@@ -1,0 +1,95 @@
+{
+  "name": "tendrils",
+  "version": "0.0.0",
+  "node-version": "7.2.0",
+  "browser": {},
+  "authors": [
+    "Eoghan O'Keeffe <keeffeoghan@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keeffEoghan/tendrils.git"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "glslify": "glslify"
+  },
+  "browserify": {
+    "transform": [
+      "glslify"
+    ]
+  },
+  "glslify": {
+    "transform": [
+      "glslify-import"
+    ]
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "bezier": "^0.1.0",
+    "clamp": "^1.0.1",
+    "dat-gui": "^0.5.0",
+    "get-image-pixels": "^1.0.1",
+    "getusermedia": "^1.3.7",
+    "gl-big-triangle": "^1.0.0",
+    "gl-context": "^0.1.1",
+    "gl-fbo": "^2.0.5",
+    "gl-geometry": "^3.1.1",
+    "gl-matrix": "^2.3.2",
+    "gl-shader": "^4.2.0",
+    "gl-texture2d": "^2.0.10",
+    "glsl-fxaa": "^3.0.0",
+    "glsl-hash-blur": "^1.0.3",
+    "glsl-luma": "^1.0.1",
+    "glsl-map": "^1.0.1",
+    "glsl-noise": "0.0.0",
+    "glsl-random": "0.0.5",
+    "hint.css": "^2.4.1",
+    "lerp": "^1.0.3",
+    "lodash": "^4.13.1",
+    "mouse-event-offset": "^3.0.2",
+    "ndarray": "^1.0.18",
+    "pepjs": "^0.4.2",
+    "polyline-normals": "^2.0.2",
+    "prefixes": "^1.0.1",
+    "querystring": "^0.2.0",
+    "range-fit": "^0.1.1",
+    "reset.css": "^2.0.2",
+    "soundcloud-badge": "^1.1.0",
+    "to-source": "^2.0.3",
+    "vkey": "^1.0.0",
+    "web-audio-analyser": "^2.0.1",
+    "xhr": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "chalk": "^1.1.3",
+    "es6-promise": "^3.2.1",
+    "eslint": "^3.0.0",
+    "exports-loader": "^0.6.3",
+    "glslify": "^5.1.0",
+    "glslify-import": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-webserver": "^0.9.1",
+    "ify-loader": "^1.0.3",
+    "imports-loader": "^0.6.5",
+    "merge-stream": "^1.0.0",
+    "modernizr": "^3.3.1",
+    "raw-loader": "^0.5.1",
+    "read-package-json": "^2.0.4",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^1.15.0",
+    "webpack-stream": "^3.2.0",
+    "yargs": "^4.7.1"
+  }
+}
