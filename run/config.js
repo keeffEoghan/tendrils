@@ -231,10 +231,6 @@ module.exports = {
                 {
                     path: 'node_modules/reset.css/',
                     name: 'reset.css'
-                },
-                {
-                    path: 'node_modules/hint.css/',
-                    name: 'hint.css'
                 }
             ]
         }

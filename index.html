@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111470321-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'UA-111470321-1');
-        </script>
-
         <!-- @see https://megatags.co -->
 
         <!-- Common tags -->
@@ -33,7 +23,6 @@
         <meta property="og:url" name="og:url" content="https://keeffeoghan.github.io/tendrils">
         <meta property="og:site_name" name="og:site_name" content="Tendrils - epok">
         <meta property="og:locale" name="og:locale" content="en_GB">
-        <meta property="og:video" name="og:video" content="https://rawgit.com/keeffEoghan/tendrils/master/videos/tendrils/short.mp4">
         <meta name="fb:admins" content="100001587181938">
         <meta property="og:type" name="og:type" content="website">
 
@@ -44,265 +33,172 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, target-densitydpi=device-dpi">
 
         <link rel="stylesheet" type="text/css" href="./build/css/index.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
         <canvas touch-action="none"></canvas>
 
-        <section class="epok-info">
-            <div class="epok-info-content">
-                <p class="epok-info-item">
-                    Emergent forms in motion. Watch, listen, interact, explore. <a class="epok-a epok-info-more-button">Learn more</a>.
+        <section class="epok-info-more epok-hide">
+            <button class="epok-info-more-button epok-cta epok-invert">Close</button>
+            <article class="epok-info-more-content">
+                <aside>
+                    Interactive music visuals - adapted from
+                    <a class="epok-a epok-invert" href="https://keeffeoghan.github.io/work/tendrils/" target="_blank">the original</a>,
+                    made by
+                    <a class="epok-a epok-invert" href="https://keeffeoghan.github.io" target="_blank">Eoghan O'Keeffe</a>.
+                </aside>
+
+                <h2>Concept</h2>
+                <p>
+                    Forms in motion, interact spontaneously, knitting emergent interconnections.<br/>
+                    A continuous reflexive process &mdash; coheres through ascending scales of complexity; recurs through cycles of entropy and order.
                 </p>
-                <button class="epok-button">Begin</button>
-                <p class="epok-info-item">Menu below, track above, keys, mouse, touch, camera, mic.</p>
-                <p class="epok-info-item">Allow camera and mic access for the full experience.</p>
-                <p class="epok-info-item">
-                    <a class="epok-a epok-quality-prompter">Change quality</a>
-                    (best on modern browser, fast computer).
+                <p>
+                    Moving through scales, evoking natural forms:<br/>
+                    From primordial matter, forms; ovum, animal...<br/>
+                    Through self; community...<br/>
+                    Towards interconnection; cohesion...
                 </p>
-                <p class="epok-info-item">
-                    <a class="epok-a" href="https://youtu.be/e9ubzN7i3-0" target="_blank">Watch the video</a>
-                    (if the live visuals don't appear here).
+
+                <h2>Tech</h2>
+                <p>
+                    The visuals are an emergent physical system of interacting particles.<br/>
+                    Complex organic forms emerge spontaneously, from simple interactions at the individual scale &mdash; in a fluid-like advection, particles recursively affect and affected by the field of motion.
                 </p>
-                <small class="epok-info-item">
-                    [
-                        <a class="epok-a" href="https://keeffeoghan.github.io" target="_blank">
-                            Eoghan O'Keeffe
-                        </a>
-                        ~ Interactive visuals
-                    ]
-                    <br/>
-                    [
-                        <a class="epok-a" href="https://vimeo.com/murrellproductions" target="_blank">
-                            Joe Murréll
-                        </a>
-                        ~ Video editing
-                    ]
-                    <br/>
-                    [
-                        <a class="epok-a" href="http://maxcooper.net" target="_blank">
-                            Max Cooper
-                        </a>
-                        ~ Music, <a class="epok-a" href="http://emergence.maxcooper.net" target="_blank">Emergence</a> project
-                    ]
-                </small>
-                <section class="epok-info-more epok-hide">
-                    <button class="epok-info-more-button epok-cta epok-invert" aria-label="Close">
-                        <i class="material-icons">cancel</i>
-                    </button>
-                    <article class="epok-info-more-content">
-                        <aside>
-                            Interactive music visuals for Max Cooper's <a class="epok-a epok-invert" href="http://emergence.maxcooper.net" target="_blank">Emergence</a> AV collaborations project.
-                        </aside>
+                <aside>
+                    At the core of this effect, each particle leaves a trace of its velocity in the velocity field, which in turn affects the velocity of particles passing through that field. This simple interaction at the individual scale gives rise to the complex organic forms at the collective scale, without explicit control or guidance.<br/>
+                    The idea came while reading about advection in Lagrangian fluid dynamics, in the excellent series of articles <a class="epok-a epok-invert" href="https://software.intel.com/en-us/articles/fluid-simulation-for-video-games-part-1">Fluid Simulation for Video Games, by Dr. Michael J. Gourlay for <em>Intel</em></a> &mdash; this is kind of a simpler advection, showing some fluid-like properties.
+                </aside>
+                <p>
+                    Stochastic noise also drives the process &mdash; to set it in motion, and to shape it through scales and forms with more control (increasing, cycling wavelengths of noise).
+                </p>
+                <aside>
+                    Noise is used here as a way to guide and direct the general motion of the particles, for animation.
+                </aside>
+                <aside>
+                    An optical flow process is performed on the camera, so the motion of the particles is influenced by people moving naturally in front of their camera. I like this kind of natural interaction (as with the micophone interaction), lowering the barrier between you and the experience.<br/>
+                    Check out
+                    <a class="epok-a epok-invert" href="http://thomasdiewald.com/blog/?p=2766" target="_blank">Thomas DieWald</a>
+                    and
+                    <a class="epok-a epok-invert" href="https://adamferriss.com/gush/">Adam Ferris</a>
+                    for some nice examples of this technique.
+                </aside>
 
-                        <h2>Concept</h2>
-                        <p>
-                            Forms in motion, interact spontaneously, knitting emergent interconnections.<br/>
-                            A continuous reflexive process &mdash; coheres through ascending scales of complexity; recurs through cycles of entropy and order.
-                        </p>
-                        <p>
-                            Moving through scales, evoking natural forms:<br/>
-                            From primordial matter, forms; ovum, animal...<br/>
-                            Through self; community...<br/>
-                            Towards interconnection; cohesion...
-                        </p>
+                <h2>Controls</h2>
+                <aside>
+                    <p>
+                        Explore through mouse, keyboard, touch, camera, microphone, and controls.
+                    </p>
 
-                        <h2>Tech</h2>
-                        <p>
-                            The visuals are an emergent physical system of interacting particles.<br/>
-                            Complex organic forms emerge spontaneously, from simple interactions at the individual scale &mdash; in a fluid-like advection, particles recursively affect and affected by the field of motion.
-                        </p>
-                        <aside>
-                            At the core of this effect, each particle leaves a trace of its velocity in the velocity field, which in turn affects the velocity of particles passing through that field. This simple interaction at the individual scale gives rise to the complex organic forms at the collective scale, without explicit control or guidance.<br/>
-                            The idea came while reading about advection in Lagrangian fluid dynamics, in the excellent series of articles <a class="epok-a epok-invert" href="https://software.intel.com/en-us/articles/fluid-simulation-for-video-games-part-1">Fluid Simulation for Video Games, by Dr. Michael J. Gourlay for <em>Intel</em></a> &mdash; this is kind of a simpler advection, showing some fluid-like properties.
-                        </aside>
-                        <p>
-                            Stochastic noise also drives the process &mdash; to set it in motion, and to shape it through scales and forms with more control (increasing, cycling wavelengths of noise).
-                        </p>
-                        <aside>
-                            Noise is used here as a way to guide and direct the general motion of the particles, for animation.
-                        </aside>
-                        <aside>
-                            An optical flow process is performed on the camera, so the motion of the particles is influenced by people moving naturally in front of their camera. I like this kind of natural interaction (as with the micophone interaction), lowering the barrier between you and the experience.<br/>
-                            Check out
-                            <a class="epok-a epok-invert" href="http://thomasdiewald.com/blog/?p=2766" target="_blank">Thomas DieWald</a>
-                            and
-                            <a class="epok-a epok-invert" href="https://adamferriss.com/gush/">Adam Ferris</a>
-                            for some nice examples of this technique.
-                        </aside>
+                    <h3>Menu controls</h3>
+                    <p>
+                        See the toolbar at the bottom of the screen for these controls - from left-to-right:
+                    </p>
+                    <ul>
+                        <li>Toggle the intro info</li>
+                        <li>Change visuals quality</li>
+                        <li>Toggle fullscreen</li>
+                        <li>Toggle the edit panel</li>
+                        <li>Capture and share a screenshot (the shareable link appears at the bottom of the capture screen)</li>
+                        <li>See the video</li>
+                        <li>Get the Emergence album</li>
+                        <li>See the Emergence project</li>
+                    </ul>
+                    <p>
+                        Further settings and controls can be found in the edit panel, which appears at the right side of the screen.
+                    </p>
 
-                        <h2>Made by</h2>
-                        <p>
-                            <a class="epok-a epok-invert" href="https://keeffeoghan.github.io" target="_blank">
-                                Eoghan O'Keeffe
-                            </a>
-                            ~ Interactive visuals.
-                            <br/>
-                            <a class="epok-a epok-invert" href="https://vimeo.com/murrellproductions" target="_blank">
-                                Joe Murréll
-                            </a>
-                            ~ Video editing.
-                            <br/>
-                            <a class="epok-a epok-invert" href="http://maxcooper.net" target="_blank">
-                                Max Cooper
-                            </a>
-                            ~ Music, Emergence project.
-                        </p>
+                    <h3>Keyboard &mdash; main controls</h3>
+                    <p>
+                        The main keyboard controls - most of these can also be found in the edit panel.
+                    </p>
+                    <p>
+                        Also, create your own animation with keyframes.<br/>
+                        (Experimental...)
+                    </p>
+                    <ul>
+                        <li><code>H</code> &mdash; Toggle the edit panel on or off</li>
 
-                        <h2>Controls</h2>
-                        <aside>
-                            <p>
-                                Explore through mouse, keyboard, touch, camera, microphone, and controls.
-                            </p>
+                        <li><code>&lt;space&gt;</code> &mdash; Play/pause</li>
 
-                            <h3>Menu controls</h3>
-                            <p>
-                                See the toolbar at the bottom of the screen for these controls - from left-to-right:
-                            </p>
-                            <ul>
-                                <li>Toggle the intro info</li>
-                                <li>Change visuals quality</li>
-                                <li>Toggle fullscreen</li>
-                                <li>Toggle the edit panel</li>
-                                <li>Capture and share a screenshot (the shareable link appears at the bottom of the capture screen)</li>
-                                <li>See the video</li>
-                                <li>Get the Emergence album</li>
-                                <li>See the Emergence project</li>
-                            </ul>
-                            <p>
-                                Further settings and controls can be found in the edit panel, which appears at the right side of the screen.
-                            </p>
+                        <li><code>[</code> &mdash; Seek backwards</li>
+                        <li><code>]</code> &mdash; Seek forwards</li>
 
-                            <h3>Keyboard &mdash; main controls</h3>
-                            <p>
-                                The main keyboard controls - most of these can also be found in the edit panel.
-                            </p>
-                            <p>
-                                Also, create your own animation with keyframes.<br/>
-                                (Experimental...)
-                            </p>
-                            <ul>
-                                <li><code>H</code> &mdash; Toggle the edit panel on or off</li>
+                        <li><code>F</code> &mdash; Fullscreen</li>
 
-                                <li><code>&lt;space&gt;</code> &mdash; Play/pause</li>
+                        <li><code>O</code> &mdash; Clear the view</li>
 
-                                <li><code>[</code> &mdash; Seek backwards</li>
-                                <li><code>]</code> &mdash; Seek forwards</li>
+                        <li><code>0</code> &mdash; <code>Flow</code> preset</li>
+                        <li><code>1</code> &mdash; <code>Wings</code> preset</li>
+                        <li><code>2</code> &mdash; <code>Fluid</code> preset</li>
+                        <li><code>3</code> &mdash; <code>Flow only</code> preset</li>
+                        <li><code>4</code> &mdash; <code>Noise only</code> preset</li>
+                        <li><code>5</code> &mdash; <code>Sea</code> preset</li>
+                        <li><code>6</code> &mdash; <code>Petri</code> preset</li>
+                        <li><code>7</code> &mdash; <code>Turbulence</code> preset</li>
+                        <li><code>8</code> &mdash; <code>Rorschach</code> preset</li>
+                        <li><code>9</code> &mdash; <code>Funhouse</code> preset</li>
 
-                                <li><code>F</code> &mdash; Fullscreen</li>
+                        <li><code>\</code> &mdash; Reset particles (keyframe)</li>
 
-                                <li><code>O</code> &mdash; Clear the view</li>
+                        <li><code>&lt;shift&gt;</code> &mdash; Respawn particles (keyframe)</li>
+                        <li><code>'</code> &mdash; Spawn particles from flow (keyframe)</li>
+                        <li><code>;</code> &mdash; Spawn particles from fastest (keyframe)</li>
+                        <li><code>,</code> &mdash; Spawn particles from form (keyframe)</li>
+                        <li><code>/</code> &mdash; Spawn particles from sampled image (keyframe)</li>
+                        <li><code>.</code> &mdash; Spawn particles from image (keyframe)</li>
 
-                                <li><code>0</code> &mdash; <code>Flow</code> preset</li>
-                                <li><code>1</code> &mdash; <code>Wings</code> preset</li>
-                                <li><code>2</code> &mdash; <code>Fluid</code> preset</li>
-                                <li><code>3</code> &mdash; <code>Flow only</code> preset</li>
-                                <li><code>4</code> &mdash; <code>Noise only</code> preset</li>
-                                <li><code>5</code> &mdash; <code>Sea</code> preset</li>
-                                <li><code>6</code> &mdash; <code>Petri</code> preset</li>
-                                <li><code>7</code> &mdash; <code>Turbulence</code> preset</li>
-                                <li><code>8</code> &mdash; <code>Rorschach</code> preset</li>
-                                <li><code>9</code> &mdash; <code>Funhouse</code> preset</li>
+                        <li><code>&lt;enter&gt;</code> &mdash; Keyframe current state at current time</li>
+                        <li><code>&lt;backspace&gt;</code> &mdash; Delete last keyframe</li>
+                    </ul>
 
-                                <li><code>\</code> &mdash; Reset particles (keyframe)</li>
+                    <h3>Keyboard &mdash; editing controls</h3>
+                    <p>
+                        While holding any of the settings keys down, change them with the adjustment keys.<br/>
+                        (Experimental...)
+                    </p>
+                    <p>
+                        Settings keys:
+                    </p>
+                    <ul>
+                        <li><code>`</code> &mdash; Set <code>rootNum</code></li>
 
-                                <li><code>&lt;shift&gt;</code> &mdash; Respawn particles (keyframe)</li>
-                                <li><code>'</code> &mdash; Spawn particles from flow (keyframe)</li>
-                                <li><code>;</code> &mdash; Spawn particles from fastest (keyframe)</li>
-                                <li><code>,</code> &mdash; Spawn particles from form (keyframe)</li>
-                                <li><code>/</code> &mdash; Spawn particles from sampled image (keyframe)</li>
-                                <li><code>.</code> &mdash; Spawn particles from image (keyframe)</li>
+                        <li><code>P</code> &mdash; Set <code>autoClearView</code></li>
 
-                                <li><code>&lt;enter&gt;</code> &mdash; Keyframe current state at current time</li>
-                                <li><code>&lt;backspace&gt;</code> &mdash; Delete last keyframe</li>
-                            </ul>
+                        <li><code>Q</code> &mdash; Set <code>forceWeight</code></li>
+                        <li><code>A</code> &mdash; Set <code>flowWeight</code></li>
+                        <li><code>W</code> &mdash; Set <code>noiseWeight</code></li>
 
-                            <h3>Keyboard &mdash; editing controls</h3>
-                            <p>
-                                While holding any of the settings keys down, change them with the adjustment keys.<br/>
-                                (Experimental...)
-                            </p>
-                            <p>
-                                Settings keys:
-                            </p>
-                            <ul>
-                                <li><code>`</code> &mdash; Set <code>rootNum</code></li>
+                        <li><code>S</code> &mdash; Set <code>flowDecay</code></li>
+                        <li><code>D</code> &mdash; Set <code>flowWidth</code></li>
 
-                                <li><code>P</code> &mdash; Set <code>autoClearView</code></li>
+                        <li><code>E</code> &mdash; Set <code>noiseScale</code></li>
+                        <li><code>R</code> &mdash; Set <code>noiseSpeed</code></li>
 
-                                <li><code>Q</code> &mdash; Set <code>forceWeight</code></li>
-                                <li><code>A</code> &mdash; Set <code>flowWeight</code></li>
-                                <li><code>W</code> &mdash; Set <code>noiseWeight</code></li>
+                        <li><code>Z</code> &mdash; Set <code>damping</code></li>
+                        <li><code>X</code> &mdash; Set <code>speedLimit</code></li>
 
-                                <li><code>S</code> &mdash; Set <code>flowDecay</code></li>
-                                <li><code>D</code> &mdash; Set <code>flowWidth</code></li>
+                        <li><code>N</code> &mdash; Set <code>speedAlpha</code></li>
+                        <li><code>M</code> &mdash; Set <code>lineWidth</code></li>
 
-                                <li><code>E</code> &mdash; Set <code>noiseScale</code></li>
-                                <li><code>R</code> &mdash; Set <code>noiseSpeed</code></li>
+                        <li><code>&lt;control&gt;</code> &mdash; hold and press another key to re-assign to current state</li>
+                    </ul>
+                    <p>
+                        Adjustment keys:
+                    </p>
+                    <ul>
+                        <li><code>-</code> &mdash; Adjust setting, small decrease</li>
+                        <li><code>=</code> &mdash; Adjust setting, small increase</li>
+                        <li><code>&lt;down&gt;</code> &mdash; Adjust setting, medium decrease</li>
+                        <li><code>&lt;up&gt;</code> &mdash; Adjust setting, medium increase</li>
+                        <li><code>&lt;left&gt;</code> &mdash; Adjust setting, large decrease</li>
+                        <li><code>&lt;right&gt;</code> &mdash; Adjust setting, large increase</li>
 
-                                <li><code>Z</code> &mdash; Set <code>damping</code></li>
-                                <li><code>X</code> &mdash; Set <code>speedLimit</code></li>
-
-                                <li><code>N</code> &mdash; Set <code>speedAlpha</code></li>
-                                <li><code>M</code> &mdash; Set <code>lineWidth</code></li>
-
-                                <li><code>&lt;control&gt;</code> &mdash; hold and press another key to re-assign to current state</li>
-                            </ul>
-                            <p>
-                                Adjustment keys:
-                            </p>
-                            <ul>
-                                <li><code>-</code> &mdash; Adjust setting, small decrease</li>
-                                <li><code>=</code> &mdash; Adjust setting, small increase</li>
-                                <li><code>&lt;down&gt;</code> &mdash; Adjust setting, medium decrease</li>
-                                <li><code>&lt;up&gt;</code> &mdash; Adjust setting, medium increase</li>
-                                <li><code>&lt;left&gt;</code> &mdash; Adjust setting, large decrease</li>
-                                <li><code>&lt;right&gt;</code> &mdash; Adjust setting, large increase</li>
-
-                                <li><code>&lt;caps-lock&gt;</code> &mdash; Reset setting to default</li>
-                                <li><code>&lt;escape&gt;</code> &mdash; Reset setting to default (keyframe)</li>
-                            </ul>
-                        </aside>
-                    </article>
-                </section>
-            </div>
+                        <li><code>&lt;caps-lock&gt;</code> &mdash; Reset setting to default</li>
+                        <li><code>&lt;escape&gt;</code> &mdash; Reset setting to default (keyframe)</li>
+                    </ul>
+                </aside>
+            </article>
         </section>
-
-        <div class="epok-main-controls">
-            <button class="epok-info-button epok-main-control epok-tooltip hint--top-right" aria-label="Toggle the intro info">
-                <i class="material-icons">info</i>
-            </button>
-
-            <button class="epok-quality-stepper epok-main-control">
-                <i class="epok-quality-level material-icons epok-tooltip hint--top-right" aria-label="Visuals quality: normal">hdr_weak</i>
-                <i class="epok-quality-level epok-hide material-icons epok-tooltip hint--top-right" aria-label="Visuals quality: high">hdr_strong</i>
-            </button>
-
-            <button class="epok-fullscreen-button epok-main-control epok-tooltip hint--top-right" aria-label="Toggle fullscreen">
-                <i class="material-icons">aspect_ratio</i>
-            </button>
-
-            <button class="epok-editor-button epok-main-control epok-tooltip hint--top-right" aria-label="Toggle the edit panel">
-                <i class="material-icons">tune</i>
-            </button>
-
-            <button class="epok-capture-button epok-main-control epok-tooltip hint--top-right" aria-label="Capture and share a screenshot">
-                <i class="material-icons">camera</i>
-            </button>
-
-            <a class="epok-a epok-video-button epok-main-control epok-tooltip hint--top-right" aria-label="See the video" href="https://youtu.be/e9ubzN7i3-0" target="_blank">
-                <i class="material-icons">ondemand_video</i>
-            </a>
-
-            <a class="epok-a epok-link-button epok-main-control epok-tooltip hint--top-right" aria-label="Get the Emergence album" href="https://maxcooper.lnk.to/emergence" target="_blank">
-                <i class="material-icons">arrow_downward</i>
-            </a>
-
-            <a class="epok-a epok-link-button epok-main-control epok-tooltip hint--top-right" aria-label="See the Emergence project" href="http://emergence.maxcooper.net/" target="_blank">
-                <i class="material-icons">arrow_forward</i>
-            </a>
-        </div>
 
         <div class="epok-audio-controls">
             <div class="epok-play-state">
@@ -311,23 +207,6 @@
             </div>
             <input class="epok-progress" type="range" value="0" min="0" max="1" touch-action="auto"/>
             <span class="epok-current time-text">-</span>&nbsp;/&nbsp;<span class="epok-total time-text">-</span>
-        </div>
-
-        <div class="epok-captured-overlay">
-            <img class="epok-captured-image"/>
-            <div class="epok-main-controls">
-                <button class="epok-exit-overlay epok-main-control epok-tooltip hint--top-right" aria-label="Return to visuals">
-                    <i class="material-icons">cancel</i>
-                </button>
-
-                <label class="epok-main-control epok-capture-url epok-tooltip hint--top-right" aria-label="Copy the link to share your screenshot">
-                    <i class="material-icons">share</i>
-                    <input class="epok-captured-url"
-                        onclick="this.focus(); this.select()" readonly
-                        placeholder="Loading share link - just a moment"
-                        />
-                </label>
-            </div>
         </div>
 
         <script type="text/javascript" src="./build/js/index.js"></script>
