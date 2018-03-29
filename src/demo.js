@@ -167,7 +167,7 @@ export default (canvas, options) => {
         trackSpawnAt: 0.18,
 
         mic: parseFloat((settings.mic_in || 1), 10),
-        micFlowAt: 1,
+        micFlowAt: 0.5,
         micFastAt: 0.8,
         micFormAt: 0.5,
         micSampleAt: 0.74,

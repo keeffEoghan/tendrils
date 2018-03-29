@@ -42,6 +42,10 @@ small {
     font-size: 0.75em;
 }
 
+em {
+    font-style: italic;
+}
+
 canvas {
     display: block;
     position: absolute;
@@ -101,6 +105,8 @@ canvas {
 }
 
 .epok-cta {
+    font-size: 1.1em;
+    font-weight: 600;
     background-color: transparent;
     border: none;
 }
