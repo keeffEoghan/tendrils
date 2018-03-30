@@ -159,20 +159,32 @@ export default (canvas, options) => {
         audible: (''+settings.mute !== 'true'),
 
         track: parseFloat((settings.track_in || 1), 10),
-        trackFlowAt: 1.15,
-        trackFastAt: 0.12,
-        trackFormAt: 0.06,
-        trackSampleAt: 0.12,
-        trackCamAt: 0.008,
-        trackSpawnAt: 0.18,
+        trackFlowAt: 0.7, // 1.15,
+        trackFastAt: 0.06, // 0.12,
+        trackFormAt: 0.03, // 0.06,
+        trackSampleAt: 0.07, // 0.12,
+        trackCamAt: 0.005, // 0.008,
+        trackSpawnAt: 0.09, // 0.18,
 
         mic: parseFloat((settings.mic_in || 1), 10),
-        micFlowAt: 0.5,
-        micFastAt: 0.8,
-        micFormAt: 0.5,
-        micSampleAt: 0.74,
-        micCamAt: 0.06,
-        micSpawnAt: 0.09
+        ...((''+settings.mic_track !== 'true')?
+                {
+                    micFlowAt: 0.5,
+                    micFastAt: 0.8,
+                    micFormAt: 0.5,
+                    micSampleAt: 0.74,
+                    micCamAt: 0.06,
+                    micSpawnAt: 0.09
+                }
+            :   {
+                    // mic: parseFloat((settings.mic_in || 18000), 10),
+                    micFlowAt: 0.7, // 1.15,
+                    micFastAt: 0.06, // 0.12,
+                    micFormAt: 0.03, // 0.06,
+                    micSampleAt: 0.07, // 0.12,
+                    micCamAt: 0.005, // 0.008,
+                    micSpawnAt: 0.09, // 0.18,
+                })
     };
 
 
@@ -637,50 +649,95 @@ export default (canvas, options) => {
         ]
     ];
 
-    const micFires = [
-        [
-            () => spawnFlow(),
-            audioFirer(() => audioState.mic*audioState.micFlowAt,
-                'meanWeight(mic, 1, 0.3)',
-                // Low end - velocity
-                (trigger, t) => meanWeight(trigger.dataOrder(1), 0.3) > t)
-        ],
-        [
-            () => spawnFastest(),
-            audioFirer(() => audioState.mic*audioState.micFastAt,
-                'meanWeight(mic, 1, 0.7)',
-                // High end - velocity
-                (trigger, t) => meanWeight(trigger.dataOrder(1), 0.7) > t)
-        ],
-        [
-            () => spawnForm(),
-            audioFirer(() => audioState.mic*audioState.micFormAt,
-                'abs(peak(mic, 2))',
-                // Sudden click/hit - acceleration
-                (trigger, t) => Math.abs(peak(trigger.dataOrder(2))) > t)
-        ],
-        [
-            () => spawnSamples(),
-            audioFirer(() => audioState.mic*audioState.micSampleAt,
-                'meanWeight(mic, 1, 0.4)',
-                // Mid - velocity
-                (trigger, t) => meanWeight(trigger.dataOrder(1), 0.4) > t)
-        ],
-        [
-            () => spawnImage(),
-            audioFirer(() => audioState.mic*audioState.micCamAt,
-                'meanWeight(mic, 2, 0.6)',
-                // Mid - acceleration
-                (trigger, t) => meanWeight(trigger.dataOrder(2), 0.6) > t)
-        ],
-        [
-            () => restart(),
-            audioFirer(() => audioState.mic*audioState.micSpawnAt,
-                'meanWeight(mic, 2, 0.3)',
-                // Low end - acceleration
-                (trigger, t) => meanWeight(trigger.dataOrder(2), 0.3) > t)
-        ]
-    ];
+    const micFires = ((''+settings.mic_track === 'true')?
+            [
+                [
+                    () => spawnFlow(),
+                    audioFirer(() => audioState.mic*audioState.micFlowAt,
+                        'meanWeight(mic, 1, 0.25)',
+                        // Low end - velocity
+                        (trigger, t) => meanWeight(trigger.dataOrder(1), 0.25) > t)
+                ],
+                [
+                    () => spawnFastest(),
+                    audioFirer(() => audioState.mic*audioState.micFastAt,
+                        'meanWeight(mic, 2, 0.8)',
+                        // High end - acceleration
+                        (trigger, t) => meanWeight(trigger.dataOrder(2), 0.8) > t)
+                ],
+                [
+                    () => spawnForm(),
+                    audioFirer(() => audioState.mic*audioState.micFormAt,
+                        'abs(peak(mic, 3))',
+                        // Sudden click/hit - force/attack
+                        (trigger, t) => Math.abs(peak(trigger.dataOrder(3))) > t)
+                ],
+                [
+                    () => spawnSamples(),
+                    audioFirer(() => audioState.mic*audioState.micSampleAt,
+                        'meanWeight(mic, 2, 0.25)',
+                        // Low end - acceleration
+                        (trigger, t) => meanWeight(trigger.dataOrder(2), 0.25) > t)
+                ],
+                [
+                    () => spawnImage(),
+                    audioFirer(() => audioState.mic*audioState.micCamAt,
+                        'meanWeight(mic, 3, 0.5)',
+                        // Mid - force/attack
+                        (trigger, t) => meanWeight(trigger.dataOrder(3), 0.5) > t)
+                ],
+                [
+                    () => restart(),
+                    audioFirer(() => audioState.mic*audioState.micSpawnAt,
+                        'meanWeight(mic, 3, 0.25)',
+                        // Low end - acceleration
+                        (trigger, t) => meanWeight(trigger.dataOrder(2), 0.25) > t)
+                ]
+            ]
+        :   [
+                [
+                    () => spawnFlow(),
+                    audioFirer(() => audioState.mic*audioState.micFlowAt,
+                        'meanWeight(mic, 1, 0.3)',
+                        // Low end - velocity
+                        (trigger, t) => meanWeight(trigger.dataOrder(1), 0.3) > t)
+                ],
+                [
+                    () => spawnFastest(),
+                    audioFirer(() => audioState.mic*audioState.micFastAt,
+                        'meanWeight(mic, 1, 0.7)',
+                        // High end - velocity
+                        (trigger, t) => meanWeight(trigger.dataOrder(1), 0.7) > t)
+                ],
+                [
+                    () => spawnForm(),
+                    audioFirer(() => audioState.mic*audioState.micFormAt,
+                        'abs(peak(mic, 2))',
+                        // Sudden click/hit - acceleration
+                        (trigger, t) => Math.abs(peak(trigger.dataOrder(2))) > t)
+                ],
+                [
+                    () => spawnSamples(),
+                    audioFirer(() => audioState.mic*audioState.micSampleAt,
+                        'meanWeight(mic, 1, 0.4)',
+                        // Mid - velocity
+                        (trigger, t) => meanWeight(trigger.dataOrder(1), 0.4) > t)
+                ],
+                [
+                    () => spawnImage(),
+                    audioFirer(() => audioState.mic*audioState.micCamAt,
+                        'meanWeight(mic, 2, 0.6)',
+                        // Mid - acceleration
+                        (trigger, t) => meanWeight(trigger.dataOrder(2), 0.6) > t)
+                ],
+                [
+                    () => restart(),
+                    audioFirer(() => audioState.mic*audioState.micSpawnAt,
+                        'meanWeight(mic, 2, 0.3)',
+                        // Low end - acceleration
+                        (trigger, t) => meanWeight(trigger.dataOrder(2), 0.3) > t)
+                ]
+            ]);
 
     // Returns a function to be executed for each `fire` pair (as above)
     const audioResponder = (trigger) => (fire) => trigger.fire(...fire);
@@ -729,6 +786,20 @@ export default (canvas, options) => {
 
     blurShader.bind();
     Object.assign(blurShader.uniforms, blurState);
+
+
+    // Background
+
+    function toggleBase(background) {
+        if(!background) {
+            background = ((canvas.classList.contains('epok-dark'))? 'light' : 'dark');
+        }
+
+        canvas.classList.remove('epok-light');
+        canvas.classList.remove('epok-dark');
+
+        canvas.classList.add('epok-'+background);
+    }
 
 
     // Animation setup
@@ -834,8 +905,7 @@ export default (canvas, options) => {
             call: [
                 () => {
                     restart();
-                    canvas.classList.remove('epok-light');
-                    canvas.classList.add('epok-dark');
+                    toggleBase('dark');
                 }
             ],
             time: 200
@@ -1341,7 +1411,8 @@ export default (canvas, options) => {
         spawnFastest,
         spawnForm,
         reset,
-        restart
+        restart,
+        toggleBase
     };
 
 
