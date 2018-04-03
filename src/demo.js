@@ -180,7 +180,7 @@ export default (canvas, options) => {
             :   {
                     // Should be the same as track above... but the input values seem to
                     // differ when audio's rerouted to mic input.
-                    mic: parseFloat((settings.mic_in || 0.02), 10),
+                    // mic: parseFloat((settings.mic_in || 0.02), 10),
                     micFlowAt: 0.2, // 1.15,
                     micFastAt: 0.03, // 0.12,
                     micFormAt: 0.015, // 0.06,
