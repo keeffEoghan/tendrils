@@ -849,7 +849,7 @@ export default (canvas, options) => {
             // damping: 0.043,
             // speedLimit: 0.01,
 
-            forceWeight: 0.016,
+            forceWeight: 0.017,
             varyForce: -0.25,
 
             flowWeight: 1,
@@ -859,7 +859,7 @@ export default (canvas, options) => {
             flowWidth: 5,
 
             speedAlpha: 0.0005,
-            colorMapAlpha: 0.85
+            colorMapAlpha: 0.5
         },
         tendrils2: {
             noiseWeight: 0.0003,
@@ -876,12 +876,12 @@ export default (canvas, options) => {
             varyTarget: 1,
             lineWidth: 1
         },
-        baseColor: [1, 1, 1, 0.9],
+        baseColor: [0, 0, 0, 0.9],
         flowColor: [1, 1, 1, 0.1],
-        fadeColor: [0, 0, 0, 0.1],
+        fadeColor: [1, 1, 1, 0.05],
         spawn: {
-            radius: 0.9,
-            speed: 0.05
+            radius: 0.6,
+            speed: 0.1
         },
         opticalFlow: { ...opticalFlowDefaults },
         audio: { ...audioDefaults },
