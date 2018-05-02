@@ -5,7 +5,6 @@
 
 import tendrilsDemo from './demo';
 
-
 const readyStates = ['loading', 'interactive', 'complete'];
 
 // Load in stages.
@@ -40,3 +39,5 @@ function updateState() {
 }
 
 updateState();
+
+export default tendrilsDemo;

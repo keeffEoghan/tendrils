@@ -1,1 +1,1 @@
-import './';
+export * from '.';
