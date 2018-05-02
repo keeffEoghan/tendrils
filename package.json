@@ -13,7 +13,8 @@
   },
   "homepage": "https://keeffeoghan.github.io/tendrils/",
   "files": [
-    "build"
+    "*",
+    "build/"
   ],
   "scripts": {
     "gulp": "gulp",
