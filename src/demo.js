@@ -1423,7 +1423,11 @@ export default (canvas, options) => {
         spawnForm,
         reset,
         restart,
-        toggleBase
+        toggleBase,
+        spawnImageTargets() {
+            spawnTargets.spawnImage = tendrils.targets;
+            spawnImage(tendrils.targets);
+        }
     };
 
 
@@ -1457,6 +1461,8 @@ export default (canvas, options) => {
                 flowColor: [255, 255, 255],
                 fadeAlpha: Math.max(state.flowDecay, 0.05)
             });
+
+            toggleBase('dark');
         },
         'Wings'() {
             Object.assign(state, {
@@ -1475,6 +1481,7 @@ export default (canvas, options) => {
                 fadeAlpha: 0
             });
 
+            toggleBase('light');
             restart();
         },
         'Fluid'() {
@@ -1486,6 +1493,7 @@ export default (canvas, options) => {
                 fadeAlpha: 0
             });
 
+            toggleBase('light');
             clear();
         },
         'Flow only'() {
@@ -1506,6 +1514,8 @@ export default (canvas, options) => {
                 baseColor: [100, 200, 255],
                 fadeAlpha: 0.1
             });
+
+            toggleBase('dark');
         },
         'Noise only'() {
             Object.assign(state, {
@@ -1521,7 +1531,7 @@ export default (canvas, options) => {
 
             Object.assign(colorProxy, {
                 baseAlpha: 0.4,
-                baseColor: [255, 150, 0],
+                baseColor: [255, 180, 50],
                 fadeAlpha: 0.05,
                 flowAlpha: 0
             });
@@ -1530,6 +1540,8 @@ export default (canvas, options) => {
                 audio: 0.9,
                 video: 0
             });
+
+            toggleBase('light');
         },
         'Sea'() {
             Object.assign(state, {
@@ -1552,6 +1564,8 @@ export default (canvas, options) => {
                 fadeAlpha: 0.3,
                 fadeColor: [0, 58, 90]
             });
+
+            toggleBase('dark');
         },
         'Ghostly'() {
             Object.assign(state, {
@@ -1566,6 +1580,8 @@ export default (canvas, options) => {
                 fadeAlpha: 0.03,
                 fadeColor: [0, 0, 0]
             });
+
+            toggleBase('dark');
         },
         'Petri'() {
             Object.assign(state, {
@@ -1580,13 +1596,16 @@ export default (canvas, options) => {
                 baseAlpha: 0.4,
                 baseColor:[255, 203, 37],
                 flowAlpha: 0.05,
-                fadeAlpha: 0.03
+                fadeAlpha: Math.max(state.flowDecay, 0.05)
             });
 
             Object.assign(resetSpawner.uniforms, {
                 radius: 1/Math.max(...tendrils.viewSize),
                 speed: 0
             });
+
+            toggleBase('dark');
+            clear();
         },
         'Turbulence'() {
             Object.assign(state, {
@@ -1606,6 +1625,8 @@ export default (canvas, options) => {
                 fadeAlpha: 0.01,
                 fadeColor: [0, 0, 0]
             });
+
+            toggleBase('light');
         },
         'Rorschach'() {
             Object.assign(state, {
@@ -1630,6 +1651,8 @@ export default (canvas, options) => {
                 fadeAlpha: 0.05,
                 fadeColor: [255, 255, 255]
             });
+
+            toggleBase('dark');
         },
         'Roots'() {
             Object.assign(state, {
@@ -1649,6 +1672,9 @@ export default (canvas, options) => {
                 flowAlpha: 0.05,
                 fadeAlpha: 0
             });
+
+            toggleBase('dark');
+            restart();
         },
         'Funhouse'() {
             Object.assign(state, {
@@ -1676,6 +1702,7 @@ export default (canvas, options) => {
                 fadeColor: [0, 0, 0]
             });
 
+            toggleBase('light');
             spawnImage(null);
         }
     };
@@ -1852,7 +1879,8 @@ export default (canvas, options) => {
             '0': keyframeCaller(presetters['Flow']),
             '1': keyframeCaller(presetters['Wings']),
             '2': keyframeCaller(presetters['Fluid']),
-            '3': keyframeCaller(presetters['Flow only']),
+            // '3': keyframeCaller(presetters['Flow only']),
+            '3': keyframeCaller(presetters['Ghostly']),
             '4': keyframeCaller(presetters['Noise only']),
             '5': keyframeCaller(presetters['Sea']),
             '6': keyframeCaller(presetters['Petri']),
@@ -1966,7 +1994,8 @@ export default (canvas, options) => {
         tracks,
         defaultState,
         audioDefaults,
-        toggleMedia
+        toggleMedia,
+        timer
     };
 
     // Debug
