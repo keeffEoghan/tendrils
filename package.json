@@ -2,14 +2,19 @@
   "name": "tendrils",
   "version": "0.0.0",
   "node-version": "7.2.0",
-  "browser": {},
+  "browser": "build/js/index.js",
   "authors": [
     "Eoghan O'Keeffe <keeffeoghan@gmail.com>"
   ],
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "https://github.com/keeffEoghan/tendrils.git"
   },
+  "homepage": "https://keeffeoghan.github.io/tendrils/",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "gulp": "gulp",
     "glslify": "glslify"

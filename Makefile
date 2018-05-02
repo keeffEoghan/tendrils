@@ -21,7 +21,7 @@ assets build custom-deps html images jscs lint scripts server styles test watch:
 	npm run gulp -- $@ $(ARGS);
 
 # A full minified build
-dist:
+dist: clean
 	make build ARGS=--is-production
 
 # Just install node_modules, also callable as `make node_modules`
@@ -52,5 +52,9 @@ deploy:
 	@echo "Switching to '$(BRANCH)' from 'master'"
 	git checkout $(BRANCH)
 
+# Clean up any built things
+clean:
+	rm -rf build
+
 # makefile ettiquette; mark rules without on-disk targets as PHONY
-.PHONY: default help setup assets build custom-deps html images jscs lint scripts server styles test watch gh-pages deploy
+.PHONY: default help setup assets build custom-deps html images jscs lint scripts server styles test watch gh-pages deploy clean
