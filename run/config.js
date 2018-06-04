@@ -170,6 +170,8 @@ module.exports = {
                 devtool: 'source-map',
                 output: {
                     filename: '[name].js',
+                    library: 'Tendrils',
+                    libraryTarget: 'umd'
                 },
                 module: {
                     loaders: [
