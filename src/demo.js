@@ -198,6 +198,13 @@ export default (canvas, options) => {
         className: 'track'
     });
 
+    const audioContext = new (self.AudioContext || self.webkitAudioContext)();
+
+    // Deal with Chrome's need for user interaction before playing audio...
+    // @see https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
+    document.addEventListener('click', () =>
+        (audioContext.state === 'suspended' && audioContext.resume()));
+
 
     // Track control setup
 
@@ -294,7 +301,7 @@ export default (canvas, options) => {
     // @todo Stereo - creates 2 separate analysers for each channel.
     // @todo Delay node to compensate for wait in analysing values?
 
-    const trackAnalyser = makeAnalyser(track, { audible: audioState.audible });
+    const trackAnalyser = makeAnalyser(track, audioContext, { audible: audioState.audible });
 
     trackAnalyser.analyser.fftSize = Math.pow(2, 8);
 
@@ -550,7 +557,7 @@ export default (canvas, options) => {
                     });
 
                     micAnalyser = (micAnalyser ||
-                        makeAnalyser(stream, { audible: false }));
+                        makeAnalyser(stream, audioContext, { audible: false }));
 
                     micAnalyser.analyser.fftSize = Math.pow(2, 8);
 
