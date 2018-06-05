@@ -34,4 +34,9 @@ node_modules
 build
 dist
 
+# Libs exceptions
+!libs/**/dist
+!libs/**/build
+libs/build
+
 .DS_Store
