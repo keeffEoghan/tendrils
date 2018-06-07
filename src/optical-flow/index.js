@@ -19,8 +19,8 @@ export const defaults = () => ({
         buffers: [[[1, 1]], [[1, 1]]]
     },
     uniforms: {
-        imageSize: [1, 1],
         viewSize: [1, 1],
+        scaleUV: [1, -1],
         offset: 1,
         lambda: 0.001,
         speed: 1,

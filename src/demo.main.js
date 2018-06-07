@@ -474,8 +474,16 @@ export default (canvas, options) => {
         video: [0, 0]
     };
 
-    let video = null;
-    let mediaStream = null;
+    const video = Object.assign(document.createElement('video'), {
+        controls: true,
+        muted: true,
+        autoplay: false
+    });
+
+    video.addEventListener('canplay', () => {
+        rasterShape.video = [video.videoWidth, video.videoHeight];
+        video.play();
+    });
 
 
     const image = new Image();
@@ -515,7 +523,8 @@ export default (canvas, options) => {
 
     const opticalFlow = new OpticalFlow(gl, undefined, {
         speed: parseFloat(settings.optical_speed || 0.08, 10),
-        offset: 0.1
+        offset: 0.1,
+        scaleUV: [-1, -1]
     });
 
     const opticalFlowState = {
@@ -528,6 +537,8 @@ export default (canvas, options) => {
 
 
     // Media access
+
+    let mediaStream;
 
     function getMedia() {
         appSettings.useMedia = true;
@@ -542,19 +553,8 @@ export default (canvas, options) => {
                 }
                 else {
                     mediaStream = stream;
-
-                    const v = Object.assign(document.createElement('video'), {
-                        src: self.URL.createObjectURL(stream),
-                        srcObject: stream,
-                        controls: true,
-                        muted: true,
-                        autoplay: true
-                    });
-
-                    v.addEventListener('canplay', () => {
-                        video = v;
-                        rasterShape.video = [v.videoWidth, v.videoHeight];
-                    });
+                    video.src = self.URL.createObjectURL(stream);
+                    video.srcObject = stream;
 
                     micAnalyser = (micAnalyser ||
                         makeAnalyser(stream, audioContext, { audible: false }));
@@ -1018,13 +1018,12 @@ export default (canvas, options) => {
          */
         audioTexture.frequencies(trackTrigger.dataOrder(0)).apply();
 
+        const drawVideo = appSettings.useMedia && video.readyState > 1;
+
         // Blend the color maps into tendrils one
         // @todo Only do this if necessary (skip if none or only one has alpha)
 
-        blend.views[1] = ((appSettings.useMedia && video)?
-                opticalFlow.buffers[0]
-            :   imageSpawner.buffer);
-
+        blend.views[1] = ((drawVideo)? opticalFlow.buffers[0] : imageSpawner.buffer);
         blend.draw(tendrils.colorMap);
 
         // The main event
@@ -1077,7 +1076,7 @@ export default (canvas, options) => {
         // @todo Blur for optical flow? Maybe Sobel as well?
         // @see https://github.com/princemio/ofxMIOFlowGLSL/blob/master/src/ofxMioFlowGLSL.cpp
 
-        if(appSettings.useMedia && video) {
+        if(drawVideo) {
             opticalFlow.resize(rasterShape.video);
             opticalFlow.setPixels(video);
 

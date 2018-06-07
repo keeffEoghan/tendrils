@@ -20,20 +20,26 @@ export const defaults = () => ({
 export class Blend {
     constructor(gl, options) {
         this.gl = gl;
+        this.uniforms = {};
 
-        const params = Object.assign(defaults(), options);
-
-        this.shader = ((Array.isArray(params.shader))?
-                shader(this.gl, ...params.shader)
-            :   params.shader);
-
-        this.screen = new Screen(gl);
+        const base = defaults();
+        const params = { ...base, ...options };
 
         this.views = params.views;
         this.alphas = params.alphas;
         this.resolution = params.resolution;
 
-        this.uniforms = {};
+        this.screen = new Screen(gl);
+
+        // Set up the right number of views if we're working with the default shader.
+        if(params.shader === base.shader) {
+            params.shader[1] = params.shader[1]
+                .replace(/(@<hook\W.*?)(\d+)/gim, `$1${params.views.length}`);
+        }
+
+        this.shader = ((Array.isArray(params.shader))?
+                shader(this.gl, ...params.shader)
+            :   params.shader);
     }
 
     draw(target, resolution = (target && target.shape), clear = true) {

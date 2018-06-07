@@ -15,7 +15,8 @@ const invLog2 = 1/Math.log(2);
 export const nextPow2 = (x) => Math.pow(2, Math.ceil(Math.log(x)*invLog2));
 
 
-// Handle paths on different hosts
+// Handle paths on different hosts - for 
+// @todo Coupled to the hosting setup - remove where not relevant.
 export const rootPath =
-    ((location.href.match('://keeffeoghan.github.io/portfolio/'))?
-        '/portfolio/' : '/');
+    `/${((location.href.match(/:\/\/.+?\/([^\/\?]+?(?=[\/\?]|$))?/i) || [])[1] || '')}/`
+        .replace(/\/+/gi, '/');

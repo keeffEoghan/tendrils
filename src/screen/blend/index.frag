@@ -1,6 +1,7 @@
 precision highp float;
 
-const int numViews = 2;
+// Replaced with the correct number of views.
+const int numViews = /* @<hook */2/* @hook> */;
 
 #pragma glslify: blend = require(../../blend/sum)
 #pragma glslify: import(./main)
