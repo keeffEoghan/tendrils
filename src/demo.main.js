@@ -553,8 +553,10 @@ export default (canvas, options) => {
                 }
                 else {
                     mediaStream = stream;
-                    video.src = self.URL.createObjectURL(stream);
-                    video.srcObject = stream;
+
+                    (('srcObject' in video)?
+                            video.srcObject = stream
+                        :   video.src = self.URL.createObjectURL(stream));
 
                     micAnalyser = (micAnalyser ||
                         makeAnalyser(stream, audioContext, { audible: false }));
@@ -962,6 +964,10 @@ export default (canvas, options) => {
             {
                 rootNum: defaultState.rootNum*2,
                 damping: defaultState.damping-0.001
+            },
+            {
+                rootNum: defaultState.rootNum*4,
+                damping: defaultState.damping-0.002
             }
         ],
         level: parseInt((settings.quality ||

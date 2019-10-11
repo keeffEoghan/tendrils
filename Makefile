@@ -32,7 +32,6 @@ setup: node_modules/.bin
 # modification date of `node_modules` when done.
 node_modules/.bin: package.json
 	npm config set progress=false;
-	npm cache verify;
 	npm install;
 	touch $@;
 
