@@ -792,7 +792,7 @@ export default (canvas, options) => {
 
     const blurState = {
         radius: 5,
-        limit: 0.2
+        limit: 0.4
     };
 
     blurShader.bind();
