@@ -83,7 +83,7 @@ void main() {
 
         // Tend towards targets
         newVel += (texture2D(targets, uv).xy-pos)*vary(target, i, varyTarget);
-        
+
         // Normalize and clamp the velocity
         /**
          * @todo This seems to cause some problems when dealing with larger max

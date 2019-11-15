@@ -1,7 +1,6 @@
 {
   "name": "tendrils",
   "version": "0.0.0",
-  "node-version": "7.2.0",
   "module": "src/index.main.js",
   "main": "build/js/index.js",
   "browser": "build/js/index.js",
@@ -18,6 +17,9 @@
     "*",
     "build/"
   ],
+  "engines": {
+    "node": "7.2.0"
+  },
   "scripts": {
     "gulp": "gulp",
     "glslify": "glslify"

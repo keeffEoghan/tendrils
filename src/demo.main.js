@@ -506,10 +506,15 @@ export default (canvas, options) => {
             raster = video;
         }
 
-        imageSpawner.buffer.shape = tendrils.colorMap.shape = shape;
+        if(Math.min(...shape) > 0) {
+            imageSpawner.buffer.shape = tendrils.colorMap.shape = shape;
 
-        imageSpawner.setPixels(raster);
-        imageSpawner.spawn(tendrils, undefined, buffer);
+            imageSpawner.setPixels(raster);
+            imageSpawner.spawn(tendrils, undefined, buffer);
+        }
+        else {
+            console.warn('`spawnRaster`: image not ready.');
+        }
     }
 
     const spawnImage = (buffer = spawnTargets.spawnImage) =>
@@ -786,7 +791,7 @@ export default (canvas, options) => {
     };
 
     const blurState = {
-        radius: 8,
+        radius: 5,
         limit: 0.2
     };
 
@@ -1439,6 +1444,7 @@ export default (canvas, options) => {
         spawnImageTargets() {
             spawnTargets.spawnImage = tendrils.targets;
             spawnImage(tendrils.targets);
+            spawnImage(null);
         }
     };
 
@@ -1694,16 +1700,22 @@ export default (canvas, options) => {
                 varyForce: 0.3,
                 flowWeight: 0.5,
                 varyFlow: 1,
-                noiseWeight: 0.0015,
+                noiseWeight: 0.0016,
                 varyNoise: 1,
                 noiseScale: 40,
                 varyNoiseScale: -4,
                 noiseSpeed: 0.0001,
                 varyNoiseSpeed: -3,
+                target: 0.005,
+                varyTarget: 5,
                 flowDecay: 0.001,
                 flowWidth: 8,
                 speedAlpha: 0.00002,
                 colorMapAlpha: 1
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'normal'
             });
 
             Object.assign(colorProxy, {
@@ -1714,8 +1726,10 @@ export default (canvas, options) => {
                 fadeColor: [0, 0, 0]
             });
 
-            toggleBase('light');
+            toggleBase('dark');
             spawnImage(null);
+            spawnTargets.spawnImage = tendrils.targets;
+            spawnImage(tendrils.targets);
         }
     };
 
@@ -1930,7 +1944,7 @@ export default (canvas, options) => {
 
             '<shift>': keyframeCaller(() => restart()),
             '/': keyframeCaller(() => spawnSamples()),
-            '.': keyframeCaller(() => spawnImage(null))
+            '.': keyframeCaller(controllers.spawnImageTargets)
         };
 
         if(fullscreen) {
