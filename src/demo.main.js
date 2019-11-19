@@ -1088,21 +1088,23 @@ export default (canvas, options) => {
         // @see https://github.com/princemio/ofxMIOFlowGLSL/blob/master/src/ofxMioFlowGLSL.cpp
 
         if(drawVideo) {
-            opticalFlow.resize(rasterShape.video);
-            opticalFlow.setPixels(video);
+            if(Math.max(...rasterShape.video) > 0) {
+                opticalFlow.resize(rasterShape.video);
+                opticalFlow.setPixels(video);
 
-            if(opticalFlowState.speed) {
-                opticalFlow.update({
-                    speedLimit: state.speedLimit,
-                    time: timer.app.time,
-                    viewSize: tendrils.viewSize,
-                    ...opticalFlowState
-                });
+                if(opticalFlowState.speed) {
+                    opticalFlow.update({
+                        speedLimit: state.speedLimit,
+                        time: timer.app.time,
+                        viewSize: tendrils.viewSize,
+                        ...opticalFlowState
+                    });
 
-                screen.render();
+                    screen.render();
+                }
+
+                opticalFlow.step();
             }
-
-            opticalFlow.step();
         }
 
 
