@@ -4,9 +4,7 @@
   "module": "src/index.main.js",
   "main": "build/js/index.js",
   "browser": "build/js/index.js",
-  "authors": [
-    "Eoghan O'Keeffe <keeffeoghan@gmail.com>"
-  ],
+  "author": "Eoghan O'Keeffe <epok.tech@gmail.com> (https://epok.tech)",
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",

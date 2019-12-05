@@ -31,7 +31,6 @@ import querystring from 'querystring';
 import toSource from 'to-source';
 import shader from 'gl-shader';
 import prefixes from 'prefixes';
-import xhr from 'xhr';
 
 // import dat from 'dat-gui';
 import dat from '../libs/dat.gui/build/dat.gui';
@@ -143,11 +142,21 @@ export default (canvas, options) => {
 
         animate: (''+settings.animate !== 'false'),
         useMedia: (''+settings.use_media !== 'false'),
+        useCamera: (''+settings.use_camera !== 'false'),
+        useMic: (''+settings.use_mic !== 'false'),
+        loopTime: (parseInt((''+settings.loop_time || 10*60*1000), 10) || 0),
+        loopPresets: (parseInt((''+settings.loop_presets || 3*60*1000), 10) || 0),
         pointerFlow: (''+settings.pointer_flow !== 'false'),
         staticImage: ((settings.static_image)?
                 decodeURIComponent(settings.static_image)
-            :   rootPath+'build/images/epok/eye.png')
+            // :   rootPath+'build/images/epok/eye.png')
+            :   rootPath+'build/images/fortune.png')
     };
+
+    Object.assign(timer.app, {
+        end: appSettings.loopTime,
+        loop: !!appSettings.loopTime
+    });
 
     if(''+settings.cursor === 'false') {
         canvas.classList.add('epok-no-cursor');
@@ -419,7 +428,7 @@ export default (canvas, options) => {
     };
 
     const flowPixelDefaults = {
-        scale: 'mirror xy'
+        scale: 'normal'
     };
 
     const flowPixelState = { ...flowPixelDefaults };
@@ -501,7 +510,7 @@ export default (canvas, options) => {
         let shape = rasterShape.image;
         let raster = image;
 
-        if(appSettings.useMedia && video) {
+        if(appSettings.useMedia && appSettings.useCamera && video) {
             shape = rasterShape.video;
             raster = video;
         }
@@ -549,27 +558,31 @@ export default (canvas, options) => {
         appSettings.useMedia = true;
 
         getUserMedia({
-                video: true,
-                audio: true
+                video: appSettings.useCamera,
+                audio: appSettings.useMic
             },
             (e, stream) => {
                 if(e) {
                     console.warn(e);
                 }
-                else {
+                else if(appSettings.useCamera || appSettings.useMic) {
                     mediaStream = stream;
 
-                    (('srcObject' in video)?
-                            video.srcObject = stream
-                        :   video.src = self.URL.createObjectURL(stream));
+                    if(appSettings.useCamera) {
+                        (('srcObject' in video)?
+                                video.srcObject = stream
+                            :   video.src = self.URL.createObjectURL(stream));
+                    }
 
-                    micAnalyser = (micAnalyser ||
-                        makeAnalyser(stream, audioContext, { audible: false }));
+                    if(appSettings.useMic) {
+                        micAnalyser = (micAnalyser ||
+                            makeAnalyser(stream, audioContext, { audible: false }));
 
-                    micAnalyser.analyser.fftSize = Math.pow(2, 8);
+                        micAnalyser.analyser.fftSize = Math.pow(2, 8);
 
-                    micTrigger = (micTrigger ||
-                        new AudioTrigger(micAnalyser, 4));
+                        micTrigger = (micTrigger ||
+                            new AudioTrigger(micAnalyser, 4));
+                    }
                 }
             });
     }
@@ -812,6 +825,8 @@ export default (canvas, options) => {
         canvas.classList.add('epok-'+background);
     }
 
+    toggleBase('dark');
+
 
     // Animation setup
 
@@ -1029,7 +1044,8 @@ export default (canvas, options) => {
          */
         audioTexture.frequencies(trackTrigger.dataOrder(0)).apply();
 
-        const drawVideo = appSettings.useMedia && video.readyState > 1;
+        const drawVideo = appSettings.useMedia && appSettings.useCamera &&
+            video.readyState > 1;
 
         // Blend the color maps into tendrils one
         // @todo Only do this if necessary (skip if none or only one has alpha)
@@ -1242,6 +1258,8 @@ export default (canvas, options) => {
                         track_in: audioState.track,
                         mic_in: audioState.mic,
                         use_media: appSettings.useMedia,
+                        use_camera: appSettings.useCamer,
+                        use_mic: appSettings.useMic,
                         animate: appSettings.animate
                     }))),
             showState: () => showExport(`Current state (@${timer.track.time}):`,
@@ -1501,7 +1519,7 @@ export default (canvas, options) => {
                 fadeAlpha: 0
             });
 
-            toggleBase('light');
+            // toggleBase('light');
             restart();
         },
         'Fluid'() {
@@ -1513,7 +1531,7 @@ export default (canvas, options) => {
                 fadeAlpha: 0
             });
 
-            toggleBase('light');
+            // toggleBase('light');
             clear();
         },
         'Flow only'() {
@@ -1561,7 +1579,7 @@ export default (canvas, options) => {
                 video: 0
             });
 
-            toggleBase('light');
+            // toggleBase('light');
         },
         'Sea'() {
             Object.assign(state, {
@@ -1646,7 +1664,7 @@ export default (canvas, options) => {
                 fadeColor: [0, 0, 0]
             });
 
-            toggleBase('light');
+            // toggleBase('light');
         },
         'Rorschach'() {
             Object.assign(state, {
@@ -1735,7 +1753,13 @@ export default (canvas, options) => {
         }
     };
 
-    const wrapPresetter = (presetter) => {
+    const presetAuto = {
+        interval: null,
+        current: 0,
+        loop: appSettings.loopPresets
+    };
+
+    const wrapPresetter = (presetter, k) => {
         Object.assign(state, defaultState);
         Object.assign(resetSpawner.uniforms, resetSpawnerDefaults);
         Object.assign(flowPixelState, flowPixelDefaults);
@@ -1748,12 +1772,34 @@ export default (canvas, options) => {
         convertColors();
         convertBlend();
         // restart();
+
+        presetAuto.current = k;
     };
 
-    for(let p in presetters) {
-        presetters[p] = wrapPresetter.bind(null, presetters[p]);
+    const presetterKeys = Object.keys(presetters);
+
+    presetterKeys.forEach((p, k) => {
+        presetters[p] = wrapPresetter.bind(null, presetters[p], k);
         gui.presets.add(presetters, p);
-    }
+    });
+
+    const updatePresetAuto = (loop) => {
+        presetAuto.loop = loop;
+        clearInterval(presetAuto.interval);
+        presetAuto.interval = null;
+
+        if(presetAuto.loop) {
+            presetAuto.interval = setInterval(() => {
+                    const next = (presetAuto.current+1)%presetterKeys.length;
+
+                    presetters[presetterKeys[next]]();
+                },
+                presetAuto.loop);
+        }
+    };
+
+    gui.presets.add(presetAuto, 'loop').onFinishChange(updatePresetAuto);
+    updatePresetAuto(presetAuto.loop);
 
 
     // Hide by default till the animation's over
