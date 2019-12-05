@@ -127,6 +127,7 @@ export default (canvas, options) => {
         tendrils.clear();
         respawn();
         respawn(tendrils.targets);
+        timer.app.time = 0;
     };
 
     const clear = () => tendrils.clear();
@@ -144,8 +145,13 @@ export default (canvas, options) => {
         useMedia: (''+settings.use_media !== 'false'),
         useCamera: (''+settings.use_camera !== 'false'),
         useMic: (''+settings.use_mic !== 'false'),
-        loopTime: (parseInt((''+settings.loop_time || 10*60*1000), 10) || 0),
-        loopPresets: (parseInt((''+settings.loop_presets || 3*60*1000), 10) || 0),
+
+        loopTime: Math.max(0,
+            parseInt((settings.loop_time || 10*60*10e2), 10) || 0),
+
+        loopPresets: Math.max(0,
+            parseInt((settings.loop_presets || 3*60*10e2), 10) || 0),
+
         pointerFlow: (''+settings.pointer_flow !== 'false'),
         staticImage: ((settings.static_image)?
                 decodeURIComponent(settings.static_image)
@@ -1272,9 +1278,7 @@ export default (canvas, options) => {
 
 
     gui.main.add(appSettings, 'trackURL').onFinishChange(setupTrackURL);
-
     gui.main.add(appSettings, 'animate');
-
     gui.main.add(appSettings, 'useMedia').onFinishChange(() => toggleMedia());
 
     gui.main.add(appSettings, 'staticImage').onFinishChange(() =>
@@ -1516,10 +1520,11 @@ export default (canvas, options) => {
             Object.assign(colorProxy, {
                 flowAlpha: 0.01,
                 baseAlpha: 0.8,
+                baseColor: [255, 255, 255],
                 fadeAlpha: 0
             });
 
-            // toggleBase('light');
+            toggleBase('dark');
             restart();
         },
         'Fluid'() {
@@ -1528,10 +1533,13 @@ export default (canvas, options) => {
             });
 
             Object.assign(colorProxy, {
+                flowAlpha: 0.6,
+                baseAlpha: 0.7,
+                baseColor: [255, 255, 255],
                 fadeAlpha: 0
             });
 
-            // toggleBase('light');
+            toggleBase('dark');
             clear();
         },
         'Flow only'() {
@@ -1550,7 +1558,8 @@ export default (canvas, options) => {
             Object.assign(colorProxy, {
                 baseAlpha: 0.8,
                 baseColor: [100, 200, 255],
-                fadeAlpha: 0.1
+                fadeAlpha: 0.1,
+                fadeColor: [0, 0, 0]
             });
 
             toggleBase('dark');
@@ -1561,17 +1570,18 @@ export default (canvas, options) => {
                 noiseWeight: 0.003,
                 noiseSpeed: 0.0005,
                 noiseScale: 1.5,
-                varyNoiseScale: 10,
+                varyNoiseScale: -20,
                 varyNoiseSpeed: 0.05,
                 speedAlpha: 0,
                 colorMapAlpha: 0.8
             });
 
             Object.assign(colorProxy, {
+                flowAlpha: 0.2,
                 baseAlpha: 0.4,
-                baseColor: [255, 180, 50],
+                baseColor: [255, 150, 0],
                 fadeAlpha: 0.05,
-                flowAlpha: 0
+                fadeColor: [0, 0, 0]
             });
 
             Object.assign(blendProxy, {
@@ -1579,7 +1589,7 @@ export default (canvas, options) => {
                 video: 0
             });
 
-            // toggleBase('light');
+            toggleBase('dark');
         },
         'Sea'() {
             Object.assign(state, {
@@ -1612,9 +1622,9 @@ export default (canvas, options) => {
             });
 
             Object.assign(colorProxy, {
-                baseAlpha: 0.25,
+                baseAlpha: 0.4,
                 baseColor: [255, 255, 255],
-                flowAlpha: 0.03,
+                flowAlpha: 0.04,
                 fadeAlpha: 0.03,
                 fadeColor: [0, 0, 0]
             });
@@ -1632,8 +1642,9 @@ export default (canvas, options) => {
 
             Object.assign(colorProxy, {
                 baseAlpha: 0.4,
-                baseColor:[255, 203, 37],
+                baseColor: [255, 203, 37],
                 flowAlpha: 0.05,
+                fadeColor: [0, 0, 0],
                 fadeAlpha: Math.max(state.flowDecay, 0.05)
             });
 
@@ -1660,11 +1671,11 @@ export default (canvas, options) => {
                 baseColor: [100, 0, 0],
                 flowAlpha: 0.5,
                 flowColor: [255, 10, 10],
-                fadeAlpha: 0.01,
+                fadeAlpha: 0.03,
                 fadeColor: [0, 0, 0]
             });
 
-            // toggleBase('light');
+            toggleBase('dark');
         },
         'Rorschach'() {
             Object.assign(state, {
@@ -1692,23 +1703,22 @@ export default (canvas, options) => {
 
             toggleBase('dark');
         },
-        'Roots'() {
+        'Rave'() {
             Object.assign(state, {
-                flowDecay: 0,
-                noiseSpeed: 0,
-                noiseScale: 18,
-                forceWeight: 0.015,
-                noiseWeight: 0.0023,
-                speedAlpha: 0.00005,
-                lineWidth: 2,
-                colorMapAlpha: 0.0001
+                noiseScale: 12,
+                forceWeight: 0.016,
+                noiseWeight: 0.003,
+                speedAlpha: 0.2,
+                target: 0.001,
+                colorMapAlpha: 0.4
             });
 
             Object.assign(colorProxy, {
-                baseAlpha: 0.2,
-                baseColor: [50, 255, 50],
+                baseAlpha: 0.6,
+                baseColor: [0, 255, 0],
                 flowAlpha: 0.05,
-                fadeAlpha: 0
+                fadeAlpha: 0.1,
+                fadeColor: [255, 0, 0]
             });
 
             toggleBase('dark');
@@ -1957,7 +1967,7 @@ export default (canvas, options) => {
             '3': keyframeCaller(presetters['Ghostly']),
             '4': keyframeCaller(presetters['Noise only']),
             '5': keyframeCaller(presetters['Sea']),
-            '6': keyframeCaller(presetters['Petri']),
+            '6': keyframeCaller(presetters['Rave']),
             '7': keyframeCaller(presetters['Turbulence']),
             '8': keyframeCaller(presetters['Rorschach']),
             '9': keyframeCaller(presetters['Funhouse']),
