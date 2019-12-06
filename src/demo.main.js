@@ -142,6 +142,8 @@ export default (canvas, options) => {
             :   decodeURIComponent(settings.track)),
 
         animate: (''+settings.animate !== 'false'),
+        editorKeys: (''+settings.editor_keys !== 'false'),
+
         useMedia: (''+settings.use_media !== 'false'),
         useCamera: (''+settings.use_camera !== 'false'),
         useMic: (''+settings.use_mic !== 'false'),
@@ -538,6 +540,12 @@ export default (canvas, options) => {
     const spawnSamples = (buffer = spawnTargets.spawnSamples) =>
         spawnRaster(imageShaders.sample, 1, buffer);
 
+    function spawnImageTargets() {
+        spawnTargets.spawnImage = tendrils.targets;
+        spawnImage(tendrils.targets);
+        spawnImage(null);
+    }
+
 
     // Optical flow
 
@@ -678,7 +686,7 @@ export default (canvas, options) => {
                 (trigger, t) => meanWeight(trigger.dataOrder(2), 0.25) > t)
         ],
         [
-            () => spawnImage(),
+            () => spawnImageTargets(),
             audioFirer(() => audioState.trackCamAt,
                 'trackCamAt | Mid - force/attack | meanWeight(track, 3, 0.5)',
                 (trigger, t) => meanWeight(trigger.dataOrder(3), 0.5) > t)
@@ -718,7 +726,7 @@ export default (canvas, options) => {
                         (trigger, t) => meanWeight(trigger.dataOrder(2), 0.25) > t)
                 ],
                 [
-                    () => spawnImage(),
+                    () => spawnImageTargets(),
                     audioFirer(() => audioState.micCamAt,
                         'micCamAt | Mid - force/attack | meanWeight(mic, 3, 0.5)',
                         (trigger, t) => meanWeight(trigger.dataOrder(3), 0.5) > t)
@@ -756,7 +764,7 @@ export default (canvas, options) => {
                         (trigger, t) => meanWeight(trigger.dataOrder(1), 0.4) > t)
                 ],
                 [
-                    () => spawnImage(),
+                    () => spawnImageTargets(),
                     audioFirer(() => audioState.micCamAt,
                         'micCamAt | Mid - acceleration | meanWeight(mic, 2, 0.6)',
                         (trigger, t) => meanWeight(trigger.dataOrder(2), 0.6) > t)
@@ -1465,11 +1473,7 @@ export default (canvas, options) => {
         reset,
         restart,
         toggleBase,
-        spawnImageTargets() {
-            spawnTargets.spawnImage = tendrils.targets;
-            spawnImage(tendrils.targets);
-            spawnImage(null);
-        }
+        spawnImageTargets
     };
 
 
@@ -1505,6 +1509,15 @@ export default (canvas, options) => {
             });
 
             toggleBase('dark');
+
+            Object.assign(audioState, {
+                micSpawnAt: 0,
+                micFormAt: audioDefaults.micFormAt*0.5,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.9
+            });
         },
         'Wings'() {
             Object.assign(state, {
@@ -1522,6 +1535,15 @@ export default (canvas, options) => {
                 baseAlpha: 0.8,
                 baseColor: [255, 255, 255],
                 fadeAlpha: 0
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.5,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: 0,
+                micSampleAt: 0
             });
 
             toggleBase('dark');
@@ -1568,25 +1590,34 @@ export default (canvas, options) => {
             Object.assign(state, {
                 flowWeight: 0,
                 noiseWeight: 0.003,
-                noiseSpeed: 0.0005,
                 noiseScale: 1.5,
-                varyNoiseScale: -20,
-                varyNoiseSpeed: 0.05,
-                speedAlpha: 0,
-                colorMapAlpha: 0.8
+                varyNoiseScale: -30,
+                noiseSpeed: 0.00025,
+                varyNoiseSpeed: -0.3,
+                speedAlpha: 0.08,
+                colorMapAlpha: 0.9
             });
 
             Object.assign(colorProxy, {
-                flowAlpha: 0.2,
-                baseAlpha: 0.4,
+                flowAlpha: 0.4,
+                flowColor: [255, 45, 146],
+                baseAlpha: 0.6,
                 baseColor: [255, 150, 0],
                 fadeAlpha: 0.05,
-                fadeColor: [0, 0, 0]
+                fadeColor: [54, 0, 48]
             });
 
             Object.assign(blendProxy, {
                 audio: 0.9,
                 video: 0
+            });
+
+            Object.assign(audioState, {
+                micFastAt: audioDefaults.micFastAt*0.4,
+                micSampleAt: 0,
+                micFormAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.8,
+                micSpawnAt: audioDefaults.micSpawnAt*0.6
             });
 
             toggleBase('dark');
@@ -1597,8 +1628,15 @@ export default (canvas, options) => {
                 forceWeight: 0.013,
                 noiseWeight: 0.002,
                 flowDecay: 0.01,
-                speedAlpha: 0,
-                colorMapAlpha: 0.4
+                target: 0.0001,
+                speedAlpha: 0.01,
+                colorMapAlpha: 0.7,
+                flowColor: [119, 190, 255],
+                flowAlpa: 0.01,
+                baseColor: [132, 166, 255],
+                baseAlpha: 0.7,
+                fadeColor: [0, 44, 110],
+                fadeAlpha: 0.1
             });
 
             Object.assign(resetSpawner.uniforms, {
@@ -1613,12 +1651,24 @@ export default (canvas, options) => {
                 fadeColor: [0, 58, 90]
             });
 
+            Object.assign(blendProxy, {
+                audio: 1,
+                video: 0.5
+            });
+
+            Object.assign(audioState, {
+                micSampleAt: 0,
+                micFormAt: audioDefaults.micFormAt*0.8,
+                micCamAt: audioDefaults.micCamAt*0.8,
+                micSpawnAt: audioDefaults.micSpawnAt*0.5
+            });
+
             toggleBase('dark');
         },
         'Ghostly'() {
             Object.assign(state, {
-                flowDecay: 0,
-                colorMapAlpha: 0.005
+                flowDecay: 0.001,
+                colorMapAlpha: 0.01
             });
 
             Object.assign(colorProxy, {
@@ -1629,76 +1679,10 @@ export default (canvas, options) => {
                 fadeColor: [0, 0, 0]
             });
 
-            toggleBase('dark');
-        },
-        'Petri'() {
-            Object.assign(state, {
-                forceWeight: 0.015,
-                noiseWeight: 0.001,
-                flowDecay: 0.001,
-                noiseScale: 200,
-                noiseSpeed: 0.0001
-            });
-
-            Object.assign(colorProxy, {
-                baseAlpha: 0.4,
-                baseColor: [255, 203, 37],
-                flowAlpha: 0.05,
-                fadeColor: [0, 0, 0],
-                fadeAlpha: Math.max(state.flowDecay, 0.05)
-            });
-
-            Object.assign(resetSpawner.uniforms, {
-                radius: 1/Math.max(...tendrils.viewSize),
-                speed: 0
-            });
-
-            toggleBase('dark');
-            clear();
-        },
-        'Turbulence'() {
-            Object.assign(state, {
-                noiseSpeed: 0.00005,
-                noiseScale: 10,
-                forceWeight: 0.014,
-                noiseWeight: 0.003,
-                speedAlpha: 0.000002,
-                colorMapAlpha: 0.3
-            });
-
-            Object.assign(colorProxy, {
-                baseAlpha: 0.3,
-                baseColor: [100, 0, 0],
-                flowAlpha: 0.5,
-                flowColor: [255, 10, 10],
-                fadeAlpha: 0.03,
-                fadeColor: [0, 0, 0]
-            });
-
-            toggleBase('dark');
-        },
-        'Rorschach'() {
-            Object.assign(state, {
-                noiseScale: 40,
-                varyNoiseScale: 0.1,
-                noiseSpeed: 0.00001,
-                varyNoiseSpeed: 0.01,
-                forceWeight: 0.014,
-                noiseWeight: 0.0021,
-                speedAlpha: 0.000002,
-                colorMapAlpha: 0.2
-            });
-
-            Object.assign(flowPixelState, {
-                scale: 'mirror xy'
-            });
-
-            Object.assign(colorProxy, {
-                baseAlpha: 0.9,
-                baseColor: [0, 0, 0],
-                flowAlpha: 0.1,
-                fadeAlpha: 0.05,
-                fadeColor: [255, 255, 255]
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.5,
+                micFastAt: audioDefaults.micFastAt*0.8,
+                micFlowAt: audioDefaults.micFlowAt*1.2
             });
 
             toggleBase('dark');
@@ -1715,14 +1699,137 @@ export default (canvas, options) => {
 
             Object.assign(colorProxy, {
                 baseAlpha: 0.6,
-                baseColor: [0, 255, 0],
+                baseColor: [0, 255, 30],
                 flowAlpha: 0.05,
                 fadeAlpha: 0.1,
-                fadeColor: [255, 0, 0]
+                fadeColor: [255, 0, 61]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: 0,
+                micFormAt: audioDefaults.micFormAt*0.5,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.9
             });
 
             toggleBase('dark');
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.3,
+                speed: 2
+            });
+
             restart();
+        },
+        'Blood'() {
+            Object.assign(state, {
+                forceWeight: 0.015,
+                noiseWeight: 0.001,
+                noiseSpeed: 0.0005,
+                speedAlpha: 0.001
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 1,
+                baseColor: [128, 0, 0],
+                flowAlpha: 0.05,
+                fadeColor: [255, 255, 255],
+                fadeAlpha: Math.max(state.flowDecay, 0.05)
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.1,
+                speed: 4
+            });
+
+            Object.assign(blendProxy, {
+                audio: 1,
+                video: 0.5
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFlowAt: audioDefaults.micFlowAt*0.5,
+                micFastAt: audioDefaults.micFastAt*0.5,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.9
+            });
+
+            toggleBase('dark');
+            clear();
+            restart();
+        },
+        'Turbulence'() {
+            Object.assign(state, {
+                noiseSpeed: 0.00005,
+                noiseScale: 10,
+                forceWeight: 0.014,
+                noiseWeight: 0.003,
+                speedAlpha: 0.01,
+                colorMapAlpha: 0.3
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.3,
+                baseColor: [194, 0, 0],
+                flowAlpha: 0.5,
+                flowColor: [255, 30, 30],
+                fadeAlpha: 0.1,
+                fadeColor: [54, 0, 10]
+            });
+
+            Object.assign(blendProxy, {
+                audio: 1,
+                video: 0.5
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: audioDefaults.micFormAt*0.7,
+                micFlowAt: audioDefaults.micFlowAt*0.8,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.9
+            });
+
+            toggleBase('dark');
+
+            restart();
+        },
+        'Rorschach'() {
+            Object.assign(state, {
+                noiseScale: 40,
+                varyNoiseScale: 0,
+                noiseSpeed: 0.0003,
+                varyNoiseSpeed: 0.01,
+                forceWeight: 0.014,
+                noiseWeight: 0.0021,
+                speedAlpha: 0.000002,
+                colorMapAlpha: 0.1
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.9,
+                baseColor: [0, 0, 0],
+                flowAlpha: 0.2,
+                fadeAlpha: 0.05,
+                fadeColor: [255, 255, 255]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: audioDefaults.micFormAt*0.8,
+                micFastAt: audioDefaults.micFastAt*0.8,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*1
+            });
+
+            toggleBase('dark');
         },
         'Funhouse'() {
             Object.assign(state, {
@@ -1756,10 +1863,24 @@ export default (canvas, options) => {
                 fadeColor: [0, 0, 0]
             });
 
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*1.5,
+                micFormAt: audioDefaults.micFormAt*1.3,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.6,
+                micSampleAt: 0
+            });
+
+            // console.log(JSON.stringify(audioState));
+
             toggleBase('dark');
+
             spawnImage(null);
             spawnTargets.spawnImage = tendrils.targets;
             spawnImage(tendrils.targets);
+
+            // controllers.spawnImageTargets();
         }
     };
 
@@ -1775,6 +1896,7 @@ export default (canvas, options) => {
         Object.assign(flowPixelState, flowPixelDefaults);
         Object.assign(colorProxy, colorDefaults);
         Object.assign(blendProxy, blendDefaults);
+        Object.assign(audioState, audioDefaults);
 
         presetter();
 
@@ -1914,96 +2036,133 @@ export default (canvas, options) => {
          * @todo Inputs for the other things in full state, controls, and
          *       presets.
          */
-        const editMap = {
+        const editMap = ((appSettings.editorKeys)?
+                {
+                    '`': {
+                        reset: () => {
+                            tendrils.setup(defaultState.rootNum);
+                            restart();
+                        },
+                        adjust: (by) => {
+                            tendrils.setup(state.rootNum*Math.pow(2, by));
+                            restart();
+                        }
+                    },
 
-            '`': {
-                reset: () => {
-                    tendrils.setup(defaultState.rootNum);
-                    restart();
-                },
-                adjust: (by) => {
-                    tendrils.setup(state.rootNum*Math.pow(2, by));
-                    restart();
+                    'P': stateBool('autoClearView'),
+
+                    'Q': stateNum('forceWeight', 0.01),
+                    'A': stateNum('flowWeight', 0.02),
+                    'W': stateNum('noiseWeight', 0.0002),
+
+                    'S': stateNum('flowDecay', 0.005),
+                    'D': stateNum('flowWidth', 1),
+
+                    'E': stateNum('noiseScale', 1),
+                    'R': stateNum('noiseSpeed', 0.002),
+
+                    'Z': stateNum('damping', 0.001),
+                    'X': stateNum('speedLimit', 0.0001),
+
+                    'N': stateNum('speedAlpha', 0.002),
+                    'M': stateNum('lineWidth', 0.1),
+
+                    // <control> is a special case for re-assigning keys, see below
+                    '<control>': (key, assign) => {
+                        delete editMap[key];
+                        delete callMap[key];
+
+                        callMap[key] = keyframeCaller(() =>
+                                Object.assign(state, assign));
+                    }
                 }
-            },
+            :   {});
 
-            'P': stateBool('autoClearView'),
+        const callMap = ((appSettings.editorKeys)?
+                {
+                    'H': () => toggleShowGUI(),
 
-            'Q': stateNum('forceWeight', 0.01),
-            'A': stateNum('flowWeight', 0.02),
-            'W': stateNum('noiseWeight', 0.0002),
+                    'O': keyframeCaller(() => tendrils.clear()),
 
-            'S': stateNum('flowDecay', 0.005),
-            'D': stateNum('flowWidth', 1),
+                    '0': keyframeCaller(presetters['Flow']),
+                    '1': keyframeCaller(presetters['Wings']),
+                    '2': keyframeCaller(presetters['Fluid']),
+                    // '3': keyframeCaller(presetters['Flow only']),
+                    '3': keyframeCaller(presetters['Ghostly']),
+                    '4': keyframeCaller(presetters['Noise only']),
+                    '5': keyframeCaller(presetters['Sea']),
+                    '6': keyframeCaller(presetters['Rave']),
+                    '7': keyframeCaller(presetters['Turbulence']),
+                    '8': keyframeCaller(presetters['Rorschach']),
+                    '9': keyframeCaller(presetters['Funhouse']),
 
-            'E': stateNum('noiseScale', 1),
-            'R': stateNum('noiseSpeed', 0.002),
+                    '-': adjustEach(-0.1),
+                    '=': adjustEach(0.1),
+                    '<down>': adjustEach(-1),
+                    '<up>': adjustEach(1),
+                    '<left>': adjustEach(-5),
+                    '<right>': adjustEach(5),
 
-            'Z': stateNum('damping', 0.001),
-            'X': stateNum('speedLimit', 0.0001),
+                    '<escape>': (...rest) => {
+                        resetEach(editMap);
+                        keyframe(...rest);
+                    },
+                    '<caps-lock>': resetEach,
 
-            'N': stateNum('speedAlpha', 0.002),
-            'M': stateNum('lineWidth', 0.1),
+                    '<space>': () => togglePlay(),
 
-            // <control> is a special case for re-assigning keys, see below
-            '<control>': (key, assign) => {
-                delete editMap[key];
-                delete callMap[key];
+                    '[': () => scrub(-2000),
+                    ']': () => scrub(2000),
+                    '<enter>': keyframe,
+                    // @todo Update this to match the new Player API
+                    '<backspace>': () =>
+                        player.track.trackAt(timer.track.time)
+                            .spliceAt(timer.track.time),
 
-                callMap[key] = keyframeCaller(() =>
-                        Object.assign(state, assign));
-            }
-        };
+                    '\\': keyframeCaller(() => reset()),
+                    "'": keyframeCaller(() => spawnFlow()),
+                    ';': keyframeCaller(() => spawnFastest()),
+                    ',': keyframeCaller(() => spawnForm()),
 
-        const callMap = {
-            'H': () => toggleShowGUI(),
+                    '<shift>': keyframeCaller(() => restart()),
+                    '/': keyframeCaller(() => spawnSamples()),
+                    '.': keyframeCaller(controllers.spawnImageTargets)
+                }
+            :   {
+                    'H': () => toggleShowGUI(),
 
-            'O': keyframeCaller(() => tendrils.clear()),
+                    'O': () => tendrils.clear(),
 
-            '0': keyframeCaller(presetters['Flow']),
-            '1': keyframeCaller(presetters['Wings']),
-            '2': keyframeCaller(presetters['Fluid']),
-            // '3': keyframeCaller(presetters['Flow only']),
-            '3': keyframeCaller(presetters['Ghostly']),
-            '4': keyframeCaller(presetters['Noise only']),
-            '5': keyframeCaller(presetters['Sea']),
-            '6': keyframeCaller(presetters['Rave']),
-            '7': keyframeCaller(presetters['Turbulence']),
-            '8': keyframeCaller(presetters['Rorschach']),
-            '9': keyframeCaller(presetters['Funhouse']),
+                    '0': presetters['Flow'],
+                    '1': presetters['Wings'],
+                    '2': presetters['Fluid'],
+                    '3': presetters['Ghostly'],
+                    '4': presetters['Noise only'],
+                    '5': presetters['Sea'],
+                    '6': presetters['Rave'],
+                    '7': presetters['Turbulence'],
+                    '8': presetters['Rorschach'],
+                    '9': presetters['Funhouse'],
+                    '-': presetters['Blood'],
+                    '=': presetters['Flow only'],
 
-            '-': adjustEach(-0.1),
-            '=': adjustEach(0.1),
-            '<down>': adjustEach(-1),
-            '<up>': adjustEach(1),
-            '<left>': adjustEach(-5),
-            '<right>': adjustEach(5),
+                    '<space>': () => restart(),
 
-            '<escape>': (...rest) => {
-                resetEach(editMap);
-                keyframe(...rest);
-            },
-            '<caps-lock>': resetEach,
+                    'x': () => spawnFlow(),
+                    'c': () => spawnFastest(),
+                    'v': () => spawnForm(),
+                    'b': () => restart(),
+                    'n': () => spawnSamples(),
+                    'm': () => controllers.spawnImageTargets(),
 
-            '<space>': () => togglePlay(),
+                    "'": () => spawnFlow(),
+                    ';': () => spawnFastest(),
+                    ',': () => spawnForm(),
 
-            '[': () => scrub(-2000),
-            ']': () => scrub(2000),
-            '<enter>': keyframe,
-            // @todo Update this to match the new Player API
-            '<backspace>': () =>
-                player.track.trackAt(timer.track.time)
-                    .spliceAt(timer.track.time),
-
-            '\\': keyframeCaller(() => reset()),
-            "'": keyframeCaller(() => spawnFlow()),
-            ';': keyframeCaller(() => spawnFastest()),
-            ',': keyframeCaller(() => spawnForm()),
-
-            '<shift>': keyframeCaller(() => restart()),
-            '/': keyframeCaller(() => spawnSamples()),
-            '.': keyframeCaller(controllers.spawnImageTargets)
-        };
+                    '<shift>': () => restart(),
+                    '/': () => spawnSamples(),
+                    '.': () => controllers.spawnImageTargets()
+                });
 
         if(fullscreen) {
             callMap['F'] = fullscreen.request;
@@ -2078,6 +2237,7 @@ export default (canvas, options) => {
         tracks,
         defaultState,
         audioDefaults,
+        audioState,
         toggleMedia,
         timer
     };
