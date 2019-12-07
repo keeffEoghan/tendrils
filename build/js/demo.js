@@ -339,7 +339,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        pointerFlow: '' + settings.pointer_flow !== 'false',
 	        staticImage: settings.static_image ? decodeURIComponent(settings.static_image)
 	        // :   rootPath+'build/images/epok/eye.png')
-	        : _utils.rootPath + 'build/images/fortune.png'
+	        // :   rootPath+'build/images/fortune.png')
+	        : _utils.rootPath + 'build/images/unit31-unfolded.jpg'
 	    };
 	
 	    Object.assign(timer.app, {
@@ -732,6 +733,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    var opticalFlowDefaults = _extends({}, opticalFlowState);
 	
+	    // Color map blending
+	
+	    var trackTexture = new _dataTexture2.default(gl, trackAnalyser.analyser.frequencyBinCount);
+	
+	    // We'll swap in the mic texture if/when it's created.
+	    var micTexture = null;
+	
+	    var blendMap = {
+	        mic: trackTexture.texture,
+	        track: trackTexture.texture,
+	        video: opticalFlow.buffers[0]
+	    };
+	
+	    var blendKeys = Object.keys(blendMap);
+	
+	    var blend = new _blend2.default(gl, {
+	        views: Object.values(blendMap),
+	        alphas: [0.1, 0.3, 0.8]
+	    });
+	
 	    // Media access
 	
 	    var mediaStream = void 0;
@@ -758,6 +779,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    micAnalyser.analyser.fftSize = Math.pow(2, 8);
 	
 	                    micTrigger = micTrigger || new _audio2.default(micAnalyser, 4);
+	
+	                    micTexture = new _dataTexture2.default(gl, micAnalyser.analyser.frequencyBinCount);
+	
+	                    blend.views[blendKeys.indexOf('mic')] = micTexture.texture;
 	                }
 	            }
 	        });
@@ -770,6 +795,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stream && (0, _each2.default)(function (track) {
 	            return track.stop();
 	        }, stream.getTracks());
+	        micTexture = null;
+	        blend.views[blendKeys.indexOf('mic')] = trackTexture.texture;
 	    }
 	
 	    var toggleMedia = function toggleMedia() {
@@ -780,15 +807,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (appSettings.useMedia) {
 	        getMedia();
 	    }
-	
-	    // Color map blending
-	
-	    var audioTexture = new _dataTexture2.default(gl, trackAnalyser.analyser.frequencyBinCount);
-	
-	    var blend = new _blend2.default(gl, {
-	        views: [audioTexture.texture, opticalFlow.buffers[0]],
-	        alphas: [0.3, 0.8]
-	    });
 	
 	    // Audio `react` and `test` function pairs - for `AudioTrigger.fire`
 	    /**
@@ -1087,7 +1105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        opticalFlow: _extends({}, opticalFlowDefaults),
 	        audio: _extends({}, audioDefaults),
-	        blend: [0, 1],
+	        blend: [0, 0, 1],
 	        blur: _extends({}, blurState),
 	        calls: null
 	    };
@@ -1207,18 +1225,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	
+	        // React to sound - from highest reaction to lowest, max one per frame
 	        /**
 	         * @todo Spectogram with frequencies on x-axis, waveform on y; or
 	         *       something better than this 1D list.
 	         */
-	        audioTexture.frequencies(trackTrigger.dataOrder(0)).apply();
+	
+	        if (trackTrigger) {
+	            trackTexture && trackTexture.frequencies(trackTrigger.dataOrder(0)).apply();
+	
+	            trackAnalyser.gain.gain
+	            // So we don't blow any speakers...
+	            .linearRampToValueAtTime((0, _clamp2.default)(audioState.track, 0, 1), trackAnalyser.ctx.currentTime + 0.5);
+	
+	            trackTrigger.sample(dt);
+	        }
+	
+	        if (micTrigger) {
+	            micTexture && micTexture.frequencies(micTrigger.dataOrder(0)).apply();
+	
+	            micAnalyser.gain.gain.linearRampToValueAtTime((0, _clamp2.default)(audioState.mic, 0, 10000), micAnalyser.ctx.currentTime + 0.5);
+	
+	            micTrigger.sample(dt);
+	        }
+	
+	        audioResponse();
+	
+	        // Blend everything to be
 	
 	        var drawVideo = appSettings.useMedia && appSettings.useCamera && video.readyState > 1;
 	
 	        // Blend the color maps into tendrils one
 	        // @todo Only do this if necessary (skip if none or only one has alpha)
 	
-	        blend.views[1] = drawVideo ? opticalFlow.buffers[0] : imageSpawner.buffer;
+	        blend.views[blendKeys.indexOf('video')] = drawVideo ? opticalFlow.buffers[0] : imageSpawner.buffer;
+	
 	        blend.draw(tendrils.colorMap);
 	
 	        // The main event
@@ -1284,24 +1325,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                opticalFlow.step();
 	            }
 	        }
-	
-	        // React to sound - from highest reaction to lowest, max one per frame
-	
-	        if (trackTrigger) {
-	            trackAnalyser.gain.gain
-	            // So we don't blow any speakers...
-	            .linearRampToValueAtTime((0, _clamp2.default)(audioState.track, 0, 1), trackAnalyser.ctx.currentTime + 0.5);
-	
-	            trackTrigger.sample(dt);
-	        }
-	
-	        if (micTrigger) {
-	            micAnalyser.gain.gain.linearRampToValueAtTime((0, _clamp2.default)(audioState.mic, 0, 10000), micAnalyser.ctx.currentTime + 0.5);
-	
-	            micTrigger.sample(dt);
-	        }
-	
-	        audioResponse();
 	    }
 	
 	    function resize() {
@@ -1533,7 +1556,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    gui.blend = gui.main.addFolder('color blend');
 	
-	    var blendKeys = ['audio', 'video'];
 	    var blendProxy = (0, _reduce2.default)(function (proxy, k, i) {
 	        proxy[k] = blend.alphas[i];
 	
@@ -1670,7 +1692,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                baseColor: [0, 0, 0],
 	                flowAlpha: 1,
 	                flowColor: [255, 255, 255],
-	                fadeAlpha: Math.max(state.flowDecay, 0.05)
+	                fadeAlpha: Math.max(state.flowDecay, 0.05),
+	                fadeColor: [0, 0, 0]
 	            });
 	
 	            toggleBase('dark');
@@ -1703,7 +1726,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(audioState, {
-	                micSpawnAt: audioDefaults.micSpawnAt * 0.5,
+	                micSpawnAt: audioDefaults.micSpawnAt * 0.55,
 	                micFormAt: 0,
 	                micFlowAt: 0,
 	                micFastAt: 0,
@@ -1716,14 +1739,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        'Fluid': function Fluid() {
 	            Object.assign(state, {
-	                autoClearView: true
+	                autoClearView: true,
+	                colorMapAlpha: 0.4
 	            });
 	
 	            Object.assign(colorProxy, {
-	                flowAlpha: 0.6,
+	                flowAlpha: 0.15,
 	                baseAlpha: 0.7,
 	                baseColor: [255, 255, 255],
 	                fadeAlpha: 0
+	            });
+	
+	            Object.assign(blendProxy, {
+	                mic: 1,
+	                track: 1,
+	                video: 0
+	            });
+	
+	            Object.assign(audioState, {
+	                micFastAt: audioDefaults.micFastAt * 0.8,
+	                micCamAt: 0
 	            });
 	
 	            toggleBase('dark');
@@ -1760,7 +1795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                noiseSpeed: 0.00025,
 	                varyNoiseSpeed: -0.3,
 	                speedAlpha: 0.08,
-	                colorMapAlpha: 0.9
+	                colorMapAlpha: 0.27
 	            });
 	
 	            Object.assign(colorProxy, {
@@ -1773,7 +1808,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 0.9,
+	                mic: 1,
+	                track: 1,
 	                video: 0
 	            });
 	
@@ -1795,7 +1831,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                flowDecay: 0.01,
 	                target: 0.0001,
 	                speedAlpha: 0.01,
-	                colorMapAlpha: 0.7,
+	                colorMapAlpha: 0.2,
 	                flowColor: [119, 190, 255],
 	                flowAlpa: 0.01,
 	                baseColor: [132, 166, 255],
@@ -1817,8 +1853,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 1,
-	                video: 0.5
+	                mic: 1,
+	                track: 1,
+	                video: 0.3
 	            });
 	
 	            Object.assign(audioState, {
@@ -1833,11 +1870,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'Ghostly': function Ghostly() {
 	            Object.assign(state, {
 	                flowDecay: 0.001,
-	                colorMapAlpha: 0.01
+	                colorMapAlpha: 0.2
 	            });
 	
 	            Object.assign(colorProxy, {
-	                baseAlpha: 0.4,
+	                baseAlpha: 0.3,
 	                baseColor: [255, 255, 255],
 	                flowAlpha: 0.04,
 	                fadeAlpha: 0.03,
@@ -1850,6 +1887,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                micFlowAt: audioDefaults.micFlowAt * 1.2
 	            });
 	
+	            Object.assign(blendProxy, {
+	                mic: 0.6,
+	                track: 0.6,
+	                video: 0.4
+	            });
+	
 	            toggleBase('dark');
 	        },
 	        'Rave': function Rave() {
@@ -1859,13 +1902,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                noiseWeight: 0.003,
 	                speedAlpha: 0.2,
 	                target: 0.001,
-	                colorMapAlpha: 0.4
+	                colorMapAlpha: 0.35
 	            });
 	
 	            Object.assign(colorProxy, {
 	                baseAlpha: 0.6,
 	                baseColor: [0, 255, 30],
-	                flowAlpha: 0.05,
+	                flowAlpha: 0.5,
+	                flowColor: [128, 255, 0],
 	                fadeAlpha: 0.1,
 	                fadeColor: [255, 0, 61]
 	            });
@@ -1879,13 +1923,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	                micSampleAt: audioDefaults.micSampleAt * 0.9
 	            });
 	
-	            toggleBase('dark');
-	
 	            Object.assign(resetSpawner.uniforms, {
 	                radius: 0.3,
 	                speed: 2
 	            });
 	
+	            Object.assign(blendProxy, {
+	                mic: 1,
+	                track: 1,
+	                video: 0
+	            });
+	
+	            toggleBase('dark');
 	            restart();
 	        },
 	        'Blood': function Blood() {
@@ -1893,15 +1942,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	                forceWeight: 0.015,
 	                noiseWeight: 0.001,
 	                noiseSpeed: 0.0005,
-	                speedAlpha: 0.001
+	                speedAlpha: 0.001,
+	                colorMapAlpha: 0.11
 	            });
 	
 	            Object.assign(colorProxy, {
 	                baseAlpha: 1,
 	                baseColor: [128, 0, 0],
-	                flowAlpha: 0.05,
-	                fadeColor: [255, 255, 255],
-	                fadeAlpha: Math.max(state.flowDecay, 0.05)
+	                flowAlpha: 0.15,
+	                flowColor: [255, 0, 0],
+	                fadeAlpha: Math.max(state.flowDecay, 0.05),
+	                fadeColor: [255, 255, 255]
 	            });
 	
 	            Object.assign(resetSpawner.uniforms, {
@@ -1910,7 +1961,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 1,
+	                mic: 1,
+	                track: 1,
 	                video: 0.5
 	            });
 	
@@ -1933,20 +1985,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                forceWeight: 0.014,
 	                noiseWeight: 0.003,
 	                speedAlpha: 0.01,
-	                colorMapAlpha: 0.3
+	                colorMapAlpha: 0.13
 	            });
 	
 	            Object.assign(colorProxy, {
 	                baseAlpha: 0.3,
-	                baseColor: [194, 0, 0],
-	                flowAlpha: 0.5,
-	                flowColor: [255, 30, 30],
+	                baseColor: [194, 30, 30],
+	                flowAlpha: 0.4,
+	                flowColor: [255, 0, 0],
 	                fadeAlpha: 0.1,
 	                fadeColor: [54, 0, 10]
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 1,
+	                mic: 1,
+	                track: 1,
 	                video: 0.5
 	            });
 	
@@ -2037,6 +2090,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                micSampleAt: 0
 	            });
 	
+	            Object.assign(blendProxy, {
+	                mic: 0,
+	                track: 0,
+	                video: 1
+	            });
+	
 	            // console.log(JSON.stringify(audioState));
 	
 	            toggleBase('dark');
@@ -2051,7 +2110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            Object.assign(state, {
 	                autoClearView: true,
 	                colorMapAlpha: 1,
-	                speedAlpha: 10,
+	                speedAlpha: 1,
 	                varyNoiseScale: 3,
 	                varyNoiseSpeed: 3
 	            });
@@ -2061,9 +2120,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(colorProxy, {
-	                baseAlpha: 0.95,
+	                baseAlpha: 0.7,
 	                baseColor: [255, 255, 255],
-	                flowAlpha: 1,
+	                flowAlpha: 0,
 	                fadeColor: [255, 255, 255],
 	                fadeAlpha: 0
 	            });
@@ -2078,7 +2137,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 1,
+	                mic: 1,
+	                track: 1,
 	                video: 0
 	            });
 	
@@ -2089,12 +2149,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                noiseWeight: 0.004,
 	                varyNoise: 0.3,
 	                flowDecay: 0.003,
+	                flowWidth: 10,
 	                noiseScale: 1,
-	                varyNoiseScale: -3,
+	                varyNoiseScale: -6,
 	                noiseSpeed: 0.0001,
-	                varyNoiseSpeed: 10,
+	                varyNoiseSpeed: -4,
 	                speedAlpha: 0.001,
-	                colorMapAlpha: 1
+	                colorMapAlpha: 0.25
 	            });
 	
 	            Object.assign(flowPixelState, {
@@ -2102,12 +2163,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(colorProxy, {
-	                baseAlpha: 0.5,
+	                baseAlpha: 0.3,
 	                baseColor: [0, 122, 27],
-	                flowAlpha: 1,
-	                flowColor: [30, 255, 214],
+	                flowAlpha: 0.4,
+	                flowColor: [0, 250, 175],
 	                fadeAlpha: 0.1,
-	                fadeColor: [0, 38, 22]
+	                fadeColor: [0, 36, 51]
 	            });
 	
 	            Object.assign(audioState, {
@@ -2120,7 +2181,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 1,
+	                mic: 1,
+	                track: 1,
 	                video: 0
 	            });
 	
@@ -2137,7 +2199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                noiseSpeed: 0.0001,
 	                varyNoiseSpeed: 0.1,
 	                speedAlpha: 0.01,
-	                colorMapAlpha: 1
+	                colorMapAlpha: 0.17
 	            });
 	
 	            Object.assign(flowPixelState, {
@@ -2163,7 +2225,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 1,
+	                mic: 1,
+	                track: 1,
 	                video: 0
 	            });
 	
@@ -2181,7 +2244,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                varyNoiseSpeed: 3,
 	                target: 0.002,
 	                speedAlpha: 0.005,
-	                colorMapAlpha: 1
+	                colorMapAlpha: 0.3
 	            });
 	
 	            Object.assign(flowPixelState, {
@@ -2207,13 +2270,203 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            Object.assign(blendProxy, {
-	                audio: 1,
+	                mic: 1,
+	                track: 1,
 	                video: 0
 	            });
 	
 	            Object.assign(resetSpawner.uniforms, {
 	                radius: 0.15,
 	                speed: 20000
+	            });
+	
+	            toggleBase('dark');
+	            restart();
+	        },
+	        'Tornado Alley': function TornadoAlley() {
+	            Object.assign(state, {
+	                noiseWeight: 0.01,
+	                varyNoise: 0,
+	                flowDecay: 0.005,
+	                noiseScale: 1.2,
+	                varyNoiseScale: 8,
+	                noiseSpeed: 0.00009,
+	                varyNoiseSpeed: 0,
+	                target: 0.003,
+	                speedAlpha: 0.005,
+	                colorMapAlpha: 1
+	            });
+	
+	            Object.assign(colorProxy, {
+	                baseAlpha: 0.05,
+	                baseColor: [255, 255, 255],
+	                flowAlpha: 0,
+	                flowColor: [0, 0, 0],
+	                fadeAlpha: 0.1,
+	                fadeColor: [46, 8, 31]
+	            });
+	
+	            Object.assign(audioState, {
+	                micSpawnAt: audioDefaults.micSpawnAt * 1.1,
+	                micFormAt: 0,
+	                micFlowAt: 0,
+	                micFastAt: 0,
+	                micCamAt: audioDefaults.micCamAt * 0.7,
+	                micSampleAt: 0
+	            });
+	
+	            Object.assign(blendProxy, {
+	                mic: 0.25,
+	                track: 0.25,
+	                video: 0.7
+	            });
+	
+	            Object.assign(resetSpawner.uniforms, {
+	                radius: 1,
+	                speed: 0
+	            });
+	
+	            toggleBase('dark');
+	            spawnImageTargets();
+	        },
+	        'Pop Tide': function PopTide() {
+	            Object.assign(state, {
+	                noiseWeight: 0.01,
+	                varyNoise: 0,
+	                flowDecay: 0.005,
+	                noiseScale: 0.1,
+	                varyNoiseScale: -50,
+	                noiseSpeed: 0.0001,
+	                varyNoiseSpeed: 0,
+	                target: 0.0025,
+	                speedAlpha: 0.02,
+	                colorMapAlpha: 0.5
+	            });
+	
+	            Object.assign(colorProxy, {
+	                baseAlpha: 0.65,
+	                baseColor: [0, 36, 166],
+	                flowAlpha: 0.3,
+	                flowColor: [128, 0, 255],
+	                fadeAlpha: 0.1,
+	                fadeColor: [255, 230, 0]
+	            });
+	
+	            Object.assign(audioState, {
+	                micSpawnAt: audioDefaults.micSpawnAt * 0.8,
+	                micFormAt: 0,
+	                micFlowAt: 0,
+	                micFastAt: 0,
+	                micCamAt: audioDefaults.micCamAt * 0.8,
+	                micSampleAt: 0
+	            });
+	
+	            Object.assign(blendProxy, {
+	                mic: 1,
+	                track: 1,
+	                video: 0
+	            });
+	
+	            Object.assign(resetSpawner.uniforms, {
+	                radius: 1,
+	                speed: 0
+	            });
+	
+	            toggleBase('dark');
+	            restart();
+	        },
+	        'Narcissus Pool': function NarcissusPool() {
+	            Object.assign(state, {
+	                noiseWeight: 0.01,
+	                varyNoise: 0,
+	                flowDecay: 0.005,
+	                noiseScale: 1.2,
+	                varyNoiseScale: -4,
+	                noiseSpeed: 0.0002,
+	                varyNoiseSpeed: 0,
+	                target: 0.003,
+	                varyTarget: 10,
+	                speedAlpha: 0.008,
+	                colorMapAlpha: 1
+	            });
+	
+	            Object.assign(colorProxy, {
+	                baseAlpha: 0,
+	                baseColor: [255, 255, 255],
+	                flowAlpha: 0,
+	                flowColor: [0, 0, 0],
+	                fadeAlpha: 0.1,
+	                fadeColor: [36, 18, 18]
+	            });
+	
+	            Object.assign(audioState, {
+	                micSpawnAt: 0,
+	                micFormAt: 0,
+	                micFlowAt: 0,
+	                micFastAt: 0,
+	                micCamAt: audioDefaults.micCamAt * 0.7,
+	                micSampleAt: 0
+	            });
+	
+	            Object.assign(blendProxy, {
+	                mic: 0.1,
+	                track: 0.1,
+	                video: 0.9
+	            });
+	
+	            Object.assign(opticalFlowState, {
+	                speed: 0.06,
+	                offset: 0
+	            });
+	
+	            toggleBase('dark');
+	            spawnImageTargets();
+	        },
+	        'Frequencies': function Frequencies() {
+	            Object.assign(state, {
+	                forceWeight: 0.015,
+	                flowWeight: -0.2,
+	                speedAlpha: 0.1,
+	                colorMapAlpha: 0.9,
+	                noiseWeight: 0.005,
+	                noiseScale: 1.2,
+	                varyNoiseScale: 2,
+	                noiseSpeed: 0.0003,
+	                varyNoiseSpeed: 0.01
+	            });
+	
+	            Object.assign(colorProxy, {
+	                baseAlpha: 0.7,
+	                baseColor: [255, 215, 111],
+	                flowAlpha: 0,
+	                flowColor: [255, 255, 255],
+	                fadeAlpha: 0.06,
+	                fadeColor: [30, 20, 0]
+	            });
+	
+	            Object.assign(audioState, {
+	                micSpawnAt: audioDefaults.micSpawnAt * 0.8,
+	                micFormAt: 0,
+	                micFlowAt: 0,
+	                micFastAt: audioDefaults.micFastAt * 0.9,
+	                micCamAt: 0,
+	                micSampleAt: 0
+	            });
+	
+	            Object.assign(blendProxy, {
+	                mic: 1,
+	                track: 1,
+	                video: 0
+	            });
+	
+	            Object.assign(resetSpawner.uniforms, {
+	                radius: 0.22,
+	                speed: 0
+	            });
+	
+	            Object.assign(opticalFlowState, {
+	                speed: 0.03,
+	                offset: 0
 	            });
 	
 	            toggleBase('dark');
@@ -2231,6 +2484,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        Object.assign(state, defaultState);
 	        Object.assign(resetSpawner.uniforms, resetSpawnerDefaults);
 	        Object.assign(flowPixelState, flowPixelDefaults);
+	        Object.assign(opticalFlowState, opticalFlowDefaults);
 	        Object.assign(colorProxy, colorDefaults);
 	        Object.assign(blendProxy, blendDefaults);
 	        Object.assign(audioState, audioDefaults);
@@ -2511,10 +2765,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return toggleShowGUI();
 	            },
 	
-	            'O': function O() {
-	                return tendrils.clear();
-	            },
-	
 	            '0': presetters['Flow'],
 	            '1': presetters['Wings'],
 	            '2': presetters['Fluid'],
@@ -2531,6 +2781,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'T': presetters['Minimal'],
 	            'Y': presetters['Kelp Forest'],
 	            'U': presetters['Starlings'],
+	            'E': presetters['Tornado Alley'],
+	            'I': presetters['Narcissus Pool'],
+	            'W': presetters['Frequencies'],
+	            'O': presetters['Pop Tide'],
 	
 	            '<space>': function space() {
 	                return restart();
@@ -28151,7 +28405,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // Set up the right number of views if we're working with the default shader.
 	        if (params.shader === base.shader) {
-	            params.shader[1] = params.shader[1].replace(/(@<hook\W.*?)(\d+)/gim, '$1' + params.views.length);
+	            params.shader[1] = params.shader[1].replace(/(@<hook\W.*?)(\d+)/gim, '$1' + this.views.length);
 	        }
 	
 	        this.shader = Array.isArray(params.shader) ? _glShader2.default.apply(undefined, [this.gl].concat(_toConsumableArray(params.shader))) : params.shader;

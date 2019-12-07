@@ -158,7 +158,8 @@ export default (canvas, options) => {
         staticImage: ((settings.static_image)?
                 decodeURIComponent(settings.static_image)
             // :   rootPath+'build/images/epok/eye.png')
-            :   rootPath+'build/images/fortune.png')
+            // :   rootPath+'build/images/fortune.png')
+            :   rootPath+'build/images/unit31-unfolded.jpg')
     };
 
     Object.assign(timer.app, {
@@ -564,6 +565,28 @@ export default (canvas, options) => {
     const opticalFlowDefaults = { ...opticalFlowState };
 
 
+    // Color map blending
+
+    const trackTexture = new AudioTexture(gl,
+        trackAnalyser.analyser.frequencyBinCount);
+
+    // We'll swap in the mic texture if/when it's created.
+    let micTexture = null;
+
+    const blendMap = {
+        mic: trackTexture.texture,
+        track: trackTexture.texture,
+        video: opticalFlow.buffers[0]
+    };
+
+    const blendKeys = Object.keys(blendMap);
+
+    const blend = new Blend(gl, {
+        views: Object.values(blendMap),
+        alphas: [0.1, 0.3, 0.8]
+    });
+
+
     // Media access
 
     let mediaStream;
@@ -596,6 +619,11 @@ export default (canvas, options) => {
 
                         micTrigger = (micTrigger ||
                             new AudioTrigger(micAnalyser, 4));
+
+                        micTexture = new AudioTexture(gl,
+                            micAnalyser.analyser.frequencyBinCount);
+
+                        blend.views[blendKeys.indexOf('mic')] = micTexture.texture;
                     }
                 }
             });
@@ -604,6 +632,8 @@ export default (canvas, options) => {
     function stopMedia(stream = mediaStream) {
         appSettings.useMedia = false;
         (stream && each((track) => track.stop(), stream.getTracks()));
+        micTexture = null;
+        blend.views[blendKeys.indexOf('mic')] = trackTexture.texture;
     }
 
     const toggleMedia = (toggle = appSettings.useMedia) =>
@@ -612,17 +642,6 @@ export default (canvas, options) => {
     if(appSettings.useMedia) {
         getMedia();
     }
-
-
-    // Color map blending
-
-    const audioTexture = new AudioTexture(gl,
-            trackAnalyser.analyser.frequencyBinCount);
-
-    const blend = new Blend(gl, {
-        views: [audioTexture.texture, opticalFlow.buffers[0]],
-        alphas: [0.3, 0.8]
-    });
 
 
     // Audio `react` and `test` function pairs - for `AudioTrigger.fire`
@@ -928,7 +947,7 @@ export default (canvas, options) => {
         },
         opticalFlow: { ...opticalFlowDefaults },
         audio: { ...audioDefaults },
-        blend: [0, 1],
+        blend: [0, 0, 1],
         blur: { ...blurState },
         calls: null
     };
@@ -1052,19 +1071,50 @@ export default (canvas, options) => {
             }
         }
 
+
+        // React to sound - from highest reaction to lowest, max one per frame
         /**
          * @todo Spectogram with frequencies on x-axis, waveform on y; or
          *       something better than this 1D list.
          */
-        audioTexture.frequencies(trackTrigger.dataOrder(0)).apply();
 
-        const drawVideo = appSettings.useMedia && appSettings.useCamera &&
-            video.readyState > 1;
+        if(trackTrigger) {
+            (trackTexture &&
+                trackTexture.frequencies(trackTrigger.dataOrder(0)).apply());
+
+            trackAnalyser.gain.gain
+                // So we don't blow any speakers...
+                .linearRampToValueAtTime(clamp(audioState.track, 0, 1),
+                    trackAnalyser.ctx.currentTime+0.5);
+
+            trackTrigger.sample(dt);
+        }
+
+        if(micTrigger) {
+            (micTexture &&
+                micTexture.frequencies(micTrigger.dataOrder(0)).apply());
+
+            micAnalyser.gain.gain
+                .linearRampToValueAtTime(clamp(audioState.mic, 0, 10000),
+                    micAnalyser.ctx.currentTime+0.5);
+
+            micTrigger.sample(dt);
+        }
+
+        audioResponse();
+
+
+        // Blend everything to be
+
+        const drawVideo = (appSettings.useMedia && appSettings.useCamera &&
+            video.readyState > 1);
 
         // Blend the color maps into tendrils one
         // @todo Only do this if necessary (skip if none or only one has alpha)
 
-        blend.views[1] = ((drawVideo)? opticalFlow.buffers[0] : imageSpawner.buffer);
+        blend.views[blendKeys.indexOf('video')] = ((drawVideo)?
+            opticalFlow.buffers[0] : imageSpawner.buffer);
+
         blend.draw(tendrils.colorMap);
 
         // The main event
@@ -1136,28 +1186,6 @@ export default (canvas, options) => {
                 opticalFlow.step();
             }
         }
-
-
-        // React to sound - from highest reaction to lowest, max one per frame
-
-        if(trackTrigger) {
-            trackAnalyser.gain.gain
-                // So we don't blow any speakers...
-                .linearRampToValueAtTime(clamp(audioState.track, 0, 1),
-                    trackAnalyser.ctx.currentTime+0.5);
-
-            trackTrigger.sample(dt);
-        }
-
-        if(micTrigger) {
-            micAnalyser.gain.gain
-                .linearRampToValueAtTime(clamp(audioState.mic, 0, 10000),
-                    micAnalyser.ctx.currentTime+0.5);
-
-            micTrigger.sample(dt);
-        }
-
-        audioResponse();
     }
 
 
@@ -1360,7 +1388,6 @@ export default (canvas, options) => {
 
     gui.blend = gui.main.addFolder('color blend');
 
-    const blendKeys = ['audio', 'video'];
     const blendProxy = reduce((proxy, k, i) => {
             proxy[k] = blend.alphas[i];
 
@@ -1505,7 +1532,8 @@ export default (canvas, options) => {
                 baseColor: [0, 0, 0],
                 flowAlpha: 1,
                 flowColor: [255, 255, 255],
-                fadeAlpha: Math.max(state.flowDecay, 0.05)
+                fadeAlpha: Math.max(state.flowDecay, 0.05),
+                fadeColor: [0, 0, 0]
             });
 
             toggleBase('dark');
@@ -1538,7 +1566,7 @@ export default (canvas, options) => {
             });
 
             Object.assign(audioState, {
-                micSpawnAt: audioDefaults.micSpawnAt*0.5,
+                micSpawnAt: audioDefaults.micSpawnAt*0.55,
                 micFormAt: 0,
                 micFlowAt: 0,
                 micFastAt: 0,
@@ -1551,14 +1579,26 @@ export default (canvas, options) => {
         },
         'Fluid'() {
             Object.assign(state, {
-                autoClearView: true
+                autoClearView: true,
+                colorMapAlpha: 0.4
             });
 
             Object.assign(colorProxy, {
-                flowAlpha: 0.6,
+                flowAlpha: 0.15,
                 baseAlpha: 0.7,
                 baseColor: [255, 255, 255],
                 fadeAlpha: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            Object.assign(audioState, {
+                micFastAt: audioDefaults.micFastAt*0.8,
+                micCamAt: 0
             });
 
             toggleBase('dark');
@@ -1595,7 +1635,7 @@ export default (canvas, options) => {
                 noiseSpeed: 0.00025,
                 varyNoiseSpeed: -0.3,
                 speedAlpha: 0.08,
-                colorMapAlpha: 0.9
+                colorMapAlpha: 0.27
             });
 
             Object.assign(colorProxy, {
@@ -1608,7 +1648,8 @@ export default (canvas, options) => {
             });
 
             Object.assign(blendProxy, {
-                audio: 0.9,
+                mic: 1,
+                track: 1,
                 video: 0
             });
 
@@ -1630,7 +1671,7 @@ export default (canvas, options) => {
                 flowDecay: 0.01,
                 target: 0.0001,
                 speedAlpha: 0.01,
-                colorMapAlpha: 0.7,
+                colorMapAlpha: 0.2,
                 flowColor: [119, 190, 255],
                 flowAlpa: 0.01,
                 baseColor: [132, 166, 255],
@@ -1652,8 +1693,9 @@ export default (canvas, options) => {
             });
 
             Object.assign(blendProxy, {
-                audio: 1,
-                video: 0.5
+                mic: 1,
+                track: 1,
+                video: 0.3
             });
 
             Object.assign(audioState, {
@@ -1668,11 +1710,11 @@ export default (canvas, options) => {
         'Ghostly'() {
             Object.assign(state, {
                 flowDecay: 0.001,
-                colorMapAlpha: 0.01
+                colorMapAlpha: 0.2
             });
 
             Object.assign(colorProxy, {
-                baseAlpha: 0.4,
+                baseAlpha: 0.3,
                 baseColor: [255, 255, 255],
                 flowAlpha: 0.04,
                 fadeAlpha: 0.03,
@@ -1685,6 +1727,12 @@ export default (canvas, options) => {
                 micFlowAt: audioDefaults.micFlowAt*1.2
             });
 
+            Object.assign(blendProxy, {
+                mic: 0.6,
+                track: 0.6,
+                video: 0.4
+            });
+
             toggleBase('dark');
         },
         'Rave'() {
@@ -1694,13 +1742,14 @@ export default (canvas, options) => {
                 noiseWeight: 0.003,
                 speedAlpha: 0.2,
                 target: 0.001,
-                colorMapAlpha: 0.4
+                colorMapAlpha: 0.35
             });
 
             Object.assign(colorProxy, {
                 baseAlpha: 0.6,
                 baseColor: [0, 255, 30],
-                flowAlpha: 0.05,
+                flowAlpha: 0.5,
+                flowColor: [128, 255, 0],
                 fadeAlpha: 0.1,
                 fadeColor: [255, 0, 61]
             });
@@ -1714,13 +1763,18 @@ export default (canvas, options) => {
                 micSampleAt: audioDefaults.micSampleAt*0.9
             });
 
-            toggleBase('dark');
-
             Object.assign(resetSpawner.uniforms, {
                 radius: 0.3,
                 speed: 2
             });
 
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            toggleBase('dark');
             restart();
         },
         'Blood'() {
@@ -1728,15 +1782,17 @@ export default (canvas, options) => {
                 forceWeight: 0.015,
                 noiseWeight: 0.001,
                 noiseSpeed: 0.0005,
-                speedAlpha: 0.001
+                speedAlpha: 0.001,
+                colorMapAlpha: 0.11
             });
 
             Object.assign(colorProxy, {
                 baseAlpha: 1,
                 baseColor: [128, 0, 0],
-                flowAlpha: 0.05,
-                fadeColor: [255, 255, 255],
-                fadeAlpha: Math.max(state.flowDecay, 0.05)
+                flowAlpha: 0.15,
+                flowColor: [255, 0, 0],
+                fadeAlpha: Math.max(state.flowDecay, 0.05),
+                fadeColor: [255, 255, 255]
             });
 
             Object.assign(resetSpawner.uniforms, {
@@ -1745,7 +1801,8 @@ export default (canvas, options) => {
             });
 
             Object.assign(blendProxy, {
-                audio: 1,
+                mic: 1,
+                track: 1,
                 video: 0.5
             });
 
@@ -1768,20 +1825,21 @@ export default (canvas, options) => {
                 forceWeight: 0.014,
                 noiseWeight: 0.003,
                 speedAlpha: 0.01,
-                colorMapAlpha: 0.3
+                colorMapAlpha: 0.13
             });
 
             Object.assign(colorProxy, {
                 baseAlpha: 0.3,
-                baseColor: [194, 0, 0],
-                flowAlpha: 0.5,
-                flowColor: [255, 30, 30],
+                baseColor: [194, 30, 30],
+                flowAlpha: 0.4,
+                flowColor: [255, 0, 0],
                 fadeAlpha: 0.1,
                 fadeColor: [54, 0, 10]
             });
 
             Object.assign(blendProxy, {
-                audio: 1,
+                mic: 1,
+                track: 1,
                 video: 0.5
             });
 
@@ -1872,6 +1930,12 @@ export default (canvas, options) => {
                 micSampleAt: 0
             });
 
+            Object.assign(blendProxy, {
+                mic: 0,
+                track: 0,
+                video: 1
+            });
+
             // console.log(JSON.stringify(audioState));
 
             toggleBase('dark');
@@ -1886,7 +1950,7 @@ export default (canvas, options) => {
             Object.assign(state, {
                 autoClearView: true,
                 colorMapAlpha: 1,
-                speedAlpha: 10,
+                speedAlpha: 1,
                 varyNoiseScale: 3,
                 varyNoiseSpeed: 3
             });
@@ -1896,9 +1960,9 @@ export default (canvas, options) => {
             });
 
             Object.assign(colorProxy, {
-                baseAlpha: 0.95,
+                baseAlpha: 0.7,
                 baseColor: [255, 255, 255],
-                flowAlpha: 1,
+                flowAlpha: 0,
                 fadeColor: [255, 255, 255],
                 fadeAlpha: 0
             });
@@ -1913,7 +1977,8 @@ export default (canvas, options) => {
             });
 
             Object.assign(blendProxy, {
-                audio: 1,
+                mic: 1,
+                track: 1,
                 video: 0
             });
 
@@ -1924,12 +1989,13 @@ export default (canvas, options) => {
                 noiseWeight: 0.004,
                 varyNoise: 0.3,
                 flowDecay: 0.003,
+                flowWidth: 10,
                 noiseScale: 1,
-                varyNoiseScale: -3,
+                varyNoiseScale: -6,
                 noiseSpeed: 0.0001,
-                varyNoiseSpeed: 10,
+                varyNoiseSpeed: -4,
                 speedAlpha: 0.001,
-                colorMapAlpha: 1
+                colorMapAlpha: 0.25
             });
 
             Object.assign(flowPixelState, {
@@ -1937,12 +2003,12 @@ export default (canvas, options) => {
             });
 
             Object.assign(colorProxy, {
-                baseAlpha: 0.5,
+                baseAlpha: 0.3,
                 baseColor: [0, 122, 27],
-                flowAlpha: 1,
-                flowColor: [30, 255, 214],
+                flowAlpha: 0.4,
+                flowColor: [0, 250, 175],
                 fadeAlpha: 0.1,
-                fadeColor: [0, 38, 22]
+                fadeColor: [0, 36, 51]
             });
 
             Object.assign(audioState, {
@@ -1955,7 +2021,8 @@ export default (canvas, options) => {
             });
 
             Object.assign(blendProxy, {
-                audio: 1,
+                mic: 1,
+                track: 1,
                 video: 0
             });
 
@@ -1972,7 +2039,7 @@ export default (canvas, options) => {
                 noiseSpeed: 0.0001,
                 varyNoiseSpeed: 0.1,
                 speedAlpha: 0.01,
-                colorMapAlpha: 1
+                colorMapAlpha: 0.17
             });
 
             Object.assign(flowPixelState, {
@@ -1998,7 +2065,8 @@ export default (canvas, options) => {
             });
 
             Object.assign(blendProxy, {
-                audio: 1,
+                mic: 1,
+                track: 1,
                 video: 0
             });
 
@@ -2016,7 +2084,7 @@ export default (canvas, options) => {
                 varyNoiseSpeed: 3,
                 target: 0.002,
                 speedAlpha: 0.005,
-                colorMapAlpha: 1
+                colorMapAlpha: 0.3
             });
 
             Object.assign(flowPixelState, {
@@ -2042,13 +2110,203 @@ export default (canvas, options) => {
             });
 
             Object.assign(blendProxy, {
-                audio: 1,
+                mic: 1,
+                track: 1,
                 video: 0
             });
 
             Object.assign(resetSpawner.uniforms, {
                 radius: 0.15,
                 speed: 20000
+            });
+
+            toggleBase('dark');
+            restart();
+        },
+        'Tornado Alley'() {
+            Object.assign(state, {
+                noiseWeight: 0.01,
+                varyNoise: 0,
+                flowDecay: 0.005,
+                noiseScale: 1.2,
+                varyNoiseScale: 8,
+                noiseSpeed: 0.00009,
+                varyNoiseSpeed: 0,
+                target: 0.003,
+                speedAlpha: 0.005,
+                colorMapAlpha: 1
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.05,
+                baseColor: [255, 255, 255],
+                flowAlpha: 0,
+                flowColor: [0, 0, 0],
+                fadeAlpha: 0.1,
+                fadeColor: [46, 8, 31]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*1.1,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.7,
+                micSampleAt: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 0.25,
+                track: 0.25,
+                video: 0.7
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 1,
+                speed: 0
+            });
+
+            toggleBase('dark');
+            spawnImageTargets();
+        },
+        'Pop Tide'() {
+            Object.assign(state, {
+                noiseWeight: 0.01,
+                varyNoise: 0,
+                flowDecay: 0.005,
+                noiseScale: 0.1,
+                varyNoiseScale: -50,
+                noiseSpeed: 0.0001,
+                varyNoiseSpeed: 0,
+                target: 0.0025,
+                speedAlpha: 0.02,
+                colorMapAlpha: 0.5
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.65,
+                baseColor: [0, 36, 166],
+                flowAlpha: 0.3,
+                flowColor: [128, 0, 255],
+                fadeAlpha: 0.1,
+                fadeColor: [255, 230, 0]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.8,
+                micSampleAt: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 1,
+                speed: 0
+            });
+
+            toggleBase('dark');
+            restart();
+        },
+        'Narcissus Pool'() {
+            Object.assign(state, {
+                noiseWeight: 0.01,
+                varyNoise: 0,
+                flowDecay: 0.005,
+                noiseScale: 1.2,
+                varyNoiseScale: -4,
+                noiseSpeed: 0.0002,
+                varyNoiseSpeed: 0,
+                target: 0.003,
+                varyTarget: 10,
+                speedAlpha: 0.008,
+                colorMapAlpha: 1
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0,
+                baseColor: [255, 255, 255],
+                flowAlpha: 0,
+                flowColor: [0, 0, 0],
+                fadeAlpha: 0.1,
+                fadeColor: [36, 18, 18]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: 0,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.7,
+                micSampleAt: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 0.1,
+                track: 0.1,
+                video: 0.9
+            });
+
+            Object.assign(opticalFlowState, {
+                speed: 0.06,
+                offset: 0
+            });
+
+            toggleBase('dark');
+            spawnImageTargets();
+        },
+        'Frequencies'() {
+            Object.assign(state, {
+                forceWeight: 0.015,
+                flowWeight: -0.2,
+                speedAlpha: 0.1,
+                colorMapAlpha: 0.9,
+                noiseWeight: 0.005,
+                noiseScale: 1.2,
+                varyNoiseScale: 2,
+                noiseSpeed: 0.0003,
+                varyNoiseSpeed: 0.01
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.7,
+                baseColor: [255, 215, 111],
+                flowAlpha: 0,
+                flowColor: [255, 255, 255],
+                fadeAlpha: 0.06,
+                fadeColor: [30, 20, 0]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: audioDefaults.micFastAt*0.9,
+                micCamAt: 0,
+                micSampleAt: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.22,
+                speed: 0
+            });
+
+            Object.assign(opticalFlowState, {
+                speed: 0.03,
+                offset: 0
             });
 
             toggleBase('dark');
@@ -2066,6 +2324,7 @@ export default (canvas, options) => {
         Object.assign(state, defaultState);
         Object.assign(resetSpawner.uniforms, resetSpawnerDefaults);
         Object.assign(flowPixelState, flowPixelDefaults);
+        Object.assign(opticalFlowState, opticalFlowDefaults);
         Object.assign(colorProxy, colorDefaults);
         Object.assign(blendProxy, blendDefaults);
         Object.assign(audioState, audioDefaults);
@@ -2303,8 +2562,6 @@ export default (canvas, options) => {
             :   {
                     'H': () => toggleShowGUI(),
 
-                    'O': () => tendrils.clear(),
-
                     '0': presetters['Flow'],
                     '1': presetters['Wings'],
                     '2': presetters['Fluid'],
@@ -2321,6 +2578,10 @@ export default (canvas, options) => {
                     'T': presetters['Minimal'],
                     'Y': presetters['Kelp Forest'],
                     'U': presetters['Starlings'],
+                    'E': presetters['Tornado Alley'],
+                    'I': presetters['Narcissus Pool'],
+                    'W': presetters['Frequencies'],
+                    'O': presetters['Pop Tide'],
 
                     '<space>': () => restart(),
 

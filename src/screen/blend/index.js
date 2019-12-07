@@ -34,7 +34,7 @@ export class Blend {
         // Set up the right number of views if we're working with the default shader.
         if(params.shader === base.shader) {
             params.shader[1] = params.shader[1]
-                .replace(/(@<hook\W.*?)(\d+)/gim, `$1${params.views.length}`);
+                .replace(/(@<hook\W.*?)(\d+)/gim, `$1${this.views.length}`);
         }
 
         this.shader = ((Array.isArray(params.shader))?
