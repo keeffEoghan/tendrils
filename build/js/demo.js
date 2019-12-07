@@ -2105,7 +2105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                baseAlpha: 0.5,
 	                baseColor: [0, 122, 27],
 	                flowAlpha: 1,
-	                flowColor: [30, 255, 147],
+	                flowColor: [30, 255, 214],
 	                fadeAlpha: 0.1,
 	                fadeColor: [0, 38, 22]
 	            });
@@ -2125,6 +2125,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	
 	            toggleBase('dark');
+	        },
+	        'Starlings': function Starlings() {
+	            Object.assign(state, {
+	                flowWeight: 1.5,
+	                noiseWeight: 0.003,
+	                varyNoise: 0.3,
+	                flowDecay: 0.004,
+	                noiseScale: 0.5,
+	                varyNoiseScale: 10,
+	                noiseSpeed: 0.0001,
+	                varyNoiseSpeed: 0.1,
+	                speedAlpha: 0.01,
+	                colorMapAlpha: 1
+	            });
+	
+	            Object.assign(flowPixelState, {
+	                scale: 'mirror xy'
+	            });
+	
+	            Object.assign(colorProxy, {
+	                baseAlpha: 1,
+	                baseColor: [0, 0, 0],
+	                flowAlpha: 0.1,
+	                flowColor: [255, 20, 255],
+	                fadeAlpha: 0.02,
+	                fadeColor: [160, 120, 40]
+	            });
+	
+	            Object.assign(audioState, {
+	                micSpawnAt: 0,
+	                micFormAt: 0,
+	                micFlowAt: audioDefaults.micFlowAt * 0.5,
+	                micFastAt: audioDefaults.micFastAt * 1.1,
+	                micCamAt: 0,
+	                micSampleAt: audioDefaults.micSampleAt * 0.9
+	            });
+	
+	            Object.assign(blendProxy, {
+	                audio: 1,
+	                video: 0
+	            });
+	
+	            toggleBase('dark');
+	            spawnSamples();
 	        },
 	        'Folding': function Folding() {
 	            Object.assign(state, {
@@ -2486,6 +2530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'R': presetters['Folding'],
 	            'T': presetters['Minimal'],
 	            'Y': presetters['Kelp Forest'],
+	            'U': presetters['Starlings'],
 	
 	            '<space>': function space() {
 	                return restart();
