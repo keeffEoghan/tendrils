@@ -1881,6 +1881,134 @@ export default (canvas, options) => {
             spawnImage(tendrils.targets);
 
             // controllers.spawnImageTargets();
+        },
+        'Minimal'() {
+            Object.assign(state, {
+                autoClearView: true,
+                colorMapAlpha: 1,
+                speedAlpha: 10,
+                varyNoiseScale: 3,
+                varyNoiseSpeed: 3
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.95,
+                baseColor: [255, 255, 255],
+                flowAlpha: 1,
+                fadeColor: [255, 255, 255],
+                fadeAlpha: 0
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*1,
+                micFormAt: audioDefaults.micFormAt*0.6,
+                micFlowAt: audioDefaults.micFlowAt*0.6,
+                micFastAt: audioDefaults.micFastAt*0.6,
+                micCamAt: 0,
+                micSampleAt: 0
+            });
+
+            Object.assign(blendProxy, {
+                audio: 1,
+                video: 0
+            });
+
+            toggleBase('dark');
+        },
+        'Kelp Forest'() {
+            Object.assign(state, {
+                noiseWeight: 0.004,
+                varyNoise: 0.3,
+                flowDecay: 0.003,
+                noiseScale: 1,
+                varyNoiseScale: -3,
+                noiseSpeed: 0.0001,
+                varyNoiseSpeed: 10,
+                speedAlpha: 0.001,
+                colorMapAlpha: 1
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.5,
+                baseColor: [0, 122, 27],
+                flowAlpha: 1,
+                flowColor: [30, 255, 147],
+                fadeAlpha: 0.1,
+                fadeColor: [0, 38, 22]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*1,
+                micFormAt: audioDefaults.micFormAt*0.6,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*1,
+                micSampleAt: audioDefaults.micSampleAt*1
+            });
+
+            Object.assign(blendProxy, {
+                audio: 1,
+                video: 0
+            });
+
+            toggleBase('dark');
+        },
+        'Folding'() {
+            Object.assign(state, {
+                noiseWeight: 0.005,
+                varyNoise: 0.3,
+                flowDecay: 0.003,
+                noiseScale: 1,
+                varyNoiseScale: -30,
+                noiseSpeed: 0.00005,
+                varyNoiseSpeed: 3,
+                target: 0.002,
+                speedAlpha: 0.005,
+                colorMapAlpha: 1
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.5,
+                baseColor: [230, 198, 255],
+                flowAlpha: 0.8,
+                flowColor: [173, 0, 255],
+                fadeAlpha: 0.15,
+                fadeColor: [0, 20, 51]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: audioDefaults.micFormAt*0.6,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.8
+            });
+
+            Object.assign(blendProxy, {
+                audio: 1,
+                video: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.15,
+                speed: 20000
+            });
+
+            toggleBase('dark');
+            restart();
         }
     };
 
@@ -2145,15 +2273,18 @@ export default (canvas, options) => {
                     '9': presetters['Funhouse'],
                     '-': presetters['Blood'],
                     '=': presetters['Flow only'],
+                    'R': presetters['Folding'],
+                    'T': presetters['Minimal'],
+                    'Y': presetters['Kelp Forest'],
 
                     '<space>': () => restart(),
 
-                    'x': () => spawnFlow(),
-                    'c': () => spawnFastest(),
-                    'v': () => spawnForm(),
-                    'b': () => restart(),
-                    'n': () => spawnSamples(),
-                    'm': () => controllers.spawnImageTargets(),
+                    'X': () => spawnFlow(),
+                    'C': () => spawnFastest(),
+                    'V': () => spawnForm(),
+                    'B': () => restart(),
+                    'N': () => spawnSamples(),
+                    'M': () => controllers.spawnImageTargets(),
 
                     "'": () => spawnFlow(),
                     ';': () => spawnFastest(),
