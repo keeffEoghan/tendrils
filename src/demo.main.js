@@ -148,6 +148,9 @@ export default (canvas, options) => {
         useCamera: (''+settings.use_camera !== 'false'),
         useMic: (''+settings.use_mic !== 'false'),
 
+        flipVideoX: (''+settings.flip_video_x === 'true'),
+        flipVideoY: (''+settings.flip_video_y === 'true'),
+
         loopTime: Math.max(0,
             parseInt((settings.loop_time || 10*60*10e2), 10) || 0),
 
@@ -498,6 +501,9 @@ export default (canvas, options) => {
         autoplay: false
     });
 
+    const videoCanvas = document.createElement('canvas');
+    const videoContext = videoCanvas.getContext('2d');
+
     video.addEventListener('canplay', () => {
         rasterShape.video = [video.videoWidth, video.videoHeight];
         video.play();
@@ -521,7 +527,7 @@ export default (canvas, options) => {
 
         if(appSettings.useMedia && appSettings.useCamera && video) {
             shape = rasterShape.video;
-            raster = video;
+            raster = videoCanvas;
         }
 
         if(Math.min(...shape) > 0) {
@@ -1169,8 +1175,19 @@ export default (canvas, options) => {
 
         if(drawVideo) {
             if(Math.max(...rasterShape.video) > 0) {
+                videoCanvas.width = video.videoWidth;
+                videoCanvas.height = video.videoHeight;
+
+                videoContext.translate(((appSettings.flipVideoX)? video.videoWidth : 0),
+                    ((appSettings.flipVideoY)? video.videoHeight : 0));
+
+                videoContext.scale(((appSettings.flipVideoX)? -1 : 1),
+                    ((appSettings.flipVideoY)? -1 : 1));
+
+                videoContext.drawImage(video, 0, 0);
+
                 opticalFlow.resize(rasterShape.video);
-                opticalFlow.setPixels(video);
+                opticalFlow.setPixels(videoCanvas);
 
                 if(opticalFlowState.speed) {
                     opticalFlow.update({
@@ -2315,6 +2332,7 @@ export default (canvas, options) => {
         'Pissarides'() {
             Object.assign(state, {
                 speedLimit: 0.003,
+                speedAlpha: 0.1,
                 flowWidth: 20,
                 colorMapAlpha: 0.3333,
                 noiseWeight: 0.0004,
@@ -2334,9 +2352,10 @@ export default (canvas, options) => {
 
             Object.assign(colorProxy, {
                 baseAlpha: 0.3333,
-                baseColor: [255, 100, 120],
+                // baseColor: [255, 100, 120],
+                baseColor: [230, 198, 255],
                 flowAlpha: 1,
-                flowColor: [180, 0, 50],
+                flowColor: [255, 0, 50],
                 fadeAlpha: 0
             });
 
@@ -2355,7 +2374,12 @@ export default (canvas, options) => {
                 micSampleAt: audioDefaults.micSampleAt*0.6
             });
 
+            Object.assign(opticalFlowState, {
+                speed: 0.1,
+            });
+
             toggleBase('dark');
+            clear();
             respawn();
         }
     };
