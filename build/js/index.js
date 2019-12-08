@@ -54,7 +54,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(194);
+	module.exports = __webpack_require__(195);
 
 
 /***/ }),
@@ -326,17 +326,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ }),
 /* 53 */,
 /* 54 */,
-/* 55 */
+/* 55 */,
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var createUniformWrapper   = __webpack_require__(56)
-	var createAttributeWrapper = __webpack_require__(59)
-	var makeReflect            = __webpack_require__(57)
-	var shaderCache            = __webpack_require__(60)
-	var runtime                = __webpack_require__(81)
-	var GLError                = __webpack_require__(58)
+	var createUniformWrapper   = __webpack_require__(57)
+	var createAttributeWrapper = __webpack_require__(60)
+	var makeReflect            = __webpack_require__(58)
+	var shaderCache            = __webpack_require__(61)
+	var runtime                = __webpack_require__(82)
+	var GLError                = __webpack_require__(59)
 	
 	//Shader object
 	function Shader(gl) {
@@ -596,13 +597,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var coallesceUniforms = __webpack_require__(57)
-	var GLError = __webpack_require__(58)
+	var coallesceUniforms = __webpack_require__(58)
+	var GLError = __webpack_require__(59)
 	
 	module.exports = createUniformWrapper
 	
@@ -793,7 +794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -855,7 +856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 	function GLError (rawError, shortMessage, longMessage) {
@@ -874,14 +875,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
 	module.exports = createAttributeWrapper
 	
-	var GLError = __webpack_require__(58)
+	var GLError = __webpack_require__(59)
 	
 	function ShaderAttribute(
 	    gl
@@ -1143,7 +1144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
@@ -1151,10 +1152,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.shader   = getShaderReference
 	exports.program  = createProgram
 	
-	var GLError = __webpack_require__(58)
-	var formatCompilerError = __webpack_require__(61);
+	var GLError = __webpack_require__(59)
+	var formatCompilerError = __webpack_require__(62);
 	
-	var weakMap = typeof WeakMap === 'undefined' ? __webpack_require__(78) : WeakMap
+	var weakMap = typeof WeakMap === 'undefined' ? __webpack_require__(79) : WeakMap
 	var CACHE = new weakMap()
 	
 	var SHADER_COUNTER = 0
@@ -1285,14 +1286,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	var sprintf = __webpack_require__(62).sprintf;
-	var glConstants = __webpack_require__(64);
-	var shaderName = __webpack_require__(66);
-	var addLineNumbers = __webpack_require__(75);
+	var sprintf = __webpack_require__(63).sprintf;
+	var glConstants = __webpack_require__(65);
+	var shaderName = __webpack_require__(67);
+	var addLineNumbers = __webpack_require__(76);
 	
 	module.exports = formatCompilerError;
 	
@@ -1344,7 +1345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* global window, exports, define */
@@ -1567,7 +1568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        window['sprintf'] = sprintf
 	        window['vsprintf'] = vsprintf
 	
-	        if ("function" === 'function' && __webpack_require__(63)['amd']) {
+	        if ("function" === 'function' && __webpack_require__(64)['amd']) {
 	            !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	                return {
 	                    'sprintf': sprintf,
@@ -1581,17 +1582,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var gl10 = __webpack_require__(65)
+	var gl10 = __webpack_require__(66)
 	
 	module.exports = function lookupConstant (number) {
 	  return gl10[number]
@@ -1599,7 +1600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -1903,11 +1904,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var tokenize = __webpack_require__(67)
-	var atob     = __webpack_require__(74)
+	var tokenize = __webpack_require__(68)
+	var atob     = __webpack_require__(75)
 	
 	module.exports = getName
 	
@@ -1932,10 +1933,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var tokenize = __webpack_require__(68)
+	var tokenize = __webpack_require__(69)
 	
 	module.exports = tokenizeString
 	
@@ -1951,16 +1952,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = tokenize
 	
-	var literals100 = __webpack_require__(69)
-	  , operators = __webpack_require__(70)
-	  , builtins100 = __webpack_require__(71)
-	  , literals300es = __webpack_require__(72)
-	  , builtins300es = __webpack_require__(73)
+	var literals100 = __webpack_require__(70)
+	  , operators = __webpack_require__(71)
+	  , builtins100 = __webpack_require__(72)
+	  , literals300es = __webpack_require__(73)
+	  , builtins300es = __webpack_require__(74)
 	
 	var NORMAL = 999          // <-- never emitted
 	  , TOKEN = 9999          // <-- never emitted
@@ -2332,7 +2333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 	module.exports = [
@@ -2432,7 +2433,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 	module.exports = [
@@ -2485,7 +2486,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 	module.exports = [
@@ -2641,10 +2642,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var v100 = __webpack_require__(69)
+	var v100 = __webpack_require__(70)
 	
 	module.exports = v100.slice().concat([
 	   'layout'
@@ -2734,11 +2735,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 300es builtins/reserved words that were previously valid in v100
-	var v100 = __webpack_require__(71)
+	var v100 = __webpack_require__(72)
 	
 	// The texture2D|Cube functions have been removed
 	// And the gl_ features are updated
@@ -2809,7 +2810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 	module.exports = function _atob(str) {
@@ -2818,10 +2819,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var padLeft = __webpack_require__(76)
+	var padLeft = __webpack_require__(77)
 	
 	module.exports = addLineNumbers
 	function addLineNumbers (string, start, delim) {
@@ -2840,7 +2841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*!
@@ -2852,7 +2853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict';
 	
-	var repeat = __webpack_require__(77);
+	var repeat = __webpack_require__(78);
 	
 	module.exports = function padLeft(str, num, ch) {
 	  ch = typeof ch !== 'undefined' ? (ch + '') : ' ';
@@ -2860,7 +2861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -2936,14 +2937,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Original - @Gozola.
 	// https://gist.github.com/Gozala/1269991
 	// This is a reimplemented version (with a few bug fixes).
 	
-	var createStore = __webpack_require__(79);
+	var createStore = __webpack_require__(80);
 	
 	module.exports = weakMap;
 	
@@ -2971,10 +2972,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var hiddenStore = __webpack_require__(80);
+	var hiddenStore = __webpack_require__(81);
 	
 	module.exports = createStore;
 	
@@ -2996,7 +2997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 	module.exports = hiddenStore;
@@ -3018,7 +3019,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -3102,10 +3103,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 82 */,
 /* 83 */,
 /* 84 */,
-/* 85 */
+/* 85 */,
+/* 86 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3137,8 +3138,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var rootPath = exports.rootPath = ('/' + ((location.href.match(/:\/\/.+?\/([^\/\?]+?(?=[\/\?]|$))?/i) || [])[1] || '') + '/').replace(/\/+/gi, '/');
 
 /***/ }),
-/* 86 */,
-/* 87 */
+/* 87 */,
+/* 88 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3248,7 +3249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Timer;
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3264,63 +3265,63 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Shaders
 	
-	var _glShader = __webpack_require__(55);
+	var _glShader = __webpack_require__(56);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _glFbo = __webpack_require__(89);
+	var _glFbo = __webpack_require__(90);
 	
 	var _glFbo2 = _interopRequireDefault(_glFbo);
 	
-	var _particles2 = __webpack_require__(106);
+	var _particles2 = __webpack_require__(107);
 	
 	var _particles3 = _interopRequireDefault(_particles2);
 	
-	var _timer = __webpack_require__(87);
+	var _timer = __webpack_require__(88);
 	
 	var _timer2 = _interopRequireDefault(_timer);
 	
-	var _utils = __webpack_require__(85);
+	var _utils = __webpack_require__(86);
 	
-	var _cpu = __webpack_require__(124);
+	var _cpu = __webpack_require__(125);
 	
 	var _cpu2 = _interopRequireDefault(_cpu);
 	
-	var _aspect = __webpack_require__(126);
+	var _aspect = __webpack_require__(127);
 	
-	var _screen = __webpack_require__(121);
+	var _screen = __webpack_require__(122);
 	
 	var _screen2 = _interopRequireDefault(_screen);
 	
-	var _logic = __webpack_require__(127);
+	var _logic = __webpack_require__(128);
 	
 	var _logic2 = _interopRequireDefault(_logic);
 	
-	var _index = __webpack_require__(128);
+	var _index = __webpack_require__(129);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(129);
+	var _index3 = __webpack_require__(130);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
-	var _index5 = __webpack_require__(130);
+	var _index5 = __webpack_require__(131);
 	
 	var _index6 = _interopRequireDefault(_index5);
 	
-	var _index7 = __webpack_require__(131);
+	var _index7 = __webpack_require__(132);
 	
 	var _index8 = _interopRequireDefault(_index7);
 	
-	var _index9 = __webpack_require__(123);
+	var _index9 = __webpack_require__(124);
 	
 	var _index10 = _interopRequireDefault(_index9);
 	
-	var _index11 = __webpack_require__(132);
+	var _index11 = __webpack_require__(133);
 	
 	var _index12 = _interopRequireDefault(_index11);
 	
-	var _copy = __webpack_require__(133);
+	var _copy = __webpack_require__(134);
 	
 	var _copy2 = _interopRequireDefault(_copy);
 	
@@ -3805,12 +3806,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tendrils;
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var createTexture = __webpack_require__(90)
+	var createTexture = __webpack_require__(91)
 	
 	module.exports = createFBO
 	
@@ -4276,14 +4277,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var ndarray = __webpack_require__(91)
-	var ops     = __webpack_require__(94)
-	var pool    = __webpack_require__(99)
+	var ndarray = __webpack_require__(92)
+	var ops     = __webpack_require__(95)
+	var pool    = __webpack_require__(100)
 	
 	module.exports = createTexture2D
 	
@@ -4843,11 +4844,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var iota = __webpack_require__(92)
-	var isBuffer = __webpack_require__(93)
+	var iota = __webpack_require__(93)
+	var isBuffer = __webpack_require__(94)
 	
 	var hasTypedArrays  = ((typeof Float64Array) !== "undefined")
 	
@@ -5192,7 +5193,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -5208,7 +5209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = iota
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -5235,12 +5236,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var compile = __webpack_require__(95)
+	var compile = __webpack_require__(96)
 	
 	var EmptyProc = {
 	  body: "",
@@ -5702,12 +5703,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var createThunk = __webpack_require__(96)
+	var createThunk = __webpack_require__(97)
 	
 	function Procedure() {
 	  this.argTypes = []
@@ -5817,7 +5818,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
@@ -5845,7 +5846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//   return thunk(compile.bind1(proc))
 	// }
 	
-	var compile = __webpack_require__(97)
+	var compile = __webpack_require__(98)
 	
 	function createThunk(proc) {
 	  var code = ["'use strict'", "var CACHED={}"]
@@ -5909,12 +5910,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var uniq = __webpack_require__(98)
+	var uniq = __webpack_require__(99)
 	
 	// This function generates very simple loops analogous to how you typically traverse arrays (the outermost loop corresponds to the slowest changing index, the innermost loop to the fastest changing index)
 	// TODO: If two arrays have the same strides (and offsets) there is potential for decreasing the number of "pointers" and related variables. The drawback is that the type signature would become more specific and that there would thus be less potential for caching, but it might still be worth it, especially when dealing with large numbers of arguments.
@@ -6273,7 +6274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -6336,13 +6337,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, Buffer) {'use strict'
 	
-	var bits = __webpack_require__(104)
-	var dup = __webpack_require__(105)
+	var bits = __webpack_require__(105)
+	var dup = __webpack_require__(106)
 	
 	//Legacy pool support
 	if(!global.__TYPEDARRAY_POOL) {
@@ -6553,10 +6554,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    BUFFER[i].length = 0
 	  }
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(100).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(101).Buffer))
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -6569,9 +6570,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict'
 	
-	var base64 = __webpack_require__(101)
-	var ieee754 = __webpack_require__(102)
-	var isArray = __webpack_require__(103)
+	var base64 = __webpack_require__(102)
+	var ieee754 = __webpack_require__(103)
+	var isArray = __webpack_require__(104)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -8352,7 +8353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -8510,7 +8511,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -8600,7 +8601,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports) {
 
 	var toString = {}.toString;
@@ -8611,7 +8612,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports) {
 
 	/**
@@ -8821,7 +8822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -8875,7 +8876,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = dupe
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8904,33 +8905,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/* global Float32Array */
 	
-	var _glGeometry = __webpack_require__(107);
+	var _glGeometry = __webpack_require__(108);
 	
 	var _glGeometry2 = _interopRequireDefault(_glGeometry);
 	
-	var _glShader = __webpack_require__(55);
+	var _glShader = __webpack_require__(56);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _glFbo = __webpack_require__(89);
+	var _glFbo = __webpack_require__(90);
 	
 	var _glFbo2 = _interopRequireDefault(_glFbo);
 	
-	var _ndarray = __webpack_require__(91);
+	var _ndarray = __webpack_require__(92);
 	
 	var _ndarray2 = _interopRequireDefault(_ndarray);
 	
-	var _isFunction = __webpack_require__(120);
+	var _isFunction = __webpack_require__(121);
 	
 	var _isFunction2 = _interopRequireDefault(_isFunction);
 	
-	var _utils = __webpack_require__(85);
+	var _utils = __webpack_require__(86);
 	
-	var _screen = __webpack_require__(121);
+	var _screen = __webpack_require__(122);
 	
 	var _screen2 = _interopRequireDefault(_screen);
 	
-	var _index = __webpack_require__(123);
+	var _index = __webpack_require__(124);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
@@ -9126,13 +9127,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Particles;
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var normalize = __webpack_require__(108)
-	var glType = __webpack_require__(115)
-	var createVAO = __webpack_require__(116)
-	var dtype = __webpack_require__(114)
+	var normalize = __webpack_require__(109)
+	var glType = __webpack_require__(116)
+	var createVAO = __webpack_require__(117)
+	var dtype = __webpack_require__(115)
 	
 	module.exports = GLGeometry
 	
@@ -9295,14 +9296,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var pack = __webpack_require__(109)
-	var ista = __webpack_require__(111)
-	var createBuffer = __webpack_require__(112)
-	var isnd = __webpack_require__(113)
-	var dtype = __webpack_require__(114)
+	var pack = __webpack_require__(110)
+	var ista = __webpack_require__(112)
+	var createBuffer = __webpack_require__(113)
+	var isnd = __webpack_require__(114)
+	var dtype = __webpack_require__(115)
 	
 	module.exports.create = create
 	module.exports.update = update
@@ -9393,10 +9394,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var dtype = __webpack_require__(110)
+	var dtype = __webpack_require__(111)
 	
 	module.exports = pack
 	
@@ -9425,7 +9426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function(dtype) {
@@ -9460,10 +9461,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(100).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(101).Buffer))
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports) {
 
 	module.exports      = isTypedArray
@@ -9508,14 +9509,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var pool = __webpack_require__(99)
-	var ops = __webpack_require__(94)
-	var ndarray = __webpack_require__(91)
+	var pool = __webpack_require__(100)
+	var ops = __webpack_require__(95)
+	var ndarray = __webpack_require__(92)
 	
 	var SUPPORTED_TYPES = [
 	  "uint8",
@@ -9666,7 +9667,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports) {
 
 	module.exports = function(arr) {
@@ -9678,7 +9679,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports) {
 
 	module.exports = function(dtype) {
@@ -9705,7 +9706,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports) {
 
 	module.exports = glToType
@@ -9727,13 +9728,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var createVAONative = __webpack_require__(117)
-	var createVAOEmulated = __webpack_require__(119)
+	var createVAONative = __webpack_require__(118)
+	var createVAOEmulated = __webpack_require__(120)
 	
 	function ExtensionShim (gl) {
 	  this.bindVertexArrayOES = gl.bindVertexArray.bind(gl)
@@ -9760,12 +9761,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var bindAttribs = __webpack_require__(118)
+	var bindAttribs = __webpack_require__(119)
 	
 	function VertexAttribute(location, dimension, a, b, c, d) {
 	  this.location = location
@@ -9852,7 +9853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createVAONative
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -9911,12 +9912,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = doBind
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var bindAttribs = __webpack_require__(118)
+	var bindAttribs = __webpack_require__(119)
 	
 	function VAOEmulated(gl) {
 	  this.gl = gl
@@ -9955,7 +9956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createVAOEmulated
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var baseGetTag = __webpack_require__(39),
@@ -9998,7 +9999,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10012,7 +10013,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _glBigTriangle = __webpack_require__(122);
+	var _glBigTriangle = __webpack_require__(123);
 	
 	var _glBigTriangle2 = _interopRequireDefault(_glBigTriangle);
 	
@@ -10050,11 +10051,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Screen;
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var createBuffer = __webpack_require__(112)
-	var createVAO = __webpack_require__(116)
+	var createBuffer = __webpack_require__(113)
+	var createVAO = __webpack_require__(117)
 	
 	module.exports = GLBigTriangle
 	
@@ -10088,13 +10089,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nattribute vec2 position;\nvarying vec2 uv;\n\nvoid main() {\n    uv = position.xy;\n\n    gl_Position = vec4(position, 1.0, 1.0);\n}\n"
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10103,7 +10104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 	
-	var _inert = __webpack_require__(125);
+	var _inert = __webpack_require__(126);
 	
 	var _inert2 = _interopRequireDefault(_inert);
 	
@@ -10117,7 +10118,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -10129,7 +10130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = -1000000;
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10156,49 +10157,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = aspect;
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D particles;\nuniform sampler2D flow;\nuniform sampler2D targets;\n\nuniform vec2 dataRes;\n\nuniform vec2 viewSize;\n\nuniform float time;\nuniform float dt;\n\nuniform float speedLimit;\nuniform float damping;\n\nuniform float forceWeight;\nuniform float flowWeight;\nuniform float noiseWeight;\n\nuniform float flowDecay;\n\nuniform float noiseSpeed;\nuniform float noiseScale;\n\nuniform float target;\n\n// These are scaled by the values they correspond to\nuniform float varyForce;\nuniform float varyFlow;\nuniform float varyNoise;\nuniform float varyNoiseScale;\nuniform float varyNoiseSpeed;\nuniform float varyTarget;\n\n//\n// Description : Array and textureless GLSL 2D/3D/4D simplex\n//               noise functions.\n//      Author : Ian McEwan, Ashima Arts.\n//  Maintainer : ijm\n//     Lastmod : 20110822 (ijm)\n//     License : Copyright (C) 2011 Ashima Arts. All rights reserved.\n//               Distributed under the MIT License. See LICENSE file.\n//               https://github.com/ashima/webgl-noise\n//\n\nvec3 mod289(vec3 x) {\n  return x - floor(x * (1.0 / 289.0)) * 289.0;\n}\n\nvec4 mod289(vec4 x) {\n  return x - floor(x * (1.0 / 289.0)) * 289.0;\n}\n\nvec4 permute(vec4 x) {\n     return mod289(((x*34.0)+1.0)*x);\n}\n\nvec4 taylorInvSqrt(vec4 r)\n{\n  return 1.79284291400159 - 0.85373472095314 * r;\n}\n\nfloat snoise(vec3 v)\n  {\n  const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;\n  const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);\n\n// First corner\n  vec3 i  = floor(v + dot(v, C.yyy) );\n  vec3 x0 =   v - i + dot(i, C.xxx) ;\n\n// Other corners\n  vec3 g = step(x0.yzx, x0.xyz);\n  vec3 l = 1.0 - g;\n  vec3 i1 = min( g.xyz, l.zxy );\n  vec3 i2 = max( g.xyz, l.zxy );\n\n  //   x0 = x0 - 0.0 + 0.0 * C.xxx;\n  //   x1 = x0 - i1  + 1.0 * C.xxx;\n  //   x2 = x0 - i2  + 2.0 * C.xxx;\n  //   x3 = x0 - 1.0 + 3.0 * C.xxx;\n  vec3 x1 = x0 - i1 + C.xxx;\n  vec3 x2 = x0 - i2 + C.yyy; // 2.0*C.x = 1/3 = C.y\n  vec3 x3 = x0 - D.yyy;      // -1.0+3.0*C.x = -0.5 = -D.y\n\n// Permutations\n  i = mod289(i);\n  vec4 p = permute( permute( permute(\n             i.z + vec4(0.0, i1.z, i2.z, 1.0 ))\n           + i.y + vec4(0.0, i1.y, i2.y, 1.0 ))\n           + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));\n\n// Gradients: 7x7 points over a square, mapped onto an octahedron.\n// The ring size 17*17 = 289 is close to a multiple of 49 (49*6 = 294)\n  float n_ = 0.142857142857; // 1.0/7.0\n  vec3  ns = n_ * D.wyz - D.xzx;\n\n  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);  //  mod(p,7*7)\n\n  vec4 x_ = floor(j * ns.z);\n  vec4 y_ = floor(j - 7.0 * x_ );    // mod(j,N)\n\n  vec4 x = x_ *ns.x + ns.yyyy;\n  vec4 y = y_ *ns.x + ns.yyyy;\n  vec4 h = 1.0 - abs(x) - abs(y);\n\n  vec4 b0 = vec4( x.xy, y.xy );\n  vec4 b1 = vec4( x.zw, y.zw );\n\n  //vec4 s0 = vec4(lessThan(b0,0.0))*2.0 - 1.0;\n  //vec4 s1 = vec4(lessThan(b1,0.0))*2.0 - 1.0;\n  vec4 s0 = floor(b0)*2.0 + 1.0;\n  vec4 s1 = floor(b1)*2.0 + 1.0;\n  vec4 sh = -step(h, vec4(0.0));\n\n  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;\n  vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;\n\n  vec3 p0 = vec3(a0.xy,h.x);\n  vec3 p1 = vec3(a0.zw,h.y);\n  vec3 p2 = vec3(a1.xy,h.z);\n  vec3 p3 = vec3(a1.zw,h.w);\n\n//Normalise gradients\n  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));\n  p0 *= norm.x;\n  p1 *= norm.y;\n  p2 *= norm.z;\n  p3 *= norm.w;\n\n// Mix final noise value\n  vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);\n  m = m * m;\n  return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1),\n                                dot(p2,x2), dot(p3,x3) ) );\n  }\n\nconst vec2 inert = vec2(-1000000.0);\n\n/**\n * @requires {float} levels The number of samples to take at different LODs\n * @requires {float} stride The step up to take between each LOD\n */\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nvec2 posToUV(vec2 pos) {\n    return map(pos, posRange.xy, posRange.zw, uvRange.xy, uvRange.zw);\n}\n\n// Time/decay\n\nvec2 get(vec3 data, float time, float decay) {\n    return data.xy*max(0.0, 1.0-((time-data.z)*decay));\n}\n\nvec2 get(vec4 data, float time, float decay) {\n    return get(data.xyz, time, decay);\n}\n\n// No time/decay\n\nvec2 get(vec2 data) {\n    return data.xy;\n}\n\nvec2 get(vec3 data) {\n    return get(data.xy);\n}\n\nvec2 get(vec4 data) {\n    return get(data.xy);\n}\n\n/**\n * @return The flow velocity and age for a given screen position, sampling\n *         several scales.\n */\nvec2 flowAtScreenPos(vec2 pos, sampler2D flow, float time, float flowDecay) {\n    vec2 uv = posToUV(pos);\n    vec2 flowForce = vec2(0.0);\n    float flowMax = 0.0;\n\n    for(float level = 0.0; level < 1.0*1.0; level += 1.0) {\n        vec4 flowData = texture2D(flow, uv, level);\n        float factor = 1.0/(level+1.0);\n\n        flowForce += get(flowData, time, flowDecay)*factor;\n        flowMax += factor;\n    }\n\n    return flowForce/flowMax;\n}\n\nfloat vary(float base, float offset, float variance) {\n    return base+(offset*variance*base);\n}\n\nvoid main() {\n    vec2 uv = gl_FragCoord.xy/dataRes;\n\n    vec4 state = texture2D(particles, uv);\n    vec2 pos = state.xy;\n    vec2 vel = state.zw;\n\n    vec2 newPos = pos;\n    vec2 newVel = vel;\n\n    if(pos != inert) {\n        // The 1D index offset of this pixel\n        float i = (gl_FragCoord.x+(gl_FragCoord.y*dataRes.x))/\n                (dataRes.x*dataRes.y);\n\n        // Wander force\n\n        vec2 noisePos = pos*vary(noiseScale, i, varyNoiseScale);\n\n        // @todo This doesn't progress linearly - the speed grows with time...\n        float noiseTime = time*vary(noiseSpeed, i, varyNoiseSpeed);\n\n        vec2 wanderForce = vec2(snoise(vec3(noisePos, uv.x+noiseTime)),\n                snoise(vec3(noisePos, uv.y+noiseTime+1234.5678)));\n\n        // Flow force - left by preceeding particles\n        // (Ensure this is checked before the next flow step is rendered, to avoid\n        // self-influence.)\n\n        vec2 flowForce = flowAtScreenPos(pos*viewSize, flow, time, flowDecay);\n\n        // Accumulate weighted forces and damping\n        newVel = (vel*damping*dt)+\n            (vary(forceWeight, i, varyForce)*\n                ((flowForce*dt*vary(flowWeight, i, varyFlow))+\n                (wanderForce*dt*vary(noiseWeight, i, varyNoise))));\n\n        // Tend towards targets\n        newVel += (texture2D(targets, uv).xy-pos)*vary(target, i, varyTarget);\n\n        // Normalize and clamp the velocity\n        /**\n         * @todo This seems to cause some problems when dealing with larger max\n         *       speeds - the particles no longer follow flow forces somehow...\n         */\n        float speed = length(newVel);\n\n        newVel *= min(speed, speedLimit)/speed;\n\n        // Integrate motion\n        newPos = pos+newVel;\n    }\n\n    gl_FragColor = vec4(newPos, newVel);\n}\n"
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D previous;\nuniform sampler2D particles;\n\nuniform vec2 dataRes;\nuniform vec2 geomRes;\n\nuniform vec2 viewSize;\n\nuniform sampler2D colorMap;\nuniform float colorMapAlpha;\n\nuniform vec4 flowColor;\nuniform vec4 baseColor;\n\nuniform float time;\nuniform float speedLimit;\nuniform float flowDecay;\n\nuniform float speedAlpha;\n\nattribute vec2 uv;\n\nvarying vec4 color;\n\n/**\n * Pre-generated constants, equivalent to:\n *     flowAxisR: `angleToVec(0)`\n *     flowAxisG: `angleToVec(tau/3.0)`\n *     flowAxisB: `angleToVec(tau*2.0/3.0)`\n */\nconst vec2 flowAxisR = vec2(1.0, 0.0);\nconst vec2 flowAxisG = vec2(-0.5000000000000004, -0.8660254037844385);\nconst vec2 flowAxisB = vec2(-0.4999999999999998, 0.8660254037844387);\n\nconst vec4 minColor = vec4(0.0);\nconst vec4 maxColor = vec4(1.0);\n\nconst vec4 minAlign = vec4(-1.0);\nconst vec4 maxAlign = vec4(1.0);\n\n// @todo Turn some of these `const`s into `uniform`s\nconst vec2 center = vec2(0.0);\nconst vec2 fadeRange = vec2(0.2, 1.0);\nconst vec3 falloff = vec3(fadeRange.x, fadeRange.y, fadeRange.y);\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec2 inert = vec2(-1000000.0);\n\nfloat length2(vec2 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec3 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec4 vec) {\n    return dot(vec, vec);\n}\n\n/**\n * Adapted from `bezier`.\n */\n\nfloat bezier(vec2 cp, float t) {\n    return cp.x+(cp.y-cp.x)*t;\n}\n\nfloat bezier(vec3 cp, float t) {\n    float ut = 1.0-t;\n\n    return (cp.x*ut+cp.y*t)*ut+(cp.y*ut+cp.z*t)*t;\n}\n\nfloat bezier(vec4 cp, float t) {\n    float ut = 1.0-t;\n    float a1 = cp.y*ut+cp.z*t;\n\n    return ((cp.x*ut+cp.y*t)*ut+a1*t)*ut+(a1*ut+(cp.z*ut+cp.w*t)*t)*t;\n}\n\n// @todo Remove the `1.0-` here?\nfloat amount(vec2 point, vec2 mid, float limit) {\n    return min(1.0-(length(point-mid)/limit), 1.0);\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit) {\n    return max(0.0, amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, float curve) {\n    return max(0.0, curve*amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec2 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec3 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec4 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nvec4 preAlpha(vec3 color, float alpha) {\n    return vec4(color.rgb*alpha, alpha);\n}\n\nvec4 preAlpha(vec4 color) {\n    return preAlpha(color.rgb, color.a);\n}\n\nconst float frameOffset = 0.25;\n\n/**\n * For every data point, we have two vertices - current and previous state.\n * Every other vertex looks up previous data. In this way, (vertical)\n * neighbours alternate from previous to current state.\n * (Vertical neighbours, because WebGL iterates column-major.)\n *\n * @return State data for the vertex, either current or previous.\n */\n\nvec4 stateAtFrame(vec2 uv, vec2 shape, sampler2D previous, sampler2D current) {\n    float nearIndex = uv.y*shape.y;\n    float offset = fract(nearIndex);\n    vec2 lookup = vec2(uv.x, floor(nearIndex)/shape.y);\n\n    // @note Some systems comlain about this form of texture lookup:\n    // return texture2D(((offset > frameOffset)? current : previous), lookup);\n    return ((offset > frameOffset)?\n            texture2D(current, lookup)\n        :   texture2D(previous, lookup));\n}\n\nvoid main() {\n    vec4 state = stateAtFrame(uv, dataRes, previous, particles);\n\n    if(state.xy != inert) {\n        vec2 pos = state.xy;\n        vec2 vel = state.zw/speedLimit;\n        float speedRate = min(length2(vel)/speedAlpha, 1.0);\n\n        // Color map\n\n        vec4 mappedColor = texture2D(colorMap, uv*geomRes/dataRes);\n\n        mappedColor *= colorMapAlpha;\n\n        // Flow color\n        \n        vec3 alignRGB = vec3(dot(vel, flowAxisR),\n                dot(vel, flowAxisG), dot(vel, flowAxisB));\n\n        vec3 flowAlign = map(mix(alignRGB, alignRGB.gbr*(1.0-flowDecay),\n                    sin(time*flowDecay)),\n                minAlign.rgb, maxAlign.rgb, minColor.rgb, maxColor.rgb);\n\n        vec4 flowAlignedColor = vec4(flowColor.rgb*flowAlign, flowColor.a);\n\n        // Color summation, clamping and pre-multiplying alpha so they don't\n        // cross over\n\n        color = clamp(preAlpha(baseColor), minColor, maxColor)+\n            clamp(preAlpha(mappedColor), minColor, maxColor)+\n            clamp(preAlpha(flowAlignedColor), minColor, maxColor);\n\n        color.a *= speedRate*clamp(vignette(pos, center, 1.0, falloff),\n                        fadeRange.x, fadeRange.y);\n\n        // Position\n        gl_Position = vec4(pos*viewSize, 0.0, 1.0);\n    }\n}\n"
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nvarying vec4 color;\n\nvoid main() {\n    gl_FragColor = color;\n}\n"
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D previous;\nuniform sampler2D data;\n\nuniform vec2 dataRes;\n\nuniform vec2 viewSize;\n\nuniform float time;\nuniform float speedLimit;\nuniform float flowDecay;\n\nattribute vec2 uv;\n\nvarying vec4 color;\n\n/**\n * @requires {float} time The current time in ms\n */\n\nvec4 flow(vec2 vel) {\n    // Faster particles leave a greater influence (opacity).\n    // Linear interpolation - inaccurate for vectors, will it be OK without\n    // sudden turns, or do we need a per-fragment lookup?\n    return vec4(vel, time, length(vel));\n}\n\nvec4 flow(vec2 vel, float speedLimit) {\n    vec4 values = flow(vel);\n\n    return vec4(values.xyz, min(values.a/speedLimit, 1.0));\n}\n\n/**\n * @requires `./head.vert`\n * @requires {function} apply A function applying a `vec4` state into a `vec3`\n *                            color to be drawn.\n */\n\nconst vec2 inert = vec2(-1000000.0);\n\nconst float frameOffset = 0.25;\n\n/**\n * For every data point, we have two vertices - current and previous state.\n * Every other vertex looks up previous data. In this way, (vertical)\n * neighbours alternate from previous to current state.\n * (Vertical neighbours, because WebGL iterates column-major.)\n *\n * @return State data for the vertex, either current or previous.\n */\n\nvec4 stateAtFrame(vec2 uv, vec2 shape, sampler2D previous, sampler2D current) {\n    float nearIndex = uv.y*shape.y;\n    float offset = fract(nearIndex);\n    vec2 lookup = vec2(uv.x, floor(nearIndex)/shape.y);\n\n    // @note Some systems comlain about this form of texture lookup:\n    // return texture2D(((offset > frameOffset)? current : previous), lookup);\n    return ((offset > frameOffset)?\n            texture2D(current, lookup)\n        :   texture2D(previous, lookup));\n}\n\nvoid main() {\n    vec4 state = stateAtFrame(uv, dataRes, previous, data);\n\n    if(state.xy != inert) {\n        gl_Position = vec4(state.xy*viewSize, 1.0, 1.0);\n        color = flow(state.zw, speedLimit);\n    }\n}\n\n"
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nvarying vec4 color;\n\nvoid main() {\n    // @todo SDF from line, to weaken force further away\n    gl_FragColor = color.rgba;\n}\n"
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform vec4 color;\n\nvoid main() {\n    gl_FragColor = color.rgba;\n}\n"
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D view;\nuniform vec2 viewRes;\n\n// #pragma glslify: fxaa = require(glsl-fxaa)\n\nvoid main() {\n    gl_FragColor = texture2D(view, gl_FragCoord.xy/viewRes);\n    // gl_FragColor = fxaa(view, gl_FragCoord.xy, viewRes);\n}\n"
 
 /***/ }),
-/* 134 */,
 /* 135 */,
 /* 136 */,
 /* 137 */,
@@ -10258,7 +10258,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 191 */,
 /* 192 */,
 /* 193 */,
-/* 194 */
+/* 194 */,
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10267,7 +10268,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _ = __webpack_require__(88);
+	var _ = __webpack_require__(89);
 	
 	Object.keys(_).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
