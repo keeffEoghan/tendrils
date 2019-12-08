@@ -28,7 +28,6 @@ import mapRange from 'range-fit';
 import clamp from 'clamp';
 import { mat3, vec2 } from 'gl-matrix';
 import querystring from 'querystring';
-import toSource from 'to-source';
 import shader from 'gl-shader';
 import prefixes from 'prefixes';
 
@@ -69,8 +68,6 @@ import { curry } from './fp/partial';
 import reduce from './fp/reduce';
 import map from './fp/map';
 import each from './fp/each';
-
-toSource.defaultFnFormatter = (depth, f) => f.name;
 
 export default (canvas, options) => {
     if(redirect()) {
@@ -1321,10 +1318,6 @@ export default (canvas, options) => {
                         use_mic: appSettings.useMic,
                         animate: appSettings.animate
                     }))),
-            showState: () => showExport(`Current state (@${timer.track.time}):`,
-                toSource(player.track.tracks)),
-            showSequence: () => showExport('Animation sequence:',
-                toSource(player.track.frames({}))),
 
             keyframe
         });

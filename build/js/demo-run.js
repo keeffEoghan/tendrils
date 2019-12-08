@@ -54,7 +54,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(194);
+	module.exports = __webpack_require__(191);
 
 
 /***/ }),
@@ -134,111 +134,107 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _querystring2 = _interopRequireDefault(_querystring);
 	
-	var _toSource = __webpack_require__(53);
-	
-	var _toSource2 = _interopRequireDefault(_toSource);
-	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _prefixes = __webpack_require__(83);
+	var _prefixes = __webpack_require__(80);
 	
 	var _prefixes2 = _interopRequireDefault(_prefixes);
 	
-	var _dat = __webpack_require__(84);
+	var _dat = __webpack_require__(81);
 	
 	var _dat2 = _interopRequireDefault(_dat);
 	
-	var _utils = __webpack_require__(86);
+	var _utils = __webpack_require__(83);
 	
-	var _protocolRedirect = __webpack_require__(87);
+	var _protocolRedirect = __webpack_require__(84);
 	
 	var _protocolRedirect2 = _interopRequireDefault(_protocolRedirect);
 	
-	var _timer = __webpack_require__(88);
+	var _timer = __webpack_require__(85);
 	
 	var _timer2 = _interopRequireDefault(_timer);
 	
-	var _2 = __webpack_require__(89);
+	var _2 = __webpack_require__(86);
 	
-	var _pixels = __webpack_require__(135);
+	var _pixels = __webpack_require__(132);
 	
 	var spawnPixels = _interopRequireWildcard(_pixels);
 	
-	var _index = __webpack_require__(136);
+	var _index = __webpack_require__(133);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _bestSample = __webpack_require__(137);
+	var _bestSample = __webpack_require__(134);
 	
 	var _bestSample2 = _interopRequireDefault(_bestSample);
 	
-	var _flowSample = __webpack_require__(138);
+	var _flowSample = __webpack_require__(135);
 	
 	var _flowSample2 = _interopRequireDefault(_flowSample);
 	
-	var _dataSample = __webpack_require__(139);
+	var _dataSample = __webpack_require__(136);
 	
 	var _dataSample2 = _interopRequireDefault(_dataSample);
 	
-	var _ball = __webpack_require__(140);
+	var _ball = __webpack_require__(137);
 	
 	var _ball2 = _interopRequireDefault(_ball);
 	
-	var _geometry = __webpack_require__(144);
+	var _geometry = __webpack_require__(141);
 	
 	var _geometry2 = _interopRequireDefault(_geometry);
 	
-	var _audio = __webpack_require__(148);
+	var _audio = __webpack_require__(145);
 	
 	var _audio2 = _interopRequireDefault(_audio);
 	
-	var _dataTexture = __webpack_require__(163);
+	var _dataTexture = __webpack_require__(160);
 	
 	var _dataTexture2 = _interopRequireDefault(_dataTexture);
 	
-	var _analyse = __webpack_require__(159);
+	var _analyse = __webpack_require__(156);
 	
-	var _multi = __webpack_require__(166);
+	var _multi = __webpack_require__(163);
 	
 	var _multi2 = _interopRequireDefault(_multi);
 	
-	var _animate = __webpack_require__(180);
+	var _animate = __webpack_require__(177);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
-	var _screen = __webpack_require__(122);
+	var _screen = __webpack_require__(119);
 	
 	var _screen2 = _interopRequireDefault(_screen);
 	
-	var _blend = __webpack_require__(188);
+	var _blend = __webpack_require__(185);
 	
 	var _blend2 = _interopRequireDefault(_blend);
 	
-	var _index3 = __webpack_require__(124);
+	var _index3 = __webpack_require__(121);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
-	var _blur = __webpack_require__(190);
+	var _blur = __webpack_require__(187);
 	
 	var _blur2 = _interopRequireDefault(_blur);
 	
-	var _opticalFlow = __webpack_require__(191);
+	var _opticalFlow = __webpack_require__(188);
 	
 	var _opticalFlow2 = _interopRequireDefault(_opticalFlow);
 	
-	var _partial = __webpack_require__(193);
+	var _partial = __webpack_require__(190);
 	
-	var _reduce = __webpack_require__(162);
+	var _reduce = __webpack_require__(159);
 	
 	var _reduce2 = _interopRequireDefault(_reduce);
 	
-	var _map = __webpack_require__(161);
+	var _map = __webpack_require__(158);
 	
 	var _map2 = _interopRequireDefault(_map);
 	
-	var _each = __webpack_require__(149);
+	var _each = __webpack_require__(146);
 	
 	var _each2 = _interopRequireDefault(_each);
 	
@@ -247,10 +243,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	_toSource2.default.defaultFnFormatter = function (depth, f) {
-	    return f.name;
-	};
 	
 	exports.default = function (canvas, options) {
 	    if ((0, _protocolRedirect2.default)()) {
@@ -1474,12 +1466,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                use_mic: appSettings.useMic,
 	                animate: appSettings.animate
 	            }))));
-	        },
-	        showState: function showState() {
-	            return showExport('Current state (@' + timer.track.time + '):', (0, _toSource2.default)(player.track.tracks));
-	        },
-	        showSequence: function showSequence() {
-	            return showExport('Animation sequence:', (0, _toSource2.default)(player.track.frames({})));
 	        },
 	
 	        keyframe: keyframe
@@ -10504,499 +10490,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 	
-	const fnToStr = __webpack_require__(54)
-	const escape = __webpack_require__(55)
-	
-	function indent(ln, tabChar) {
-	  var str = ''
-	  for (var i = 0; i < ln; i++) str += tabChar
-	  return str
-	}
-	
-	function defaultFnFormatter() {
-	  return 'function() {}'
-	}
-	
-	function simpleFnFormatter(depth, fn) {
-	  return fnToStr(fn)
-	}
-	
-	function mkFnFormatter(tabChar) {
-	  if (tabChar === undefined) tabChar = '\t'
-	  return function(tabDepth, fn) {
-	    var sourced = fnToStr(fn)
-	
-	    var src = sourced.split('\n')
-	
-	    // Start by finding the height that the function is currently indented at.
-	    // I will need this to adjust the indentation.
-	    var lastLine = src[src.length - 1]
-	
-	    var currentH = lastLine.match('^(' + tabChar + ')*')[0].length
-	
-	    // No need to reindent if its already at the proper height.
-	    if (currentH === tabDepth) {
-	      return sourced
-	    }
-	
-	    // Relying on standard writing style, I shouldn't need to indent the first
-	    // line.
-	    var tail = src.slice(1)
-	
-	    var corrected
-	
-	    // I need to add indentation.
-	    if (currentH < tabDepth) {
-	      var addTabs = tabDepth - currentH
-	      corrected = tail.map(function(line) {
-	        return indent(addTabs, tabChar)
-	      })
-	    } else {
-	      // remove indentation.
-	      var removeChars = currentH - tabDepth
-	      corrected = tail.map(function(line) {
-	        return line.substring(removeChars)
-	      })
-	    }
-	    return src[0] + '\n' + corrected.join('\n')
-	  }
-	}
-	
-	function shouldQuote(key) {
-	  return !/^[a-z$_][a-z0-9_$]*$/i.test(key)
-	}
-	
-	function objectToSource(data, tabDepth, enclose, options) {
-	  const { tabChar, quoteChar } = options
-	  let count = 0
-	  var objListing = Object.keys(data).map(function(key) {
-	    count++
-	    var sourced = toSource(data[key], tabDepth + 1, true, options)
-	
-	    var literalKey = shouldQuote(key)
-	      ? quoteChar + escape(key) + quoteChar
-	      : key
-	
-	    var base = indent(tabDepth + 1, tabChar) + literalKey + ': '
-	    return base + sourced
-	  })
-	
-	  var inner = objListing.join(',\n')
-	  if (options.trailingComma && count > 0) {
-	    inner += ','
-	  }
-	  if (enclose) {
-	    return '{\n' + inner + '\n' + indent(tabDepth, tabChar) + '}'
-	  } else {
-	    return inner
-	  }
-	}
-	
-	function arrayToSource(data, tabDepth, enclose, options) {
-	  const tabChar = options.tabChar
-	  let count = 0
-	  var inner = data
-	    .map(function(part) {
-	      count++
-	      var src = toSource(part, tabDepth + 1, true, options)
-	      return indent(tabDepth + 1, tabChar) + src
-	    })
-	    .join(',\n')
-	
-	  if (options.trailingComma && count > 0) {
-	    inner += ','
-	  }
-	
-	  if (enclose) {
-	    return '[\n' + inner + '\n' + indent(tabDepth, tabChar) + ']'
-	  } else {
-	    return inner
-	  }
-	}
-	
-	function toSource(data, tabDepth, enclose, options) {
-	  const quoteChar = options.quoteChar
-	  switch (typeof data) {
-	    case 'function':
-	      return options.functionFormatter(tabDepth, data)
-	    case 'number':
-	    case 'undefined':
-	    case 'boolean':
-	      return '' + data
-	    case 'string':
-	      return quoteChar + escape(data, quoteChar) + quoteChar
-	    case 'object':
-	      if (Array.isArray(data)) {
-	        return arrayToSource(data, tabDepth, enclose, options)
-	      } else if (data === null) {
-	        // null is an object lol.
-	        return 'null'
-	      } else if (data instanceof Date) {
-	        return 'new Date(' + data.getTime() + ')'
-	      } else if (data instanceof RegExp) {
-	        return data.toString()
-	      } else {
-	        return objectToSource(data, tabDepth, enclose, options)
-	      }
-	  }
-	}
-	
-	// Wrap the toSource function to add in defaults.
-	module.exports = function(data, options) {
-	  options = Object.assign(
-	    {
-	      trailingComma: false,
-	      tabDepth: 0,
-	      enclose: true,
-	      tabChar: '\t',
-	      quoteChar: "'",
-	      functionFormatter: module.exports.defaultFnFormatter
-	    },
-	    options || {}
-	  )
-	
-	  if (
-	    options.quoteChar &&
-	    options.quoteChar !== "'" &&
-	    options.quoteChar !== '"'
-	  ) {
-	    throw new Error('Unsupported quote character ' + options.quoteChar)
-	  }
-	  return toSource(data, options.tabDepth, options.enclose, options)
-	}
-	
-	module.exports.defaultFnFormatter = defaultFnFormatter
-	module.exports.mkFnFormatter = mkFnFormatter
-	module.exports.simpleFnFormatter = simpleFnFormatter
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports) {
-
-	var nativeFnNames = [
-	  // String
-	  'String.fromCharCode',
-	  'String.fromCodePoint',
-	  'String.prototype.anchor',
-	  'String.prototype.charAt',
-	  'String.prototype.charCodeAt',
-	  'String.prototype.codePointAt',
-	  'String.prototype.concat',
-	  'String.prototype.endsWith',
-	  'String.prototype.includes',
-	  'String.prototype.indexOf',
-	  'String.prototype.lastIndexOf',
-	  'String.prototype.link',
-	  'String.prototype.localeCompare',
-	  'String.prototype.match',
-	  'String.prototype.normalize',
-	  'String.prototype.repeat',
-	  'String.prototype.replace',
-	  'String.prototype.search',
-	  'String.prototype.slice',
-	  'String.prototype.split',
-	  'String.prototype.startsWith',
-	  'String.prototype.substr',
-	  'String.prototype.substring',
-	  'String.prototype.toLocaleLowerCase',
-	  'String.prototype.toLocaleUpperCase',
-	  'String.prototype.toLowerCase',
-	  'String.prototype.toString',
-	  'String.prototype.toUpperCase',
-	  'String.prototype.trim',
-	  'String.prototype.trimLeft',
-	  'String.prototype.trimRight',
-	  'String.prototype.valueOf',
-	  'String.raw',
-	
-	  // Regexp
-	  'RegExp.prototype.exec',
-	  'RegExp.prototype.test',
-	  'RegExp.prototype.toSource',
-	  'RegExp.prototype.toString',
-	
-	  // Date
-	  'Date.now',
-	  'Date.UTC',
-	  'Date.parse',
-	  'Date.prototype.getDate',
-	  'Date.prototype.getDay',
-	  'Date.prototype.getFullYear',
-	  'Date.prototype.getHours',
-	  'Date.prototype.getMilliseconds',
-	  'Date.prototype.getMinutes',
-	  'Date.prototype.getMonth',
-	  'Date.prototype.getSeconds',
-	  'Date.prototype.getTime',
-	  'Date.prototype.getTimezoneOffset',
-	  'Date.prototype.getUTCDate',
-	  'Date.prototype.getUTCDay',
-	  'Date.prototype.getUTCFullYear',
-	  'Date.prototype.getUTCHours',
-	  'Date.prototype.getUTCMilliseconds',
-	  'Date.prototype.getUTCMinutes',
-	  'Date.prototype.getUTCMonth',
-	  'Date.prototype.getUTCSeconds',
-	  'Date.prototype.getYear',
-	  'Date.prototype.setDate',
-	  'Date.prototype.setFullYear',
-	  'Date.prototype.setHours',
-	  'Date.prototype.setMilliseconds',
-	  'Date.prototype.setMinutes',
-	  'Date.prototype.setMonth',
-	  'Date.prototype.setSeconds',
-	  'Date.prototype.setTime',
-	  'Date.prototype.setUTCDate',
-	  'Date.prototype.setUTCFullYear',
-	  'Date.prototype.setUTCHours',
-	  'Date.prototype.setUTCMilliseconds',
-	  'Date.prototype.setUTCMinutes',
-	  'Date.prototype.setUTCMonth',
-	  'Date.prototype.setUTCSeconds',
-	  'Date.prototype.setYear',
-	  'Date.prototype.toDateString',
-	  'Date.prototype.toGMTString',
-	  'Date.prototype.toISOString',
-	  'Date.prototype.toJSON',
-	  'Date.prototype.toLocaleDateString',
-	  'Date.prototype.toLocaleFormat',
-	  'Date.prototype.toLocaleString',
-	  'Date.prototype.toLocaleTimeString',
-	  'Date.prototype.toSource',
-	  'Date.prototype.toString',
-	  'Date.prototype.toTimeString',
-	  'Date.prototype.toUTCString',
-	  'Date.prototype.valueOf',
-	  // Object
-	  'Object.assign',
-	  'Object.create',
-	  'Object.defineProperties',
-	  'Object.defineProperty',
-	  'Object.freeze',
-	  'Object.getOwnPropertyDescriptor',
-	  'Object.getOwnPropertyNames',
-	  'Object.getOwnPropertySymbols',
-	  'Object.getPrototypeOf',
-	  'Object.is',
-	  'Object.isExtensible',
-	  'Object.isFrozen',
-	  'Object.isSealed',
-	  'Object.keys',
-	  'Object.preventExtensions',
-	  'Object.prototype.hasOwnProperty',
-	  'Object.prototype.isPrototypeOf',
-	  'Object.prototype.propertyIsEnumerable',
-	  'Object.prototype.toLocaleString',
-	  'Object.prototype.toSource',
-	  'Object.prototype.toString',
-	  'Object.prototype.unwatch',
-	  'Object.prototype.valueOf',
-	  'Object.prototype.watch',
-	  'Object.seal',
-	  'Object.setPrototypeOf',
-	
-	  // Array
-	  'Array.from',
-	  'Array.isArray',
-	  'Array.of',
-	  'Array.prototype.concat',
-	  'Array.prototype.copyWithin',
-	  'Array.prototype.entries',
-	  'Array.prototype.every',
-	  'Array.prototype.fill',
-	  'Array.prototype.filter',
-	  'Array.prototype.find',
-	  'Array.prototype.findIndex',
-	  'Array.prototype.forEach',
-	  'Array.prototype.includes',
-	  'Array.prototype.indexOf',
-	  'Array.prototype.join',
-	  'Array.prototype.keys',
-	  'Array.prototype.lastIndexOf',
-	  'Array.prototype.map',
-	  'Array.prototype.pop',
-	  'Array.prototype.push',
-	  'Array.prototype.reduce',
-	  'Array.prototype.reduceRight',
-	  'Array.prototype.reverse',
-	  'Array.prototype.shift',
-	  'Array.prototype.slice',
-	  'Array.prototype.some',
-	  'Array.prototype.sort',
-	  'Array.prototype.splice',
-	  'Array.prototype.toLocaleString',
-	  'Array.prototype.toSource',
-	  'Array.prototype.toString',
-	  'Array.prototype.unshift',
-	  'Array.prototype.values',
-	
-	  // Function
-	  'Function.prototype.apply',
-	  'Function.prototype.bind',
-	  'Function.prototype.call',
-	  'Function.prototype.isGenerator',
-	  'Function.prototype.toSource',
-	  'Function.prototype.toString',
-	
-	  // JSON
-	  'JSON.parse',
-	  'JSON.stringify',
-	
-	  // Number
-	  'Number.isNaN',
-	  'Number.isFinite',
-	  'Number.isInteger',
-	  'Number.isSafeInteger',
-	  'Number.parseFloat',
-	  'Number.parseInt',
-	
-	  // Math
-	  'Math.abs',
-	  'Math.acos',
-	  'Math.acosh',
-	  'Math.asin',
-	  'Math.asinh',
-	  'Math.atan',
-	  'Math.atan2',
-	  'Math.atanh',
-	  'Math.cbrt',
-	  'Math.ceil',
-	  'Math.clz32',
-	  'Math.cos',
-	  'Math.cosh',
-	  'Math.exp',
-	  'Math.expm1',
-	  'Math.floor',
-	  'Math.fround',
-	  'Math.hypot',
-	  'Math.imul',
-	  'Math.log',
-	  'Math.log10',
-	  'Math.log1p',
-	  'Math.log2',
-	  'Math.max',
-	  'Math.min',
-	  'Math.pow',
-	  'Math.random',
-	  'Math.round',
-	  'Math.sign',
-	  'Math.sin',
-	  'Math.sinh',
-	  'Math.sqrt',
-	  'Math.tan',
-	  'Math.tanh',
-	  'Math.trunc',
-	
-	  // Misc
-	  'isNaN',
-	  'isFinite',
-	  'eval',
-	  'parseFloat',
-	  'parseInt',
-	  'uneval'
-	]
-	
-	var nativeFns = null
-	var globalScope = (function() {
-	  return this
-	})()
-	
-	/**
-	 * Returns undefined if the value isn't present in the global scope.
-	 */
-	function findGlobalVal(name) {
-	  var parts = name.split('.')
-	  // console.log('parts', parts);
-	  return parts.reduce(function(target, part) {
-	    // console.log('target', target, 'part', part);
-	    if (target === undefined) return target
-	    return target[part]
-	  }, globalScope)
-	}
-	
-	function createNativeFnList() {
-	  return nativeFnNames.map(function(name) {
-	    return {
-	      name: name,
-	      value: findGlobalVal(name)
-	    }
-	  })
-	}
-	
-	function findNativeFnName(fn) {
-	  for (var i = 0; i < nativeFns.length; i++) {
-	    var item = nativeFns[i]
-	    if (item.value === fn) return item.name
-	  }
-	}
-	
-	function fnToStr(fn) {
-	  var str = fn.toString()
-	  if (isNativeFn(fn)) {
-	    if (nativeFns === null) {
-	      // lazily initialize...
-	      nativeFns = createNativeFnList()
-	    }
-	    var converted = findNativeFnName(fn)
-	    // In some cases, the native function won't be a standard built-in.
-	    // For these situations, I think I'd rather have the user know what is
-	    // going on than silently fail.
-	    if (!converted) {
-	      throw new Error('Serialization for native function not supported.')
-	    }
-	    return converted
-	  }
-	  return str
-	}
-	function isNativeFn(fn) {
-	  return /function [A-z_]+\(\) { \[native code\] }/.test(fn)
-	}
-	module.exports = fnToStr
-	module.exports.isNativeFn = isNativeFn
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports) {
-
-	/**
-	 * Escapes a javascript string or identifier so that it can be quoted properly.
-	 */
-	
-	const singleQuoteReg = new RegExp("'", 'g')
-	const doubleQuoteReg = new RegExp('"', 'g')
-	const backslashReg = new RegExp('[\\\\]', 'g')
-	
-	function escape(str, quoteChar) {
-	  let escaped = str
-	    .replace(backslashReg, '\\\\')
-	    .replace(/\n/g, '\\n')
-	    .replace(/\r/g, '\\r')
-	
-	  if (quoteChar === "'") {
-	    escaped = escaped.replace(singleQuoteReg, "\\'")
-	  } else {
-	    escaped = escaped.replace(doubleQuoteReg, '\\"')
-	  }
-	  return escaped
-	}
-	
-	module.exports = escape
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict'
-	
-	var createUniformWrapper   = __webpack_require__(57)
-	var createAttributeWrapper = __webpack_require__(60)
-	var makeReflect            = __webpack_require__(58)
-	var shaderCache            = __webpack_require__(61)
-	var runtime                = __webpack_require__(82)
-	var GLError                = __webpack_require__(59)
+	var createUniformWrapper   = __webpack_require__(54)
+	var createAttributeWrapper = __webpack_require__(57)
+	var makeReflect            = __webpack_require__(55)
+	var shaderCache            = __webpack_require__(58)
+	var runtime                = __webpack_require__(79)
+	var GLError                = __webpack_require__(56)
 	
 	//Shader object
 	function Shader(gl) {
@@ -11256,13 +10755,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 57 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var coallesceUniforms = __webpack_require__(58)
-	var GLError = __webpack_require__(59)
+	var coallesceUniforms = __webpack_require__(55)
+	var GLError = __webpack_require__(56)
 	
 	module.exports = createUniformWrapper
 	
@@ -11453,7 +10952,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 58 */
+/* 55 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -11515,7 +11014,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 59 */
+/* 56 */
 /***/ (function(module, exports) {
 
 	function GLError (rawError, shortMessage, longMessage) {
@@ -11534,14 +11033,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 60 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
 	module.exports = createAttributeWrapper
 	
-	var GLError = __webpack_require__(59)
+	var GLError = __webpack_require__(56)
 	
 	function ShaderAttribute(
 	    gl
@@ -11803,7 +11302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 61 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
@@ -11811,10 +11310,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.shader   = getShaderReference
 	exports.program  = createProgram
 	
-	var GLError = __webpack_require__(59)
-	var formatCompilerError = __webpack_require__(62);
+	var GLError = __webpack_require__(56)
+	var formatCompilerError = __webpack_require__(59);
 	
-	var weakMap = typeof WeakMap === 'undefined' ? __webpack_require__(79) : WeakMap
+	var weakMap = typeof WeakMap === 'undefined' ? __webpack_require__(76) : WeakMap
 	var CACHE = new weakMap()
 	
 	var SHADER_COUNTER = 0
@@ -11945,14 +11444,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 62 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	var sprintf = __webpack_require__(63).sprintf;
-	var glConstants = __webpack_require__(65);
-	var shaderName = __webpack_require__(67);
-	var addLineNumbers = __webpack_require__(76);
+	var sprintf = __webpack_require__(60).sprintf;
+	var glConstants = __webpack_require__(62);
+	var shaderName = __webpack_require__(64);
+	var addLineNumbers = __webpack_require__(73);
 	
 	module.exports = formatCompilerError;
 	
@@ -12004,7 +11503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 63 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* global window, exports, define */
@@ -12227,7 +11726,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        window['sprintf'] = sprintf
 	        window['vsprintf'] = vsprintf
 	
-	        if ("function" === 'function' && __webpack_require__(64)['amd']) {
+	        if ("function" === 'function' && __webpack_require__(61)['amd']) {
 	            !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	                return {
 	                    'sprintf': sprintf,
@@ -12241,17 +11740,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 64 */
+/* 61 */
 /***/ (function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ }),
-/* 65 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var gl10 = __webpack_require__(66)
+	var gl10 = __webpack_require__(63)
 	
 	module.exports = function lookupConstant (number) {
 	  return gl10[number]
@@ -12259,7 +11758,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 66 */
+/* 63 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -12563,11 +12062,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 67 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var tokenize = __webpack_require__(68)
-	var atob     = __webpack_require__(75)
+	var tokenize = __webpack_require__(65)
+	var atob     = __webpack_require__(72)
 	
 	module.exports = getName
 	
@@ -12592,10 +12091,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 68 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var tokenize = __webpack_require__(69)
+	var tokenize = __webpack_require__(66)
 	
 	module.exports = tokenizeString
 	
@@ -12611,16 +12110,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 69 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = tokenize
 	
-	var literals100 = __webpack_require__(70)
-	  , operators = __webpack_require__(71)
-	  , builtins100 = __webpack_require__(72)
-	  , literals300es = __webpack_require__(73)
-	  , builtins300es = __webpack_require__(74)
+	var literals100 = __webpack_require__(67)
+	  , operators = __webpack_require__(68)
+	  , builtins100 = __webpack_require__(69)
+	  , literals300es = __webpack_require__(70)
+	  , builtins300es = __webpack_require__(71)
 	
 	var NORMAL = 999          // <-- never emitted
 	  , TOKEN = 9999          // <-- never emitted
@@ -12992,7 +12491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 70 */
+/* 67 */
 /***/ (function(module, exports) {
 
 	module.exports = [
@@ -13092,7 +12591,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 71 */
+/* 68 */
 /***/ (function(module, exports) {
 
 	module.exports = [
@@ -13145,7 +12644,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 72 */
+/* 69 */
 /***/ (function(module, exports) {
 
 	module.exports = [
@@ -13301,10 +12800,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 73 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var v100 = __webpack_require__(70)
+	var v100 = __webpack_require__(67)
 	
 	module.exports = v100.slice().concat([
 	   'layout'
@@ -13394,11 +12893,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 74 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 300es builtins/reserved words that were previously valid in v100
-	var v100 = __webpack_require__(72)
+	var v100 = __webpack_require__(69)
 	
 	// The texture2D|Cube functions have been removed
 	// And the gl_ features are updated
@@ -13469,7 +12968,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 75 */
+/* 72 */
 /***/ (function(module, exports) {
 
 	module.exports = function _atob(str) {
@@ -13478,10 +12977,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 76 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var padLeft = __webpack_require__(77)
+	var padLeft = __webpack_require__(74)
 	
 	module.exports = addLineNumbers
 	function addLineNumbers (string, start, delim) {
@@ -13500,7 +12999,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 77 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*!
@@ -13512,7 +13011,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict';
 	
-	var repeat = __webpack_require__(78);
+	var repeat = __webpack_require__(75);
 	
 	module.exports = function padLeft(str, num, ch) {
 	  ch = typeof ch !== 'undefined' ? (ch + '') : ' ';
@@ -13520,7 +13019,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 78 */
+/* 75 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -13596,14 +13095,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 79 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Original - @Gozola.
 	// https://gist.github.com/Gozala/1269991
 	// This is a reimplemented version (with a few bug fixes).
 	
-	var createStore = __webpack_require__(80);
+	var createStore = __webpack_require__(77);
 	
 	module.exports = weakMap;
 	
@@ -13631,10 +13130,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 80 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var hiddenStore = __webpack_require__(81);
+	var hiddenStore = __webpack_require__(78);
 	
 	module.exports = createStore;
 	
@@ -13656,7 +13155,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 81 */
+/* 78 */
 /***/ (function(module, exports) {
 
 	module.exports = hiddenStore;
@@ -13678,7 +13177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 82 */
+/* 79 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -13762,7 +13261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 83 */
+/* 80 */
 /***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -13812,7 +13311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 84 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -18264,10 +17763,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	;
 	//# sourceMappingURL=dat.gui.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(82)(module)))
 
 /***/ }),
-/* 85 */
+/* 82 */
 /***/ (function(module, exports) {
 
 	module.exports = function(module) {
@@ -18283,7 +17782,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 86 */
+/* 83 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -18315,7 +17814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var rootPath = exports.rootPath = ('/' + ((location.href.match(/:\/\/.+?\/([^\/\?]+?(?=[\/\?]|$))?/i) || [])[1] || '') + '/').replace(/\/+/gi, '/');
 
 /***/ }),
-/* 87 */
+/* 84 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -18339,7 +17838,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = redirect;
 
 /***/ }),
-/* 88 */
+/* 85 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -18449,7 +17948,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Timer;
 
 /***/ }),
-/* 89 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18465,63 +17964,63 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Shaders
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _glFbo = __webpack_require__(90);
+	var _glFbo = __webpack_require__(87);
 	
 	var _glFbo2 = _interopRequireDefault(_glFbo);
 	
-	var _particles2 = __webpack_require__(107);
+	var _particles2 = __webpack_require__(104);
 	
 	var _particles3 = _interopRequireDefault(_particles2);
 	
-	var _timer = __webpack_require__(88);
+	var _timer = __webpack_require__(85);
 	
 	var _timer2 = _interopRequireDefault(_timer);
 	
-	var _utils = __webpack_require__(86);
+	var _utils = __webpack_require__(83);
 	
-	var _cpu = __webpack_require__(125);
+	var _cpu = __webpack_require__(122);
 	
 	var _cpu2 = _interopRequireDefault(_cpu);
 	
-	var _aspect = __webpack_require__(127);
+	var _aspect = __webpack_require__(124);
 	
-	var _screen = __webpack_require__(122);
+	var _screen = __webpack_require__(119);
 	
 	var _screen2 = _interopRequireDefault(_screen);
 	
-	var _logic = __webpack_require__(128);
+	var _logic = __webpack_require__(125);
 	
 	var _logic2 = _interopRequireDefault(_logic);
 	
-	var _index = __webpack_require__(129);
+	var _index = __webpack_require__(126);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(130);
+	var _index3 = __webpack_require__(127);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
-	var _index5 = __webpack_require__(131);
+	var _index5 = __webpack_require__(128);
 	
 	var _index6 = _interopRequireDefault(_index5);
 	
-	var _index7 = __webpack_require__(132);
+	var _index7 = __webpack_require__(129);
 	
 	var _index8 = _interopRequireDefault(_index7);
 	
-	var _index9 = __webpack_require__(124);
+	var _index9 = __webpack_require__(121);
 	
 	var _index10 = _interopRequireDefault(_index9);
 	
-	var _index11 = __webpack_require__(133);
+	var _index11 = __webpack_require__(130);
 	
 	var _index12 = _interopRequireDefault(_index11);
 	
-	var _copy = __webpack_require__(134);
+	var _copy = __webpack_require__(131);
 	
 	var _copy2 = _interopRequireDefault(_copy);
 	
@@ -19006,12 +18505,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tendrils;
 
 /***/ }),
-/* 90 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var createTexture = __webpack_require__(91)
+	var createTexture = __webpack_require__(88)
 	
 	module.exports = createFBO
 	
@@ -19477,14 +18976,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 91 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var ndarray = __webpack_require__(92)
-	var ops     = __webpack_require__(95)
-	var pool    = __webpack_require__(100)
+	var ndarray = __webpack_require__(89)
+	var ops     = __webpack_require__(92)
+	var pool    = __webpack_require__(97)
 	
 	module.exports = createTexture2D
 	
@@ -20044,11 +19543,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 92 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var iota = __webpack_require__(93)
-	var isBuffer = __webpack_require__(94)
+	var iota = __webpack_require__(90)
+	var isBuffer = __webpack_require__(91)
 	
 	var hasTypedArrays  = ((typeof Float64Array) !== "undefined")
 	
@@ -20393,7 +19892,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 93 */
+/* 90 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -20409,7 +19908,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = iota
 
 /***/ }),
-/* 94 */
+/* 91 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -20436,12 +19935,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 95 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var compile = __webpack_require__(96)
+	var compile = __webpack_require__(93)
 	
 	var EmptyProc = {
 	  body: "",
@@ -20903,12 +20402,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 96 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var createThunk = __webpack_require__(97)
+	var createThunk = __webpack_require__(94)
 	
 	function Procedure() {
 	  this.argTypes = []
@@ -21018,7 +20517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 97 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
@@ -21046,7 +20545,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//   return thunk(compile.bind1(proc))
 	// }
 	
-	var compile = __webpack_require__(98)
+	var compile = __webpack_require__(95)
 	
 	function createThunk(proc) {
 	  var code = ["'use strict'", "var CACHED={}"]
@@ -21110,12 +20609,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 98 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var uniq = __webpack_require__(99)
+	var uniq = __webpack_require__(96)
 	
 	// This function generates very simple loops analogous to how you typically traverse arrays (the outermost loop corresponds to the slowest changing index, the innermost loop to the fastest changing index)
 	// TODO: If two arrays have the same strides (and offsets) there is potential for decreasing the number of "pointers" and related variables. The drawback is that the type signature would become more specific and that there would thus be less potential for caching, but it might still be worth it, especially when dealing with large numbers of arguments.
@@ -21474,7 +20973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 99 */
+/* 96 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -21537,13 +21036,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 100 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, Buffer) {'use strict'
 	
-	var bits = __webpack_require__(105)
-	var dup = __webpack_require__(106)
+	var bits = __webpack_require__(102)
+	var dup = __webpack_require__(103)
 	
 	//Legacy pool support
 	if(!global.__TYPEDARRAY_POOL) {
@@ -21754,10 +21253,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    BUFFER[i].length = 0
 	  }
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(101).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(98).Buffer))
 
 /***/ }),
-/* 101 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -21770,9 +21269,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict'
 	
-	var base64 = __webpack_require__(102)
-	var ieee754 = __webpack_require__(103)
-	var isArray = __webpack_require__(104)
+	var base64 = __webpack_require__(99)
+	var ieee754 = __webpack_require__(100)
+	var isArray = __webpack_require__(101)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -23553,7 +23052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 102 */
+/* 99 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -23711,7 +23210,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 103 */
+/* 100 */
 /***/ (function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -23801,7 +23300,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 104 */
+/* 101 */
 /***/ (function(module, exports) {
 
 	var toString = {}.toString;
@@ -23812,7 +23311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 105 */
+/* 102 */
 /***/ (function(module, exports) {
 
 	/**
@@ -24022,7 +23521,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 106 */
+/* 103 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -24076,7 +23575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = dupe
 
 /***/ }),
-/* 107 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24105,33 +23604,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/* global Float32Array */
 	
-	var _glGeometry = __webpack_require__(108);
+	var _glGeometry = __webpack_require__(105);
 	
 	var _glGeometry2 = _interopRequireDefault(_glGeometry);
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _glFbo = __webpack_require__(90);
+	var _glFbo = __webpack_require__(87);
 	
 	var _glFbo2 = _interopRequireDefault(_glFbo);
 	
-	var _ndarray = __webpack_require__(92);
+	var _ndarray = __webpack_require__(89);
 	
 	var _ndarray2 = _interopRequireDefault(_ndarray);
 	
-	var _isFunction = __webpack_require__(121);
+	var _isFunction = __webpack_require__(118);
 	
 	var _isFunction2 = _interopRequireDefault(_isFunction);
 	
-	var _utils = __webpack_require__(86);
+	var _utils = __webpack_require__(83);
 	
-	var _screen = __webpack_require__(122);
+	var _screen = __webpack_require__(119);
 	
 	var _screen2 = _interopRequireDefault(_screen);
 	
-	var _index = __webpack_require__(124);
+	var _index = __webpack_require__(121);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
@@ -24327,13 +23826,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Particles;
 
 /***/ }),
-/* 108 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var normalize = __webpack_require__(109)
-	var glType = __webpack_require__(116)
-	var createVAO = __webpack_require__(117)
-	var dtype = __webpack_require__(115)
+	var normalize = __webpack_require__(106)
+	var glType = __webpack_require__(113)
+	var createVAO = __webpack_require__(114)
+	var dtype = __webpack_require__(112)
 	
 	module.exports = GLGeometry
 	
@@ -24496,14 +23995,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 109 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var pack = __webpack_require__(110)
-	var ista = __webpack_require__(112)
-	var createBuffer = __webpack_require__(113)
-	var isnd = __webpack_require__(114)
-	var dtype = __webpack_require__(115)
+	var pack = __webpack_require__(107)
+	var ista = __webpack_require__(109)
+	var createBuffer = __webpack_require__(110)
+	var isnd = __webpack_require__(111)
+	var dtype = __webpack_require__(112)
 	
 	module.exports.create = create
 	module.exports.update = update
@@ -24594,10 +24093,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 110 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var dtype = __webpack_require__(111)
+	var dtype = __webpack_require__(108)
 	
 	module.exports = pack
 	
@@ -24626,7 +24125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 111 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function(dtype) {
@@ -24661,10 +24160,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(101).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(98).Buffer))
 
 /***/ }),
-/* 112 */
+/* 109 */
 /***/ (function(module, exports) {
 
 	module.exports      = isTypedArray
@@ -24709,14 +24208,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 113 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var pool = __webpack_require__(100)
-	var ops = __webpack_require__(95)
-	var ndarray = __webpack_require__(92)
+	var pool = __webpack_require__(97)
+	var ops = __webpack_require__(92)
+	var ndarray = __webpack_require__(89)
 	
 	var SUPPORTED_TYPES = [
 	  "uint8",
@@ -24867,7 +24366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 114 */
+/* 111 */
 /***/ (function(module, exports) {
 
 	module.exports = function(arr) {
@@ -24879,7 +24378,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 115 */
+/* 112 */
 /***/ (function(module, exports) {
 
 	module.exports = function(dtype) {
@@ -24906,7 +24405,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 116 */
+/* 113 */
 /***/ (function(module, exports) {
 
 	module.exports = glToType
@@ -24928,13 +24427,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 117 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var createVAONative = __webpack_require__(118)
-	var createVAOEmulated = __webpack_require__(120)
+	var createVAONative = __webpack_require__(115)
+	var createVAOEmulated = __webpack_require__(117)
 	
 	function ExtensionShim (gl) {
 	  this.bindVertexArrayOES = gl.bindVertexArray.bind(gl)
@@ -24961,12 +24460,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 118 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var bindAttribs = __webpack_require__(119)
+	var bindAttribs = __webpack_require__(116)
 	
 	function VertexAttribute(location, dimension, a, b, c, d) {
 	  this.location = location
@@ -25053,7 +24552,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createVAONative
 
 /***/ }),
-/* 119 */
+/* 116 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -25112,12 +24611,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = doBind
 
 /***/ }),
-/* 120 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 	
-	var bindAttribs = __webpack_require__(119)
+	var bindAttribs = __webpack_require__(116)
 	
 	function VAOEmulated(gl) {
 	  this.gl = gl
@@ -25156,7 +24655,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createVAOEmulated
 
 /***/ }),
-/* 121 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var baseGetTag = __webpack_require__(39),
@@ -25199,7 +24698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 122 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25213,7 +24712,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _glBigTriangle = __webpack_require__(123);
+	var _glBigTriangle = __webpack_require__(120);
 	
 	var _glBigTriangle2 = _interopRequireDefault(_glBigTriangle);
 	
@@ -25251,11 +24750,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Screen;
 
 /***/ }),
-/* 123 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var createBuffer = __webpack_require__(113)
-	var createVAO = __webpack_require__(117)
+	var createBuffer = __webpack_require__(110)
+	var createVAO = __webpack_require__(114)
 	
 	module.exports = GLBigTriangle
 	
@@ -25289,13 +24788,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 124 */
+/* 121 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nattribute vec2 position;\nvarying vec2 uv;\n\nvoid main() {\n    uv = position.xy;\n\n    gl_Position = vec4(position, 1.0, 1.0);\n}\n"
 
 /***/ }),
-/* 125 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25304,7 +24803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 	
-	var _inert = __webpack_require__(126);
+	var _inert = __webpack_require__(123);
 	
 	var _inert2 = _interopRequireDefault(_inert);
 	
@@ -25318,7 +24817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 126 */
+/* 123 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -25330,7 +24829,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = -1000000;
 
 /***/ }),
-/* 127 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25357,49 +24856,49 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = aspect;
 
 /***/ }),
-/* 128 */
+/* 125 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D particles;\nuniform sampler2D flow;\nuniform sampler2D targets;\n\nuniform vec2 dataRes;\n\nuniform vec2 viewSize;\n\nuniform float time;\nuniform float dt;\n\nuniform float speedLimit;\nuniform float damping;\n\nuniform float forceWeight;\nuniform float flowWeight;\nuniform float noiseWeight;\n\nuniform float flowDecay;\n\nuniform float noiseSpeed;\nuniform float noiseScale;\n\nuniform float target;\n\n// These are scaled by the values they correspond to\nuniform float varyForce;\nuniform float varyFlow;\nuniform float varyNoise;\nuniform float varyNoiseScale;\nuniform float varyNoiseSpeed;\nuniform float varyTarget;\n\n//\n// Description : Array and textureless GLSL 2D/3D/4D simplex\n//               noise functions.\n//      Author : Ian McEwan, Ashima Arts.\n//  Maintainer : ijm\n//     Lastmod : 20110822 (ijm)\n//     License : Copyright (C) 2011 Ashima Arts. All rights reserved.\n//               Distributed under the MIT License. See LICENSE file.\n//               https://github.com/ashima/webgl-noise\n//\n\nvec3 mod289(vec3 x) {\n  return x - floor(x * (1.0 / 289.0)) * 289.0;\n}\n\nvec4 mod289(vec4 x) {\n  return x - floor(x * (1.0 / 289.0)) * 289.0;\n}\n\nvec4 permute(vec4 x) {\n     return mod289(((x*34.0)+1.0)*x);\n}\n\nvec4 taylorInvSqrt(vec4 r)\n{\n  return 1.79284291400159 - 0.85373472095314 * r;\n}\n\nfloat snoise(vec3 v)\n  {\n  const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;\n  const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);\n\n// First corner\n  vec3 i  = floor(v + dot(v, C.yyy) );\n  vec3 x0 =   v - i + dot(i, C.xxx) ;\n\n// Other corners\n  vec3 g = step(x0.yzx, x0.xyz);\n  vec3 l = 1.0 - g;\n  vec3 i1 = min( g.xyz, l.zxy );\n  vec3 i2 = max( g.xyz, l.zxy );\n\n  //   x0 = x0 - 0.0 + 0.0 * C.xxx;\n  //   x1 = x0 - i1  + 1.0 * C.xxx;\n  //   x2 = x0 - i2  + 2.0 * C.xxx;\n  //   x3 = x0 - 1.0 + 3.0 * C.xxx;\n  vec3 x1 = x0 - i1 + C.xxx;\n  vec3 x2 = x0 - i2 + C.yyy; // 2.0*C.x = 1/3 = C.y\n  vec3 x3 = x0 - D.yyy;      // -1.0+3.0*C.x = -0.5 = -D.y\n\n// Permutations\n  i = mod289(i);\n  vec4 p = permute( permute( permute(\n             i.z + vec4(0.0, i1.z, i2.z, 1.0 ))\n           + i.y + vec4(0.0, i1.y, i2.y, 1.0 ))\n           + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));\n\n// Gradients: 7x7 points over a square, mapped onto an octahedron.\n// The ring size 17*17 = 289 is close to a multiple of 49 (49*6 = 294)\n  float n_ = 0.142857142857; // 1.0/7.0\n  vec3  ns = n_ * D.wyz - D.xzx;\n\n  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);  //  mod(p,7*7)\n\n  vec4 x_ = floor(j * ns.z);\n  vec4 y_ = floor(j - 7.0 * x_ );    // mod(j,N)\n\n  vec4 x = x_ *ns.x + ns.yyyy;\n  vec4 y = y_ *ns.x + ns.yyyy;\n  vec4 h = 1.0 - abs(x) - abs(y);\n\n  vec4 b0 = vec4( x.xy, y.xy );\n  vec4 b1 = vec4( x.zw, y.zw );\n\n  //vec4 s0 = vec4(lessThan(b0,0.0))*2.0 - 1.0;\n  //vec4 s1 = vec4(lessThan(b1,0.0))*2.0 - 1.0;\n  vec4 s0 = floor(b0)*2.0 + 1.0;\n  vec4 s1 = floor(b1)*2.0 + 1.0;\n  vec4 sh = -step(h, vec4(0.0));\n\n  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;\n  vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;\n\n  vec3 p0 = vec3(a0.xy,h.x);\n  vec3 p1 = vec3(a0.zw,h.y);\n  vec3 p2 = vec3(a1.xy,h.z);\n  vec3 p3 = vec3(a1.zw,h.w);\n\n//Normalise gradients\n  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));\n  p0 *= norm.x;\n  p1 *= norm.y;\n  p2 *= norm.z;\n  p3 *= norm.w;\n\n// Mix final noise value\n  vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);\n  m = m * m;\n  return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1),\n                                dot(p2,x2), dot(p3,x3) ) );\n  }\n\nconst vec2 inert = vec2(-1000000.0);\n\n/**\n * @requires {float} levels The number of samples to take at different LODs\n * @requires {float} stride The step up to take between each LOD\n */\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nvec2 posToUV(vec2 pos) {\n    return map(pos, posRange.xy, posRange.zw, uvRange.xy, uvRange.zw);\n}\n\n// Time/decay\n\nvec2 get(vec3 data, float time, float decay) {\n    return data.xy*max(0.0, 1.0-((time-data.z)*decay));\n}\n\nvec2 get(vec4 data, float time, float decay) {\n    return get(data.xyz, time, decay);\n}\n\n// No time/decay\n\nvec2 get(vec2 data) {\n    return data.xy;\n}\n\nvec2 get(vec3 data) {\n    return get(data.xy);\n}\n\nvec2 get(vec4 data) {\n    return get(data.xy);\n}\n\n/**\n * @return The flow velocity and age for a given screen position, sampling\n *         several scales.\n */\nvec2 flowAtScreenPos(vec2 pos, sampler2D flow, float time, float flowDecay) {\n    vec2 uv = posToUV(pos);\n    vec2 flowForce = vec2(0.0);\n    float flowMax = 0.0;\n\n    for(float level = 0.0; level < 1.0*1.0; level += 1.0) {\n        vec4 flowData = texture2D(flow, uv, level);\n        float factor = 1.0/(level+1.0);\n\n        flowForce += get(flowData, time, flowDecay)*factor;\n        flowMax += factor;\n    }\n\n    return flowForce/flowMax;\n}\n\nfloat vary(float base, float offset, float variance) {\n    return base+(offset*variance*base);\n}\n\nvoid main() {\n    vec2 uv = gl_FragCoord.xy/dataRes;\n\n    vec4 state = texture2D(particles, uv);\n    vec2 pos = state.xy;\n    vec2 vel = state.zw;\n\n    vec2 newPos = pos;\n    vec2 newVel = vel;\n\n    if(pos != inert) {\n        // The 1D index offset of this pixel\n        float i = (gl_FragCoord.x+(gl_FragCoord.y*dataRes.x))/\n                (dataRes.x*dataRes.y);\n\n        // Wander force\n\n        vec2 noisePos = pos*vary(noiseScale, i, varyNoiseScale);\n\n        // @todo This doesn't progress linearly - the speed grows with time...\n        float noiseTime = time*vary(noiseSpeed, i, varyNoiseSpeed);\n\n        vec2 wanderForce = vec2(snoise(vec3(noisePos, uv.x+noiseTime)),\n                snoise(vec3(noisePos, uv.y+noiseTime+1234.5678)));\n\n        // Flow force - left by preceeding particles\n        // (Ensure this is checked before the next flow step is rendered, to avoid\n        // self-influence.)\n\n        vec2 flowForce = flowAtScreenPos(pos*viewSize, flow, time, flowDecay);\n\n        // Accumulate weighted forces and damping\n        newVel = (vel*damping*dt)+\n            (vary(forceWeight, i, varyForce)*\n                ((flowForce*dt*vary(flowWeight, i, varyFlow))+\n                (wanderForce*dt*vary(noiseWeight, i, varyNoise))));\n\n        // Tend towards targets\n        newVel += (texture2D(targets, uv).xy-pos)*vary(target, i, varyTarget);\n\n        // Normalize and clamp the velocity\n        /**\n         * @todo This seems to cause some problems when dealing with larger max\n         *       speeds - the particles no longer follow flow forces somehow...\n         */\n        float speed = length(newVel);\n\n        newVel *= min(speed, speedLimit)/speed;\n\n        // Integrate motion\n        newPos = pos+newVel;\n    }\n\n    gl_FragColor = vec4(newPos, newVel);\n}\n"
 
 /***/ }),
-/* 129 */
+/* 126 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D previous;\nuniform sampler2D particles;\n\nuniform vec2 dataRes;\nuniform vec2 geomRes;\n\nuniform vec2 viewSize;\n\nuniform sampler2D colorMap;\nuniform float colorMapAlpha;\n\nuniform vec4 flowColor;\nuniform vec4 baseColor;\n\nuniform float time;\nuniform float speedLimit;\nuniform float flowDecay;\n\nuniform float speedAlpha;\n\nattribute vec2 uv;\n\nvarying vec4 color;\n\n/**\n * Pre-generated constants, equivalent to:\n *     flowAxisR: `angleToVec(0)`\n *     flowAxisG: `angleToVec(tau/3.0)`\n *     flowAxisB: `angleToVec(tau*2.0/3.0)`\n */\nconst vec2 flowAxisR = vec2(1.0, 0.0);\nconst vec2 flowAxisG = vec2(-0.5000000000000004, -0.8660254037844385);\nconst vec2 flowAxisB = vec2(-0.4999999999999998, 0.8660254037844387);\n\nconst vec4 minColor = vec4(0.0);\nconst vec4 maxColor = vec4(1.0);\n\nconst vec4 minAlign = vec4(-1.0);\nconst vec4 maxAlign = vec4(1.0);\n\n// @todo Turn some of these `const`s into `uniform`s\nconst vec2 center = vec2(0.0);\nconst vec2 fadeRange = vec2(0.2, 1.0);\nconst vec3 falloff = vec3(fadeRange.x, fadeRange.y, fadeRange.y);\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec2 inert = vec2(-1000000.0);\n\nfloat length2(vec2 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec3 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec4 vec) {\n    return dot(vec, vec);\n}\n\n/**\n * Adapted from `bezier`.\n */\n\nfloat bezier(vec2 cp, float t) {\n    return cp.x+(cp.y-cp.x)*t;\n}\n\nfloat bezier(vec3 cp, float t) {\n    float ut = 1.0-t;\n\n    return (cp.x*ut+cp.y*t)*ut+(cp.y*ut+cp.z*t)*t;\n}\n\nfloat bezier(vec4 cp, float t) {\n    float ut = 1.0-t;\n    float a1 = cp.y*ut+cp.z*t;\n\n    return ((cp.x*ut+cp.y*t)*ut+a1*t)*ut+(a1*ut+(cp.z*ut+cp.w*t)*t)*t;\n}\n\n// @todo Remove the `1.0-` here?\nfloat amount(vec2 point, vec2 mid, float limit) {\n    return min(1.0-(length(point-mid)/limit), 1.0);\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit) {\n    return max(0.0, amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, float curve) {\n    return max(0.0, curve*amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec2 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec3 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec4 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nvec4 preAlpha(vec3 color, float alpha) {\n    return vec4(color.rgb*alpha, alpha);\n}\n\nvec4 preAlpha(vec4 color) {\n    return preAlpha(color.rgb, color.a);\n}\n\nconst float frameOffset = 0.25;\n\n/**\n * For every data point, we have two vertices - current and previous state.\n * Every other vertex looks up previous data. In this way, (vertical)\n * neighbours alternate from previous to current state.\n * (Vertical neighbours, because WebGL iterates column-major.)\n *\n * @return State data for the vertex, either current or previous.\n */\n\nvec4 stateAtFrame(vec2 uv, vec2 shape, sampler2D previous, sampler2D current) {\n    float nearIndex = uv.y*shape.y;\n    float offset = fract(nearIndex);\n    vec2 lookup = vec2(uv.x, floor(nearIndex)/shape.y);\n\n    // @note Some systems comlain about this form of texture lookup:\n    // return texture2D(((offset > frameOffset)? current : previous), lookup);\n    return ((offset > frameOffset)?\n            texture2D(current, lookup)\n        :   texture2D(previous, lookup));\n}\n\nvoid main() {\n    vec4 state = stateAtFrame(uv, dataRes, previous, particles);\n\n    if(state.xy != inert) {\n        vec2 pos = state.xy;\n        vec2 vel = state.zw/speedLimit;\n        float speedRate = min(length2(vel)/speedAlpha, 1.0);\n\n        // Color map\n\n        vec4 mappedColor = texture2D(colorMap, uv*geomRes/dataRes);\n\n        mappedColor *= colorMapAlpha;\n\n        // Flow color\n        \n        vec3 alignRGB = vec3(dot(vel, flowAxisR),\n                dot(vel, flowAxisG), dot(vel, flowAxisB));\n\n        vec3 flowAlign = map(mix(alignRGB, alignRGB.gbr*(1.0-flowDecay),\n                    sin(time*flowDecay)),\n                minAlign.rgb, maxAlign.rgb, minColor.rgb, maxColor.rgb);\n\n        vec4 flowAlignedColor = vec4(flowColor.rgb*flowAlign, flowColor.a);\n\n        // Color summation, clamping and pre-multiplying alpha so they don't\n        // cross over\n\n        color = clamp(preAlpha(baseColor), minColor, maxColor)+\n            clamp(preAlpha(mappedColor), minColor, maxColor)+\n            clamp(preAlpha(flowAlignedColor), minColor, maxColor);\n\n        color.a *= speedRate*clamp(vignette(pos, center, 1.0, falloff),\n                        fadeRange.x, fadeRange.y);\n\n        // Position\n        gl_Position = vec4(pos*viewSize, 0.0, 1.0);\n    }\n}\n"
 
 /***/ }),
-/* 130 */
+/* 127 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nvarying vec4 color;\n\nvoid main() {\n    gl_FragColor = color;\n}\n"
 
 /***/ }),
-/* 131 */
+/* 128 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D previous;\nuniform sampler2D data;\n\nuniform vec2 dataRes;\n\nuniform vec2 viewSize;\n\nuniform float time;\nuniform float speedLimit;\nuniform float flowDecay;\n\nattribute vec2 uv;\n\nvarying vec4 color;\n\n/**\n * @requires {float} time The current time in ms\n */\n\nvec4 flow(vec2 vel) {\n    // Faster particles leave a greater influence (opacity).\n    // Linear interpolation - inaccurate for vectors, will it be OK without\n    // sudden turns, or do we need a per-fragment lookup?\n    return vec4(vel, time, length(vel));\n}\n\nvec4 flow(vec2 vel, float speedLimit) {\n    vec4 values = flow(vel);\n\n    return vec4(values.xyz, min(values.a/speedLimit, 1.0));\n}\n\n/**\n * @requires `./head.vert`\n * @requires {function} apply A function applying a `vec4` state into a `vec3`\n *                            color to be drawn.\n */\n\nconst vec2 inert = vec2(-1000000.0);\n\nconst float frameOffset = 0.25;\n\n/**\n * For every data point, we have two vertices - current and previous state.\n * Every other vertex looks up previous data. In this way, (vertical)\n * neighbours alternate from previous to current state.\n * (Vertical neighbours, because WebGL iterates column-major.)\n *\n * @return State data for the vertex, either current or previous.\n */\n\nvec4 stateAtFrame(vec2 uv, vec2 shape, sampler2D previous, sampler2D current) {\n    float nearIndex = uv.y*shape.y;\n    float offset = fract(nearIndex);\n    vec2 lookup = vec2(uv.x, floor(nearIndex)/shape.y);\n\n    // @note Some systems comlain about this form of texture lookup:\n    // return texture2D(((offset > frameOffset)? current : previous), lookup);\n    return ((offset > frameOffset)?\n            texture2D(current, lookup)\n        :   texture2D(previous, lookup));\n}\n\nvoid main() {\n    vec4 state = stateAtFrame(uv, dataRes, previous, data);\n\n    if(state.xy != inert) {\n        gl_Position = vec4(state.xy*viewSize, 1.0, 1.0);\n        color = flow(state.zw, speedLimit);\n    }\n}\n\n"
 
 /***/ }),
-/* 132 */
+/* 129 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nvarying vec4 color;\n\nvoid main() {\n    // @todo SDF from line, to weaken force further away\n    gl_FragColor = color.rgba;\n}\n"
 
 /***/ }),
-/* 133 */
+/* 130 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform vec4 color;\n\nvoid main() {\n    gl_FragColor = color.rgba;\n}\n"
 
 /***/ }),
-/* 134 */
+/* 131 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D view;\nuniform vec2 viewRes;\n\n// #pragma glslify: fxaa = require(glsl-fxaa)\n\nvoid main() {\n    gl_FragColor = texture2D(view, gl_FragCoord.xy/viewRes);\n    // gl_FragColor = fxaa(view, gl_FragCoord.xy, viewRes);\n}\n"
 
 /***/ }),
-/* 135 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25414,25 +24913,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Tendrils `spawnShader` function.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 	
-	var _glFbo = __webpack_require__(90);
+	var _glFbo = __webpack_require__(87);
 	
 	var _glFbo2 = _interopRequireDefault(_glFbo);
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
 	var _glMatrix = __webpack_require__(52);
 	
-	var _aspect = __webpack_require__(127);
+	var _aspect = __webpack_require__(124);
 	
 	var _aspect2 = _interopRequireDefault(_aspect);
 	
-	var _index = __webpack_require__(124);
+	var _index = __webpack_require__(121);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(136);
+	var _index3 = __webpack_require__(133);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -25512,31 +25011,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = PixelSpawner;
 
 /***/ }),
-/* 136 */
+/* 133 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D particles;\nuniform sampler2D spawnData;\n\nuniform vec2 dataRes;\nuniform vec2 geomRes;\nuniform vec2 spawnSize;\n\nuniform vec2 jitter;\nuniform float time;\nuniform float speed;\n\nuniform mat3 spawnMatrix;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\nhighp float random(vec2 co)\n{\n    highp float a = 12.9898;\n    highp float b = 78.233;\n    highp float c = 43758.5453;\n    highp float dt= dot(co.xy ,vec2(a,b));\n    highp float sn= mod(dt,3.14);\n    return fract(sin(sn) * c);\n}\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nvec2 uvToPos(vec2 uv) {\n    return map(uv, uvRange.xy, uvRange.zw, posRange.xy, posRange.zw);\n}\n\nfloat transform(mat2 m, float v) {\n    return (m*vec2(v, 1.0)).x;\n}\n\nvec2 transform(mat3 m, vec2 v) {\n    return (m*vec3(v, 1.0)).xy;\n}\n\nvec3 transform(mat4 m, vec3 v) {\n    return (m*vec4(v, 1.0)).xyz;\n}\n\nconst vec2 flipUV = vec2(1.0, -1.0);\n\nvec2 spawnToPos(vec2 uv) {\n    // Jittering around a UV cell to get rid of boxy scaled sampling artefacts\n    vec2 offset = vec2(mix(-jitter.x, jitter.x, random(uv-1.2345+(time*0.001))),\n            mix(-jitter.y, jitter.y, random(uv+1.2345+(time*0.001))));\n\n    return transform(spawnMatrix, uvToPos(uv+offset)*flipUV*spawnSize);\n}\n\n// `import`-able convenience for setting up a vignette - should be replaced with\n// a proper `uniform`-ed version.\n\nconst vec3 curve = vec3(0.1, 1.0, 1.0);\nconst vec2 mid = vec2(0.5);\nconst float limit = 0.6;\n\n// #pragma glslify: vignette = require(../../filter/pass/vignette, curve = curve, mid = mid, limit = limit)\n\n/**\n * Directly uses a normal image - brightness being speed in a direction defined\n * by the `rgba` channels.\n *\n * @requires {float} time The current time\n */\n\nconst vec4 k = vec4(0.0, -1.0/3.0, 2.0/3.0, -1.0);\nconst float e = 1.0e-10;\n\nvec3 rgb2hsv(vec3 c) {\n    vec4 p = ((c.g < c.b)? vec4(c.bg, k.wz) : vec4(c.gb, k.xy));\n    vec4 q = ((c.r < p.x)? vec4(p.xyw, c.r) : vec4(c.r, p.yzx));\n\n    float d = q.x-min(q.w, q.y);\n\n    return vec3(abs(q.z+(q.w-q.y)/(6.0*d+e)), d/(q.x+e), q.x);\n}\n\nconst float tau = 6.28318530717958647692;\n\nvec2 angleToVec(float rad) {\n    return vec2(cos(rad), sin(rad));\n}\n\nvec4 apply(vec2 uv, vec2 pos, vec4 pixel) {\n    vec3 hsv = rgb2hsv(pixel.rgb);\n\n    return vec4(pos, angleToVec((hsv.r+(time*0.00003))*tau)*hsv.g*hsv.b*pixel.a);\n}\n\n// #pragma glslify: applier = require(./apply/brightest)\n/**\n * @requires {vec2} mid The center of the vignette\n * @requires {float} limit The radius of the vignette\n * @requires {(float|vec2|vec3|vec4)} curve Bezier curve points, shaping falloff\n */\n\n/**\n * Adapted from `bezier`.\n */\n\nfloat bezier(vec2 cp, float t) {\n    return cp.x+(cp.y-cp.x)*t;\n}\n\nfloat bezier(vec3 cp, float t) {\n    float ut = 1.0-t;\n\n    return (cp.x*ut+cp.y*t)*ut+(cp.y*ut+cp.z*t)*t;\n}\n\nfloat bezier(vec4 cp, float t) {\n    float ut = 1.0-t;\n    float a1 = cp.y*ut+cp.z*t;\n\n    return ((cp.x*ut+cp.y*t)*ut+a1*t)*ut+(a1*ut+(cp.z*ut+cp.w*t)*t)*t;\n}\n\n// @todo Remove the `1.0-` here?\nfloat amount(vec2 point, vec2 mid, float limit) {\n    return min(1.0-(length(point-mid)/limit), 1.0);\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit) {\n    return max(0.0, amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, float curve) {\n    return max(0.0, curve*amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec2 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec3 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec4 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nvec4 pass(vec2 uv, vec4 pixel) {\n    return pixel*vignette(uv, mid, limit, curve);\n}\n\n/**\n * A way to easily compose filter passes on the pixel before applying it.\n *\n * @see `../../../filter/`\n * @see `./`\n * @requires {function} pass The filter pass function, given the pixel.\n * @requires {function} apply The apply function, given the result of `pass`.\n */\n\nvec4 compose(vec2 uv, vec2 pos, vec4 pixel) {\n    return apply(uv, pos, pass(uv, pixel));\n}\n\n// #pragma glslify: apply = require(./apply/color, time = time)\n// #pragma glslify: apply = require(./apply/brightest)\n\n/**\n * Directly spawns a particle according to its euivalent position/values in the\n * given texture.\n *\n * @requires {function} apply A function that transforms a `vec4` of data into a\n *                            valid `vec4` state.\n */\n\nvoid main() {\n    /**\n     * @todo I have no idea why this seems to be required here and not in the\n     *       main logic shader... seems to do with the data/geometry size ratio.\n     */\n    // vec2 uv = gl_FragCoord.xy/dataRes;\n    vec2 uv = (gl_FragCoord.xy/dataRes)*(geomRes/dataRes);\n\n    vec4 state = compose(uv, spawnToPos(uv), texture2D(spawnData, uv));\n\n    gl_FragColor = vec4(state.xy, state.zw*speed);\n}\n\n"
 
 /***/ }),
-/* 137 */
+/* 134 */
 /***/ (function(module, exports) {
 
 	module.exports = "/**\n * Tries a number of times to randomly select a pixel scored highest by a given\n * function.\n */\n\nprecision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D particles;\nuniform sampler2D spawnData;\n\nuniform vec2 dataRes;\nuniform vec2 geomRes;\nuniform vec2 spawnSize;\n\nuniform vec2 jitter;\nuniform float time;\nuniform float speed;\n\nuniform mat3 spawnMatrix;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\nhighp float random(vec2 co)\n{\n    highp float a = 12.9898;\n    highp float b = 78.233;\n    highp float c = 43758.5453;\n    highp float dt= dot(co.xy ,vec2(a,b));\n    highp float sn= mod(dt,3.14);\n    return fract(sin(sn) * c);\n}\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nvec2 uvToPos(vec2 uv) {\n    return map(uv, uvRange.xy, uvRange.zw, posRange.xy, posRange.zw);\n}\n\nfloat transform(mat2 m, float v) {\n    return (m*vec2(v, 1.0)).x;\n}\n\nvec2 transform(mat3 m, vec2 v) {\n    return (m*vec3(v, 1.0)).xy;\n}\n\nvec3 transform(mat4 m, vec3 v) {\n    return (m*vec4(v, 1.0)).xyz;\n}\n\nconst vec2 flipUV = vec2(1.0, -1.0);\n\nvec2 spawnToPos(vec2 uv) {\n    // Jittering around a UV cell to get rid of boxy scaled sampling artefacts\n    vec2 offset = vec2(mix(-jitter.x, jitter.x, random(uv-1.2345+(time*0.001))),\n            mix(-jitter.y, jitter.y, random(uv+1.2345+(time*0.001))));\n\n    return transform(spawnMatrix, uvToPos(uv+offset)*flipUV*spawnSize);\n}\n\n// `import`-able convenience for setting up a vignette - should be replaced with\n// a proper `uniform`-ed version.\n\nconst vec3 curve = vec3(0.1, 1.0, 1.0);\nconst vec2 mid = vec2(0.5);\nconst float limit = 0.6;\n\n// #pragma glslify: vignette = require(../../filter/pass/vignette, curve = curve, mid = mid, limit = limit)\n\n/**\n * Directly uses a normal image - brightness being speed in a direction defined\n * by the `rgba` channels.\n *\n * @requires {float} time The current time\n */\n\nconst vec4 k = vec4(0.0, -1.0/3.0, 2.0/3.0, -1.0);\nconst float e = 1.0e-10;\n\nvec3 rgb2hsv(vec3 c) {\n    vec4 p = ((c.g < c.b)? vec4(c.bg, k.wz) : vec4(c.gb, k.xy));\n    vec4 q = ((c.r < p.x)? vec4(p.xyw, c.r) : vec4(c.r, p.yzx));\n\n    float d = q.x-min(q.w, q.y);\n\n    return vec3(abs(q.z+(q.w-q.y)/(6.0*d+e)), d/(q.x+e), q.x);\n}\n\nconst float tau = 6.28318530717958647692;\n\nvec2 angleToVec(float rad) {\n    return vec2(cos(rad), sin(rad));\n}\n\nvec4 apply(vec2 uv, vec2 pos, vec4 pixel) {\n    vec3 hsv = rgb2hsv(pixel.rgb);\n\n    return vec4(pos, angleToVec((hsv.r+(time*0.00003))*tau)*hsv.g*hsv.b*pixel.a);\n}\n\n// #pragma glslify: applier = require(./apply/brightest)\n/**\n * @requires {vec2} mid The center of the vignette\n * @requires {float} limit The radius of the vignette\n * @requires {(float|vec2|vec3|vec4)} curve Bezier curve points, shaping falloff\n */\n\n/**\n * Adapted from `bezier`.\n */\n\nfloat bezier(vec2 cp, float t) {\n    return cp.x+(cp.y-cp.x)*t;\n}\n\nfloat bezier(vec3 cp, float t) {\n    float ut = 1.0-t;\n\n    return (cp.x*ut+cp.y*t)*ut+(cp.y*ut+cp.z*t)*t;\n}\n\nfloat bezier(vec4 cp, float t) {\n    float ut = 1.0-t;\n    float a1 = cp.y*ut+cp.z*t;\n\n    return ((cp.x*ut+cp.y*t)*ut+a1*t)*ut+(a1*ut+(cp.z*ut+cp.w*t)*t)*t;\n}\n\n// @todo Remove the `1.0-` here?\nfloat amount(vec2 point, vec2 mid, float limit) {\n    return min(1.0-(length(point-mid)/limit), 1.0);\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit) {\n    return max(0.0, amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, float curve) {\n    return max(0.0, curve*amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec2 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec3 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec4 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nvec4 pass(vec2 uv, vec4 pixel) {\n    return pixel*vignette(uv, mid, limit, curve);\n}\n\n/**\n * A way to easily compose filter passes on the pixel before applying it.\n *\n * @see `../../../filter/`\n * @see `./`\n * @requires {function} pass The filter pass function, given the pixel.\n * @requires {function} apply The apply function, given the result of `pass`.\n */\n\nvec4 compose(vec2 uv, vec2 pos, vec4 pixel) {\n    return apply(uv, pos, pass(uv, pixel));\n}\n\n// #pragma glslify: apply = require(./apply/color, time = time)\n// #pragma glslify: apply = require(./apply/brightest)\n\n/**\n * Pick the Highest velocity.\n * Uses the same data structure as the particles.\n */\n\nfloat length2(vec2 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec3 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec4 vec) {\n    return dot(vec, vec);\n}\n\nfloat test(vec4 data) {\n    return length2(data.zw);\n}\n\nconst float samples = 6.0;\n\n/**\n * Tries a number of times to randomly select a pixel scored highest by a given\n * function.\n *\n * @requires {function} apply A function that transforms a `vec4` of data into a\n *                            valid `vec4` state.\n * @requires {function} test A function that returns a float value for a given\n *                           `vec4` state; greater values win the comparison.\n */\n\n// Over 1 favours changing to new data; under 1 favours current data.\nuniform float bias;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\n\nvec4 pick(vec4 current, vec4 next) {\n    return ((test(current) > bias*test(next))? current : next);\n}\n\nvoid main() {\n    /**\n     * @todo This was needed in `./direct-main.frag` - is it needed here too?\n     */\n    vec2 uv = gl_FragCoord.xy/dataRes;\n    // vec2 uv = (gl_FragCoord.xy/dataRes)*(geomRes/dataRes);\n    \n    vec4 state = texture2D(particles, uv);\n\n    vec4 baseSeed = state+vec4(uv, uv)+vec4(1.2345+(time*0.001));\n\n    for(float n = 0.0; n < samples; n += 1.0) {\n        vec4 seed = baseSeed+vec4(n);\n        vec2 spawnUV = mod(vec2(random(seed.xy), random(seed.zw)), 1.0);\n        vec4 other = compose(spawnUV, spawnToPos(spawnUV),\n                texture2D(spawnData, spawnUV));\n\n        state = pick(state, vec4(other.xy, other.zw*speed));\n    }\n\n    gl_FragColor = state;\n}\n\n"
 
 /***/ }),
-/* 138 */
+/* 135 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D particles;\nuniform sampler2D spawnData;\n\nuniform vec2 dataRes;\nuniform vec2 geomRes;\nuniform vec2 spawnSize;\n\nuniform vec2 jitter;\nuniform float time;\nuniform float speed;\n\nuniform mat3 spawnMatrix;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\nhighp float random(vec2 co)\n{\n    highp float a = 12.9898;\n    highp float b = 78.233;\n    highp float c = 43758.5453;\n    highp float dt= dot(co.xy ,vec2(a,b));\n    highp float sn= mod(dt,3.14);\n    return fract(sin(sn) * c);\n}\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nvec2 uvToPos(vec2 uv) {\n    return map(uv, uvRange.xy, uvRange.zw, posRange.xy, posRange.zw);\n}\n\nfloat transform(mat2 m, float v) {\n    return (m*vec2(v, 1.0)).x;\n}\n\nvec2 transform(mat3 m, vec2 v) {\n    return (m*vec3(v, 1.0)).xy;\n}\n\nvec3 transform(mat4 m, vec3 v) {\n    return (m*vec4(v, 1.0)).xyz;\n}\n\nconst vec2 flipUV = vec2(1.0, -1.0);\n\nvec2 spawnToPos(vec2 uv) {\n    // Jittering around a UV cell to get rid of boxy scaled sampling artefacts\n    vec2 offset = vec2(mix(-jitter.x, jitter.x, random(uv-1.2345+(time*0.001))),\n            mix(-jitter.y, jitter.y, random(uv+1.2345+(time*0.001))));\n\n    return transform(spawnMatrix, uvToPos(uv+offset)*flipUV*spawnSize);\n}\n\nuniform float flowDecay;\n\n/**\n * Use the pixel position, and the particle velocity.\n * Same data structure as the flow.\n *\n * @requires {float} time The current time\n * @requires {float} decay The rate of decay of the flow over time\n */\n\n// Time/decay\n\nvec2 get(vec3 data, float time, float decay) {\n    return data.xy*max(0.0, 1.0-((time-data.z)*decay));\n}\n\nvec2 get(vec4 data, float time, float decay) {\n    return get(data.xyz, time, decay);\n}\n\n// No time/decay\n\nvec2 get(vec2 data) {\n    return data.xy;\n}\n\nvec2 get(vec3 data) {\n    return get(data.xy);\n}\n\nvec2 get(vec4 data) {\n    return get(data.xy);\n}\n\nvec4 apply(vec2 uv, vec2 pos, vec4 pixel) {\n    return vec4(pos, get(pixel, time, flowDecay));\n}\n\n/**\n * Pick the Highest velocity.\n * Uses the same data structure as the particles.\n */\n\nfloat length2(vec2 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec3 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec4 vec) {\n    return dot(vec, vec);\n}\n\nfloat test(vec4 data) {\n    return length2(data.zw);\n}\n\nconst float samples = 5.0;\n\n/**\n * Tries a number of times to randomly select a pixel scored highest by a given\n * function.\n *\n * @requires {function} apply A function that transforms a `vec4` of data into a\n *                            valid `vec4` state.\n * @requires {function} test A function that returns a float value for a given\n *                           `vec4` state; greater values win the comparison.\n */\n\n// Over 1 favours changing to new data; under 1 favours current data.\nuniform float bias;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\n\nvec4 pick(vec4 current, vec4 next) {\n    return ((test(current) > bias*test(next))? current : next);\n}\n\nvoid main() {\n    /**\n     * @todo This was needed in `./direct-main.frag` - is it needed here too?\n     */\n    vec2 uv = gl_FragCoord.xy/dataRes;\n    // vec2 uv = (gl_FragCoord.xy/dataRes)*(geomRes/dataRes);\n    \n    vec4 state = texture2D(particles, uv);\n\n    vec4 baseSeed = state+vec4(uv, uv)+vec4(1.2345+(time*0.001));\n\n    for(float n = 0.0; n < samples; n += 1.0) {\n        vec4 seed = baseSeed+vec4(n);\n        vec2 spawnUV = mod(vec2(random(seed.xy), random(seed.zw)), 1.0);\n        vec4 other = apply(spawnUV, spawnToPos(spawnUV),\n                texture2D(spawnData, spawnUV));\n\n        state = pick(state, vec4(other.xy, other.zw*speed));\n    }\n\n    gl_FragColor = state;\n}\n\n"
 
 /***/ }),
-/* 139 */
+/* 136 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D particles;\nuniform sampler2D spawnData;\n\nuniform vec2 dataRes;\nuniform vec2 geomRes;\nuniform vec2 spawnSize;\n\nuniform vec2 jitter;\nuniform float time;\nuniform float speed;\n\nuniform mat3 spawnMatrix;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\nhighp float random(vec2 co)\n{\n    highp float a = 12.9898;\n    highp float b = 78.233;\n    highp float c = 43758.5453;\n    highp float dt= dot(co.xy ,vec2(a,b));\n    highp float sn= mod(dt,3.14);\n    return fract(sin(sn) * c);\n}\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nvec2 uvToPos(vec2 uv) {\n    return map(uv, uvRange.xy, uvRange.zw, posRange.xy, posRange.zw);\n}\n\nfloat transform(mat2 m, float v) {\n    return (m*vec2(v, 1.0)).x;\n}\n\nvec2 transform(mat3 m, vec2 v) {\n    return (m*vec3(v, 1.0)).xy;\n}\n\nvec3 transform(mat4 m, vec3 v) {\n    return (m*vec4(v, 1.0)).xyz;\n}\n\nconst vec2 flipUV = vec2(1.0, -1.0);\n\nvec2 spawnToPos(vec2 uv) {\n    // Jittering around a UV cell to get rid of boxy scaled sampling artefacts\n    vec2 offset = vec2(mix(-jitter.x, jitter.x, random(uv-1.2345+(time*0.001))),\n            mix(-jitter.y, jitter.y, random(uv+1.2345+(time*0.001))));\n\n    return transform(spawnMatrix, uvToPos(uv+offset)*flipUV*spawnSize);\n}\n\n// `import`-able convenience for setting up a vignette - should be replaced with\n// a proper `uniform`-ed version.\n\nconst vec3 curve = vec3(0.1, 1.0, 1.0);\nconst vec2 mid = vec2(0.5);\nconst float limit = 0.6;\n\n// #pragma glslify: vignette = require(../../filter/pass/vignette, curve = curve, mid = mid, limit = limit)\n\n/**\n * Identity\n */\nvec4 apply(vec2 uv, vec2 pos, vec4 pixel) {\n    return pixel;\n}\n\n/**\n * @requires {vec2} mid The center of the vignette\n * @requires {float} limit The radius of the vignette\n * @requires {(float|vec2|vec3|vec4)} curve Bezier curve points, shaping falloff\n */\n\n/**\n * Adapted from `bezier`.\n */\n\nfloat bezier(vec2 cp, float t) {\n    return cp.x+(cp.y-cp.x)*t;\n}\n\nfloat bezier(vec3 cp, float t) {\n    float ut = 1.0-t;\n\n    return (cp.x*ut+cp.y*t)*ut+(cp.y*ut+cp.z*t)*t;\n}\n\nfloat bezier(vec4 cp, float t) {\n    float ut = 1.0-t;\n    float a1 = cp.y*ut+cp.z*t;\n\n    return ((cp.x*ut+cp.y*t)*ut+a1*t)*ut+(a1*ut+(cp.z*ut+cp.w*t)*t)*t;\n}\n\n// @todo Remove the `1.0-` here?\nfloat amount(vec2 point, vec2 mid, float limit) {\n    return min(1.0-(length(point-mid)/limit), 1.0);\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit) {\n    return max(0.0, amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, float curve) {\n    return max(0.0, curve*amount(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec2 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec3 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec4 curve) {\n    return max(0.0, bezier(curve, amount(point, mid, limit)));\n}\n\nvec4 pass(vec2 uv, vec4 pixel) {\n    return pixel*vignette(uv, mid, limit, curve);\n}\n\n/**\n * A way to easily compose filter passes on the pixel before applying it.\n *\n * @see `../../../filter/`\n * @see `./`\n * @requires {function} pass The filter pass function, given the pixel.\n * @requires {function} apply The apply function, given the result of `pass`.\n */\n\nvec4 compose(vec2 uv, vec2 pos, vec4 pixel) {\n    return apply(uv, pos, pass(uv, pixel));\n}\n\n/**\n * Pick the Highest velocity.\n * Uses the same data structure as the particles.\n */\n\nfloat length2(vec2 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec3 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec4 vec) {\n    return dot(vec, vec);\n}\n\nfloat test(vec4 data) {\n    return length2(data.zw);\n}\n\nconst float samples = 2.0;\n\n/**\n * Tries a number of times to randomly select a pixel scored highest by a given\n * function.\n *\n * @requires {function} apply A function that transforms a `vec4` of data into a\n *                            valid `vec4` state.\n * @requires {function} test A function that returns a float value for a given\n *                           `vec4` state; greater values win the comparison.\n */\n\n// Over 1 favours changing to new data; under 1 favours current data.\nuniform float bias;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\n\nvec4 pick(vec4 current, vec4 next) {\n    return ((test(current) > bias*test(next))? current : next);\n}\n\nvoid main() {\n    /**\n     * @todo This was needed in `./direct-main.frag` - is it needed here too?\n     */\n    vec2 uv = gl_FragCoord.xy/dataRes;\n    // vec2 uv = (gl_FragCoord.xy/dataRes)*(geomRes/dataRes);\n    \n    vec4 state = texture2D(particles, uv);\n\n    vec4 baseSeed = state+vec4(uv, uv)+vec4(1.2345+(time*0.001));\n\n    for(float n = 0.0; n < samples; n += 1.0) {\n        vec4 seed = baseSeed+vec4(n);\n        vec2 spawnUV = mod(vec2(random(seed.xy), random(seed.zw)), 1.0);\n        vec4 other = compose(spawnUV, spawnToPos(spawnUV),\n                texture2D(spawnData, spawnUV));\n\n        state = pick(state, vec4(other.xy, other.zw*speed));\n    }\n\n    gl_FragColor = state;\n}\n\n"
 
 /***/ }),
-/* 140 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25546,11 +25045,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.spawnBall = exports.defaults = undefined;
 	
-	var _init = __webpack_require__(141);
+	var _init = __webpack_require__(138);
 	
 	var init = _interopRequireWildcard(_init);
 	
-	var _index = __webpack_require__(143);
+	var _index = __webpack_require__(140);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
@@ -25577,7 +25076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = spawnBall;
 
 /***/ }),
-/* 141 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25587,15 +25086,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.spawner = exports.defaults = undefined;
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _index = __webpack_require__(124);
+	var _index = __webpack_require__(121);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(142);
+	var _index3 = __webpack_require__(139);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -25632,19 +25131,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = spawner;
 
 /***/ }),
-/* 142 */
+/* 139 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nconst vec2 inert = vec2(-1000000.0);\n\nconst vec2 pos = vec2(inert);\nconst vec2 vel = vec2(0.0);\n\nvoid main() {\n    gl_FragColor = vec4(pos, vel);\n}\n"
 
 /***/ }),
-/* 143 */
+/* 140 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform float radius;\nuniform float speed;\n\nhighp float random(vec2 co)\n{\n    highp float a = 12.9898;\n    highp float b = 78.233;\n    highp float c = 43758.5453;\n    highp float dt= dot(co.xy ,vec2(a,b));\n    highp float sn= mod(dt,3.14);\n    return fract(sin(sn) * c);\n}\n\nvec2 angleToVec(float rad) {\n    return vec2(cos(rad), sin(rad));\n}\n\nconst float tau = 6.28318530717958647692;\n\nvoid main() {\n    vec4 randoms = vec4(random((gl_FragCoord.xy*1.7654)+2.3675),\n        random((gl_FragCoord.xy*1.23494)+0.36434),\n        random((gl_FragCoord.xy*0.327789)+3.498787),\n        random((gl_FragCoord.xy*9.0374)+0.2773));\n\n    gl_FragColor = vec4(angleToVec(randoms.x*tau)*randoms.y*radius,\n        angleToVec(randoms.z*tau)*randoms.w*speed);\n}\n"
 
 /***/ }),
-/* 144 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25658,29 +25157,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _glGeometry = __webpack_require__(108);
+	var _glGeometry = __webpack_require__(105);
 	
 	var _glGeometry2 = _interopRequireDefault(_glGeometry);
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
 	var _glMatrix = __webpack_require__(52);
 	
-	var _pixels = __webpack_require__(135);
+	var _pixels = __webpack_require__(132);
 	
 	var spawnPixels = _interopRequireWildcard(_pixels);
 	
-	var _brightSample = __webpack_require__(145);
+	var _brightSample = __webpack_require__(142);
 	
 	var _brightSample2 = _interopRequireDefault(_brightSample);
 	
-	var _index = __webpack_require__(146);
+	var _index = __webpack_require__(143);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(147);
+	var _index3 = __webpack_require__(144);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -25807,25 +25306,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = GeometrySpawner;
 
 /***/ }),
-/* 145 */
+/* 142 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D particles;\nuniform sampler2D spawnData;\n\nuniform vec2 dataRes;\nuniform vec2 geomRes;\nuniform vec2 spawnSize;\n\nuniform vec2 jitter;\nuniform float time;\nuniform float speed;\n\nuniform mat3 spawnMatrix;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\nhighp float random(vec2 co)\n{\n    highp float a = 12.9898;\n    highp float b = 78.233;\n    highp float c = 43758.5453;\n    highp float dt= dot(co.xy ,vec2(a,b));\n    highp float sn= mod(dt,3.14);\n    return fract(sin(sn) * c);\n}\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nvec2 uvToPos(vec2 uv) {\n    return map(uv, uvRange.xy, uvRange.zw, posRange.xy, posRange.zw);\n}\n\nfloat transform(mat2 m, float v) {\n    return (m*vec2(v, 1.0)).x;\n}\n\nvec2 transform(mat3 m, vec2 v) {\n    return (m*vec3(v, 1.0)).xy;\n}\n\nvec3 transform(mat4 m, vec3 v) {\n    return (m*vec4(v, 1.0)).xyz;\n}\n\nconst vec2 flipUV = vec2(1.0, -1.0);\n\nvec2 spawnToPos(vec2 uv) {\n    // Jittering around a UV cell to get rid of boxy scaled sampling artefacts\n    vec2 offset = vec2(mix(-jitter.x, jitter.x, random(uv-1.2345+(time*0.001))),\n            mix(-jitter.y, jitter.y, random(uv+1.2345+(time*0.001))));\n\n    return transform(spawnMatrix, uvToPos(uv+offset)*flipUV*spawnSize);\n}\n\n/**\n * Directly uses a normal image - brightness being speed in a random direction.\n */\n\nfloat luma(vec3 color) {\n  return dot(color, vec3(0.299, 0.587, 0.114));\n}\n\nfloat luma(vec4 color) {\n  return dot(color.rgb, vec3(0.299, 0.587, 0.114));\n}\n\nconst float tau = 6.28318530717958647692;\n\nvec2 angleToVec(float rad) {\n    return vec2(cos(rad), sin(rad));\n}\n\nvec4 apply(vec2 uv, vec2 pos, vec4 pixel) {\n    return vec4(pos,\n        angleToVec(mod(random(uv*dot(pixel.rg, pixel.ba)), 1.0)*tau)*\n            luma(pixel)*pixel.a);\n}\n\n/**\n * Pick the Highest velocity.\n * Uses the same data structure as the particles.\n */\n\nfloat length2(vec2 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec3 vec) {\n    return dot(vec, vec);\n}\n\nfloat length2(vec4 vec) {\n    return dot(vec, vec);\n}\n\nfloat test(vec4 data) {\n    return length2(data.zw);\n}\n\nconst float samples = 6.0;\n\n/**\n * Tries a number of times to randomly select a pixel scored highest by a given\n * function.\n *\n * @requires {function} apply A function that transforms a `vec4` of data into a\n *                            valid `vec4` state.\n * @requires {function} test A function that returns a float value for a given\n *                           `vec4` state; greater values win the comparison.\n */\n\n// Over 1 favours changing to new data; under 1 favours current data.\nuniform float bias;\n\n/**\n * @todo Some bug with `glslify-import` & sons breaks `node_modules` aliased\n *       `require`s in `import`ed files, so we need to do it the looooooong way.\n */\n// #pragma glslify: random = require(glsl-random)\n\nvec4 pick(vec4 current, vec4 next) {\n    return ((test(current) > bias*test(next))? current : next);\n}\n\nvoid main() {\n    /**\n     * @todo This was needed in `./direct-main.frag` - is it needed here too?\n     */\n    vec2 uv = gl_FragCoord.xy/dataRes;\n    // vec2 uv = (gl_FragCoord.xy/dataRes)*(geomRes/dataRes);\n    \n    vec4 state = texture2D(particles, uv);\n\n    vec4 baseSeed = state+vec4(uv, uv)+vec4(1.2345+(time*0.001));\n\n    for(float n = 0.0; n < samples; n += 1.0) {\n        vec4 seed = baseSeed+vec4(n);\n        vec2 spawnUV = mod(vec2(random(seed.xy), random(seed.zw)), 1.0);\n        vec4 other = apply(spawnUV, spawnToPos(spawnUV),\n                texture2D(spawnData, spawnUV));\n\n        state = pick(state, vec4(other.xy, other.zw*speed));\n    }\n\n    gl_FragColor = state;\n}\n\n"
 
 /***/ }),
-/* 146 */
+/* 143 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nattribute vec2 position;\n\nuniform vec2 viewSize;\n\nvoid main() {\n    gl_Position = vec4(position*viewSize, 0.0, 1.0);\n}\n"
 
 /***/ }),
-/* 147 */
+/* 144 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform vec4 color;\n\nvoid main() {\n    gl_FragColor = color;\n}\n"
 
 /***/ }),
-/* 148 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25842,19 +25341,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * time, to trigger outputs.
 	 */
 	
-	var _utils = __webpack_require__(86);
+	var _utils = __webpack_require__(83);
 	
-	var _each = __webpack_require__(149);
+	var _each = __webpack_require__(146);
 	
 	var _each2 = _interopRequireDefault(_each);
 	
-	var _data = __webpack_require__(151);
+	var _data = __webpack_require__(148);
 	
 	var _data2 = _interopRequireDefault(_data);
 	
-	var _dataLog = __webpack_require__(152);
+	var _dataLog = __webpack_require__(149);
 	
-	var _analyse = __webpack_require__(159);
+	var _analyse = __webpack_require__(156);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25949,7 +25448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = AudioTrigger;
 
 /***/ }),
-/* 149 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25959,7 +25458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.each = exports.eachList = undefined;
 	
-	var _iterable = __webpack_require__(150);
+	var _iterable = __webpack_require__(147);
 	
 	var _iterable2 = _interopRequireDefault(_iterable);
 	
@@ -25993,7 +25492,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = each;
 
 /***/ }),
-/* 150 */
+/* 147 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -26008,7 +25507,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = iterable;
 
 /***/ }),
-/* 151 */
+/* 148 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -26038,7 +25537,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = makeData;
 
 /***/ }),
-/* 152 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26048,7 +25547,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.makeOrderLog = exports.makeLog = undefined;
 	
-	var _times = __webpack_require__(153);
+	var _times = __webpack_require__(150);
 	
 	var _times2 = _interopRequireDefault(_times);
 	
@@ -26098,12 +25597,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = makeOrderLog;
 
 /***/ }),
-/* 153 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseTimes = __webpack_require__(154),
-	    castFunction = __webpack_require__(155),
-	    toInteger = __webpack_require__(157);
+	var baseTimes = __webpack_require__(151),
+	    castFunction = __webpack_require__(152),
+	    toInteger = __webpack_require__(154);
 	
 	/** Used as references for various `Number` constants. */
 	var MAX_SAFE_INTEGER = 9007199254740991;
@@ -26155,7 +25654,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 154 */
+/* 151 */
 /***/ (function(module, exports) {
 
 	/**
@@ -26181,10 +25680,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 155 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var identity = __webpack_require__(156);
+	var identity = __webpack_require__(153);
 	
 	/**
 	 * Casts `value` to `identity` if it's not a function.
@@ -26201,7 +25700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 156 */
+/* 153 */
 /***/ (function(module, exports) {
 
 	/**
@@ -26228,10 +25727,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 157 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var toFinite = __webpack_require__(158);
+	var toFinite = __webpack_require__(155);
 	
 	/**
 	 * Converts `value` to an integer.
@@ -26270,7 +25769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 158 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var toNumber = __webpack_require__(37);
@@ -26318,7 +25817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 159 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26329,13 +25828,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.meanWeight = exports.mean = exports.sumWeight = exports.sum = exports.peakPos = exports.peak = exports.logRates = undefined;
 	exports.orderLogRates = orderLogRates;
 	
-	var _euler = __webpack_require__(160);
+	var _euler = __webpack_require__(157);
 	
-	var _map = __webpack_require__(161);
+	var _map = __webpack_require__(158);
 	
-	var _reduce = __webpack_require__(162);
+	var _reduce = __webpack_require__(159);
 	
-	var _utils = __webpack_require__(86);
+	var _utils = __webpack_require__(83);
 	
 	// Use them to derive higher-order info (velocity, acceleration, force, jerk...)
 	
@@ -26414,7 +25913,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 160 */
+/* 157 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -26450,7 +25949,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = euler;
 
 /***/ }),
-/* 161 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26460,9 +25959,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.map = exports.mapList = undefined;
 	
-	var _reduce = __webpack_require__(162);
+	var _reduce = __webpack_require__(159);
 	
-	var _iterable = __webpack_require__(150);
+	var _iterable = __webpack_require__(147);
 	
 	var _iterable2 = _interopRequireDefault(_iterable);
 	
@@ -26499,7 +25998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = map;
 
 /***/ }),
-/* 162 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26509,7 +26008,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.reduce = exports.reduceList = undefined;
 	
-	var _iterable = __webpack_require__(150);
+	var _iterable = __webpack_require__(147);
 	
 	var _iterable2 = _interopRequireDefault(_iterable);
 	
@@ -26541,7 +26040,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = reduce;
 
 /***/ }),
-/* 163 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26560,21 +26059,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/* global Float32Array */
 	
-	var _glTexture2d = __webpack_require__(91);
+	var _glTexture2d = __webpack_require__(88);
 	
 	var _glTexture2d2 = _interopRequireDefault(_glTexture2d);
 	
-	var _ndarray = __webpack_require__(92);
+	var _ndarray = __webpack_require__(89);
 	
 	var _ndarray2 = _interopRequireDefault(_ndarray);
 	
-	var _isNumber = __webpack_require__(164);
+	var _isNumber = __webpack_require__(161);
 	
 	var _isNumber2 = _interopRequireDefault(_isNumber);
 	
-	var _map = __webpack_require__(161);
+	var _map = __webpack_require__(158);
 	
-	var _utils = __webpack_require__(165);
+	var _utils = __webpack_require__(162);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -26644,7 +26143,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = AudioTexture;
 
 /***/ }),
-/* 164 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var baseGetTag = __webpack_require__(39),
@@ -26688,7 +26187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 165 */
+/* 162 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -26707,7 +26206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 166 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26721,11 +26220,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Convenience wrapper for a collection of flow lines.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 	
-	var _ = __webpack_require__(167);
+	var _ = __webpack_require__(164);
 	
 	var _2 = _interopRequireDefault(_);
 	
-	var _reduce = __webpack_require__(162);
+	var _reduce = __webpack_require__(159);
 	
 	var _reduce2 = _interopRequireDefault(_reduce);
 	
@@ -26765,7 +26264,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = FlowLines;
 
 /***/ }),
-/* 167 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26784,15 +26283,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *       especially over short gaps.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 	
-	var _line2 = __webpack_require__(168);
+	var _line2 = __webpack_require__(165);
 	
 	var _line3 = _interopRequireDefault(_line2);
 	
-	var _index = __webpack_require__(178);
+	var _index = __webpack_require__(175);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(179);
+	var _index3 = __webpack_require__(176);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -26951,7 +26450,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = FlowLine;
 
 /***/ }),
-/* 168 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26969,27 +26468,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/* global Float32Array */
 	
-	var _glGeometry = __webpack_require__(108);
+	var _glGeometry = __webpack_require__(105);
 	
 	var _glGeometry2 = _interopRequireDefault(_glGeometry);
 	
-	var _polylineNormals = __webpack_require__(169);
+	var _polylineNormals = __webpack_require__(166);
 	
 	var _polylineNormals2 = _interopRequireDefault(_polylineNormals);
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _each = __webpack_require__(149);
+	var _each = __webpack_require__(146);
 	
 	var _each2 = _interopRequireDefault(_each);
 	
-	var _index = __webpack_require__(176);
+	var _index = __webpack_require__(173);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(177);
+	var _index3 = __webpack_require__(174);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -27173,10 +26672,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Line;
 
 /***/ }),
-/* 169 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var util = __webpack_require__(170)
+	var util = __webpack_require__(167)
 	
 	var lineA = [0, 0]
 	var lineB = [0, 0]
@@ -27245,14 +26744,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 170 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var add = __webpack_require__(171)
-	var set = __webpack_require__(172)
-	var normalize = __webpack_require__(173)
-	var subtract = __webpack_require__(174)
-	var dot = __webpack_require__(175)
+	var add = __webpack_require__(168)
+	var set = __webpack_require__(169)
+	var normalize = __webpack_require__(170)
+	var subtract = __webpack_require__(171)
+	var dot = __webpack_require__(172)
 	
 	var tmp = [0, 0]
 	
@@ -27283,7 +26782,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 171 */
+/* 168 */
 /***/ (function(module, exports) {
 
 	module.exports = add
@@ -27303,7 +26802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 172 */
+/* 169 */
 /***/ (function(module, exports) {
 
 	module.exports = set
@@ -27323,7 +26822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 173 */
+/* 170 */
 /***/ (function(module, exports) {
 
 	module.exports = normalize
@@ -27349,7 +26848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 174 */
+/* 171 */
 /***/ (function(module, exports) {
 
 	module.exports = subtract
@@ -27369,7 +26868,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 175 */
+/* 172 */
 /***/ (function(module, exports) {
 
 	module.exports = dot
@@ -27386,31 +26885,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 176 */
+/* 173 */
 /***/ (function(module, exports) {
 
 	module.exports = "/**\n * Drawing lines in a vertex shader, from https://mattdesl.svbtle.com/drawing-lines-is-hard#expanding-in-a-vertex-shader_2\n * Pushes a point along its normal by its radius.\n */\n\nprecision highp float;\n#define GLSLIFY 1\n\nattribute vec2 position;\n\nuniform vec2 viewSize;\n\nattribute vec2 normal;\nattribute float miter;\n\nuniform float rad;\n\nvarying float sdf;\n\n/**\n * Drawing lines, from https://mattdesl.svbtle.com/drawing-lines-is-hard#expanding-in-a-vertex-shader_2\n * Pushes a point along its normal by its radius, in the direction of miter.\n */\n\nvec2 expand(vec2 position, vec2 normal, float rad, float miter) {\n    return position+(normal*rad*miter);\n}\n\nvoid main() {\n    vec2 pos = expand(position, normal, rad, miter);\n\n    sdf = sign(miter);\n\n    gl_Position = vec4(pos*viewSize, 0.0, 1.0);\n}\n"
 
 /***/ }),
-/* 177 */
+/* 174 */
 /***/ (function(module, exports) {
 
 	module.exports = "/**\n * For a smooth line, check distance from line per-fragment.\n */\n\nprecision highp float;\n#define GLSLIFY 1\n\nuniform vec4 color;\n\nvarying float sdf;\n\nvoid main() {\n    gl_FragColor = vec4(color.rgb, color.a-abs(sdf));\n}\n"
 
 /***/ }),
-/* 178 */
+/* 175 */
 /***/ (function(module, exports) {
 
 	module.exports = "/**\n * Drawing lines in a vertex shader, from https://mattdesl.svbtle.com/drawing-lines-is-hard#expanding-in-a-vertex-shader_2\n * Pushes a point along its normal by its radius.\n */\n\nprecision highp float;\n#define GLSLIFY 1\n\nattribute vec2 position;\n\nuniform vec2 viewSize;\n\nattribute vec2 normal;\nattribute float miter;\n\nuniform float rad;\n\nuniform float speed;\nuniform float speedLimit;\n// uniform float time;\n\nattribute vec2 previous;\nattribute float time;\nattribute float dt;\n\nvarying vec4 values;\nvarying vec2 crest;\nvarying float sdf;\n\n/**\n * @requires {float} time The current time in ms\n */\n\nvec4 flow(vec2 vel) {\n    // Faster particles leave a greater influence (opacity).\n    // Linear interpolation - inaccurate for vectors, will it be OK without\n    // sudden turns, or do we need a per-fragment lookup?\n    return vec4(vel, time, length(vel));\n}\n\nvec4 flow(vec2 vel, float speedLimit) {\n    vec4 values = flow(vel);\n\n    return vec4(values.xyz, min(values.a/speedLimit, 1.0));\n}\n\n// #pragma glslify: flow = require(../flow/apply/screen, time = time, flowDecay = 0.001)\n\nvec2 perp(vec2 vec) {\n    return vec2(-vec.y, vec.x);\n}\n\nvec2 perp(vec2 vec, bool anti) {\n    return ((anti)? vec2(vec.y, -vec.x) : perp(vec));\n}\n\n/**\n * Drawing lines, from https://mattdesl.svbtle.com/drawing-lines-is-hard#expanding-in-a-vertex-shader_2\n * Pushes a point along its normal by its radius, in the direction of miter.\n */\n\nvec2 expand(vec2 position, vec2 normal, float rad, float miter) {\n    return position+(normal*rad*miter);\n}\n\nvoid main() {\n    sdf = sign(miter);\n\n    float rate = speed/max(dt, 1.0);\n\n    // @note For some reason, using these have different effects.\n    vec2 vel = (position-previous)*rate;\n    // vec2 vel = perp(normal, true)*length(position-previous)*rate;\n\n    values = flow(vel, speedLimit);\n\n    crest = normal*miter;\n\n    vec2 vert = expand(position, normal, rad*values.a, miter);\n\n    gl_Position = vec4(vert*viewSize, 0.0, 1.0);\n}\n"
 
 /***/ }),
-/* 179 */
+/* 176 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\n// Where the crest limit is (0 is the path direction, 1 is perpendicular/away).\nuniform float crestShape;\n\nvarying vec4 values;\nvarying vec2 crest;\nvarying float sdf;\n\nvoid main() {\n    float d = abs(sdf);\n    float speed = length(values.rg)*(1.0-d);\n\n    vec2 vel = normalize(mix(values.rg, crest, d*crestShape))*speed;\n\n    gl_FragColor = vec4(vel, values.b, values.a-d);\n}\n"
 
 /***/ }),
-/* 180 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27425,23 +26924,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Players and timelines can be combined, nested, and played in parallel.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 	
-	var _timeline = __webpack_require__(181);
+	var _timeline = __webpack_require__(178);
 	
 	var _timeline2 = _interopRequireDefault(_timeline);
 	
-	var _tween = __webpack_require__(185);
+	var _tween = __webpack_require__(182);
 	
 	var _tween2 = _interopRequireDefault(_tween);
 	
-	var _each2 = __webpack_require__(149);
+	var _each2 = __webpack_require__(146);
 	
 	var _each3 = _interopRequireDefault(_each2);
 	
-	var _reduce = __webpack_require__(162);
+	var _reduce = __webpack_require__(159);
 	
 	var _reduce2 = _interopRequireDefault(_reduce);
 	
-	var _map = __webpack_require__(161);
+	var _map = __webpack_require__(158);
 	
 	var _map2 = _interopRequireDefault(_map);
 	
@@ -27620,7 +27119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Player;
 
 /***/ }),
-/* 181 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27638,23 +27137,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _clamp2 = _interopRequireDefault(_clamp);
 	
-	var _frame2 = __webpack_require__(182);
+	var _frame2 = __webpack_require__(179);
 	
 	var _frame3 = _interopRequireDefault(_frame2);
 	
-	var _joinCurve = __webpack_require__(183);
+	var _joinCurve = __webpack_require__(180);
 	
 	var _joinCurve2 = _interopRequireDefault(_joinCurve);
 	
-	var _each = __webpack_require__(149);
+	var _each = __webpack_require__(146);
 	
 	var _each2 = _interopRequireDefault(_each);
 	
-	var _filter = __webpack_require__(184);
+	var _filter = __webpack_require__(181);
 	
 	var _filter2 = _interopRequireDefault(_filter);
 	
-	var _iterable = __webpack_require__(150);
+	var _iterable = __webpack_require__(147);
 	
 	var _iterable2 = _interopRequireDefault(_iterable);
 	
@@ -28172,7 +27671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Timeline;
 
 /***/ }),
-/* 182 */
+/* 179 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -28189,7 +27688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = frame;
 
 /***/ }),
-/* 183 */
+/* 180 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -28210,7 +27709,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = join;
 
 /***/ }),
-/* 184 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28220,9 +27719,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.filter = exports.filterList = undefined;
 	
-	var _reduce = __webpack_require__(162);
+	var _reduce = __webpack_require__(159);
 	
-	var _iterable = __webpack_require__(150);
+	var _iterable = __webpack_require__(147);
 	
 	var _iterable2 = _interopRequireDefault(_iterable);
 	
@@ -28260,7 +27759,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = filter;
 
 /***/ }),
-/* 185 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28270,19 +27769,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.tween = exports.tweenProps = exports.tweenValue = undefined;
 	
-	var _lerp = __webpack_require__(186);
+	var _lerp = __webpack_require__(183);
 	
 	var _lerp2 = _interopRequireDefault(_lerp);
 	
-	var _bezier = __webpack_require__(187);
+	var _bezier = __webpack_require__(184);
 	
 	var _bezier2 = _interopRequireDefault(_bezier);
 	
-	var _isNumber = __webpack_require__(164);
+	var _isNumber = __webpack_require__(161);
 	
 	var _isNumber2 = _interopRequireDefault(_isNumber);
 	
-	var _map = __webpack_require__(161);
+	var _map = __webpack_require__(158);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28332,7 +27831,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = tween;
 
 /***/ }),
-/* 186 */
+/* 183 */
 /***/ (function(module, exports) {
 
 	function lerp(v0, v1, t) {
@@ -28341,7 +27840,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = lerp
 
 /***/ }),
-/* 187 */
+/* 184 */
 /***/ (function(module, exports) {
 
 	var cache = {
@@ -28418,7 +27917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 188 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28434,21 +27933,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Blend textures into a target
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _map = __webpack_require__(161);
+	var _map = __webpack_require__(158);
 	
-	var _ = __webpack_require__(122);
+	var _ = __webpack_require__(119);
 	
 	var _2 = _interopRequireDefault(_);
 	
-	var _index = __webpack_require__(124);
+	var _index = __webpack_require__(121);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(189);
+	var _index3 = __webpack_require__(186);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -28534,19 +28033,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Blend;
 
 /***/ }),
-/* 189 */
+/* 186 */
 /***/ (function(module, exports) {
 
 	module.exports = "precision highp float;\n#define GLSLIFY 1\n\n// Replaced with the correct number of views.\nconst int numViews = /* @<hook */2/* @hook> */;\n\nvec4 preAlpha(vec3 color, float alpha) {\n    return vec4(color.rgb*alpha, alpha);\n}\n\nvec4 preAlpha(vec4 color) {\n    return preAlpha(color.rgb, color.a);\n}\n\nvec4 blend(vec4 sum, vec4 color, float alpha) {\n    return sum+preAlpha(color.rgb, color.a*alpha);\n}\n\n/**\n * Color summation from multiple views, each blending with a global alpha.\n *\n * @requires {float} numViews The number of source views to blend together\n * @requires {function} blend A function blending a source buffer into a sum\n */\n\nuniform sampler2D views[numViews];\nuniform float alphas[numViews];\nuniform vec2 resolution;\n\nvoid main() {\n    vec2 uv = gl_FragCoord.xy/resolution;\n\n    // Accumulate colors\n    \n    vec4 sum = vec4(0.0);\n\n    for(int i = 0; i < numViews; ++i) {\n        vec4 color = texture2D(views[i], uv);\n\n        // Pre-multiplied alpha so they don't cross over\n        sum = blend(sum, color, alphas[i]);\n    }\n\n    gl_FragColor = sum;\n}\n\n"
 
 /***/ }),
-/* 190 */
+/* 187 */
 /***/ (function(module, exports) {
 
 	module.exports = "/**\n * A vignette hash blur\n * @todo Make the `const`s here into `uniform`s.\n */\n\nprecision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D view;\nuniform vec2 resolution;\nuniform float time;\nuniform float radius;\nuniform float limit;\n\nvec3 sampler(vec2 uv) {\n    return texture2D(view, uv).rgb;\n}\n\nhighp float random(vec2 co)\n{\n    highp float a = 12.9898;\n    highp float b = 78.233;\n    highp float c = 43758.5453;\n    highp float dt= dot(co.xy ,vec2(a,b));\n    highp float sn= mod(dt,3.14);\n    return fract(sin(sn) * c);\n}\n\n#ifndef TAU\n  #define TAU 6.28318530718\n#endif\n\n//Use last part of hash function to generate new random radius and angle\nvec2 mult(inout vec2 r) {\n  r = fract(r * vec2(12.9898,78.233));\n  return sqrt(r.x + .001) * vec2(sin(r.y * TAU), cos(r.y * TAU));\n}\n\nvec3 blur(vec2 uv, float radius, float aspect, float offset) {\n  vec2 circle = vec2(radius);\n  circle.x *= aspect;\n  vec2 rnd = vec2(random(vec2(uv + offset)));\n\n  vec3 acc = vec3(0.0);\n  for (int i = 0; i < 20; i++) {\n    acc += sampler(uv + circle * mult(rnd)).xyz;\n  }\n  return acc / float(20);\n}\n\nvec3 blur(vec2 uv, float radius, float aspect) {\n  return blur(uv, radius, aspect, 0.0);\n}\n\nvec3 blur(vec2 uv, float radius) {\n  return blur(uv, radius, 1.0);\n}\n\n/**\n * Adapted from `bezier`.\n */\n\nfloat bezier(vec2 cp, float t) {\n    return cp.x+(cp.y-cp.x)*t;\n}\n\nfloat bezier(vec3 cp, float t) {\n    float ut = 1.0-t;\n\n    return (cp.x*ut+cp.y*t)*ut+(cp.y*ut+cp.z*t)*t;\n}\n\nfloat bezier(vec4 cp, float t) {\n    float ut = 1.0-t;\n    float a1 = cp.y*ut+cp.z*t;\n\n    return ((cp.x*ut+cp.y*t)*ut+a1*t)*ut+(a1*ut+(cp.z*ut+cp.w*t)*t)*t;\n}\n\n// @todo Remove the `1.0-` here?\nfloat amount_0(vec2 point, vec2 mid, float limit) {\n    return min(1.0-(length(point-mid)/limit), 1.0);\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit) {\n    return max(0.0, amount_0(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, float curve) {\n    return max(0.0, curve*amount_0(point, mid, limit));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec2 curve) {\n    return max(0.0, bezier(curve, amount_0(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec3 curve) {\n    return max(0.0, bezier(curve, amount_0(point, mid, limit)));\n}\n\nfloat vignette(vec2 point, vec2 mid, float limit, vec4 curve) {\n    return max(0.0, bezier(curve, amount_0(point, mid, limit)));\n}\n\nconst vec3 falloff = vec3(0.0, 1.0, 1.0);\nconst vec2 mid = vec2(0.5);\n\nvoid main() {\n    vec2 uv = gl_FragCoord.xy/resolution;\n    float texel = 1.0/min(resolution.x, resolution.y);\n    float amount = (1.0-vignette(uv, mid, limit, falloff))*texel;\n    float aspect = resolution.x/resolution.y;\n    float jitter = mod(time, 20.0);\n\n    gl_FragColor = vec4(blur(uv, radius*amount, aspect, jitter),\n            texture2D(view, uv).a);\n}\n"
 
 /***/ }),
-/* 191 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28561,29 +28060,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Tendrils `spawnShader` function.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 	
-	var _glFbo = __webpack_require__(90);
+	var _glFbo = __webpack_require__(87);
 	
 	var _glFbo2 = _interopRequireDefault(_glFbo);
 	
-	var _glShader = __webpack_require__(56);
+	var _glShader = __webpack_require__(53);
 	
 	var _glShader2 = _interopRequireDefault(_glShader);
 	
-	var _map = __webpack_require__(161);
+	var _map = __webpack_require__(158);
 	
 	var _map2 = _interopRequireDefault(_map);
 	
-	var _each = __webpack_require__(149);
+	var _each = __webpack_require__(146);
 	
 	var _each2 = _interopRequireDefault(_each);
 	
-	var _utils = __webpack_require__(86);
+	var _utils = __webpack_require__(83);
 	
-	var _index = __webpack_require__(124);
+	var _index = __webpack_require__(121);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(192);
+	var _index3 = __webpack_require__(189);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -28666,13 +28165,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = OpticalFlow;
 
 /***/ }),
-/* 192 */
+/* 189 */
 /***/ (function(module, exports) {
 
 	module.exports = "/**\n * @see https://forum.openframeworks.cc/t/ofxflowtools-optical-flow-fluid-dynamics-and-particles-in-glsl/15470\n * @see https://github.com/moostrik/ofxFlowTools\n * @see https://github.com/diwi/PixelFlow\n * @see http://thomasdiewald.com/blog/?p=2766\n * @see https://adamferriss.com/gush/\n * @see https://github.com/princemio/ofxMIOFlowGLSL/blob/master/src/FlowShader.cpp\n */\n\nprecision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D view;\nuniform sampler2D last;\n\nuniform vec2 viewSize;\nuniform vec2 scaleUV;\n\nuniform float offset;\nuniform float lambda;\n\nuniform float time;\nuniform float speed;\nuniform float speedLimit;\n\nvarying vec2 uv;\n\n/**\n * Adapted from `bezier`.\n */\n\nfloat bezier(vec2 cp, float t) {\n    return cp.x+(cp.y-cp.x)*t;\n}\n\nfloat bezier(vec3 cp, float t) {\n    float ut = 1.0-t;\n\n    return (cp.x*ut+cp.y*t)*ut+(cp.y*ut+cp.z*t)*t;\n}\n\nfloat bezier(vec4 cp, float t) {\n    float ut = 1.0-t;\n    float a1 = cp.y*ut+cp.z*t;\n\n    return ((cp.x*ut+cp.y*t)*ut+a1*t)*ut+(a1*ut+(cp.z*ut+cp.w*t)*t)*t;\n}\n\nvec4 grayScale(vec4 color) {\n\treturn vec4(vec3(dot(color.rgb, vec3(0.3, 0.59, 0.11))), 1.0);\n}\n\n/**\n * @requires {float} time The current time in ms\n */\n\nvec4 flow(vec2 vel) {\n    // Faster particles leave a greater influence (opacity).\n    // Linear interpolation - inaccurate for vectors, will it be OK without\n    // sudden turns, or do we need a per-fragment lookup?\n    return vec4(vel, time, length(vel));\n}\n\nvec4 flow(vec2 vel, float speedLimit) {\n    vec4 values = flow(vel);\n\n    return vec4(values.xyz, min(values.a/speedLimit, 1.0));\n}\n\nfloat map(float value, float inMin, float inMax, float outMin, float outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec2 map(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec3 map(vec3 value, vec3 inMin, vec3 inMax, vec3 outMin, vec3 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nvec4 map(vec4 value, vec4 inMin, vec4 inMax, vec4 outMin, vec4 outMax) {\n  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);\n}\n\nconst vec4 posRange = vec4(-1.0, -1.0, 1.0, 1.0);\n\nconst vec4 uvRange = vec4(0.0, 0.0, 1.0, 1.0);\n\nvec2 posToUV(vec2 pos) {\n    return map(pos, posRange.xy, posRange.zw, uvRange.xy, uvRange.zw);\n}\n\nconst vec2 zero = vec2(0.0);\nconst vec3 falloff = vec3(0.0, 0.0, 1.0);\n/*\nvec4 mapColor(vec2 vec, vec2 scale) {\n    vec2 x = vec2(max(vec.x, 0.0), abs(min(vec.x, 0.0)))*scale.x;\n    vec2 y = vec2(max(vec.y, 0.0), abs(min(vec.y, 0.0)))*scale.y;\n\n    float dirY = ((y.x > y.y)? 0.9 : 1.0);\n\n    return vec4(x.xy, max(y.x, y.y), dirY);\n}*/\n\n#if 1\n    vec4 pixel(sampler2D texture, vec2 uv) {\n        return grayScale(texture2D(texture, uv));\n    }\n#else\n    vec4 pixel(sampler2D texture, vec2 uv) {\n        return texture2D(texture, uv);\n    }\n#endif\n\nvoid main() {\n    vec2 st = posToUV(uv*scaleUV/viewSize);\n\n    vec2 offsetX = vec2(offset, 0.0);\n    vec2 offsetY = vec2(0.0, offset);\n\n    // Gradient\n\n    vec4 gradX = (pixel(view, st+offsetX)-pixel(view, st-offsetX))+\n        (pixel(last, st+offsetX)-pixel(last, st-offsetX));\n\n    vec4 gradY = (pixel(view, st+offsetY)-pixel(view, st-offsetY))+\n        (pixel(last, st+offsetY)-pixel(last, st-offsetY));\n\n    vec4 gradMag = sqrt((gradX*gradX)+(gradY*gradY)+vec4(lambda));\n\n    // Difference\n    vec4 diff = pixel(view, st)-pixel(last, st);\n\n    // vec2 vec = vec2((diff*(gradX/gradMag)).x, (diff*(gradY/gradMag)).x);\n\n    // gl_FragColor = mapColor(vec, scale);\n\n    vec2 vec = vec2((diff*(gradX/gradMag)).x, (diff*(gradY/gradMag)).x)*speed;\n\n    gl_FragColor = flow(bezier(falloff, length(vec)/speedLimit)*vec, speedLimit);\n}\n"
 
 /***/ }),
-/* 193 */
+/* 190 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -28726,7 +28225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = part;
 
 /***/ }),
-/* 194 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
