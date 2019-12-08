@@ -2311,6 +2311,52 @@ export default (canvas, options) => {
 
             toggleBase('dark');
             restart();
+        },
+        'Pissarides'() {
+            Object.assign(state, {
+                speedLimit: 0.003,
+                flowWidth: 20,
+                colorMapAlpha: 0.3333,
+                noiseWeight: 0.0004,
+                target: 0.0002,
+                varyTarget: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 1,
+                speed: 0
+            });
+
+            Object.assign(blurState, {
+                radius: 12,
+                limit: 0.3
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.3333,
+                baseColor: [255, 100, 120],
+                flowAlpha: 1,
+                flowColor: [180, 0, 50],
+                fadeAlpha: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: 0,
+                micFlowAt: audioDefaults.micFlowAt*0.8,
+                micFastAt: audioDefaults.micFastAt*1,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.6
+            });
+
+            toggleBase('dark');
+            respawn();
         }
     };
 
@@ -2327,6 +2373,7 @@ export default (canvas, options) => {
         Object.assign(opticalFlowState, opticalFlowDefaults);
         Object.assign(colorProxy, colorDefaults);
         Object.assign(blendProxy, blendDefaults);
+        Object.assign(blurState, blurDefaults);
         Object.assign(audioState, audioDefaults);
 
         presetter();
@@ -2565,23 +2612,24 @@ export default (canvas, options) => {
                     '0': presetters['Flow'],
                     '1': presetters['Wings'],
                     '2': presetters['Fluid'],
-                    '3': presetters['Ghostly'],
+                    '3': presetters['Flow only'],
                     '4': presetters['Noise only'],
                     '5': presetters['Sea'],
-                    '6': presetters['Rave'],
-                    '7': presetters['Turbulence'],
-                    '8': presetters['Rorschach'],
-                    '9': presetters['Funhouse'],
-                    '-': presetters['Blood'],
-                    '=': presetters['Flow only'],
-                    'R': presetters['Folding'],
-                    'T': presetters['Minimal'],
-                    'Y': presetters['Kelp Forest'],
-                    'U': presetters['Starlings'],
-                    'E': presetters['Tornado Alley'],
+                    '6': presetters['Ghostly'],
+                    '7': presetters['Rave'],
+                    '8': presetters['Blood'],
+                    '9': presetters['Turbulence'],
+                    '-': presetters['Rorschach'],
+                    '=': presetters['Funhouse'],
+                    'W': presetters['Minimal'],
+                    'E': presetters['Kelp Forest'],
+                    'R': presetters['Starlings'],
+                    'T': presetters['Folding'],
+                    'Y': presetters['Tornado Alley'],
+                    'U': presetters['Pop Tide'],
                     'I': presetters['Narcissus Pool'],
-                    'W': presetters['Frequencies'],
-                    'O': presetters['Pop Tide'],
+                    'O': presetters['Frequencies'],
+                    'P': presetters['Pissarides'],
 
                     '<space>': () => restart(),
 
