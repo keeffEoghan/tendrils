@@ -52,7 +52,7 @@
     "glsl-noise": "0.0.0",
     "glsl-random": "0.0.5",
     "lerp": "^1.0.3",
-    "lodash": "^4.13.1",
+    "lodash": "^4.17.19",
     "mouse-event-offset": "^3.0.2",
     "ndarray": "^1.0.18",
     "pepjs": "^0.4.2",
