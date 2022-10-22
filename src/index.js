@@ -44,7 +44,7 @@ export const defaults = () => ({
         noiseWeight: 0.002,
         varyNoise: 0.3,
 
-        flowDecay: 0.003,
+        flowDecay: 0.005,
         flowWidth: 5,
 
         noiseScale: 2.125,

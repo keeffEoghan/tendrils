@@ -159,7 +159,9 @@ export default (canvas, options) => {
                 decodeURIComponent(settings.static_image)
             // :   rootPath+'build/images/epok/eye.png')
             // :   rootPath+'build/images/fortune.png')
-            :   rootPath+'build/images/unit31-unfolded.jpg')
+            // :   rootPath+'build/images/unit31-unfolded.jpg')
+            // :   rootPath+'build/images/hysteria-kinetic-bliss-poster.jpeg')
+            :   rootPath+'build/images/hysteria-kinetic-bliss-logo.png')
     };
 
     Object.assign(timer.app, {
@@ -220,8 +222,9 @@ export default (canvas, options) => {
 
     // Deal with Chrome's need for user interaction before playing audio...
     // @see https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
-    document.addEventListener('click', () =>
-        (audioContext.state === 'suspended' && audioContext.resume()));
+    canvas.addEventListener('click', () =>
+        (audioContext.state === 'suspended' &&
+            audioContext.resume().then(() => console.log('Restarted audio'))));
 
 
     // Track control setup
@@ -534,7 +537,7 @@ export default (canvas, options) => {
             imageSpawner.spawn(tendrils, undefined, buffer);
         }
         else {
-            console.warn('`spawnRaster`: image not ready.');
+            console.warn('`spawnRaster`: image not ready.', raster);
         }
     }
 
@@ -1614,47 +1617,35 @@ export default (canvas, options) => {
             toggleBase('dark');
             clear();
         },
-        'Flow only'() {
+        'Frequencies'() {
             Object.assign(state, {
-                flowDecay: 0.001,
-                forceWeight: 0.014,
-                noiseWeight: 0,
-                speedAlpha: 0
-            });
-
-            Object.assign(resetSpawner.uniforms, {
-                radius: 0.4,
-                speed: 0.15
+                forceWeight: 0.015,
+                flowWeight: -0.2,
+                speedAlpha: 0.1,
+                colorMapAlpha: 0.9,
+                noiseWeight: 0.005,
+                noiseScale: 1.2,
+                varyNoiseScale: 2,
+                noiseSpeed: 0.0003,
+                varyNoiseSpeed: 0.01
             });
 
             Object.assign(colorProxy, {
-                baseAlpha: 0.8,
-                baseColor: [100, 200, 255],
-                fadeAlpha: 0.1,
-                fadeColor: [0, 0, 0]
+                baseAlpha: 0.7,
+                baseColor: [255, 215, 111],
+                flowAlpha: 0,
+                flowColor: [255, 255, 255],
+                fadeAlpha: 0.06,
+                fadeColor: [30, 20, 0]
             });
 
-            toggleBase('dark');
-        },
-        'Noise only'() {
-            Object.assign(state, {
-                flowWeight: 0,
-                noiseWeight: 0.003,
-                noiseScale: 1.5,
-                varyNoiseScale: -30,
-                noiseSpeed: 0.00025,
-                varyNoiseSpeed: -0.3,
-                speedAlpha: 0.08,
-                colorMapAlpha: 0.27
-            });
-
-            Object.assign(colorProxy, {
-                flowAlpha: 0.4,
-                flowColor: [255, 45, 146],
-                baseAlpha: 0.6,
-                baseColor: [255, 150, 0],
-                fadeAlpha: 0.05,
-                fadeColor: [54, 0, 48]
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: audioDefaults.micFastAt*0.9,
+                micCamAt: 0,
+                micSampleAt: 0
             });
 
             Object.assign(blendProxy, {
@@ -1663,59 +1654,19 @@ export default (canvas, options) => {
                 video: 0
             });
 
-            Object.assign(audioState, {
-                micFastAt: audioDefaults.micFastAt*0.4,
-                micSampleAt: 0,
-                micFormAt: 0,
-                micCamAt: audioDefaults.micCamAt*0.8,
-                micSpawnAt: audioDefaults.micSpawnAt*0.6
-            });
-
-            toggleBase('dark');
-        },
-        'Sea'() {
-            Object.assign(state, {
-                flowWidth: 5,
-                forceWeight: 0.013,
-                noiseWeight: 0.002,
-                flowDecay: 0.01,
-                target: 0.0001,
-                speedAlpha: 0.01,
-                colorMapAlpha: 0.2,
-                flowColor: [119, 190, 255],
-                flowAlpa: 0.01,
-                baseColor: [132, 166, 255],
-                baseAlpha: 0.7,
-                fadeColor: [0, 44, 110],
-                fadeAlpha: 0.1
-            });
-
             Object.assign(resetSpawner.uniforms, {
-                radius: 1.5,
+                radius: 0.22,
                 speed: 0
             });
 
-            Object.assign(colorProxy, {
-                baseAlpha: 0.8,
-                baseColor: [55, 155, 255],
-                fadeAlpha: 0.3,
-                fadeColor: [0, 58, 90]
-            });
-
-            Object.assign(blendProxy, {
-                mic: 1,
-                track: 1,
-                video: 0.3
-            });
-
-            Object.assign(audioState, {
-                micSampleAt: 0,
-                micFormAt: audioDefaults.micFormAt*0.8,
-                micCamAt: audioDefaults.micCamAt*0.8,
-                micSpawnAt: audioDefaults.micSpawnAt*0.5
+            Object.assign(opticalFlowState, {
+                speed: 0.03,
+                offset: 0
             });
 
             toggleBase('dark');
+            spawnImageTargets();
+            restart();
         },
         'Ghostly'() {
             Object.assign(state, {
@@ -1818,10 +1769,10 @@ export default (canvas, options) => {
 
             Object.assign(audioState, {
                 micSpawnAt: audioDefaults.micSpawnAt*0.8,
-                micFlowAt: audioDefaults.micFlowAt*0.5,
+                micFlowAt: 0,
                 micFastAt: audioDefaults.micFastAt*0.5,
                 micCamAt: 0,
-                micSampleAt: audioDefaults.micSampleAt*0.9
+                micSampleAt: 0
             });
 
             toggleBase('dark');
@@ -1862,42 +1813,8 @@ export default (canvas, options) => {
             });
 
             toggleBase('dark');
-
+            clear();
             restart();
-        },
-        'Rorschach'() {
-            Object.assign(state, {
-                noiseScale: 40,
-                varyNoiseScale: 0,
-                noiseSpeed: 0.0003,
-                varyNoiseSpeed: 0.01,
-                forceWeight: 0.014,
-                noiseWeight: 0.0021,
-                speedAlpha: 0.000002,
-                colorMapAlpha: 0.1
-            });
-
-            Object.assign(flowPixelState, {
-                scale: 'mirror xy'
-            });
-
-            Object.assign(colorProxy, {
-                baseAlpha: 0.9,
-                baseColor: [0, 0, 0],
-                flowAlpha: 0.2,
-                fadeAlpha: 0.05,
-                fadeColor: [255, 255, 255]
-            });
-
-            Object.assign(audioState, {
-                micSpawnAt: audioDefaults.micSpawnAt*0.8,
-                micFormAt: audioDefaults.micFormAt*0.8,
-                micFastAt: audioDefaults.micFastAt*0.8,
-                micCamAt: 0,
-                micSampleAt: audioDefaults.micSampleAt*1
-            });
-
-            toggleBase('dark');
         },
         'Funhouse'() {
             Object.assign(state, {
@@ -1954,124 +1871,27 @@ export default (canvas, options) => {
             spawnTargets.spawnImage = tendrils.targets;
             spawnImage(tendrils.targets);
 
-            // controllers.spawnImageTargets();
+            // spawnImageTargets();
         },
-        'Minimal'() {
+        'Noise Only'() {
             Object.assign(state, {
-                autoClearView: true,
-                colorMapAlpha: 1,
-                speedAlpha: 1,
-                varyNoiseScale: 3,
-                varyNoiseSpeed: 3
-            });
-
-            Object.assign(flowPixelState, {
-                scale: 'mirror xy'
-            });
-
-            Object.assign(colorProxy, {
-                baseAlpha: 0.7,
-                baseColor: [255, 255, 255],
-                flowAlpha: 0,
-                fadeColor: [255, 255, 255],
-                fadeAlpha: 0
-            });
-
-            Object.assign(audioState, {
-                micSpawnAt: audioDefaults.micSpawnAt*1,
-                micFormAt: audioDefaults.micFormAt*0.6,
-                micFlowAt: audioDefaults.micFlowAt*0.6,
-                micFastAt: audioDefaults.micFastAt*0.6,
-                micCamAt: 0,
-                micSampleAt: 0
-            });
-
-            Object.assign(blendProxy, {
-                mic: 1,
-                track: 1,
-                video: 0
-            });
-
-            toggleBase('dark');
-        },
-        'Kelp Forest'() {
-            Object.assign(state, {
-                noiseWeight: 0.004,
-                varyNoise: 0.3,
-                flowDecay: 0.003,
-                flowWidth: 10,
-                noiseScale: 1,
-                varyNoiseScale: -6,
-                noiseSpeed: 0.0001,
-                varyNoiseSpeed: -4,
-                speedAlpha: 0.001,
-                colorMapAlpha: 0.25
-            });
-
-            Object.assign(flowPixelState, {
-                scale: 'mirror xy'
-            });
-
-            Object.assign(colorProxy, {
-                baseAlpha: 0.3,
-                baseColor: [0, 122, 27],
-                flowAlpha: 0.4,
-                flowColor: [0, 250, 175],
-                fadeAlpha: 0.1,
-                fadeColor: [0, 36, 51]
-            });
-
-            Object.assign(audioState, {
-                micSpawnAt: audioDefaults.micSpawnAt*1,
-                micFormAt: audioDefaults.micFormAt*0.6,
-                micFlowAt: 0,
-                micFastAt: 0,
-                micCamAt: audioDefaults.micCamAt*1,
-                micSampleAt: audioDefaults.micSampleAt*1
-            });
-
-            Object.assign(blendProxy, {
-                mic: 1,
-                track: 1,
-                video: 0
-            });
-
-            toggleBase('dark');
-        },
-        'Starlings'() {
-            Object.assign(state, {
-                flowWeight: 1.5,
+                flowWeight: 0,
                 noiseWeight: 0.003,
-                varyNoise: 0.3,
-                flowDecay: 0.004,
-                noiseScale: 0.5,
-                varyNoiseScale: 10,
-                noiseSpeed: 0.0001,
-                varyNoiseSpeed: 0.1,
-                speedAlpha: 0.01,
-                colorMapAlpha: 0.17
-            });
-
-            Object.assign(flowPixelState, {
-                scale: 'mirror xy'
+                noiseScale: 1.5,
+                varyNoiseScale: -30,
+                noiseSpeed: 0.00025,
+                varyNoiseSpeed: -0.3,
+                speedAlpha: 0.08,
+                colorMapAlpha: 0.27
             });
 
             Object.assign(colorProxy, {
-                baseAlpha: 1,
-                baseColor: [0, 0, 0],
-                flowAlpha: 0.1,
-                flowColor: [255, 20, 255],
-                fadeAlpha: 0.02,
-                fadeColor: [160, 120, 40]
-            });
-
-            Object.assign(audioState, {
-                micSpawnAt: 0,
-                micFormAt: 0,
-                micFlowAt: audioDefaults.micFlowAt*0.5,
-                micFastAt: audioDefaults.micFastAt*1.1,
-                micCamAt: 0,
-                micSampleAt: audioDefaults.micSampleAt*0.9
+                flowAlpha: 0.4,
+                flowColor: [255, 45, 146],
+                baseAlpha: 0.6,
+                baseColor: [255, 150, 0],
+                fadeAlpha: 0.05,
+                fadeColor: [54, 0, 48]
             });
 
             Object.assign(blendProxy, {
@@ -2080,8 +1900,37 @@ export default (canvas, options) => {
                 video: 0
             });
 
+            Object.assign(audioState, {
+                micFastAt: audioDefaults.micFastAt*0.4,
+                micSampleAt: 0,
+                micFormAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.8,
+                micSpawnAt: audioDefaults.micSpawnAt*0.6
+            });
+
             toggleBase('dark');
-            spawnSamples();
+        },
+        'Flow Only'() {
+            Object.assign(state, {
+                flowDecay: 0.001,
+                forceWeight: 0.014,
+                noiseWeight: 0,
+                speedAlpha: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.4,
+                speed: 0.15
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.8,
+                baseColor: [100, 200, 255],
+                fadeAlpha: 0.1,
+                fadeColor: [0, 0, 0]
+            });
+
+            toggleBase('dark');
         },
         'Folding'() {
             Object.assign(state, {
@@ -2132,6 +1981,173 @@ export default (canvas, options) => {
 
             toggleBase('dark');
             restart();
+        },
+        'Rorschach'() {
+            Object.assign(state, {
+                noiseScale: 40,
+                varyNoiseScale: 0,
+                noiseSpeed: 0.0003,
+                varyNoiseSpeed: 0.01,
+                forceWeight: 0.014,
+                noiseWeight: 0.0021,
+                speedAlpha: 0.000002,
+                colorMapAlpha: 0.1
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.9,
+                baseColor: [0, 0, 0],
+                flowAlpha: 0.2,
+                fadeAlpha: 0.05,
+                fadeColor: [255, 255, 255]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: audioDefaults.micFormAt*0.8,
+                micFastAt: audioDefaults.micFastAt*0.8,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*1
+            });
+
+            toggleBase('dark');
+        },
+        'Starlings'() {
+            Object.assign(state, {
+                flowWeight: 1.5,
+                noiseWeight: 0.003,
+                varyNoise: 0.3,
+                flowDecay: 0.004,
+                noiseScale: 0.5,
+                varyNoiseScale: 10,
+                noiseSpeed: 0.0001,
+                varyNoiseSpeed: 0.1,
+                speedAlpha: 0.01,
+                colorMapAlpha: 0.17
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 1,
+                baseColor: [0, 0, 0],
+                flowAlpha: 0.1,
+                flowColor: [255, 20, 255],
+                fadeAlpha: 0.02,
+                fadeColor: [160, 120, 40]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: 0,
+                micFormAt: 0,
+                micFlowAt: audioDefaults.micFlowAt*0.5,
+                micFastAt: audioDefaults.micFastAt*1.1,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.9
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            toggleBase('dark');
+            spawnSamples();
+        },
+        'Sea'() {
+            Object.assign(state, {
+                flowWidth: 5,
+                forceWeight: 0.013,
+                noiseWeight: 0.002,
+                flowDecay: 0.01,
+                target: 0.0001,
+                speedAlpha: 0.01,
+                colorMapAlpha: 0.2,
+                flowColor: [119, 190, 255],
+                flowAlpa: 0.01,
+                baseColor: [132, 166, 255],
+                baseAlpha: 0.7,
+                fadeColor: [0, 44, 110],
+                fadeAlpha: 0.1
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 1.5,
+                speed: 0
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.8,
+                baseColor: [55, 155, 255],
+                fadeAlpha: 0.3,
+                fadeColor: [0, 58, 90]
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0.3
+            });
+
+            Object.assign(audioState, {
+                micSampleAt: 0,
+                micFormAt: audioDefaults.micFormAt*0.8,
+                micCamAt: audioDefaults.micCamAt*0.8,
+                micSpawnAt: audioDefaults.micSpawnAt*0.5
+            });
+
+            toggleBase('dark');
+        },
+        'Kelp Forest'() {
+            Object.assign(state, {
+                noiseWeight: 0.004,
+                varyNoise: 0.3,
+                flowDecay: 0.003,
+                flowWidth: 10,
+                noiseScale: 1,
+                varyNoiseScale: -6,
+                noiseSpeed: 0.0001,
+                varyNoiseSpeed: -4,
+                speedAlpha: 0.001,
+                colorMapAlpha: 0.25
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.3,
+                baseColor: [0, 122, 27],
+                flowAlpha: 0.4,
+                flowColor: [0, 250, 175],
+                fadeAlpha: 0.1,
+                fadeColor: [0, 36, 51]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*1,
+                micFormAt: audioDefaults.micFormAt*0.6,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*1,
+                micSampleAt: audioDefaults.micSampleAt*1
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            toggleBase('dark');
         },
         'Tornado Alley'() {
             Object.assign(state, {
@@ -2272,33 +2288,32 @@ export default (canvas, options) => {
             toggleBase('dark');
             spawnImageTargets();
         },
-        'Frequencies'() {
+        'Minimal'() {
             Object.assign(state, {
-                forceWeight: 0.015,
-                flowWeight: -0.2,
-                speedAlpha: 0.1,
-                colorMapAlpha: 0.9,
-                noiseWeight: 0.005,
-                noiseScale: 1.2,
-                varyNoiseScale: 2,
-                noiseSpeed: 0.0003,
-                varyNoiseSpeed: 0.01
+                autoClearView: true,
+                colorMapAlpha: 1,
+                speedAlpha: 1,
+                varyNoiseScale: 3,
+                varyNoiseSpeed: 3
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
             });
 
             Object.assign(colorProxy, {
                 baseAlpha: 0.7,
-                baseColor: [255, 215, 111],
+                baseColor: [255, 255, 255],
                 flowAlpha: 0,
-                flowColor: [255, 255, 255],
-                fadeAlpha: 0.06,
-                fadeColor: [30, 20, 0]
+                fadeColor: [255, 255, 255],
+                fadeAlpha: 0
             });
 
             Object.assign(audioState, {
-                micSpawnAt: audioDefaults.micSpawnAt*0.8,
-                micFormAt: 0,
-                micFlowAt: 0,
-                micFastAt: audioDefaults.micFastAt*0.9,
+                micSpawnAt: audioDefaults.micSpawnAt*1,
+                micFormAt: audioDefaults.micFormAt*0.6,
+                micFlowAt: audioDefaults.micFlowAt*0.6,
+                micFastAt: audioDefaults.micFastAt*0.6,
                 micCamAt: 0,
                 micSampleAt: 0
             });
@@ -2309,18 +2324,7 @@ export default (canvas, options) => {
                 video: 0
             });
 
-            Object.assign(resetSpawner.uniforms, {
-                radius: 0.22,
-                speed: 0
-            });
-
-            Object.assign(opticalFlowState, {
-                speed: 0.03,
-                offset: 0
-            });
-
             toggleBase('dark');
-            restart();
         },
         'Pissarides'() {
             Object.assign(state, {
@@ -2374,7 +2378,381 @@ export default (canvas, options) => {
             toggleBase('dark');
             clear();
             respawn();
-        }
+        },
+
+        // Hysteria Kinetic Bliss (HKB)
+        // HKB white 236, 251, 208
+        // HKB light blue 72, 83, 245
+        // HKB light green 21, 222, 11
+        // HKB green 82, 164, 52
+        // HKB red 222, 50, 51
+        // HKB orange 194, 106, 69
+        // HKB pink 209, 22, 82
+        // HKB purple 183, 49, 126
+        // HKB dark blue 6, 10, 113
+        // HKB dark purple 47, 15, 35
+        // HKB dark green 3, 66, 2
+        // HKB dark orange 90, 31, 33
+        // HKB black 10, 21, 42
+        'HKB:G:Mani: Flow'() {
+            Object.assign(state, {
+                flowWidth: 5,
+                colorMapAlpha: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.25,
+                speed: 0.01
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.5,
+                baseColor: [183, 49, 126],
+                flowAlpha: 1,
+                flowColor: [236, 251, 208],
+                fadeAlpha: Math.max(state.flowDecay, 0.05),
+                fadeColor: [47, 15, 35]
+            });
+
+            toggleBase('dark');
+
+            Object.assign(audioState, {
+                micSpawnAt: 0,
+                micFormAt: audioDefaults.micFormAt*0.5,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.9
+            });
+        },
+        'HKB:Z:Mani: Folding'() {
+            Object.assign(state, {
+                noiseWeight: 0.005,
+                varyNoise: 0.3,
+                flowDecay: 0.003,
+                noiseScale: 1,
+                varyNoiseScale: -30,
+                noiseSpeed: 0.00005,
+                varyNoiseSpeed: 3,
+                target: 0.002,
+                speedAlpha: 0.005,
+                colorMapAlpha: 0.3
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.5,
+                baseColor: [72, 83, 245],
+                flowAlpha: 0.8,
+                flowColor: [209, 22, 82],
+                fadeAlpha: 0.15,
+                fadeColor: [6, 10, 113]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: audioDefaults.micFormAt*0.6,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.8
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.15,
+                speed: 20000
+            });
+
+            toggleBase('dark');
+            restart();
+        },
+        'HKB:X:Mani: Starlings'() {
+            Object.assign(state, {
+                flowWeight: 1.5,
+                noiseWeight: 0.003,
+                varyNoise: 0.3,
+                flowDecay: 0.004,
+                noiseScale: 0.5,
+                varyNoiseScale: 10,
+                noiseSpeed: 0.0001,
+                varyNoiseSpeed: 0.1,
+                speedAlpha: 0.01,
+                colorMapAlpha: 0.17
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 1,
+                baseColor: [47, 15, 35],
+                flowAlpha: 0.1,
+                flowColor: [222, 50, 51],
+                fadeAlpha: 0.02,
+                fadeColor: [194, 106, 69]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: 0,
+                micFormAt: 0,
+                micFlowAt: audioDefaults.micFlowAt*0.5,
+                micFastAt: audioDefaults.micFastAt*1.1,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.9
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            toggleBase('dark');
+            spawnSamples();
+        },
+        'HKB:C:Mani: Kelp Forest'() {
+            Object.assign(state, {
+                noiseWeight: 0.004,
+                varyNoise: 0.3,
+                flowDecay: 0.003,
+                flowWidth: 10,
+                noiseScale: 1,
+                varyNoiseScale: -6,
+                noiseSpeed: 0.0001,
+                varyNoiseSpeed: -4,
+                speedAlpha: 0.001,
+                colorMapAlpha: 0.25
+            });
+
+            Object.assign(flowPixelState, {
+                scale: 'mirror xy'
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.6,
+                baseColor: [21, 222, 11],
+                flowAlpha: 0.6,
+                flowColor: [222, 50, 51],
+                fadeAlpha: 0.1,
+                fadeColor: [3, 66, 2]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*1,
+                micFormAt: audioDefaults.micFormAt*0.6,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*1,
+                micSampleAt: audioDefaults.micSampleAt*1
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            toggleBase('dark');
+        },
+        'HKB:V:Mani: Tornado Alley'() {
+            Object.assign(state, {
+                noiseWeight: 0.01,
+                varyNoise: 0,
+                flowDecay: 0.005,
+                noiseScale: 1.2,
+                varyNoiseScale: 8,
+                noiseSpeed: 0.0002,
+                varyNoiseSpeed: 0,
+                target: 0.003,
+                speedAlpha: 0.005,
+                colorMapAlpha: 0.85
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.4,
+                baseColor: [183, 49, 126],
+                flowAlpha: 0.1,
+                flowColor: [209, 22, 82],
+                fadeAlpha: 0.06,
+                fadeColor: [90, 31, 33]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*1.1,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.7,
+                micSampleAt: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 0.25,
+                track: 0.25,
+                video: 0.7
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 1,
+                speed: 0
+            });
+
+            toggleBase('dark');
+            spawnImageTargets();
+        },
+        'HKB:B:Mani: Pop Tide'() {
+            Object.assign(state, {
+                noiseWeight: 0.01,
+                varyNoise: 0,
+                flowDecay: 0.005,
+                noiseScale: 0.1,
+                varyNoiseScale: -50,
+                noiseSpeed: 0.0001,
+                varyNoiseSpeed: 0,
+                target: 0.0025,
+                speedAlpha: 0.02,
+                colorMapAlpha: 0.5
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.8,
+                baseColor: [72, 83, 245],
+                flowAlpha: 0.2,
+                flowColor: [236, 251, 208],
+                fadeAlpha: 0.1,
+                fadeColor: [82, 164, 52]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: audioDefaults.micFormAt,
+                micFlowAt: audioDefaults.micFlowAt,
+                micFastAt: 0,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.8
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 0.6,
+                speed: 0
+            });
+
+            toggleBase('dark');
+            restart();
+        },
+        'HKB:N:Mani: Narcissus Pool'() {
+            Object.assign(state, {
+                noiseWeight: 0.01,
+                varyNoise: 0,
+                flowDecay: 0.005,
+                noiseScale: 1.2,
+                varyNoiseScale: -4,
+                noiseSpeed: 0.0002,
+                varyNoiseSpeed: 0,
+                target: 0.003,
+                varyTarget: 10,
+                speedAlpha: 0.008,
+                colorMapAlpha: 1
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.1,
+                baseColor: [236, 251, 208],
+                flowAlpha: 0.1,
+                flowColor: [183, 49, 126],
+                fadeAlpha: 0.2,
+                fadeColor: [47, 15, 35]
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: 0,
+                micFormAt: 0,
+                micFlowAt: 0,
+                micFastAt: 0,
+                micCamAt: audioDefaults.micCamAt*0.7,
+                micSampleAt: 0
+            });
+
+            Object.assign(blendProxy, {
+                mic: 0.1,
+                track: 0.1,
+                video: 0.9
+            });
+
+            Object.assign(opticalFlowState, { speed: 0.025 });
+
+            toggleBase('dark');
+            spawnImageTargets();
+        },
+        'HKB:M:Mani: Pissarides'() {
+            Object.assign(state, {
+                speedLimit: 0.003,
+                speedAlpha: 0.1,
+                flowWidth: 20,
+                colorMapAlpha: 0.3333,
+                noiseWeight: 0.0004,
+                target: 0.0002,
+                varyTarget: 0
+            });
+
+            Object.assign(resetSpawner.uniforms, {
+                radius: 1,
+                speed: 0
+            });
+
+            Object.assign(blurState, {
+                radius: 12,
+                limit: 0.3
+            });
+
+            Object.assign(colorProxy, {
+                baseAlpha: 0.3333,
+                baseColor: [21, 222, 11],
+                flowAlpha: 1,
+                flowColor: [194, 106, 69],
+                fadeAlpha: 0.06,
+                fadeColor: [222, 50, 51]
+            });
+
+            Object.assign(blendProxy, {
+                mic: 1,
+                track: 1,
+                video: 0
+            });
+
+            Object.assign(audioState, {
+                micSpawnAt: audioDefaults.micSpawnAt*0.8,
+                micFormAt: audioDefaults.micFormAt,
+                micFlowAt: audioDefaults.micFlowAt*0.6,
+                micFastAt: audioDefaults.micFastAt,
+                micCamAt: 0,
+                micSampleAt: audioDefaults.micSampleAt*0.6
+            });
+
+            Object.assign(opticalFlowState, {
+                speed: 0.1,
+            });
+
+            toggleBase('dark');
+            clear();
+            respawn();
+        },
     };
 
     const presetAuto = {
@@ -2393,6 +2771,7 @@ export default (canvas, options) => {
         Object.assign(blurState, blurDefaults);
         Object.assign(audioState, audioDefaults);
 
+        quality.change(quality.level);
         presetter();
 
         updateGUI();
@@ -2579,17 +2958,16 @@ export default (canvas, options) => {
 
                     'O': keyframeCaller(() => tendrils.clear()),
 
-                    '0': keyframeCaller(presetters['Flow']),
-                    '1': keyframeCaller(presetters['Wings']),
-                    '2': keyframeCaller(presetters['Fluid']),
-                    // '3': keyframeCaller(presetters['Flow only']),
-                    '3': keyframeCaller(presetters['Ghostly']),
-                    '4': keyframeCaller(presetters['Noise only']),
-                    '5': keyframeCaller(presetters['Sea']),
+                    '1': keyframeCaller(presetters['Flow']),
+                    '2': keyframeCaller(presetters['Wings']),
+                    '3': keyframeCaller(presetters['Fluid']),
+                    '4': keyframeCaller(presetters['Frequencies']),
+                    '5': keyframeCaller(presetters['Ghostly']),
                     '6': keyframeCaller(presetters['Rave']),
-                    '7': keyframeCaller(presetters['Turbulence']),
-                    '8': keyframeCaller(presetters['Rorschach']),
+                    '7': keyframeCaller(presetters['Blood']),
+                    '8': keyframeCaller(presetters['Turbulence']),
                     '9': keyframeCaller(presetters['Funhouse']),
+                    '0': keyframeCaller(presetters['Noise Only']),
 
                     '-': adjustEach(-0.1),
                     '=': adjustEach(0.1),
@@ -2626,36 +3004,38 @@ export default (canvas, options) => {
             :   {
                     'H': () => toggleShowGUI(),
 
-                    '0': presetters['Flow'],
-                    '1': presetters['Wings'],
-                    '2': presetters['Fluid'],
-                    '3': presetters['Flow only'],
-                    '4': presetters['Noise only'],
-                    '5': presetters['Sea'],
-                    '6': presetters['Ghostly'],
-                    '7': presetters['Rave'],
-                    '8': presetters['Blood'],
-                    '9': presetters['Turbulence'],
-                    '-': presetters['Rorschach'],
-                    '=': presetters['Funhouse'],
-                    'W': presetters['Minimal'],
-                    'E': presetters['Kelp Forest'],
-                    'R': presetters['Starlings'],
-                    'T': presetters['Folding'],
+                    '1': presetters['Flow'],
+                    '2': presetters['Wings'],
+                    '3': presetters['Fluid'],
+                    '4': presetters['Frequencies'],
+                    '5': presetters['Ghostly'],
+                    '6': presetters['Rave'],
+                    '7': presetters['Blood'],
+                    '8': presetters['Turbulence'],
+                    '9': presetters['Funhouse'],
+                    '0': presetters['Noise Only'],
+                    '-': presetters['Flow Only'],
+                    'Q': presetters['Folding'],
+                    'W': presetters['Rorschach'],
+                    'E': presetters['Starlings'],
+                    'R': presetters['Sea'],
+                    'T': presetters['Kelp Forest'],
                     'Y': presetters['Tornado Alley'],
                     'U': presetters['Pop Tide'],
                     'I': presetters['Narcissus Pool'],
-                    'O': presetters['Frequencies'],
+                    'O': presetters['Minimal'],
                     'P': presetters['Pissarides'],
 
-                    '<space>': () => restart(),
+                    'G': presetters['HKB:G:Mani: Flow'],
+                    'Z': presetters['HKB:Z:Mani: Folding'],
+                    'X': presetters['HKB:X:Mani: Starlings'],
+                    'C': presetters['HKB:C:Mani: Kelp Forest'],
+                    'V': presetters['HKB:V:Mani: Tornado Alley'],
+                    'B': presetters['HKB:B:Mani: Pop Tide'],
+                    'N': presetters['HKB:N:Mani: Narcissus Pool'],
+                    'M': presetters['HKB:M:Mani: Pissarides'],
 
-                    'X': () => spawnFlow(),
-                    'C': () => spawnFastest(),
-                    'V': () => spawnForm(),
-                    'B': () => restart(),
-                    'N': () => spawnSamples(),
-                    'M': () => controllers.spawnImageTargets(),
+                    '<space>': () => restart(),
 
                     "'": () => spawnFlow(),
                     ';': () => spawnFastest(),
@@ -2663,7 +3043,10 @@ export default (canvas, options) => {
 
                     '<shift>': () => restart(),
                     '/': () => spawnSamples(),
-                    '.': () => controllers.spawnImageTargets()
+                    '.': () => controllers.spawnImageTargets(),
+                    '\\': () => clear(),
+
+                    '`': () => state.autoClearView = !state.autoClearView
                 });
 
         if(fullscreen) {
