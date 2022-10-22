@@ -2380,21 +2380,21 @@ export default (canvas, options) => {
             respawn();
         },
 
-        // Hysteria Kinetic Bliss (HKB)
-        // HKB white 236, 251, 208
-        // HKB light blue 72, 83, 245
-        // HKB light green 21, 222, 11
-        // HKB green 82, 164, 52
-        // HKB red 222, 50, 51
-        // HKB orange 194, 106, 69
-        // HKB pink 209, 22, 82
-        // HKB purple 183, 49, 126
-        // HKB dark blue 6, 10, 113
-        // HKB dark purple 47, 15, 35
-        // HKB dark green 3, 66, 2
-        // HKB dark orange 90, 31, 33
-        // HKB black 10, 21, 42
-        'HKB:G:Mani: Flow'() {
+        // Hysteria Kinetic Bliss (H)
+        // H white 236, 251, 208
+        // H light blue 72, 83, 245
+        // H light green 21, 222, 11
+        // H green 82, 164, 52
+        // H red 222, 50, 51
+        // H orange 194, 106, 69
+        // H pink 209, 22, 82
+        // H purple 183, 49, 126
+        // H dark blue 6, 10, 113
+        // H dark purple 47, 15, 35
+        // H dark green 3, 66, 2
+        // H dark orange 90, 31, 33
+        // H black 10, 21, 42
+        'H:G:Flow'() {
             Object.assign(state, {
                 flowWidth: 5,
                 colorMapAlpha: 0
@@ -2425,7 +2425,7 @@ export default (canvas, options) => {
                 micSampleAt: audioDefaults.micSampleAt*0.9
             });
         },
-        'HKB:Z:Mani: Folding'() {
+        'H:Z:Folding'() {
             Object.assign(state, {
                 noiseWeight: 0.005,
                 varyNoise: 0.3,
@@ -2475,7 +2475,7 @@ export default (canvas, options) => {
             toggleBase('dark');
             restart();
         },
-        'HKB:X:Mani: Starlings'() {
+        'H:X:Starlings'() {
             Object.assign(state, {
                 flowWeight: 1.5,
                 noiseWeight: 0.003,
@@ -2520,7 +2520,7 @@ export default (canvas, options) => {
             toggleBase('dark');
             spawnSamples();
         },
-        'HKB:C:Mani: Kelp Forest'() {
+        'H:C:Kelp Forest'() {
             Object.assign(state, {
                 noiseWeight: 0.004,
                 varyNoise: 0.3,
@@ -2564,7 +2564,7 @@ export default (canvas, options) => {
 
             toggleBase('dark');
         },
-        'HKB:V:Mani: Tornado Alley'() {
+        'H:V:Tornado Alley'() {
             Object.assign(state, {
                 noiseWeight: 0.01,
                 varyNoise: 0,
@@ -2610,7 +2610,7 @@ export default (canvas, options) => {
             toggleBase('dark');
             spawnImageTargets();
         },
-        'HKB:B:Mani: Pop Tide'() {
+        'H:B:Pop Tide'() {
             Object.assign(state, {
                 noiseWeight: 0.01,
                 varyNoise: 0,
@@ -2656,7 +2656,7 @@ export default (canvas, options) => {
             toggleBase('dark');
             restart();
         },
-        'HKB:N:Mani: Narcissus Pool'() {
+        'H:N:Narcissus Pool'() {
             Object.assign(state, {
                 noiseWeight: 0.01,
                 varyNoise: 0,
@@ -2700,7 +2700,7 @@ export default (canvas, options) => {
             toggleBase('dark');
             spawnImageTargets();
         },
-        'HKB:M:Mani: Pissarides'() {
+        'H:M:Pissarides'() {
             Object.assign(state, {
                 speedLimit: 0.003,
                 speedAlpha: 0.1,
@@ -3026,14 +3026,14 @@ export default (canvas, options) => {
                     'O': presetters['Minimal'],
                     'P': presetters['Pissarides'],
 
-                    'G': presetters['HKB:G:Mani: Flow'],
-                    'Z': presetters['HKB:Z:Mani: Folding'],
-                    'X': presetters['HKB:X:Mani: Starlings'],
-                    'C': presetters['HKB:C:Mani: Kelp Forest'],
-                    'V': presetters['HKB:V:Mani: Tornado Alley'],
-                    'B': presetters['HKB:B:Mani: Pop Tide'],
-                    'N': presetters['HKB:N:Mani: Narcissus Pool'],
-                    'M': presetters['HKB:M:Mani: Pissarides'],
+                    'G': presetters['H:G:Flow'],
+                    'Z': presetters['H:Z:Folding'],
+                    'X': presetters['H:X:Starlings'],
+                    'C': presetters['H:C:Kelp Forest'],
+                    'V': presetters['H:V:Tornado Alley'],
+                    'B': presetters['H:B:Pop Tide'],
+                    'N': presetters['H:N:Narcissus Pool'],
+                    'M': presetters['H:M:Pissarides'],
 
                     '<space>': () => restart(),
 
