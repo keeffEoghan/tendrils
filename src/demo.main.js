@@ -2449,7 +2449,7 @@ export default (canvas, options) => {
                 flowAlpha: 0.8,
                 flowColor: [209, 22, 82],
                 fadeAlpha: 0.15,
-                fadeColor: [6, 10, 113]
+                fadeColor: [222, 50, 51]
             });
 
             Object.assign(audioState, {
