@@ -1,357 +1,309 @@
-@import '../libs/build/reset';
-
-@viewport {
-    zoom: 1;
-    width: device-width;
-}
-
-html {
-    box-sizing: border-box;
-    font-family: sans-serif;
-    font-size: 14px;
-    zoom: 1;
-
-    @media (min-width: 480px) {
-        font-size: 16px;
-    }
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: inherit;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-    width: 100vw;
-    height: 100vh;
-}
-
-body {
-    margin: 0;
-}
-
-main {
-    min-height: 100%;
-}
-
-small {
-    font-size: 0.75em;
-}
-
-em {
-    font-style: italic;
-}
-
 canvas {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    cursor: crosshair;
-    transition: background-color 200ms ease-in-out;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  cursor: crosshair;
+  transition: background-color 200ms ease-in-out;
 
-    &.epok-dark {
-        background: #000;
-    }
+  &.epok-dark {
+    background: #000;
+  }
 
-    &.epok-light {
-        background: #fff;
-    }
+  &.epok-light {
+    background: #fff;
+  }
 
-    &.epok-no-cursor {
-        cursor: none;
-    }
+  &.epok-no-cursor {
+    cursor: none;
+  }
 }
 
 .epok-a,
 .epok-cta {
-    cursor: pointer;
+  cursor: pointer;
+  color: #efefef;
+
+  &.epok-invert {
+    color: #111;
+  }
+
+  &:visited {
     color: #efefef;
 
     &.epok-invert {
-        color: #111;
+      color: #111;
     }
+  }
 
-    &:visited {
-        color: #efefef;
+  &:hover,
+  &:focus {
+    color: #fff;
 
-        &.epok-invert {
-            color: #111;
-        }
+    &.epok-invert {
+      color: #000;
     }
+  }
 
-    &:hover,
-    &:focus {
-        color: #fff;
-
-        &.epok-invert {
-            color: #000;
-        }
-    }
-
-    &:active {
-        color: #414141;
-    }
+  &:active {
+    color: #414141;
+  }
 }
 
 .epok-a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .epok-cta {
+  font-size: 1.1em;
+  font-weight: 600;
+  background-color: transparent;
+  border: none;
+}
+
+.epok-info-more {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  &.epok-hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.epok-info-more-content {
+  flex: 0 1 auto;
+  margin: auto 0;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.epok-info-more {
+  position: fixed;
+  z-index: 1002;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 3em;
+  line-height: 1.85;
+  background-color: #fff;
+  color: #000;
+  transition: opacity 400ms ease-in-out,
+    transform 400ms ease-out;
+
+  &.epok-hide {
+    transform: scale(1.05);
+  }
+
+  .epok-info-more-button {
+    padding: 0;
+    margin-left: auto;
+  }
+
+  h2 {
     font-size: 1.1em;
-    font-weight: 600;
-    background-color: transparent;
-    border: none;
-}
+    font-weight: bolder;
+    margin: 2em 0 1em;
+  }
 
-.epok-info-more {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
+  h3 {
+    font-size: 1.05em;
+    font-weight: bold;
+    margin: 1em 0 1em;
+  }
 
-    &.epok-hide {
-        opacity: 0;
-        pointer-events: none;
-    }
-}
+  p,
+  aside {
+    margin-bottom: 1em;
+  }
 
-.epok-info-more-content {
-    flex: 0 1 auto;
-    margin: auto 0;
-    max-height: 100%;
-    overflow: auto;
-}
+  aside {
+    font-weight: lighter;
+    font-style: italic;
+    opacity: 0.75;
+  }
 
-.epok-info-more {
-    position: fixed;
-    z-index: 1002;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 3em;
-    line-height: 1.85;
-    background-color: #fff;
-    color: #000;
-    transition: opacity 400ms ease-in-out,
-        transform 400ms ease-out;
+  ul {
+    line-height: 1.6;
+    list-style-type: circle;
+    margin: 0 0 1em 2em;
+  }
 
-    &.epok-hide {
-        transform: scale(1.05);
-    }
+  li {
+    padding: 0.1em 0;
+  }
 
-    .epok-info-more-button {
-        padding: 0;
-        margin-left: auto;
-    }
-
-    h2 {
-        font-size: 1.1em;
-        font-weight: bolder;
-        margin: 2em 0 1em;
-    }
-
-    h3 {
-        font-size: 1.05em;
-        font-weight: bold;
-        margin: 1em 0 1em;
-    }
-
-    p,
-    aside {
-        margin-bottom: 1em;
-    }
-
-    aside {
-        font-weight: lighter;
-        font-style: italic;
-        opacity: 0.75;
-    }
-
-    ul {
-        line-height: 1.6;
-        list-style-type: circle;
-        margin: 0 0 1em 2em;
-    }
-
-    li {
-        padding: 0.1em 0;
-    }
-
-    code {
-        display: inline-block;
-        padding: 0 0.4em;
-        background-color: #333;
-        color: #fff;
-        border-radius: 2px;
-        font-style: normal;
-        font-family: monospace;
-    }
+  code {
+    display: inline-block;
+    padding: 0 0.4em;
+    background-color: #333;
+    color: #fff;
+    border-radius: 2px;
+    font-style: normal;
+    font-family: monospace;
+  }
 }
 
 .epok-info-more-content {
-    padding: 2em;
-    margin: auto;
-    max-width: 36em;
+  padding: 2em;
+  margin: auto;
+  max-width: 36em;
 }
 
 
 /* Quick fix for a broken DAT.GUI style */
 .hue-field {
-    width: 13px !important;
+  width: 13px !important;
 }
 
 .npm-scb-wrap,
 .npm-scb-now-playing {
-    right: 0;
+  right: 0;
 }
 
 .npm-scb-inner {
-    transition: width 500ms cubic-bezier(1, 0, 0, 1),
-        top 500ms ease-out,
-        background-color 300ms ease-out 100ms,
-        box-shadow 200ms ease-out 200ms;
+  transition: width 500ms cubic-bezier(1, 0, 0, 1),
+    top 500ms ease-out,
+    background-color 300ms ease-out 100ms,
+    box-shadow 200ms ease-out 200ms;
 }
 
 .npm-scb-wrap {
-    opacity: 0.7;
-    text-shadow: 0 0 3px #000,
-        0 0 3px #000;
-    transition: opacity 300ms ease-in-out;
+  opacity: 0.7;
+  text-shadow: 0 0 3px #000,
+    0 0 3px #000;
+  transition: opacity 300ms ease-in-out;
 
-    &:hover {
-        opacity: 1;
-    }
+  &:hover {
+    opacity: 1;
+  }
 
-    .epok-track {
-        margin: 0;
-    }
+  .epok-track {
+    margin: 0;
+  }
 }
 
 .npm-scb-now-playing {
-    width: auto;
+  width: auto;
 }
 
 .npm-scb-info {
-    width: auto;
+  width: auto;
 }
 
 .npm-scb-icon {
-    background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .epok-soundcloud.epok-show,
 .npm-scb-wrap:hover {
-    .npm-scb-inner {
-        top: 0;
-        background-color: rgba(255, 255, 255, 0.85);
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
+  .npm-scb-inner {
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
 
-    .npm-scb-now-playing {
-        opacity: 0;
-    }
+  .npm-scb-now-playing {
+    opacity: 0;
+  }
 }
 
 .epok-edit-controls {
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: stretch;
+  top: 0;
+  right: 0;
+  max-height: 100%;
+  padding-bottom: 20px;
+  z-index: 1000;
+  transition: opacity 300ms ease-out;
+
+  &.epok-hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .dg.main {
+    overflow-y: auto;
+  }
+
+  .close-button {
     position: absolute;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: stretch;
-    top: 0;
-    right: 0;
-    max-height: 100%;
-    padding-bottom: 20px;
-    z-index: 1000;
-    transition: opacity 300ms ease-out;
-
-    &.epok-hide {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .dg.main {
-        overflow-y: auto;
-    }
-
-    .close-button {
-        position: absolute;
-        bottom: 0;
-    }
+    bottom: 0;
+  }
 }
 
 .epok-track {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .epok-audio-controls {
-    display: none;
-    flex-flow: row nowrap;
-    align-items: stretch;
-    justify-content: center;
-    padding: 0.7em 1em;
-    color: #fff;
-    text-shadow: 0 0 3px #000,
-        0 0 3px #000;
+  display: none;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0.7em 1em;
+  color: #fff;
+  text-shadow: 0 0 3px #000,
+    0 0 3px #000;
 
-    &.epok-show {
-        display: flex;
+  &.epok-show {
+    display: flex;
+  }
+
+  &.epok-on-window {
+    position: absolute;
+    z-index: 1002;
+  }
+
+  .epok-play-state {
+    position: relative;
+  }
+
+  .epok-play-toggle,
+  .epok-play-indicator {
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+  }
+
+  .epok-play-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+
+    &::after {
+      content: '\25BA';
     }
+  }
 
-    &.epok-on-window {
-        position: absolute;
-        z-index: 1002;
+  .epok-play-toggle {
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+
+    &:checked + .epok-play-indicator::after {
+      content: '\2759\2759';
     }
+  }
 
-    .epok-play-state {
-        position: relative;
-    }
-
-    .epok-play-toggle,
-    .epok-play-indicator {
-        width: 1.2rem;
-        height: 1.2rem;
-        line-height: 1.2rem;
-    }
-
-    .epok-play-indicator {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-
-        &::after {
-            content: '\25BA';
-        }
-    }
-
-    .epok-play-toggle {
-        position: relative;
-        z-index: 10;
-        opacity: 0;
-        padding: 0;
-        border: none;
-        margin: 0;
-        cursor: pointer;
-
-        &:checked + .epok-play-indicator::after {
-            content: '\2759\2759';
-        }
-    }
-
-    .epok-progress {
-        flex: 1 1 auto;
-        margin: 0 1em;
-        cursor: pointer;
-    }
+  .epok-progress {
+    flex: 1 1 auto;
+    margin: 0 1em;
+    cursor: pointer;
+  }
 }
