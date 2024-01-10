@@ -45,7 +45,9 @@ deploy:
 	git checkout master
 	git merge $(BRANCH)
 	make dist
-	git add -f build
+	rm -rf docs
+	cp -R build docs
+	git add docs
 	git commit
 	git push
 	@echo "Switching to '$(BRANCH)' from 'master'"

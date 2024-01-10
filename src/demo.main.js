@@ -610,9 +610,7 @@ export default (canvas, options) => {
   const toggleMedia = (toggle = appSettings.useMedia) =>
     ((toggle)? getMedia : stopMedia)();
 
-  if(appSettings.useMedia) {
-    getMedia();
-  }
+  appSettings.useMedia && getMedia();
 
 
   // Audio `react` and `test` function pairs - for `AudioTrigger.fire`
@@ -2316,16 +2314,12 @@ export default (canvas, options) => {
     },
 
     // Submersive.
-    // 68, 111, 150
-    // 43, 45, 57
-    // 124, 199, 201
-    // 120, 80, 134
-    // 183, 87, 74
-    // 164, 162, 173
-    // 210, 218, 221
-    // 197, 118, 204
-    // 40, 39, 39
+    // 68, 111, 150  |   43, 45, 57  | 124, 199, 201
+    // 120, 80, 134  |  183, 87, 74  | 164, 162, 173
+    // 210, 218, 221 | 197, 118, 204 |  40, 39, 39
     'S:Intro'() {
+      // See 'Pissarides'.
+
       Object.assign(state, {
         speedLimit: 0.003,
         speedAlpha: 0.1,
@@ -2354,8 +2348,10 @@ export default (canvas, options) => {
       respawn();
     },
     'S:Awe'() {
+      // See 'Blood'.
+
       Object.assign(state, {
-        forceWeight: 0.015,
+        forceWeight: 0.018,
         noiseWeight: 0.001,
         noiseSpeed: 0.0005,
         speedAlpha: 0.001,
@@ -2363,6 +2359,8 @@ export default (canvas, options) => {
       });
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.5, speed: 4 });
+      Object.assign(blendProxy, { mic: 1, track: 1, video: 0.5 });
 
       Object.assign(colorProxy, {
         baseAlpha: 0.9,
@@ -2373,15 +2371,12 @@ export default (canvas, options) => {
         fadeColor: [68, 111, 150]
       });
 
-      Object.assign(resetSpawner.uniforms, { radius: 0.5, speed: 4 });
-
-      Object.assign(blendProxy, { mic: 1, track: 1, video: 0.5 });
-
       toggleBase('dark');
-      clear();
       restart();
     },
     'S:Wonder'() {
+      // See 'Sea'.
+
       Object.assign(state, {
         flowWidth: 5,
         forceWeight: 0.013,
@@ -2392,22 +2387,24 @@ export default (canvas, options) => {
         colorMapAlpha: 0.2
       });
 
-      Object.assign(resetSpawner.uniforms, { radius: 3, speed: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.5, speed: 4 });
+      Object.assign(blendProxy, { mic: 1, track: 1, video: 0.3 });
 
       Object.assign(colorProxy, {
         baseAlpha: 0.8,
         baseColor: [120, 80, 134],
         flowAlpha: 0.2,
         flowColor: [210, 218, 221],
-        fadeAlpha: 0.3,
+        fadeAlpha: Math.max(state.flowDecay, 0.3),
         fadeColor: [40, 39, 39]
       });
 
-      Object.assign(blendProxy, { mic: 1, track: 1, video: 0.3 });
-
       toggleBase('dark');
+      restart();
     },
     'S:Euphoria'() {
+      // See 'H:X:Starlings'.
+
       Object.assign(state, {
         flowWeight: 1.5,
         noiseWeight: 0.003,
@@ -2422,14 +2419,14 @@ export default (canvas, options) => {
       });
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
-      Object.assign(resetSpawner.uniforms, { radius: 3, speed: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.8, speed: 0 });
       Object.assign(flowPixelState, { scale: 'mirror xy' });
 
       Object.assign(colorProxy, {
         baseAlpha: 1,
         baseColor: [40, 39, 39],
         flowAlpha: 0.2,
-        flowColor: [197, 118, 204],
+        flowColor: [183, 87, 74],
         fadeAlpha: 0.1,
         fadeColor: [120, 80, 134]
       });
@@ -2440,13 +2437,15 @@ export default (canvas, options) => {
       restart();
     },
     'S:Inspiration'() {
+      // See 'H:B:Pop Tide'.
+
       Object.assign(state, {
-        noiseWeight: 0.01,
+        noiseWeight: 0.005,
         varyNoise: 0,
         flowDecay: 0.005,
         noiseScale: 0.1,
         varyNoiseScale: -50,
-        noiseSpeed: 0.00007,
+        noiseSpeed: 0.00005,
         varyNoiseSpeed: 0,
         target: 0.0025,
         speedAlpha: 0.02,
@@ -2454,25 +2453,73 @@ export default (canvas, options) => {
       });
 
       Object.assign(colorProxy, {
-        baseAlpha: 0.8,
+        baseAlpha: 0.9,
         baseColor: [210, 218, 221],
         flowAlpha: 0.2,
         flowColor: [197, 118, 204],
-        fadeAlpha: 0.1,
-        fadeColor: [120, 80, 134]
+        fadeAlpha: Math.max(state.flowDecay, 0.1),
+        fadeColor: [68, 111, 150]
       });
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
       Object.assign(blendProxy, { mic: 1, track: 1, video: 0 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.6, speed: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.6, speed: 0.3 });
 
       toggleBase('dark');
       restart();
     },
-    'S:Transcendence'() { return presetters['S:Awe'](); },
-    'S:Basking'() { return presetters['S:Intro'](); },
-    'S:Subscribe'() { return presetters['S:Awe'](); },
-    'S:Subscribed'() { return presetters['S:Intro'](); },
+    'S:Transcendence'() {
+      // See 'Flow'.
+
+      Object.assign(state, { flowWidth: 5, colorMapAlpha: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.25, speed: 0.01 });
+      Object.assign(blurState, { radius: 9, limit: 0.5 });
+
+      Object.assign(colorProxy, {
+        baseAlpha: 0.8,
+        baseColor: [68, 111, 150],
+        flowAlpha: 0.2,
+        flowColor: [124, 199, 201],
+        fadeAlpha: Math.max(state.flowDecay, 0.1),
+        fadeColor: [43, 45, 57]
+      });
+
+      toggleBase('dark');
+    },
+    'S:Basking'() {
+      // See 'Frequencies'.
+
+      Object.assign(state, {
+        forceWeight: 0.015,
+        flowWeight: -0.4,
+        speedAlpha: 0.1,
+        colorMapAlpha: 0.9,
+        noiseWeight: 0.005,
+        noiseScale: 1.2,
+        varyNoiseScale: 2,
+        noiseSpeed: 0.0003,
+        varyNoiseSpeed: 0.01
+      });
+
+      Object.assign(colorProxy, {
+        baseAlpha: 0.7,
+        baseColor: [183, 87, 74],
+        flowAlpha: 0.1,
+        flowColor: [210, 218, 221],
+        fadeAlpha: Math.max(state.flowDecay, 0.1),
+        fadeColor: [40, 39, 39]
+      });
+
+      Object.assign(blurState, { radius: 9, limit: 0.5 });
+      Object.assign(blendProxy, { mic: 1, track: 1, video: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.22, speed: 0 });
+      Object.assign(opticalFlowState, { speed: 0.03, offset: 0 });
+
+      toggleBase('dark');
+      spawnImageTargets();
+      restart();
+    },
+    'S:Subscribe': () => presetters['S:Intro'](),
 
     // Hysteria Kinetic Bliss (H)
     // H white 236, 251, 208
@@ -2855,7 +2902,7 @@ export default (canvas, options) => {
     loop: appSettings.loopPresets
   };
 
-  const wrapPresetter = (presetter, k) => {
+  const wrapPresetter = (presetter, k, name) => {
     Object.assign(state, defaultState);
     Object.assign(resetSpawner.uniforms, resetSpawnerDefaults);
     Object.assign(flowPixelState, flowPixelDefaults);
@@ -2874,12 +2921,13 @@ export default (canvas, options) => {
     // restart();
 
     presetAuto.current = k;
+    console.log('Preset', k, name);
   };
 
   const presetterKeys = Object.keys(presetters);
 
   presetterKeys.forEach((p, k) => {
-    presetters[p] = wrapPresetter.bind(null, presetters[p], k);
+    presetters[p] = wrapPresetter.bind(null, presetters[p], k, p);
     gui.presets.add(presetters, p);
   });
 
@@ -3218,6 +3266,8 @@ export default (canvas, options) => {
     setupImage,
     image,
     video,
+    getMedia,
+    stopMedia,
     toggleMedia,
     timer
   };

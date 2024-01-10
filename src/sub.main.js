@@ -20,12 +20,11 @@ let readyCallbacks = {
     // let preset = 'S:Transcendence';
     // let preset = 'S:Basking';
     // let preset = 'S:Subscribe';
-    // let preset = 'S:Subscribed';
 
     const tendrils = tendrilsDemo(canvas, {
       // track: './audio/sub/clip.gitignore.mp3',
       // static_image: './images/sub/image.png',
-      use_media: false,
+      // use_media: false,
       edit: false,
       keyboard: false,
       preset
