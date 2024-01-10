@@ -24,7 +24,8 @@ let readyCallbacks = {
     const tendrils = tendrilsDemo(canvas, {
       // track: './audio/sub/clip.gitignore.mp3',
       // static_image: './images/sub/image.png',
-      // use_media: false,
+      static_image: './images/ringed-dot/w-b.png',
+      use_media: false,
       edit: false,
       keyboard: false,
       preset
@@ -39,18 +40,27 @@ let readyCallbacks = {
         const to = all.reduce((to, at) => {
             const { isIntersecting: i1, time: t1 } = at;
 
+            if(i1) {
+              const t = at.target.dataset.tendrilsTrigger;
+              const f = t && tendrils.controls[t];
+
+              f && console.log(t, setTimeout(f, 300));
+            }
+
             return ((i1 && (!to || (t1 > to.time)))? at : to);
           },
           null);
 
-        const p = to && to.target.dataset.tendrilsPreset;
+        if(!to) { return; }
+
+        const p = to.target.dataset.tendrilsPreset;
         const f = p && (preset !== (preset = p)) && tendrils.presets[p];
 
         f && f();
       },
       { threshold: 1 });
 
-    document.querySelectorAll('[data-tendrils-preset]')
+    document.querySelectorAll('[data-tendrils-preset], [data-tendrils-trigger]')
       .forEach((e) => intersector.observe(e));
 
     document.removeEventListener('readystatechange', updateState);

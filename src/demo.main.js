@@ -146,13 +146,14 @@ export default (canvas, options) => {
 
     pointerFlow: (''+settings.pointer_flow !== 'false'),
 
-    staticImage: (((''+settings.static_image).match(/(false|undefined)/gi))? ''
-      : (decodeURIComponent(settings.static_image) ||
-        rootPath+'images/epok/eye.png'))
-        // rootPath+'images/fortune.png'))
-        // rootPath+'images/unit31-unfolded.jpg'))
-        // rootPath+'images/hysteria-kinetic-bliss-poster.jpeg'))
-        // rootPath+'images/hysteria-kinetic-bliss-logo.png'))
+    staticImage: (((''+settings.static_image) === 'false')? ''
+      : (decodeURIComponent(settings.static_image || '') ||
+          rootPath+'images/ringed-dot/w-b.png'))
+          // rootPath+'images/epok/eye.png'))
+          // rootPath+'images/fortune.png'))
+          // rootPath+'images/unit31-unfolded.jpg'))
+          // rootPath+'images/hysteria-kinetic-bliss-poster.jpeg'))
+          // rootPath+'images/hysteria-kinetic-bliss-logo.png'))
   };
 
   Object.assign(timer.app,
@@ -296,6 +297,9 @@ export default (canvas, options) => {
       });
     }
   }
+
+  const toggleTrack = () =>
+    ((tendrils.track.paused)? track.play() : track.pause());
 
 
   // Analyser setup
@@ -497,13 +501,10 @@ export default (canvas, options) => {
 
     if(Math.min(...shape) > 0) {
       imageSpawner.buffer.shape = tendrils.colorMap.shape = shape;
-
       imageSpawner.setPixels(raster);
       imageSpawner.spawn(tendrils, undefined, buffer);
     }
-    else {
-      console.warn('`spawnRaster`: image not ready.', raster);
-    }
+    else { console.warn('`spawnRaster`: image not ready.', raster); }
   }
 
   const spawnImage = (buffer = spawnTargets.spawnImage) =>
@@ -632,9 +633,7 @@ export default (canvas, options) => {
       if(t) {
         const cached = audioCache.get(key);
 
-        if(cached) {
-          return cached;
-        }
+        if(cached) { return cached; }
         else {
           const value = test(trigger, t);
 
@@ -643,9 +642,7 @@ export default (canvas, options) => {
           return value;
         }
       }
-      else {
-        return t;
-      }
+      else { return t; }
     };
 
   const trackFires = [
@@ -1435,7 +1432,7 @@ export default (canvas, options) => {
 
   // Controls
 
-  const controllers = {
+  const controls = {
     clear,
     clearView,
     clearFlow,
@@ -1454,14 +1451,14 @@ export default (canvas, options) => {
 
   gui.controls = gui.main.addFolder('controls');
 
-  for(let c in controllers) { gui.controls.add(controllers, c); }
+  for(let c in controls) { gui.controls.add(controls, c); }
 
 
   // Presets
 
   gui.presets = gui.main.addFolder('presets');
 
-  const presetters = {
+  const presets = {
     'Flow'() {
       Object.assign(state, {
         flowWidth: 5,
@@ -2519,7 +2516,7 @@ export default (canvas, options) => {
       spawnImageTargets();
       restart();
     },
-    'S:Subscribe': () => presetters['S:Intro'](),
+    'S:Subscribe': () => presets['S:Intro'](),
 
     // Hysteria Kinetic Bliss (H)
     // H white 236, 251, 208
@@ -2924,11 +2921,11 @@ export default (canvas, options) => {
     console.log('Preset', k, name);
   };
 
-  const presetterKeys = Object.keys(presetters);
+  const presetterKeys = Object.keys(presets);
 
   presetterKeys.forEach((p, k) => {
-    presetters[p] = wrapPresetter.bind(null, presetters[p], k, p);
-    gui.presets.add(presetters, p);
+    presets[p] = wrapPresetter.bind(null, presets[p], k, p);
+    gui.presets.add(presets, p);
   });
 
   const updatePresetAuto = (loop) => {
@@ -2940,7 +2937,7 @@ export default (canvas, options) => {
       presetAuto.interval = setInterval(() => {
           const next = (presetAuto.current+1)%presetterKeys.length;
 
-          presetters[presetterKeys[next]]();
+          presets[presetterKeys[next]]();
         },
         presetAuto.loop);
     }
@@ -3100,16 +3097,16 @@ export default (canvas, options) => {
 
           'O': keyframeCaller(() => tendrils.clear()),
 
-          '1': keyframeCaller(presetters['Flow']),
-          '2': keyframeCaller(presetters['Wings']),
-          '3': keyframeCaller(presetters['Fluid']),
-          '4': keyframeCaller(presetters['Frequencies']),
-          '5': keyframeCaller(presetters['Ghostly']),
-          '6': keyframeCaller(presetters['Rave']),
-          '7': keyframeCaller(presetters['Blood']),
-          '8': keyframeCaller(presetters['Turbulence']),
-          '9': keyframeCaller(presetters['Funhouse']),
-          '0': keyframeCaller(presetters['Noise Only']),
+          '1': keyframeCaller(presets['Flow']),
+          '2': keyframeCaller(presets['Wings']),
+          '3': keyframeCaller(presets['Fluid']),
+          '4': keyframeCaller(presets['Frequencies']),
+          '5': keyframeCaller(presets['Ghostly']),
+          '6': keyframeCaller(presets['Rave']),
+          '7': keyframeCaller(presets['Blood']),
+          '8': keyframeCaller(presets['Turbulence']),
+          '9': keyframeCaller(presets['Funhouse']),
+          '0': keyframeCaller(presets['Noise Only']),
 
           '-': adjustEach(-0.1),
           '=': adjustEach(0.1),
@@ -3141,41 +3138,41 @@ export default (canvas, options) => {
 
           '<shift>': keyframeCaller(() => restart()),
           '/': keyframeCaller(() => spawnSamples()),
-          '.': keyframeCaller(controllers.spawnImageTargets)
+          '.': keyframeCaller(controls.spawnImageTargets)
         }
       : {
           'H': () => toggleShowGUI(),
 
-          '1': presetters['Flow'],
-          '2': presetters['Wings'],
-          '3': presetters['Fluid'],
-          '4': presetters['Frequencies'],
-          '5': presetters['Ghostly'],
-          '6': presetters['Rave'],
-          '7': presetters['Blood'],
-          '8': presetters['Turbulence'],
-          '9': presetters['Funhouse'],
-          '0': presetters['Noise Only'],
-          '-': presetters['Flow Only'],
-          'Q': presetters['Folding'],
-          'W': presetters['Rorschach'],
-          'E': presetters['Starlings'],
-          'R': presetters['Sea'],
-          'T': presetters['Kelp Forest'],
-          'Y': presetters['Tornado Alley'],
-          'U': presetters['Pop Tide'],
-          'I': presetters['Narcissus Pool'],
-          'O': presetters['Minimal'],
-          'P': presetters['Pissarides'],
+          '1': presets['Flow'],
+          '2': presets['Wings'],
+          '3': presets['Fluid'],
+          '4': presets['Frequencies'],
+          '5': presets['Ghostly'],
+          '6': presets['Rave'],
+          '7': presets['Blood'],
+          '8': presets['Turbulence'],
+          '9': presets['Funhouse'],
+          '0': presets['Noise Only'],
+          '-': presets['Flow Only'],
+          'Q': presets['Folding'],
+          'W': presets['Rorschach'],
+          'E': presets['Starlings'],
+          'R': presets['Sea'],
+          'T': presets['Kelp Forest'],
+          'Y': presets['Tornado Alley'],
+          'U': presets['Pop Tide'],
+          'I': presets['Narcissus Pool'],
+          'O': presets['Minimal'],
+          'P': presets['Pissarides'],
 
-          'G': presetters['H:G:Flow'],
-          'Z': presetters['H:Z:Folding'],
-          'X': presetters['H:X:Starlings'],
-          'C': presetters['H:C:Kelp Forest'],
-          'V': presetters['H:V:Tornado Alley'],
-          'B': presetters['H:B:Pop Tide'],
-          'N': presetters['H:N:Narcissus Pool'],
-          'M': presetters['H:M:Pissarides'],
+          'G': presets['H:G:Flow'],
+          'Z': presets['H:Z:Folding'],
+          'X': presets['H:X:Starlings'],
+          'C': presets['H:C:Kelp Forest'],
+          'V': presets['H:V:Tornado Alley'],
+          'B': presets['H:B:Pop Tide'],
+          'N': presets['H:N:Narcissus Pool'],
+          'M': presets['H:M:Pissarides'],
 
           '<space>': () => restart(),
 
@@ -3185,7 +3182,7 @@ export default (canvas, options) => {
 
           '<shift>': () => restart(),
           '/': () => spawnSamples(),
-          '.': () => controllers.spawnImageTargets(),
+          '.': () => controls.spawnImageTargets(),
           '\\': () => clear(),
 
           '`': () => state.autoClearView = !state.autoClearView
@@ -3246,7 +3243,7 @@ export default (canvas, options) => {
 
   (''+settings.keyboard !== 'false') && keyMash();
 
-  presetters[settings.preset] && presetters[settings.preset]();
+  presets[settings.preset] && presets[settings.preset]();
 
   // Need some stuff exposed.
   // @todo Come up with a better interface than this.
@@ -3254,14 +3251,15 @@ export default (canvas, options) => {
     settings,
     appSettings,
     tendrils,
-    ...controllers,
-    presets: presetters,
+    controls,
+    presets,
     tracks,
     defaultState,
     audioDefaults,
     audioState,
     restartAudio,
     setupTrack,
+    toggleTrack,
     track,
     setupImage,
     image,
