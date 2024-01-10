@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- @see https://megatags.co -->
+
+    <!-- Common tags -->
+    <meta charset="utf-8">
+    <title>Tendrils - epok.tech</title>
+
+    <!-- Search Engine -->
+    <meta name="description" content="Forms in motion, interact spontaneously, knitting emergent interconnections. Interactive music visuals.">
+    <meta name="image" content="https://keeffeoghan.github.io/tendrils/build/images/thumb.png">
+
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="Tendrils - epok.tech">
+    <meta itemprop="description" content="Forms in motion, interact spontaneously, knitting emergent interconnections. Interactive music visuals.">
+    <meta itemprop="image" content="https://keeffeoghan.github.io/tendrils/build/images/thumb.png">
+
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta property="og:title" name="og:title" content="Tendrils - epok.tech">
+    <meta property="og:description" name="og:description" content="Forms in motion, interact spontaneously, knitting emergent interconnections. Interactive music visuals.">
+    <meta property="og:image" name="og:image" content="https://keeffeoghan.github.io/tendrils/build/images/thumb.png">
+    <meta property="og:url" name="og:url" content="https://keeffeoghan.github.io/tendrils">
+    <meta property="og:site_name" name="og:site_name" content="Tendrils - epok.tech">
+    <meta property="og:locale" name="og:locale" content="en_GB">
+    <meta name="fb:admins" content="100001587181938">
+    <meta property="og:type" name="og:type" content="website">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, target-densitydpi=device-dpi">
+
+    <link rel="stylesheet" type="text/css" href="./css/demo.css">
+  </head>
+  <body>
+    <canvas touch-action="none"></canvas>
+
+    <section class="epok-info-more epok-hide">
+      <button class="epok-info-more-button epok-cta epok-invert"><em>[Close]</em></button>
+      <article class="epok-info-more-content">
+        <aside>
+          Interactive music visuals - adapted from
+          <a class="epok-a epok-invert" href="https://keeffeoghan.github.io/work/tendrils/" target="_blank">the original</a>,
+          made by
+          <a class="epok-a epok-invert" href="https://keeffeoghan.github.io" target="_blank">Eoghan O'Keeffe</a>.
+        </aside>
+
+        <h2>Concept</h2>
+        <p>
+          Forms in motion, interact spontaneously, knitting emergent interconnections.<br/>
+          A continuous reflexive process &mdash; coheres through ascending scales of complexity; recurs through cycles of entropy and order.
+        </p>
+        <p>
+          Moving through scales, evoking natural forms:<br/>
+          From primordial matter, forms; ovum, animal...<br/>
+          Through self; community...<br/>
+          Towards interconnection; cohesion...
+        </p>
+
+        <h2>Tech</h2>
+        <p>
+          The visuals are an emergent physical system of interacting particles.<br/>
+          Complex organic forms emerge spontaneously, from simple interactions at the individual scale &mdash; in a fluid-like advection, particles recursively affect and affected by the field of motion.
+        </p>
+        <aside>
+          At the core of this effect, each particle leaves a trace of its velocity in the velocity field, which in turn affects the velocity of particles passing through that field. This simple interaction at the individual scale gives rise to the complex organic forms at the collective scale, without explicit control or guidance.<br/>
+          The idea came while reading about advection in Lagrangian fluid dynamics, in the excellent series of articles <a class="epok-a epok-invert" href="https://software.intel.com/en-us/articles/fluid-simulation-for-video-games-part-1">Fluid Simulation for Video Games, by Dr. Michael J. Gourlay for <em>Intel</em></a> &mdash; this is kind of a simpler advection, showing some fluid-like properties.
+        </aside>
+        <p>
+          Stochastic noise also drives the process &mdash; to set it in motion, and to shape it through scales and forms with more control (increasing, cycling wavelengths of noise).
+        </p>
+        <aside>
+          Noise is used here as a way to guide and direct the general motion of the particles, for animation.
+        </aside>
+        <aside>
+          An optical flow process is performed on the camera, so the motion of the particles is influenced by people moving naturally in front of their camera. I like this kind of natural interaction (as with the micophone interaction), lowering the barrier between you and the experience.<br/>
+          Check out
+          <a class="epok-a epok-invert" href="http://thomasdiewald.com/blog/?p=2766" target="_blank">Thomas DieWald</a>
+          and
+          <a class="epok-a epok-invert" href="https://adamferriss.com/gush/">Adam Ferris</a>
+          for some nice examples of this technique.
+        </aside>
+
+        <h2>Controls</h2>
+        <aside>
+          <p>
+            Explore through mouse, keyboard, touch, camera, microphone, and controls.
+          </p>
+
+          <h3>Main controls</h3>
+          <p>
+            Main settings and controls can be found in the edit panel, which appears at the right side of the screen.
+          </p>
+
+          <h3>Keyboard &mdash; main controls</h3>
+          <p>
+            The main keyboard controls - most of these can also be found in the edit panel.
+          </p>
+          <p>
+            Also, create your own animation with keyframes.<br/>
+            (Experimental...)
+          </p>
+          <ul>
+            <li><code>H</code> &mdash; Toggle the edit panel on or off</li>
+
+            <li><code>&lt;space&gt;</code> &mdash; Play/pause</li>
+
+            <li><code>[</code> &mdash; Seek backwards</li>
+            <li><code>]</code> &mdash; Seek forwards</li>
+
+            <li><code>F</code> &mdash; Fullscreen</li>
+
+            <li><code>O</code> &mdash; Clear the view</li>
+
+            <li><code>0</code> &mdash; <code>Flow</code> preset</li>
+            <li><code>1</code> &mdash; <code>Wings</code> preset</li>
+            <li><code>2</code> &mdash; <code>Fluid</code> preset</li>
+            <li><code>3</code> &mdash; <code>Flow only</code> preset</li>
+            <li><code>4</code> &mdash; <code>Noise only</code> preset</li>
+            <li><code>5</code> &mdash; <code>Sea</code> preset</li>
+            <li><code>6</code> &mdash; <code>Petri</code> preset</li>
+            <li><code>7</code> &mdash; <code>Turbulence</code> preset</li>
+            <li><code>8</code> &mdash; <code>Rorschach</code> preset</li>
+            <li><code>9</code> &mdash; <code>Funhouse</code> preset</li>
+
+            <li><code>\</code> &mdash; Reset particles (keyframe)</li>
+
+            <li><code>&lt;shift&gt;</code> &mdash; Respawn particles (keyframe)</li>
+            <li><code>'</code> &mdash; Spawn particles from flow (keyframe)</li>
+            <li><code>;</code> &mdash; Spawn particles from fastest (keyframe)</li>
+            <li><code>,</code> &mdash; Spawn particles from form (keyframe)</li>
+            <li><code>/</code> &mdash; Spawn particles from sampled image (keyframe)</li>
+            <li><code>.</code> &mdash; Spawn particles from image (keyframe)</li>
+
+            <li><code>&lt;enter&gt;</code> &mdash; Keyframe current state at current time</li>
+            <li><code>&lt;backspace&gt;</code> &mdash; Delete last keyframe</li>
+          </ul>
+
+          <h3>Keyboard &mdash; editing controls</h3>
+          <p>
+            While holding any of the settings keys down, change them with the adjustment keys.<br/>
+            (Experimental...)
+          </p>
+          <p>
+            Settings keys:
+          </p>
+          <ul>
+            <li><code>`</code> &mdash; Set <code>rootNum</code></li>
+
+            <li><code>P</code> &mdash; Set <code>autoClearView</code></li>
+
+            <li><code>Q</code> &mdash; Set <code>forceWeight</code></li>
+            <li><code>A</code> &mdash; Set <code>flowWeight</code></li>
+            <li><code>W</code> &mdash; Set <code>noiseWeight</code></li>
+
+            <li><code>S</code> &mdash; Set <code>flowDecay</code></li>
+            <li><code>D</code> &mdash; Set <code>flowWidth</code></li>
+
+            <li><code>E</code> &mdash; Set <code>noiseScale</code></li>
+            <li><code>R</code> &mdash; Set <code>noiseSpeed</code></li>
+
+            <li><code>Z</code> &mdash; Set <code>damping</code></li>
+            <li><code>X</code> &mdash; Set <code>speedLimit</code></li>
+
+            <li><code>N</code> &mdash; Set <code>speedAlpha</code></li>
+            <li><code>M</code> &mdash; Set <code>lineWidth</code></li>
+
+            <li><code>&lt;control&gt;</code> &mdash; hold and press another key to re-assign to current state</li>
+          </ul>
+          <p>
+            Adjustment keys:
+          </p>
+          <ul>
+            <li><code>-</code> &mdash; Adjust setting, small decrease</li>
+            <li><code>=</code> &mdash; Adjust setting, small increase</li>
+            <li><code>&lt;down&gt;</code> &mdash; Adjust setting, medium decrease</li>
+            <li><code>&lt;up&gt;</code> &mdash; Adjust setting, medium increase</li>
+            <li><code>&lt;left&gt;</code> &mdash; Adjust setting, large decrease</li>
+            <li><code>&lt;right&gt;</code> &mdash; Adjust setting, large increase</li>
+
+            <li><code>&lt;caps-lock&gt;</code> &mdash; Reset setting to default</li>
+            <li><code>&lt;escape&gt;</code> &mdash; Reset setting to default (keyframe)</li>
+          </ul>
+        </aside>
+      </article>
+    </section>
+
+    <div class="epok-audio-controls">
+      <div class="epok-play-state">
+        <input class="epok-play-toggle" type="checkbox"/>
+        <span class="epok-play-indicator"></span>
+      </div>
+      <input class="epok-progress" type="range" value="0" min="0" max="1" touch-action="auto"/>
+      <span class="epok-current time-text">-</span>&nbsp;/&nbsp;<span class="epok-total time-text">-</span>
+    </div>
+
+    <script type="text/javascript" src="./js/demo-run.js"></script>
+  </body>
+</html>
