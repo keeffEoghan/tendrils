@@ -24,7 +24,7 @@ let readyCallbacks = {
     const tendrils = tendrilsDemo(canvas, {
       // track: './audio/sub/clip.gitignore.mp3',
       // static_image: './images/sub/image.png',
-      static_image: './images/ringed-dot/w-b.png',
+      // static_image: './images/ringed-dot/w-b.png',
       use_media: false,
       edit: false,
       keyboard: false,
@@ -62,6 +62,9 @@ let readyCallbacks = {
 
     document.querySelectorAll('[data-tendrils-preset], [data-tendrils-trigger]')
       .forEach((e) => intersector.observe(e));
+
+    document.querySelectorAll('.tendrils-audio').forEach((e) =>
+      e.addEventListener('click', () => tendrils.toggleTrack()));
 
     document.removeEventListener('readystatechange', updateState);
   }

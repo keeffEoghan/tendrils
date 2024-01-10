@@ -298,8 +298,7 @@ export default (canvas, options) => {
     }
   }
 
-  const toggleTrack = () =>
-    ((tendrils.track.paused)? track.play() : track.pause());
+  const toggleTrack = () => ((track.paused)? track.play() : track.pause());
 
 
   // Analyser setup
