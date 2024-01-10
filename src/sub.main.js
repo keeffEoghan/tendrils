@@ -44,8 +44,8 @@ let readyCallbacks = {
           },
           null);
 
-        const p = to.target.dataset.tendrilsPreset;
-        const f = to && (preset !== (preset = p)) && tendrils.presets[p];
+        const p = to && to.target.dataset.tendrilsPreset;
+        const f = p && (preset !== (preset = p)) && tendrils.presets[p];
 
         f && f();
       },

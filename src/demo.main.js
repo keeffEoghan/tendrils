@@ -2367,7 +2367,7 @@ export default (canvas, options) => {
       Object.assign(colorProxy, {
         baseAlpha: 0.9,
         baseColor: [183, 87, 74],
-        flowAlpha: 0.15,
+        flowAlpha: 0.3,
         flowColor: [119, 80, 133],
         fadeAlpha: Math.max(state.flowDecay, 0.05),
         fadeColor: [68, 111, 150]
@@ -2427,11 +2427,11 @@ export default (canvas, options) => {
 
       Object.assign(colorProxy, {
         baseAlpha: 1,
-        baseColor: [43, 45, 57],
+        baseColor: [40, 39, 39],
         flowAlpha: 0.2,
         flowColor: [197, 118, 204],
         fadeAlpha: 0.1,
-        fadeColor: [40, 39, 39]
+        fadeColor: [120, 80, 134]
       });
 
       Object.assign(blendProxy, { mic: 1, track: 1, video: 0 });
@@ -2439,7 +2439,36 @@ export default (canvas, options) => {
       toggleBase('dark');
       restart();
     },
-    'S:Inspiration'() { return presetters['S:Intro'](); },
+    'S:Inspiration'() {
+      Object.assign(state, {
+        noiseWeight: 0.01,
+        varyNoise: 0,
+        flowDecay: 0.005,
+        noiseScale: 0.1,
+        varyNoiseScale: -50,
+        noiseSpeed: 0.00007,
+        varyNoiseSpeed: 0,
+        target: 0.0025,
+        speedAlpha: 0.02,
+        colorMapAlpha: 0.5
+      });
+
+      Object.assign(colorProxy, {
+        baseAlpha: 0.8,
+        baseColor: [210, 218, 221],
+        flowAlpha: 0.2,
+        flowColor: [197, 118, 204],
+        fadeAlpha: 0.1,
+        fadeColor: [120, 80, 134]
+      });
+
+      Object.assign(blurState, { radius: 9, limit: 0.5 });
+      Object.assign(blendProxy, { mic: 1, track: 1, video: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.6, speed: 0 });
+
+      toggleBase('dark');
+      restart();
+    },
     'S:Transcendence'() { return presetters['S:Awe'](); },
     'S:Basking'() { return presetters['S:Intro'](); },
     'S:Subscribe'() { return presetters['S:Awe'](); },
