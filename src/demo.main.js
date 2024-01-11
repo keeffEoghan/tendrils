@@ -2383,7 +2383,7 @@ export default (canvas, options) => {
         colorMapAlpha: 0.2
       });
 
-      Object.assign(resetSpawner.uniforms, { radius: 0.5, speed: 4 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.7, speed: 4 });
       Object.assign(blendProxy, { mic: 1, track: 1, video: 0.3 });
 
       Object.assign(colorProxy, {
@@ -2415,7 +2415,7 @@ export default (canvas, options) => {
       });
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.8, speed: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.9, speed: 0 });
       Object.assign(flowPixelState, { scale: 'mirror xy' });
 
       Object.assign(colorProxy, {
@@ -2459,7 +2459,7 @@ export default (canvas, options) => {
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
       Object.assign(blendProxy, { mic: 1, track: 1, video: 0 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.6, speed: 0.3 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.7, speed: 0.3 });
 
       toggleBase('dark');
       restart();
@@ -2468,7 +2468,7 @@ export default (canvas, options) => {
       // See 'Flow'.
 
       Object.assign(state, { flowWidth: 5, colorMapAlpha: 0 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.25, speed: 0.01 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.5, speed: 0.01 });
       Object.assign(blurState, { radius: 9, limit: 0.5 });
 
       Object.assign(colorProxy, {

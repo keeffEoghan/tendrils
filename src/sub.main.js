@@ -6,6 +6,7 @@
 import tendrilsDemo from './demo.main';
 
 const readyStates = ['loading', 'interactive', 'complete'];
+const triggerTimes = [2e2, 4e2, 6e2];
 
 // Load in stages.
 let readyCallbacks = {
@@ -37,17 +38,23 @@ let readyCallbacks = {
 
     /** @see [Intersection-based infinite scroll example](https://googlechrome.github.io/samples/intersectionobserver/) */
     const intersector = new IntersectionObserver((all) => {
-        const to = all.reduce((to, at) => {
-            const { isIntersecting: i1, time: t1 } = at;
+        const to = all.reduce((e0, e1) => {
+            const { isIntersecting, intersectionRatio: r1, time, target } = e1;
 
-            if(i1) {
-              const t = at.target.dataset.tendrilsTrigger;
-              const f = t && tendrils.controls[t];
+            if(!isIntersecting) { return e0; }
 
-              f && console.log(t, setTimeout(f, 300));
-            }
+            const { tendrilsTrigger: tt, tendrilsPreset: tp } = target.dataset;
+            const f = tt && tendrils.controls[tt];
 
-            return ((i1 && (!to || (t1 > to.time)))? at : to);
+            f && console.log(tt, triggerTimes,
+              triggerTimes.forEach((t) => setTimeout(f, t)));
+
+            if(!tp) { return e0; }
+            else if(!e0) { return e1; }
+
+            const { intersectionRatio: r0, time: t0 } = e0;
+
+            return (((r1 > r0) || ((r1 === r0) && (time > t0)))? e1 : e0);
           },
           null);
 
@@ -58,7 +65,7 @@ let readyCallbacks = {
 
         f && f();
       },
-      { threshold: 1 });
+      { threshold: 0, root: null, rootMargin: '-49% 0%' });
 
     document.querySelectorAll('[data-tendrils-preset], [data-tendrils-trigger]')
       .forEach((e) => intersector.observe(e));

@@ -25,7 +25,7 @@
       [data-tendrils-preset],
       [data-tendrils-trigger] {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
         position: relative;
@@ -36,14 +36,16 @@
       }
 
       [data-tendrils-preset] {
-        min-height: 60vh;
         font-size: 4rem;
+        min-height: 60vh;
         mix-blend-mode: exclusion;
+        outline: 1px dashed green;
       }
 
       [data-tendrils-trigger] {
-        min-height: 30vh;
         font-size: 1.5rem;
+        min-height: 20vh;
+        outline: 1px dashed blue;
       }
     </style>
     <div data-tendrils-preset="S:Intro">S:Intro</div>
