@@ -10,6 +10,7 @@ const readyStates = ['loading', 'interactive', 'complete'];
 const triggerTimes = {
   spawnForm: [2e2, 3e2],
   spawnFlow: [2e2, 3e2],
+  spawnFastest: [2e2, 3e2],
   def: [2e2]
 };
 
