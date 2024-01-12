@@ -2481,6 +2481,7 @@ export default (canvas, options) => {
       });
 
       toggleBase('dark');
+      restart();
     },
     'S:Basking'() {
       // See 'Frequencies'.

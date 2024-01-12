@@ -8,8 +8,8 @@ import tendrilsDemo from './demo.main';
 const readyStates = ['loading', 'interactive', 'complete'];
 
 const triggerTimes = {
-  spawnForm: [2e2, 4e2],
-  spawnFlow: [1e2, 2e2, 3e2, 4e2, 5e2, 6e2],
+  spawnForm: [2e2],
+  spawnFlow: [2e2, 3e2, 4e2],
   def: [2e2]
 };
 
@@ -68,7 +68,7 @@ let readyCallbacks = {
         if(!to) { return; }
 
         const p = to.target.dataset.tendrilsPreset;
-        const f = p && (preset !== (preset = p)) && tendrils.presets[p];
+        const f = p && (preset !== p) && tendrils.presets[preset = p];
 
         f && f();
       },
