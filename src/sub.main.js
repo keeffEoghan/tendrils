@@ -43,6 +43,21 @@ let readyCallbacks = {
 
     tendrils.track.loop = true;
 
+    const rootClass = document.documentElement.classList;
+
+    function updateRootAudio(on = !tendrils.track.paused) {
+      rootClass.toggle('tendrils-audio-on', on);
+      rootClass.toggle('tendrils-audio-off', !on);
+    }
+
+    function updateRootVideo(on = !tendrils.appSettings.useMedia) {
+      rootClass.toggle('tendrils-video-on', on);
+      rootClass.toggle('tendrils-video-off', !on);
+    }
+
+    updateRootAudio();
+    updateRootVideo();
+
     /** @see [Intersection-based infinite scroll example](https://googlechrome.github.io/samples/intersectionobserver/) */
     const intersector = new IntersectionObserver((all) => {
         const to = all.reduce((e0, e1) => {
@@ -78,11 +93,25 @@ let readyCallbacks = {
     document.querySelectorAll('[data-tendrils-preset], [data-tendrils-trigger]')
       .forEach((e) => intersector.observe(e));
 
-    document.querySelectorAll('.tendrils-audio').forEach((e) =>
-      e.addEventListener('click', () => tendrils.toggleTrack()));
+    document.querySelectorAll('.tendrils-audio').forEach(($e) =>
+      $e.addEventListener('click', () => {
+        tendrils.toggleTrack();
+        updateRootAudio();
+      }));
 
-    document.querySelectorAll('.tendrils-video, .activate-cam').forEach((e) =>
-      e.addEventListener('click', () => tendrils.toggleMedia()));
+    document.querySelectorAll('.tendrils-video').forEach(($e) =>
+      $e.addEventListener('click', () => {
+        tendrils.toggleMedia();
+        updateRootVideo();
+      }));
+
+    document.querySelectorAll('.activate-cam').forEach(($e) =>
+      $e.addEventListener('click', () => {
+        if(!tendrils.appSettings.useMedia) {
+          tendrils.getMedia();
+          updateRootVideo();
+        }
+      }));
 
     document.removeEventListener('readystatechange', updateState);
   }

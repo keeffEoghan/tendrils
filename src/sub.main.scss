@@ -1,1 +1,37 @@
 @import './index';
+
+.tendrils-audio,
+.tendrils-video {
+  .w-embed {
+    transition: opacity ease-in-out 300ms;
+    will-change: opacity;
+  }
+}
+
+.tendrils-audio .w-embed {
+  .tendrils-audio-on & {
+    &.off { opacity: 0 !important; }
+
+    &.on { opacity: 1 !important; }
+  }
+
+  .tendrils-audio-off & {
+    &.off { opacity: 1 !important; }
+
+    &.on { opacity: 0 !important; }
+  }
+}
+
+.tendrils-video .w-embed {
+  .tendrils-video-on & {
+    &.off { opacity: 0 !important; }
+
+    &.on { opacity: 1 !important; }
+  }
+
+  .tendrils-video-off & {
+    &.off { opacity: 1 !important; }
+
+    &.on { opacity: 0 !important; }
+  }
+}
