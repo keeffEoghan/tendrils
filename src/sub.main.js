@@ -50,7 +50,7 @@ let readyCallbacks = {
       rootClass.toggle('tendrils-audio-off', !on);
     }
 
-    function updateRootVideo(on = !tendrils.appSettings.useMedia) {
+    function updateRootVideo(on = tendrils.appSettings.useMedia) {
       rootClass.toggle('tendrils-video-on', on);
       rootClass.toggle('tendrils-video-off', !on);
     }

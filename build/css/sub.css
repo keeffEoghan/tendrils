@@ -105,4 +105,22 @@ canvas.epok-no-cursor { cursor: none; }
 
 .epok-audio-controls .epok-progress { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; margin: 0 1em; cursor: pointer; }
 
+.tendrils-audio .w-embed, .tendrils-video .w-embed { -webkit-transition: opacity ease-in-out 300ms; transition: opacity ease-in-out 300ms; will-change: opacity; }
+
+.tendrils-audio-on .tendrils-audio .w-embed.off { opacity: 0 !important; }
+
+.tendrils-audio-on .tendrils-audio .w-embed.on { opacity: 1 !important; }
+
+.tendrils-audio-off .tendrils-audio .w-embed.off { opacity: 1 !important; }
+
+.tendrils-audio-off .tendrils-audio .w-embed.on { opacity: 0 !important; }
+
+.tendrils-video-on .tendrils-video .w-embed.off { opacity: 0 !important; }
+
+.tendrils-video-on .tendrils-video .w-embed.on { opacity: 1 !important; }
+
+.tendrils-video-off .tendrils-video .w-embed.off { opacity: 1 !important; }
+
+.tendrils-video-off .tendrils-video .w-embed.on { opacity: 0 !important; }
+
 /*# sourceMappingURL=sub.css.map */
