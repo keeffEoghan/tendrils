@@ -1441,10 +1441,10 @@ export default (canvas, options) => {
     spawnFlow,
     spawnFastest,
     spawnForm,
+    spawnImageTargets,
     reset,
     restart,
-    toggleBase,
-    spawnImageTargets
+    toggleBase
   };
 
 
@@ -2355,8 +2355,8 @@ export default (canvas, options) => {
       });
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.5, speed: 4 });
       Object.assign(blendProxy, { mic: 1, track: 1, video: 0.5 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.4, speed: 4 });
 
       Object.assign(colorProxy, {
         baseAlpha: 0.9,
@@ -2383,8 +2383,8 @@ export default (canvas, options) => {
         colorMapAlpha: 0.2
       });
 
-      Object.assign(resetSpawner.uniforms, { radius: 0.7, speed: 4 });
       Object.assign(blendProxy, { mic: 1, track: 1, video: 0.3 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.7, speed: 4 });
 
       Object.assign(colorProxy, {
         baseAlpha: 0.8,
@@ -2415,8 +2415,8 @@ export default (canvas, options) => {
       });
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.9, speed: 0 });
       Object.assign(flowPixelState, { scale: 'mirror xy' });
+      Object.assign(resetSpawner.uniforms, { radius: 1, speed: 0 });
 
       Object.assign(colorProxy, {
         baseAlpha: 1,
@@ -2468,8 +2468,8 @@ export default (canvas, options) => {
       // See 'Flow'.
 
       Object.assign(state, { flowWidth: 5, colorMapAlpha: 0 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.5, speed: 0.01 });
       Object.assign(blurState, { radius: 9, limit: 0.5 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.4, speed: 0.01 });
 
       Object.assign(colorProxy, {
         baseAlpha: 0.8,
@@ -2509,7 +2509,7 @@ export default (canvas, options) => {
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
       Object.assign(blendProxy, { mic: 1, track: 1, video: 0 });
-      Object.assign(resetSpawner.uniforms, { radius: 0.22, speed: 0 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.3, speed: 0 });
       Object.assign(opticalFlowState, { speed: 0.03, offset: 0 });
 
       toggleBase('dark');
