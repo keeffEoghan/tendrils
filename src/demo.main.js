@@ -607,7 +607,7 @@ export default (canvas, options) => {
     blend.views[blendKeys.indexOf('mic')] = trackTexture.texture;
   }
 
-  const toggleMedia = (toggle = appSettings.useMedia) =>
+  const toggleMedia = (toggle = !appSettings.useMedia) =>
     ((toggle)? getMedia : stopMedia)();
 
   appSettings.useMedia && getMedia();
@@ -1275,7 +1275,7 @@ export default (canvas, options) => {
 
   gui.main.add(appSettings, 'trackURL').onFinishChange(setupTrackURL);
   gui.main.add(appSettings, 'animate');
-  gui.main.add(appSettings, 'useMedia').onFinishChange(() => toggleMedia());
+  gui.main.add(appSettings, 'useMedia').onFinishChange(toggleMedia);
   gui.main.add(appSettings, 'staticImage').onFinishChange(() => setupImage());
 
   each((f, control) => gui.main.add(rootControls, control), rootControls);

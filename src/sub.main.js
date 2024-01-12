@@ -6,7 +6,12 @@
 import tendrilsDemo from './demo.main';
 
 const readyStates = ['loading', 'interactive', 'complete'];
-const triggerTimes = [2e2, 4e2, 6e2];
+
+const triggerTimes = {
+  spawnForm: [2e2, 4e2],
+  spawnFlow: [2e2, 3e2, 4e2, 5e2],
+  def: [2e2]
+};
 
 // Load in stages.
 let readyCallbacks = {
@@ -27,6 +32,7 @@ let readyCallbacks = {
       // static_image: './images/sub/image.png',
       // static_image: './images/ringed-dot/w-b.png',
       use_media: false,
+      use_mic: false,
       edit: false,
       keyboard: false,
       preset
@@ -43,13 +49,14 @@ let readyCallbacks = {
 
             if(!isIntersecting) { return e0; }
 
-            const { tendrilsTrigger: tt, tendrilsPreset: tp } = target.dataset;
-            const f = tt && tendrils.controls[tt];
+            const { tendrilsTrigger, tendrilsPreset } = target.dataset;
+            const f = tendrilsTrigger && tendrils.controls[tendrilsTrigger];
 
-            f && console.log(tt, triggerTimes,
-              triggerTimes.forEach((t) => setTimeout(f, t)));
+            f && console.log(tendrilsTrigger,
+              (triggerTimes[tendrilsTrigger] || triggerTimes.def)
+                .forEach((t) => setTimeout(f, t)));
 
-            if(!tp) { return e0; }
+            if(!tendrilsPreset) { return e0; }
             else if(!e0) { return e1; }
 
             const { intersectionRatio: r0, time: t0 } = e0;
@@ -72,6 +79,9 @@ let readyCallbacks = {
 
     document.querySelectorAll('.tendrils-audio').forEach((e) =>
       e.addEventListener('click', () => tendrils.toggleTrack()));
+
+    document.querySelectorAll('.tendrils-video, .activate-cam').forEach((e) =>
+      e.addEventListener('click', () => tendrils.toggleMedia()));
 
     document.removeEventListener('readystatechange', updateState);
   }
