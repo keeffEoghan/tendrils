@@ -111,8 +111,7 @@ let readyCallbacks = {
 
     document.querySelectorAll('.tendrils-audio').forEach(($e) =>
       $e.addEventListener('click', (e) => {
-        toggleTrack();
-        updateRootAudio();
+        Promise.resolve(toggleTrack()).then(() => updateRootAudio());
         stopEvent(e);
       }));
 
