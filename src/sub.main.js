@@ -5,6 +5,16 @@
 
 import tendrilsDemo from './demo.main';
 
+const { PI: pi } = Math;
+
+const stopEffect = (e) => e.preventDefault();
+const stopBubble = (e) => e.stopPropagation();
+
+function stopEvent(e) {
+  stopEffect(e);
+  stopBubble(e);
+}
+
 const readyStates = ['loading', 'interactive', 'complete'];
 
 const triggerTimes = {
@@ -29,28 +39,34 @@ let readyCallbacks = {
     // let preset = 'S:Subscribe';
 
     const tendrils = tendrilsDemo(canvas, {
-      // track: './audio/sub/clip.gitignore.mp3',
-      // static_image: './images/sub/image.png',
-      // static_image: './images/ringed-dot/w-b.png',
-      use_media: false,
-      use_mic: false,
-      edit: false,
-      keyboard: false,
-      preset
+      use_media: false, use_mic: false, edit: false, keyboard: false, preset
     });
+
+    const { appSettings, track, geometrySpawner, controls, presets } = tendrils;
+    const { toggleTrack, toggleMedia, getMedia } = tendrils;
 
     canvas.classList.add('epok-dark');
 
-    tendrils.track.loop = true;
+    document.querySelector('.tendrils-audio').appendChild(track);
+    track.loop = true;
+    // track.controls = true;
+
+    const { radii, obtuse, arcs } = geometrySpawner.shuffles;
+
+    radii[0] = 0.2;
+    radii[1] = 0.4;
+    arcs[0] = 0.1;
+    arcs[1] = 0.03;
+    obtuse.rate = 0;
 
     const rootClass = document.documentElement.classList;
 
-    function updateRootAudio(on = !tendrils.track.paused) {
+    function updateRootAudio(on = !track.paused) {
       rootClass.toggle('tendrils-audio-on', on);
       rootClass.toggle('tendrils-audio-off', !on);
     }
 
-    function updateRootVideo(on = tendrils.appSettings.useMedia) {
+    function updateRootVideo(on = appSettings.useMedia) {
       rootClass.toggle('tendrils-video-on', on);
       rootClass.toggle('tendrils-video-off', !on);
     }
@@ -66,7 +82,7 @@ let readyCallbacks = {
             if(!isIntersecting) { return e0; }
 
             const { tendrilsTrigger, tendrilsPreset } = target.dataset;
-            const f = tendrilsTrigger && tendrils.controls[tendrilsTrigger];
+            const f = tendrilsTrigger && controls[tendrilsTrigger];
 
             f && console.log(tendrilsTrigger,
               (triggerTimes[tendrilsTrigger] || triggerTimes.def)
@@ -84,7 +100,7 @@ let readyCallbacks = {
         if(!to) { return; }
 
         const p = to.target.dataset.tendrilsPreset;
-        const f = p && (preset !== p) && tendrils.presets[preset = p];
+        const f = p && (preset !== p) && presets[preset = p];
 
         f && f();
       },
@@ -94,21 +110,23 @@ let readyCallbacks = {
       .forEach((e) => intersector.observe(e));
 
     document.querySelectorAll('.tendrils-audio').forEach(($e) =>
-      $e.addEventListener('click', () => {
-        tendrils.toggleTrack();
+      $e.addEventListener('click', (e) => {
+        toggleTrack();
         updateRootAudio();
+        stopEvent(e);
       }));
 
     document.querySelectorAll('.tendrils-video').forEach(($e) =>
-      $e.addEventListener('click', () => {
-        tendrils.toggleMedia();
+      $e.addEventListener('click', (e) => {
+        toggleMedia();
         updateRootVideo();
+        stopEvent(e);
       }));
 
     document.querySelectorAll('.activate-cam').forEach(($e) =>
       $e.addEventListener('click', () => {
-        if(!tendrils.appSettings.useMedia) {
-          tendrils.getMedia();
+        if(!appSettings.useMedia) {
+          getMedia();
           updateRootVideo();
         }
       }));

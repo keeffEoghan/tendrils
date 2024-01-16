@@ -202,7 +202,7 @@ export default (canvas, options) => {
   // Track
 
   const track = Object.assign(new Audio(),
-    { crossOrigin: 'anonymous', className: 'track' });
+    { crossOrigin: 'anonymous', className: 'epok-track' });
 
   const audioContext = new (self.AudioContext || self.webkitAudioContext)();
 
@@ -271,6 +271,8 @@ export default (canvas, options) => {
     }
   });
 
+  const toggleTrack = () => ((track.paused)? track.play() : track.pause());
+
   if(trackControl) {
     const { main: $m, toggle: $t, progress: $p } = trackControl.els;
 
@@ -298,8 +300,6 @@ export default (canvas, options) => {
     }
   }
 
-  const toggleTrack = () => ((track.paused)? track.play() : track.pause());
-
 
   // Analyser setup
 
@@ -320,7 +320,8 @@ export default (canvas, options) => {
   // @todo Stereo - creates 2 separate analysers for each channel.
   // @todo Delay node to compensate for wait in analysing values?
 
-  const trackAnalyser = makeAnalyser(track, audioContext, { audible: audioState.audible });
+  const trackAnalyser = makeAnalyser(track, audioContext,
+    { audible: audioState.audible });
 
   trackAnalyser.analyser.fftSize = Math.pow(2, 8);
 
@@ -439,10 +440,8 @@ export default (canvas, options) => {
 
   // Respawn from geometry (platonic forms)
 
-  const geometrySpawner = new GeometrySpawner(gl, {
-    speed: 0.005,
-    bias: 100/0.005
-  });
+  const geometrySpawner = new GeometrySpawner(gl,
+    { speed: 0.005, bias: 1e2/5e-3 });
 
   const spawnForm = (buffer = spawnTargets.spawnForm) =>
     geometrySpawner.shuffle().spawn(tendrils, undefined, buffer);
@@ -3267,7 +3266,8 @@ export default (canvas, options) => {
     getMedia,
     stopMedia,
     toggleMedia,
-    timer
+    timer,
+    geometrySpawner
   };
 
   // Debug
