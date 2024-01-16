@@ -204,6 +204,8 @@ export default (canvas, options) => {
   const track = Object.assign(new Audio(),
     { crossOrigin: 'anonymous', className: 'epok-track' });
 
+  track.appendChild(document.createElement('source'));
+
   const audioContext = new (self.AudioContext || self.webkitAudioContext)();
 
   // Deal with Chrome's need for user interaction before playing audio...
@@ -336,8 +338,10 @@ export default (canvas, options) => {
   // Track setup
 
   const setupTrack = (src, el = canvas.parentElement, onWindow = false) => {
-    if(track.src !== src) {
-      track.src = src;
+    const $src = track.querySelector('source') || track;
+
+    if($src.src !== src) {
+      $src.src = src;
       track.currentTime = 0;
     }
 

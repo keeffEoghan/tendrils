@@ -50,6 +50,7 @@ let readyCallbacks = {
     canvas.classList.add('epok-dark');
 
     document.querySelector('.tendrils-audio').appendChild(track);
+    track.querySelector('source').type = 'audio/mpeg';
     track.loop = true;
     // track.controls = true;
 
