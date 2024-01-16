@@ -19,7 +19,7 @@
 import 'pepjs';
 import glContext from 'gl-context';
 import vkey from 'vkey';
-import getUserMedia from 'getusermedia';
+import getUserMedia from 'getusermedia/index-browser';
 import analyser from 'web-audio-analyser';
 import offset from 'mouse-event-offset';
 import throttle from 'lodash/throttle';
@@ -565,49 +565,49 @@ export default (canvas, options) => {
 
   let mediaStream;
 
-  function getMedia() {
+  const getMedia = () => new Promise((y, n) => {
+    const { useCamera, useMic } = appSettings;
+
     appSettings.useMedia = true;
 
-    getUserMedia({
-        video: appSettings.useCamera,
-        audio: appSettings.useMic
-      },
-      (e, stream) => {
-        if(e) {
-          console.warn(e);
-        }
-        else if(appSettings.useCamera || appSettings.useMic) {
-          mediaStream = stream;
+    getUserMedia({ video: useCamera, audio: useMic }, (e, stream) => {
+      if(e) {
+        console.warn(e);
 
-          if(appSettings.useCamera) {
-            (('srcObject' in video)?
-                video.srcObject = stream
-              : video.src = self.URL.createObjectURL(stream));
-          }
+        return n(e);
+      }
 
-          if(appSettings.useMic) {
-            micAnalyser = (micAnalyser ||
-              makeAnalyser(stream, audioContext, { audible: false }));
+      const { useCamera, useMic } = appSettings;
 
-            micAnalyser.analyser.fftSize = Math.pow(2, 8);
+      if(!useCamera && !useMic) { return; }
 
-            micTrigger = (micTrigger ||
-              new AudioTrigger(micAnalyser, 4));
+      mediaStream = stream;
 
-            micTexture = new AudioTexture(gl,
-              micAnalyser.analyser.frequencyBinCount);
+      useCamera &&
+        (('srcObject' in video)? video.srcObject = stream
+        : video.src = URL.createObjectURL(stream));
 
-            blend.views[blendKeys.indexOf('mic')] = micTexture.texture;
-          }
-        }
-      });
-  }
+      if(useMic) {
+        const { analyser } = micAnalyser = (micAnalyser ||
+          makeAnalyser(stream, audioContext, { audible: false }));
+
+        analyser.fftSize = Math.pow(2, 8);
+        micTrigger = (micTrigger || new AudioTrigger(micAnalyser, 4));
+        micTexture = new AudioTexture(gl, analyser.frequencyBinCount);
+        blend.views[blendKeys.indexOf('mic')] = micTexture.texture;
+      }
+
+      y();
+    });
+  });
 
   function stopMedia(stream = mediaStream) {
     appSettings.useMedia = false;
     (stream && each((track) => track.stop(), stream.getTracks()));
     micTexture = null;
     blend.views[blendKeys.indexOf('mic')] = trackTexture.texture;
+
+    return video.pause();
   }
 
   const toggleMedia = (toggle = !appSettings.useMedia) =>
@@ -2345,6 +2345,15 @@ export default (canvas, options) => {
       toggleBase('dark');
       clear();
       respawn();
+
+      Object.assign(audioState, {
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7
+      });
     },
     'S:Awe'() {
       // See 'Blood'.
@@ -2372,6 +2381,15 @@ export default (canvas, options) => {
 
       toggleBase('dark');
       restart();
+
+      Object.assign(audioState, {
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7
+      });
     },
     'S:Wonder'() {
       // See 'Sea'.
@@ -2400,6 +2418,15 @@ export default (canvas, options) => {
 
       toggleBase('dark');
       restart();
+
+      Object.assign(audioState, {
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7
+      });
     },
     'S:Euphoria'() {
       // See 'H:X:Starlings'.
@@ -2434,6 +2461,15 @@ export default (canvas, options) => {
 
       toggleBase('dark');
       restart();
+
+      Object.assign(audioState, {
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7
+      });
     },
     'S:Inspiration'() {
       // See 'H:B:Pop Tide'.
@@ -2466,6 +2502,15 @@ export default (canvas, options) => {
 
       toggleBase('dark');
       restart();
+
+      Object.assign(audioState, {
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7
+      });
     },
     'S:Transcendence'() {
       // See 'Flow'.
@@ -2485,6 +2530,15 @@ export default (canvas, options) => {
 
       toggleBase('dark');
       restart();
+
+      Object.assign(audioState, {
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7
+      });
     },
     'S:Basking'() {
       // See 'Frequencies'.
@@ -2518,6 +2572,15 @@ export default (canvas, options) => {
       toggleBase('dark');
       spawnImageTargets();
       restart();
+
+      Object.assign(audioState, {
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7
+      });
     },
     'S:Subscribe': () => presets['S:Intro'](),
 

@@ -125,7 +125,9 @@ canvas.epok-no-cursor { cursor: none; }
 
 .epok-track { position: fixed; visibility: hidden; opacity: 0; inset: auto 0 0 auto; z-index: -1; }
 
-.tendrils-audio, .tendrils-video { position: relative; }
+.tendrils-audio, .tendrils-video { position: relative; /** Temporary hide buttons on mobile where these don't reliably work. */ }
+
+@media screen and (max-width: 991px) { .tendrils-audio, .tendrils-video { display: none !important; } }
 
 .tendrils-loading { overflow: hidden; }
 

@@ -44,7 +44,7 @@ let readyCallbacks = {
       use_media: false, use_mic: false, edit: false, keyboard: false, preset
     });
 
-    const { appSettings, track, geometrySpawner, controls, presets } = tendrils;
+    const { appSettings, track, video, geometrySpawner, controls, presets } = tendrils;
     const { toggleTrack, toggleMedia, getMedia, restartAudio } = tendrils;
 
     canvas.classList.add('epok-dark');
@@ -69,13 +69,18 @@ let readyCallbacks = {
       rootClass.toggle('tendrils-audio-off', !on);
     }
 
-    function updateRootVideo(on = appSettings.useMedia) {
+    function updateRootVideo(on = !video.paused) {
       rootClass.toggle('tendrils-video-on', on);
       rootClass.toggle('tendrils-video-off', !on);
     }
 
     updateRootAudio();
     updateRootVideo();
+
+    track.addEventListener('play', () => updateRootAudio());
+    track.addEventListener('pause', () => updateRootAudio());
+    video.addEventListener('play', () => updateRootVideo());
+    video.addEventListener('pause', () => updateRootVideo());
 
     /** @see [Intersection-based infinite scroll example](https://googlechrome.github.io/samples/intersectionobserver/) */
     const intersector = new IntersectionObserver((all) => {
@@ -115,8 +120,10 @@ let readyCallbacks = {
     document.querySelectorAll('.tendrils-audio').forEach(($e) =>
       $e.addEventListener('click', (e) => {
         Promise.resolve(toggleTrack())
-          .catch((e) => ((dev)? console.log : alert)(e))
-          .finally(() => updateRootAudio());
+          .catch((e) => {
+            console.warn("Can't toggle audio track:", e);
+            dev && alert("Can't toggle audio track: "+e);
+          });
 
         restartAudio();
         stopEvent(e);
@@ -124,19 +131,23 @@ let readyCallbacks = {
 
     document.querySelectorAll('.tendrils-video').forEach(($e) =>
       $e.addEventListener('click', (e) => {
-        toggleMedia();
-        updateRootVideo();
+        Promise.resolve(toggleMedia())
+          .catch((e) => {
+            console.warn("Can't toggle video camera:", e);
+            dev && alert("Can't toggle video camera: "+e);
+          });
+
         restartAudio();
         stopEvent(e);
       }));
 
     document.querySelectorAll('.activate-cam').forEach(($e) =>
-      $e.addEventListener('click', () => {
-        if(!appSettings.useMedia) {
-          getMedia();
-          updateRootVideo();
-        }
-      }));
+      $e.addEventListener('click', () =>
+        Promise.resolve(getMedia())
+          .catch((e) => {
+            console.warn("Can't start video camera:", e);
+            dev && alert("Can't start video camera: "+e);
+          })));
 
     document.removeEventListener('readystatechange', updateState);
   }
