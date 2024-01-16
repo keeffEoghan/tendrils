@@ -7,6 +7,8 @@ import tendrilsDemo from './demo.main';
 
 const { PI: pi } = Math;
 
+const dev = location.hostname.search(/.webflow.io$/gi) < 0;
+
 const stopEffect = (e) => e.preventDefault();
 const stopBubble = (e) => e.stopPropagation();
 
@@ -111,7 +113,10 @@ let readyCallbacks = {
 
     document.querySelectorAll('.tendrils-audio').forEach(($e) =>
       $e.addEventListener('click', (e) => {
-        Promise.resolve(toggleTrack()).then(() => updateRootAudio());
+        Promise.resolve(toggleTrack())
+          .catch((e) => ((dev)? console.log : alert)(e))
+          .finally(() => updateRootAudio());
+
         stopEvent(e);
       }));
 
