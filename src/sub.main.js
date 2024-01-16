@@ -45,14 +45,14 @@ let readyCallbacks = {
     });
 
     const { appSettings, track, geometrySpawner, controls, presets } = tendrils;
-    const { toggleTrack, toggleMedia, getMedia } = tendrils;
+    const { toggleTrack, toggleMedia, getMedia, restartAudio } = tendrils;
 
     canvas.classList.add('epok-dark');
 
     document.body.appendChild(track);
     track.querySelector('source').type = 'audio/mpeg';
     track.loop = true;
-    // track.controls = true;
+    track.controls = true;
 
     const { radii, obtuse, arcs } = geometrySpawner.shuffles;
 
@@ -118,7 +118,7 @@ let readyCallbacks = {
           .catch((e) => ((dev)? console.log : alert)(e))
           .finally(() => updateRootAudio());
 
-        tendrils.restartAudio();
+        restartAudio();
         stopEvent(e);
       }));
 
@@ -126,7 +126,7 @@ let readyCallbacks = {
       $e.addEventListener('click', (e) => {
         toggleMedia();
         updateRootVideo();
-        tendrils.restartAudio();
+        restartAudio();
         stopEvent(e);
       }));
 

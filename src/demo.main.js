@@ -338,10 +338,10 @@ export default (canvas, options) => {
   // Track setup
 
   const setupTrack = (src, el = canvas.parentElement, onWindow = false) => {
-    const $src = track.querySelector('source') || track;
+    const $src = track.querySelector('source');
 
-    if($src.src !== src) {
-      $src.src = src;
+    if((track.src !== src) || ($src.src !== src)) {
+      track.src = $src.src = src;
       track.currentTime = 0;
     }
 
