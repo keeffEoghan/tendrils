@@ -49,7 +49,7 @@ let readyCallbacks = {
 
     canvas.classList.add('epok-dark');
 
-    document.querySelector('.tendrils-audio').appendChild(track);
+    document.body.appendChild(track);
     track.querySelector('source').type = 'audio/mpeg';
     track.loop = true;
     // track.controls = true;
@@ -118,6 +118,7 @@ let readyCallbacks = {
           .catch((e) => ((dev)? console.log : alert)(e))
           .finally(() => updateRootAudio());
 
+        tendrils.restartAudio();
         stopEvent(e);
       }));
 
@@ -125,6 +126,7 @@ let readyCallbacks = {
       $e.addEventListener('click', (e) => {
         toggleMedia();
         updateRootVideo();
+        tendrils.restartAudio();
         stopEvent(e);
       }));
 
