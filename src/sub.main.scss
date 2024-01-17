@@ -45,11 +45,13 @@
 }
 
 .tendrils-audio,
-.tendrils-video {
-  position: relative;
+.tendrils-video { position: relative; }
 
+@media screen and (max-width: 991px) {
   /** Temporary hide buttons on mobile where these don't reliably work. */
-  @media screen and (max-width: 991px) { display: none !important; }
+  .tendrils-audio,
+  .tendrils-video,
+  .success-text-camera { display: none !important; }
 }
 
 .tendrils-loading { overflow: hidden; }
