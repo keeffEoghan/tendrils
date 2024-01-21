@@ -46,7 +46,7 @@ let readyCallbacks = {
 
     const { appSettings, track, video, controls, presets } = tendrils;
     const { toggleTrack, toggleMedia, getMedia, restartAudio } = tendrils;
-    const { geometrySpawner, audioContext } = tendrils;
+    const { geometrySpawner, audioContext, flowInputs, timer } = tendrils;
     let trackOK = false;
 
     $canvas.classList.add('epok-dark');
@@ -158,7 +158,7 @@ let readyCallbacks = {
       { threshold: 0, root: null, rootMargin: '-49% 0%' });
 
     document.querySelectorAll('[data-tendrils-preset], [data-tendrils-trigger]')
-      .forEach((e) => intersector.observe(e));
+      .forEach(($e) => intersector.observe($e));
 
     const $audioFlips = document.querySelectorAll('.tendrils-audio');
     const $videoFlips = document.querySelectorAll('.tendrils-video');
@@ -195,6 +195,16 @@ let readyCallbacks = {
           console.warn("Can't start video camera:", e);
           dev && alert("Can't start video camera: "+e);
         })));
+
+    const $flows = document.querySelectorAll('[data-tendrils-flow]');
+
+    // requestAnimationFrame(function flow() {
+    //   $flows.forEach(($f, i) => {
+    //     flowInputs.get('data-tendrils-flow-'+i).add(timer.app.time, p);
+    //   });
+
+    //   requestAnimationFrame(flow);
+    // });
 
     document.removeEventListener('readystatechange', updateState);
   }
