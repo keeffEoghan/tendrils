@@ -110,7 +110,7 @@ let readyCallbacks = {
         console.warn("Can't toggle audio track:", e);
         dev && alert("Can't toggle audio track: "+e);
       })
-      .finally(() => toggleTrack(false));
+      .finally(() => setTimeout(() => toggleTrack(false)));
 
     addEventListener('change', checkTrack);
     addEventListener('click', checkTrack);

@@ -21,7 +21,6 @@ import glContext from 'gl-context';
 import vkey from 'vkey';
 import getUserMedia from 'getusermedia/index-browser';
 import analyser from 'web-audio-analyser';
-import offset from 'mouse-event-offset';
 import throttle from 'lodash/throttle';
 import mapRange from 'range-fit';
 import clamp from 'clamp';
@@ -376,18 +375,14 @@ export default (canvas, options) => {
 
   const pointerFlow = (e) => {
     if(appSettings.pointerFlow) {
-      /**
-       * @todo Passing a `vec2` doesn't work - TypedArrays fail the test
-       *     `offset` uses.
-       */
-      // const pos = offset(e, canvas, vec2.create());
-      const pos = offset(e, canvas);
+      const { clientX = 0, clientY = 0, pointerId } = e;
+      const { left, top } = canvas.getBoundingClientRect();
+      const { viewRes } = tendrils;
 
-      pos[0] = mapRange(pos[0], 0, tendrils.viewRes[0], -1, 1);
-      pos[1] = mapRange(pos[1], 0, tendrils.viewRes[1], 1, -1);
+      const p = vec2.fromValues(mapRange(clientX-left, 0, viewRes[0], -1, 1),
+        mapRange(clientY-top, 0, viewRes[1], 1, -1));
 
-      flowInputs.get(e.pointerId).add(timer.app.time, pos);
-
+      flowInputs.get(pointerId).add(timer.app.time, p);
       e.preventDefault();
     }
   };
@@ -3338,7 +3333,8 @@ export default (canvas, options) => {
     stopMedia,
     toggleMedia,
     timer,
-    geometrySpawner
+    geometrySpawner,
+    flowInputs
   };
 
   // Debug
