@@ -571,33 +571,36 @@ export default (canvas, options) => {
     appSettings.useMedia = true;
 
     getUserMedia({ video: useCamera, audio: useMic }, (e, stream) => {
-      if(e) {
+      try {
+        if(e) { throw e; }
+
+        const { useCamera, useMic } = appSettings;
+
+        if(!useCamera && !useMic) { return; }
+
+        mediaStream = stream;
+
+        useCamera &&
+          (('srcObject' in video)? video.srcObject = stream
+          : video.src = URL.createObjectURL(stream));
+
+        if(useMic) {
+          const { analyser } = micAnalyser = (micAnalyser ||
+            makeAnalyser(stream, audioContext, { audible: false }));
+
+          analyser.fftSize = Math.pow(2, 8);
+          micTrigger = (micTrigger || new AudioTrigger(micAnalyser, 4));
+          micTexture = new AudioTexture(gl, analyser.frequencyBinCount);
+          blend.views[blendKeys.indexOf('mic')] = micTexture.texture;
+        }
+
+        y();
+      }
+      catch(e) {
         console.warn(e);
 
         return n(e);
       }
-
-      const { useCamera, useMic } = appSettings;
-
-      if(!useCamera && !useMic) { return; }
-
-      mediaStream = stream;
-
-      useCamera &&
-        (('srcObject' in video)? video.srcObject = stream
-        : video.src = URL.createObjectURL(stream));
-
-      if(useMic) {
-        const { analyser } = micAnalyser = (micAnalyser ||
-          makeAnalyser(stream, audioContext, { audible: false }));
-
-        analyser.fftSize = Math.pow(2, 8);
-        micTrigger = (micTrigger || new AudioTrigger(micAnalyser, 4));
-        micTexture = new AudioTexture(gl, analyser.frequencyBinCount);
-        blend.views[blendKeys.indexOf('mic')] = micTexture.texture;
-      }
-
-      y();
     });
   });
 
