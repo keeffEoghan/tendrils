@@ -7,7 +7,7 @@ import tendrilsDemo from './demo.main';
 
 const { PI: pi } = Math;
 
-const dev = location.hostname.search(/.webflow.io$/gi) < 0;
+const dev = (new URLSearchParams(location.search)).has('debug');
 
 const stopEffect = (e) => e.preventDefault();
 const stopBubble = (e) => e.stopPropagation();
@@ -108,7 +108,7 @@ let readyCallbacks = {
       })
       .catch((e) => {
         console.warn("Can't toggle audio track:", e);
-        dev && alert("Can't toggle audio track: "+e);
+        debug && alert("Can't toggle audio track: "+e);
       })
       .finally(() => setTimeout(() => toggleTrack(false)));
 
@@ -168,7 +168,7 @@ let readyCallbacks = {
       Promise.resolve(toggleTrack())
         .catch((e) => {
           console.warn("Can't toggle audio track:", e);
-          dev && alert("Can't toggle audio track: "+e);
+          debug && alert("Can't toggle audio track: "+e);
         });
 
       restartAudio();
@@ -179,7 +179,7 @@ let readyCallbacks = {
       Promise.resolve(toggleMedia())
         .catch((e) => {
           console.warn("Can't toggle video camera:", e);
-          dev && alert("Can't toggle video camera: "+e);
+          debug && alert("Can't toggle video camera: "+e);
         });
 
       restartAudio();
@@ -193,7 +193,7 @@ let readyCallbacks = {
         .then(() => flipVideoShow(true))
         .catch((e) => {
           console.warn("Can't start video camera:", e);
-          dev && alert("Can't start video camera: "+e);
+          debug && alert("Can't start video camera: "+e);
         })));
 
     const $flows = document.querySelectorAll('[data-tendrils-flow]');
