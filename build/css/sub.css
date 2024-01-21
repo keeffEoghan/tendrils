@@ -125,9 +125,13 @@ canvas.epok-no-cursor { cursor: none; }
 
 .epok-track { position: fixed; visibility: hidden; opacity: 0; inset: auto 0 0 auto; z-index: -1; }
 
-.tendrils-audio, .tendrils-video { position: relative; /** Temporary hide buttons on mobile where these don't reliably work. */ }
+.tendrils-audio { position: relative; }
 
-@media screen and (max-width: 991px) { .tendrils-audio, .tendrils-video { display: none !important; } }
+.tendrils-audio-hide .tendrils-audio { display: none !important; }
+
+.tendrils-video, .tendrils-text-video { position: relative; }
+
+.tendrils-video-hide .tendrils-video, .tendrils-video-hide .tendrils-text-video { display: none !important; }
 
 .tendrils-loading { overflow: hidden; }
 

@@ -30,7 +30,7 @@ const triggerTimes = {
 let readyCallbacks = {
   loading: () => document.addEventListener('readystatechange', updateState),
   interactive() {
-    const canvas = document.querySelector('canvas');
+    const $canvas = document.querySelector('canvas');
     let preset = 'S:Intro';
     // let preset = 'S:Awe';
     // let preset = 'S:Wonder';
@@ -40,15 +40,16 @@ let readyCallbacks = {
     // let preset = 'S:Basking';
     // let preset = 'S:Subscribe';
 
-    const tendrils = tendrilsDemo(canvas, {
+    const tendrils = tendrilsDemo($canvas, {
       use_media: false, use_mic: false, edit: false, keyboard: false, preset
     });
 
-    const { appSettings, track, video, geometrySpawner, controls, presets } = tendrils;
+    const { appSettings, track, video, controls, presets } = tendrils;
     const { toggleTrack, toggleMedia, getMedia, restartAudio } = tendrils;
+    const { geometrySpawner, audioContext } = tendrils;
+    let trackOK = false;
 
-    canvas.classList.add('epok-dark');
-
+    $canvas.classList.add('epok-dark');
     document.body.appendChild(track);
     track.querySelector('source').type = 'audio/mpeg';
     track.loop = true;
@@ -62,25 +63,69 @@ let readyCallbacks = {
     arcs[1] = 0.03;
     obtuse.rate = 0;
 
-    const rootClass = document.documentElement.classList;
+    const rootClass = document.body.classList;
 
-    function updateRootAudio(on = !track.paused) {
+    function flipAudioPlay(on = !track.paused) {
       rootClass.toggle('tendrils-audio-on', on);
       rootClass.toggle('tendrils-audio-off', !on);
     }
 
-    function updateRootVideo(on = !video.paused) {
+    function flipVideoPlay(on = !video.paused) {
       rootClass.toggle('tendrils-video-on', on);
       rootClass.toggle('tendrils-video-off', !on);
     }
 
-    updateRootAudio();
-    updateRootVideo();
+    function flipAudioShow(on = (trackOK && audioContext.state === 'running')) {
+      rootClass.toggle('tendrils-audio-show', on);
+      rootClass.toggle('tendrils-audio-hide', !on);
+    }
 
-    track.addEventListener('play', () => updateRootAudio());
-    track.addEventListener('pause', () => updateRootAudio());
-    video.addEventListener('play', () => updateRootVideo());
-    video.addEventListener('pause', () => updateRootVideo());
+    function flipVideoShow(on = rootClass.contains('tendrils-video-hide')) {
+      rootClass.toggle('tendrils-video-show', on);
+      rootClass.toggle('tendrils-video-hide', !on);
+    }
+
+    flipAudioPlay();
+    flipVideoPlay();
+    track.addEventListener('play', () => flipAudioPlay());
+    track.addEventListener('pause', () => flipAudioPlay());
+    video.addEventListener('play', () => flipVideoPlay());
+    video.addEventListener('pause', () => flipVideoPlay());
+
+    const checkTrack = () => Promise.resolve(toggleTrack(true))
+      .then(() => {
+        trackOK = true;
+        flipAudioShow();
+        removeEventListener('change', checkTrack);
+        removeEventListener('click', checkTrack);
+        removeEventListener('contextmenu', checkTrack);
+        removeEventListener('dblclick', checkTrack);
+        removeEventListener('mouseup', checkTrack);
+        removeEventListener('pointerup', checkTrack);
+        removeEventListener('reset', checkTrack);
+        removeEventListener('submit', checkTrack);
+        removeEventListener('touchend', checkTrack);
+      })
+      .catch((e) => {
+        console.warn("Can't toggle audio track:", e);
+        dev && alert("Can't toggle audio track: "+e);
+      })
+      .finally(() => toggleTrack(false));
+
+    addEventListener('change', checkTrack);
+    addEventListener('click', checkTrack);
+    addEventListener('contextmenu', checkTrack);
+    addEventListener('dblclick', checkTrack);
+    addEventListener('mouseup', checkTrack);
+    addEventListener('pointerup', checkTrack);
+    addEventListener('reset', checkTrack);
+    addEventListener('submit', checkTrack);
+    addEventListener('touchend', checkTrack);
+
+    flipAudioShow();
+    audioContext.addEventListener('statechange', () => flipAudioShow());
+
+    flipVideoShow(false);
 
     /** @see [Intersection-based infinite scroll example](https://googlechrome.github.io/samples/intersectionobserver/) */
     const intersector = new IntersectionObserver((all) => {
@@ -117,37 +162,39 @@ let readyCallbacks = {
     document.querySelectorAll('[data-tendrils-preset], [data-tendrils-trigger]')
       .forEach((e) => intersector.observe(e));
 
-    document.querySelectorAll('.tendrils-audio').forEach(($e) =>
-      $e.addEventListener('click', (e) => {
-        Promise.resolve(toggleTrack())
-          .catch((e) => {
-            console.warn("Can't toggle audio track:", e);
-            dev && alert("Can't toggle audio track: "+e);
-          });
+    const $audioFlips = document.querySelectorAll('.tendrils-audio');
+    const $videoFlips = document.querySelectorAll('.tendrils-video');
+    const $videoOns = document.querySelectorAll('.tendrils-video-on');
 
-        restartAudio();
-        stopEvent(e);
-      }));
+    $audioFlips.forEach(($e) => $e.addEventListener('click', (e) => {
+      Promise.resolve(toggleTrack())
+        .catch((e) => {
+          console.warn("Can't toggle audio track:", e);
+          dev && alert("Can't toggle audio track: "+e);
+        });
 
-    document.querySelectorAll('.tendrils-video').forEach(($e) =>
-      $e.addEventListener('click', (e) => {
-        Promise.resolve(toggleMedia())
-          .catch((e) => {
-            console.warn("Can't toggle video camera:", e);
-            dev && alert("Can't toggle video camera: "+e);
-          });
+      restartAudio();
+      stopEvent(e);
+    }));
 
-        restartAudio();
-        stopEvent(e);
-      }));
+    $videoFlips.forEach(($e) => $e.addEventListener('click', (e) => {
+      Promise.resolve(toggleMedia())
+        .catch((e) => {
+          console.warn("Can't toggle video camera:", e);
+          dev && alert("Can't toggle video camera: "+e);
+        });
 
-    document.querySelectorAll('.activate-cam').forEach(($e) =>
-      $e.addEventListener('click', () =>
-        Promise.resolve(getMedia())
-          .catch((e) => {
-            console.warn("Can't start video camera:", e);
-            dev && alert("Can't start video camera: "+e);
-          })));
+      restartAudio();
+      stopEvent(e);
+    }));
+
+    $videoOns.forEach(($e) => $e.addEventListener('click', () =>
+      Promise.resolve(getMedia())
+        .then(() => flipVideoShow(true))
+        .catch((e) => {
+          console.warn("Can't start video camera:", e);
+          dev && alert("Can't start video camera: "+e);
+        })));
 
     document.removeEventListener('readystatechange', updateState);
   }

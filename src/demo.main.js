@@ -3321,6 +3321,7 @@ export default (canvas, options) => {
     presets,
     tracks,
     defaultState,
+    audioContext,
     audioDefaults,
     audioState,
     restartAudio,

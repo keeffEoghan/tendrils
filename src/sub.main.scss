@@ -44,14 +44,17 @@
   z-index: -1;
 }
 
-.tendrils-audio,
-.tendrils-video { position: relative; }
+.tendrils-audio {
+  position: relative;
 
-@media screen and (max-width: 991px) {
-  /** Temporary hide buttons on mobile where these don't reliably work. */
-  .tendrils-audio,
-  .tendrils-video,
-  .success-text-camera { display: none !important; }
+  .tendrils-audio-hide & { display: none !important; }
+}
+
+.tendrils-video,
+.tendrils-text-video {
+  position: relative;
+
+  .tendrils-video-hide & { display: none !important; }
 }
 
 .tendrils-loading { overflow: hidden; }
