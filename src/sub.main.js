@@ -54,6 +54,7 @@ let readyCallbacks = {
     track.querySelector('source').type = 'audio/mpeg';
     track.loop = true;
     track.controls = true;
+    track.volume = 0;
 
     const { radii, obtuse, arcs } = geometrySpawner.shuffles;
 
@@ -94,8 +95,7 @@ let readyCallbacks = {
 
     const checkTrack = () => Promise.resolve(toggleTrack(true))
       .then(() => {
-        trackOK = true;
-        flipAudioShow();
+        (trackOK = true) && (track.volume = 1) && flipAudioShow();
         removeEventListener('change', checkTrack);
         removeEventListener('click', checkTrack);
         removeEventListener('contextmenu', checkTrack);
@@ -124,8 +124,6 @@ let readyCallbacks = {
 
     flipAudioShow();
     audioContext.addEventListener('statechange', () => flipAudioShow());
-
-    flipVideoShow(false);
 
     /** @see [Intersection-based infinite scroll example](https://googlechrome.github.io/samples/intersectionobserver/) */
     const intersector = new IntersectionObserver((all) => {
@@ -187,6 +185,8 @@ let readyCallbacks = {
       restartAudio();
       stopEvent(e);
     }));
+
+    flipVideoShow(false);
 
     $videoOns.forEach(($e) => $e.addEventListener('click', () =>
       Promise.resolve(getMedia())
