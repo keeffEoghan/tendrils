@@ -133,6 +133,10 @@ canvas.epok-no-cursor { cursor: none; }
 
 .tendrils-video-hide .tendrils-video, .tendrils-video-hide .tendrils-text-video { display: none !important; }
 
+canvas { -webkit-transition: opacity 300ms ease-in-out; transition: opacity 300ms ease-in-out; will-change: opacity; }
+
 .tendrils-loading { overflow: hidden; }
+
+.tendrils-loading canvas { opacity: 0; }
 
 /*# sourceMappingURL=sub.css.map */

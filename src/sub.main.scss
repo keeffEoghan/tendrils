@@ -57,4 +57,13 @@
   .tendrils-video-hide & { display: none !important; }
 }
 
-.tendrils-loading { overflow: hidden; }
+canvas {
+  transition: opacity 300ms ease-in-out;
+  will-change: opacity;
+}
+
+.tendrils-loading {
+  overflow: hidden;
+
+  canvas { opacity: 0; }
+}
