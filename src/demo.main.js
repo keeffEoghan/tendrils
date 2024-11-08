@@ -149,6 +149,7 @@ export default (canvas, options) => {
       : (decodeURIComponent(settings.static_image || '') ||
           rootPath+'images/ringed-dot/w-b.png'))
           // rootPath+'images/epok/eye.png'))
+          // rootPath+'images/artizen.png'))
           // rootPath+'images/fortune.png'))
           // rootPath+'images/unit31-unfolded.jpg'))
           // rootPath+'images/hysteria-kinetic-bliss-poster.jpeg'))
@@ -2310,6 +2311,92 @@ export default (canvas, options) => {
       respawn();
     },
 
+    'Artizen'() {
+      // See 'S:Inspiration'.
+      // See 'S:Transcendence'.
+
+      Object.assign(state, {
+        noiseWeight: 0.005,
+        varyNoise: 0,
+        flowDecay: 0.005,
+        flowWidth: 5,
+        noiseScale: 0.1,
+        varyNoiseScale: -50,
+        noiseSpeed: 0.00005,
+        varyNoiseSpeed: 0,
+        target: 0.0025,
+        speedAlpha: 0.02,
+        colorMapAlpha: 0.5
+      });
+
+      Object.assign(colorProxy, {
+        // Algae
+        // baseColor: [26, 204, 108],
+        // Moss
+        baseColor: [6, 170, 89],
+        // Reef
+        // baseColor: [179, 244, 135],
+        // Slate
+        // baseColor: [32, 34, 34],
+        // Stone
+        // baseColor: [179, 244, 135],
+        // baseAlpha: 0.8,
+        baseAlpha: 0.6,
+
+        // Reef
+        flowColor: [179, 244, 135],
+        // UI Success
+        // flowColor: [45, 214, 133],
+        // Wash
+        // flowColor: [250, 250, 250],
+        flowAlpha: 0.3,
+
+        // Gravel
+        // fadeColor: [77, 93, 83],
+        // Night
+        // fadeColor: [18, 18, 18],
+        // Slate
+        fadeColor: [32, 34, 34],
+        // Wash
+        // fadeColor: [250, 250, 250],
+        // Moon
+        // fadeColor: [241, 243, 238],
+        // Stone
+        // fadeColor: [179, 244, 135],
+        // UI Success
+        // fadeColor: [45, 214, 133],
+        // Algae
+        // fadeColor: [26, 204, 108],
+        // Moss
+        // fadeColor: [6, 170, 89],
+        fadeAlpha: Math.max(state.flowDecay, 0.05)
+      });
+
+      Object.assign(blurState, { radius: 9, limit: 0.5 });
+      Object.assign(blendProxy, { mic: 1, track: 1, video: 0.2 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.4, speed: 2e4 });
+
+      toggleBase('dark');
+      restart();
+
+      Object.assign(audioState, {
+        track: 1,
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7,
+        mic: 1,
+        micSpawnAt: audioDefaults.micSpawnAt*0.8,
+        micFormAt: audioDefaults.micFormAt*1.5,
+        micFlowAt: audioDefaults.micFlowAt*1.2,
+        micFastAt: audioDefaults.micFastAt*0.6,
+        micCamAt: audioDefaults.micCamAt*1.7,
+        micSampleAt: audioDefaults.micSampleAt*1.7
+      });
+    },
+
     // Submersive.
     // 68, 111, 150  |   43, 45, 57  | 124, 199, 201
     // 120, 80, 134  |  183, 87, 74  | 164, 162, 173
@@ -3228,6 +3315,8 @@ export default (canvas, options) => {
           'I': presets['Narcissus Pool'],
           'O': presets['Minimal'],
           'P': presets['Pissarides'],
+
+          'A': presets['Artizen'],
 
           'G': presets['H:G:Flow'],
           'Z': presets['H:Z:Folding'],
