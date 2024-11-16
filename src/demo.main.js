@@ -79,7 +79,7 @@ export default (canvas, options) => {
 
   // Main init
 
-  const gl = glContext(canvas, glSettings, render);
+  const gl = glContext(canvas, glSettings);
 
   const timer = { app: defaultSettings.timer, track: new Timer(0) };
 
@@ -147,13 +147,16 @@ export default (canvas, options) => {
 
     staticImage: (((''+settings.static_image) === 'false')? ''
       : (decodeURIComponent(settings.static_image || '') ||
-          rootPath+'images/ringed-dot/w-b.png'))
-          // rootPath+'images/epok/eye.png'))
-          // rootPath+'images/artizen.png'))
-          // rootPath+'images/fortune.png'))
-          // rootPath+'images/unit31-unfolded.jpg'))
-          // rootPath+'images/hysteria-kinetic-bliss-poster.jpeg'))
-          // rootPath+'images/hysteria-kinetic-bliss-logo.png'))
+          rootPath+'images/ringed-dot/w-b.png')),
+          // rootPath+'images/epok/eye.png')),
+          // rootPath+'images/artizen.png')),
+          // rootPath+'images/fortune.png')),
+          // rootPath+'images/unit31-unfolded.jpg')),
+          // rootPath+'images/hysteria-kinetic-bliss-poster.jpeg')),
+          // rootPath+'images/hysteria-kinetic-bliss-logo.png')),
+
+    frameStep: Math.max(0,
+      parseFloat(settings.frame_step || 0, 10) || 0)
   };
 
   Object.assign(timer.app,
@@ -1157,6 +1160,22 @@ export default (canvas, options) => {
     }
   }
 
+  let frameWait = null;
+
+  function frame() {
+    if(frameWait) {
+      clearTimeout(frameWait);
+      frameWait.cancel && frameWait.cancel();
+      frameWait = null;
+    }
+
+    render();
+
+    const s = appSettings.frameStep;
+
+    frameWait = ((s)? setTimeout(frame, s) : requestAnimationFrame(frame));
+  }
+
 
   function resize() {
     canvas.width = self.innerWidth;
@@ -1173,6 +1192,8 @@ export default (canvas, options) => {
 
   tendrils.setup();
   respawn();
+
+  frame();
 
 
   // Control panel
@@ -2311,7 +2332,9 @@ export default (canvas, options) => {
       respawn();
     },
 
-    'Artizen'() {
+    // Artizen.
+    'Artizen'() { return presets['AZ:Dark'](); },
+    'AZ:Dark'() {
       // See 'S:Inspiration'.
       // See 'S:Transcendence'.
 
@@ -2322,9 +2345,9 @@ export default (canvas, options) => {
         flowWidth: 5,
         noiseScale: 0.1,
         varyNoiseScale: -50,
-        noiseSpeed: 0.00005,
+        noiseSpeed: 1e-6,
         varyNoiseSpeed: 0,
-        target: 0.0025,
+        target: 0.003,
         speedAlpha: 0.02,
         colorMapAlpha: 0.5
       });
@@ -2369,7 +2392,7 @@ export default (canvas, options) => {
         // fadeColor: [26, 204, 108],
         // Moss
         // fadeColor: [6, 170, 89],
-        fadeAlpha: Math.max(state.flowDecay, 0.05)
+        fadeAlpha: Math.max(state.flowDecay, 0.1)
       });
 
       Object.assign(blurState, { radius: 9, limit: 0.5 });
@@ -2388,12 +2411,180 @@ export default (canvas, options) => {
         trackCamAt: audioDefaults.trackCamAt*1.7,
         trackSampleAt: audioDefaults.trackSampleAt*1.7,
         mic: 1,
-        micSpawnAt: audioDefaults.micSpawnAt*0.8,
-        micFormAt: audioDefaults.micFormAt*1.5,
-        micFlowAt: audioDefaults.micFlowAt*1.2,
-        micFastAt: audioDefaults.micFastAt*0.6,
-        micCamAt: audioDefaults.micCamAt*1.7,
-        micSampleAt: audioDefaults.micSampleAt*1.7
+        micSpawnAt: audioDefaults.micSpawnAt*0.6,
+        micFormAt: audioDefaults.micFormAt*1.3,
+        micFlowAt: audioDefaults.micFlowAt*1,
+        micFastAt: audioDefaults.micFastAt*0.4,
+        micCamAt: audioDefaults.micCamAt*1.5,
+        micSampleAt: audioDefaults.micSampleAt*1.5
+      });
+    },
+    'AZ:Light'() {
+      // See 'S:Inspiration'.
+      // See 'S:Transcendence'.
+
+      Object.assign(state, {
+        noiseWeight: 0.005,
+        flowDecay: 0.005,
+        flowWidth: 5,
+        noiseScale: 1.5,
+        varyNoiseScale: -30,
+        noiseSpeed: 0.00025,
+        varyNoiseSpeed: -0.3,
+        target: 0.003,
+        speedAlpha: 0.02,
+        colorMapAlpha: 0.3
+      });
+
+      Object.assign(colorProxy, {
+        // Algae
+        baseColor: [26, 204, 108],
+        // Moss
+        // baseColor: [6, 170, 89],
+        // Reef
+        // baseColor: [179, 244, 135],
+        // Slate
+        // baseColor: [32, 34, 34],
+        // Stone
+        // baseColor: [179, 244, 135],
+        // baseAlpha: 0.8,
+        baseAlpha: 0.4,
+
+        // Reef
+        flowColor: [179, 244, 135],
+        // UI Success
+        // flowColor: [45, 214, 133],
+        // Wash
+        // flowColor: [250, 250, 250],
+        flowAlpha: 0.15,
+
+        // Gravel
+        // fadeColor: [77, 93, 83],
+        // Night
+        // fadeColor: [18, 18, 18],
+        // Slate
+        // fadeColor: [32, 34, 34],
+        // Wash
+        // fadeColor: [250, 250, 250],
+        // Moon
+        fadeColor: [241, 243, 238],
+        // Stone
+        // fadeColor: [179, 244, 135],
+        // UI Success
+        // fadeColor: [45, 214, 133],
+        // Algae
+        // fadeColor: [26, 204, 108],
+        // Moss
+        // fadeColor: [6, 170, 89],
+        fadeAlpha: Math.max(state.flowDecay, 0.1)
+      });
+
+      Object.assign(blurState, { radius: 6, limit: 0.8 });
+      Object.assign(blendProxy, { mic: 1, track: 1, video: 0.2 });
+      Object.assign(resetSpawner.uniforms, { radius: 0.8, speed: 2e4 });
+
+      toggleBase('dark');
+      restart();
+
+      Object.assign(audioState, {
+        track: 1,
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7,
+        mic: 1,
+        micSpawnAt: audioDefaults.micSpawnAt*0.6,
+        micFormAt: audioDefaults.micFormAt*1.3,
+        micFlowAt: audioDefaults.micFlowAt*1,
+        micFastAt: audioDefaults.micFastAt*0.4,
+        micCamAt: audioDefaults.micCamAt*1.5,
+        micSampleAt: audioDefaults.micSampleAt*1.5
+      });
+    },
+    'AZ:Green'() {
+      // See 'S:Inspiration'.
+      // See 'S:Transcendence'.
+
+      Object.assign(state, {
+        noiseWeight: 0.005,
+        flowDecay: 0.005,
+        flowWidth: 5,
+        noiseScale: 2,
+        varyNoiseScale: -20,
+        noiseSpeed: 0.0003,
+        varyNoiseSpeed: -0.3,
+        target: 0.003,
+        speedAlpha: 0.02,
+        colorMapAlpha: 0.3
+      });
+
+      Object.assign(colorProxy, {
+        // Algae
+        // baseColor: [26, 204, 108],
+        // Moss
+        // baseColor: [6, 170, 89],
+        // Reef
+        // baseColor: [179, 244, 135],
+        // Slate
+        baseColor: [32, 34, 34],
+        // Stone
+        // baseColor: [179, 244, 135],
+        // baseAlpha: 0.8,
+        baseAlpha: 0.5,
+
+        // Reef
+        // flowColor: [179, 244, 135],
+        // UI Success
+        // flowColor: [45, 214, 133],
+        // Wash
+        flowColor: [250, 250, 250],
+        flowAlpha: 0.05,
+
+        // Gravel
+        // fadeColor: [77, 93, 83],
+        // Night
+        // fadeColor: [18, 18, 18],
+        // Slate
+        // fadeColor: [32, 34, 34],
+        // Wash
+        // fadeColor: [250, 250, 250],
+        // Moon
+        // fadeColor: [241, 243, 238],
+        // Stone
+        // fadeColor: [179, 244, 135],
+        // UI Success
+        // fadeColor: [45, 214, 133],
+        // Algae
+        fadeColor: [26, 204, 108],
+        // Moss
+        // fadeColor: [6, 170, 89],
+        fadeAlpha: Math.max(state.flowDecay, 0.1)
+      });
+
+      Object.assign(blurState, { radius: 6, limit: 0.8 });
+      Object.assign(blendProxy, { mic: 1, track: 1, video: 0.2 });
+      Object.assign(resetSpawner.uniforms, { radius: 1, speed: 2e4 });
+
+      toggleBase('dark');
+      restart();
+
+      Object.assign(audioState, {
+        track: 1,
+        trackSpawnAt: audioDefaults.trackSpawnAt*0.8,
+        trackFormAt: audioDefaults.trackFormAt*1.5,
+        trackFlowAt: audioDefaults.trackFlowAt*1.2,
+        trackFastAt: audioDefaults.trackFastAt*0.6,
+        trackCamAt: audioDefaults.trackCamAt*1.7,
+        trackSampleAt: audioDefaults.trackSampleAt*1.7,
+        mic: 1,
+        micSpawnAt: audioDefaults.micSpawnAt*0.6,
+        micFormAt: audioDefaults.micFormAt*1.3,
+        micFlowAt: audioDefaults.micFlowAt*1,
+        micFastAt: audioDefaults.micFastAt*0.4,
+        micCamAt: audioDefaults.micCamAt*1.5,
+        micSampleAt: audioDefaults.micSampleAt*1.5
       });
     },
 
@@ -2683,7 +2874,7 @@ export default (canvas, options) => {
     // H dark green 3, 66, 2
     // H dark orange 90, 31, 33
     // H black 10, 21, 42
-    'H:G:Flow'() {
+    'H:J:Flow'() {
       Object.assign(state, {
         flowWidth: 5,
         colorMapAlpha: 0
@@ -3317,8 +3508,11 @@ export default (canvas, options) => {
           'P': presets['Pissarides'],
 
           'A': presets['Artizen'],
+          'D': presets['AZ:Dark'],
+          'L': presets['AZ:Light'],
+          'G': presets['AZ:Green'],
 
-          'G': presets['H:G:Flow'],
+          'J': presets['H:J:Flow'],
           'Z': presets['H:Z:Folding'],
           'X': presets['H:X:Starlings'],
           'C': presets['H:C:Kelp Forest'],
