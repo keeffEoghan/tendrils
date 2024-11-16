@@ -2333,8 +2333,8 @@ export default (canvas, options) => {
     },
 
     // Artizen.
-    'Artizen'() { return presets['AZ:Dark'](); },
-    'AZ:Dark'() {
+    'Artizen'() { return presets['AZ:D:Dark'](); },
+    'AZ:D:Dark'() {
       // See 'S:Inspiration'.
       // See 'S:Transcendence'.
 
@@ -2419,7 +2419,7 @@ export default (canvas, options) => {
         micSampleAt: audioDefaults.micSampleAt*1.5
       });
     },
-    'AZ:Light'() {
+    'AZ:L:Light'() {
       // See 'S:Inspiration'.
       // See 'S:Transcendence'.
 
@@ -2503,7 +2503,7 @@ export default (canvas, options) => {
         micSampleAt: audioDefaults.micSampleAt*1.5
       });
     },
-    'AZ:Green'() {
+    'AZ:G:Green'() {
       // See 'S:Inspiration'.
       // See 'S:Transcendence'.
 
@@ -3507,10 +3507,10 @@ export default (canvas, options) => {
           'O': presets['Minimal'],
           'P': presets['Pissarides'],
 
-          'A': presets['Artizen'],
-          'D': presets['AZ:Dark'],
-          'L': presets['AZ:Light'],
-          'G': presets['AZ:Green'],
+          'A': presets['Artizen:A'],
+          'D': presets['AZ:D:Dark'],
+          'L': presets['AZ:L:Light'],
+          'G': presets['AZ:G:Green'],
 
           'J': presets['H:J:Flow'],
           'Z': presets['H:Z:Folding'],
